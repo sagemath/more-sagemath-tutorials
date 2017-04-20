@@ -1,0 +1,805 @@
+.. _demo.2011-05-23-SMAI:
+
+==========================================================================================
+SMAI 2011, Guidel, 23 mai 2011: Sage pour le calcul symbolique, algébrique et combinatoire
+==========================================================================================
+
+.. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>,
+    avec de nombreux exemples tirés de *«Calcul Mathématique avec Sage»*
+
+Cet exposé complète le tutoriel d'introduction à Sage en explorant
+plus en avant les possibilités de Sage pour le calcul symbolique,
+algébrique et combinatoire. Nous mettrons en particulier en avant
+l'intérêt d'avoir une large palette d'outils à l'intérieur d'un même
+système de calcul, ainsi que la démarche de Sage visant à modéliser
+les mathématiques au plus près. On peut par exemple manipuler non
+seulement des matrices, mais ausi des systèmes d'équations, des
+morphismes ou des sous-espaces vectoriels. On peut aussi modéliser des
+connaissances mathématiques comme: «L'anneau des polynômes en une
+variable sur un corps est euclidien». Cette modélisation s'appuie sur
+un pont naturel entre théorie des catégories d'un côté et
+programmation orientée objet (un des multiples paradigmes de
+programmation du langage Python) de l'autre.
+
+Si le temps le permet, nous montrerons un exemple réel dans un
+contexte de recherche illustrant des constructions avancées et la
+combinaison de multiples outils de calculs.
+
+.. linkall
+
+Calcul symbolique
+=================
+
+Le coeur des systèmes comme Maple et Maxima est le calcul sur les
+expressions, avec sa simplicité pour les nouveaux venus et sa
+souplesse.  Modulo la déclaration explicite des variables et des
+petites variantes de syntaxe, l'utilisateur casuel retrouvera ses
+petits.
+
+Une expression::
+
+    sage: f = cos(x)^6 + sin(x)^6 + 3 * sin(x)^2 * cos(x)^2; f
+    sin(x)^6 + cos(x)^6 + 3*sin(x)^2*cos(x)^2
+
+Simplifions-la::
+
+    sage: f.simplify_trig()
+    1
+
+
+Une sommation définie::
+
+    sage: var('n,k')
+    (n, k)
+    sage: sum(binomial(n, k) * factorial(k) / factorial(n+1+k), k, 0, n)
+    1/2*sqrt(pi)/factorial(n + 1/2)
+
+    sage: pretty_print(_)
+    <html><span class="math">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{\sqrt{\pi}}{2 \, \left(n + \frac{1}{2}\right)!}</span></html>
+
+Calcul de `\lim\limits_{x\rightarrow \frac{\pi}{4} }\dfrac{\cos\left(\frac{\pi}{4}-x \right)-\tan x }{1-\sin\left(\frac{\pi}{4}+x \right)}`::
+
+    sage: f(x) = (cos(pi/4-x)-tan(x)) / (1-sin(pi/4 + x))
+    sage: limit(f(x), x = pi/4, dir='minus')
+    +Infinity
+
+Calcul, selon la valeur de `x`, de `\int_0^{\infty} \frac{x \cos u}{u^2+x^2} du`::
+
+    sage: var('u')
+    u
+    sage: f = x * cos(u) / (u^2 + x^2)
+    sage: assume(x>0)
+    sage: f.integrate(u, 0, infinity)
+    1/2*pi*e^(-x)
+    sage: forget(); assume(x<0); f.integrate(u, 0, infinity)
+    -1/2*pi*e^x
+
+L'arithmétique est gérée en interne (pynac) et le reste est délégué à
+Maxima. En relatif, cet aspect reste un des points faibles de Sage.
+
+Polynômes
+=========
+
+Chaque fois que possible, Sage privilégie la modélisation explicite de
+la structure algébrique dans laquelle on souhaite mener le
+calcul. Cela permet de travailler naturellement et efficacement dans
+des constructions algébriques plus avancées::
+
+    sage: Z2 = GF(2); Z2
+    Finite Field of size 2
+    sage: P = Z2['x']; P
+    Univariate Polynomial Ring in x over Finite Field of size 2 (using NTL)
+    sage: M = MatrixSpace(P, 3); M
+    Full MatrixSpace of 3 by 3 dense matrices over Univariate Polynomial Ring in x over Finite Field of size 2 (using NTL)
+
+    sage: m = M.random_element(); m                       # random
+    [      x + 1         x^2         x^2]
+    [          x     x^2 + x       x + 1]
+    [    x^2 + 1 x^2 + x + 1         x^2]
+
+    sage: m.parent()
+    Full MatrixSpace of 3 by 3 dense matrices over Univariate Polynomial Ring in x over Finite Field of size 2 (using NTL)
+
+    sage: m * (m-1)                                       # random
+    [      x^4 + x^3 + x           x^3 + x^2           x^4 + x^2]
+    [        x^2 + x + 1         x^4 + x + 1       x^3 + x^2 + 1]
+    [                x^4 x^4 + x^3 + x^2 + 1             x^3 + 1]
+
+    sage: m.det()                                         # random
+    x^6 + x^5 + x^3 + x^2 + x + 1
+
+et d'y traiter rigoureusement, par exemple, les questions de
+factorisation::
+
+    sage: p = 54*x^4+36*x^3-102*x^2-72*x-12
+    sage: p.factor()
+    6*(3*x + 1)^2*(x^2 - 2)
+
+    sage: for A in [ZZ, QQ, ComplexField(16), QQ[sqrt(2)], GF(5)]:
+    ....:     print A, ":"; print A['x'](p).factor()
+    Integer Ring :
+    2 * 3 * (3*x + 1)^2 * (x^2 - 2)
+    Rational Field :
+    (54) * (x + 1/3)^2 * (x^2 - 2)
+    Complex Field with 16 bits of precision :
+    (54.00) * (x - 1.414) * (x + 0.3333)^2 * (x + 1.414)
+    Number Field in sqrt2 with defining polynomial x^2 - 2 :
+    (54) * (x - sqrt2) * (x + sqrt2) * (x + 1/3)^2
+    Finite Field of size 5 :
+    (4) * (x + 2)^2 * (x^2 + 3)
+
+Algèbre linéaire
+================
+
+Dans les exemples ci-dessous, nous ferons de l'algèbre linéaire sur le
+corps fini `\ZZ/7\ZZ`::
+
+    sage: K = GF(7); K
+    Finite Field of size 7
+
+    sage: list(K)
+    [0, 1, 2, 3, 4, 5, 6]
+
+Nous avons choisi ce corps à titre d'illustration pour avoir des
+résultats *lisibles*. On aurait pu prendre des coefficients entiers,
+rationnels, ou numériques à plus ou moins haute précision. Les aspects
+numériques seront abordés plus en détail dans l'exposé suivant. Notons
+au passage que, même en calcul exact, il est possible de manipuler de
+relativement grosses matrices::
+
+    sage: M = random_matrix(K, 10000, sparse=True, density=3/10000)
+    sage: M.rank()                                                     # random
+    9278
+
+.. .. todo:: demonstration de M.visualize_structure()
+
+Définissons donc une matrice à coefficients dans `\ZZ/7\ZZ`::
+
+    sage: A = matrix(K, 4, [5,5,4,3,0,3,3,4,0,1,5,4,6,0,6,3]); A
+    [5 5 4 3]
+    [0 3 3 4]
+    [0 1 5 4]
+    [6 0 6 3]
+
+Calculons le polynôme caractéristique de cette matrice::
+
+    sage: P = A.characteristic_polynomial(); P
+    x^4 + 5*x^3 + 6*x + 2
+
+On vérifie le théorème de Cayley-Hamilton sur cet exemple::
+
+    sage: P(A)
+    [0 0 0 0]
+    [0 0 0 0]
+    [0 0 0 0]
+    [0 0 0 0]
+
+Notons que l'information sur le corps de base est préservée::
+
+    sage: P.parent()
+    Univariate Polynomial Ring in x over Finite Field of size 7
+
+ce qui influe directement sur la factorisation de ce polynôme::
+
+    sage: factor(P)
+    (x + 3) * (x + 6) * (x + 5)^2
+
+    sage: factor(x^4 + 5*x^3 + 6*x + 2)
+    x^4 + 5*x^3 + 6*x + 2
+
+Le calcul ci-dessus nous donne les valeurs propres: -3=4,-6=1 et -5=2.
+Quels sont les espaces propres?
+
+::
+
+    sage: A.eigenspaces_left()
+    [
+    (4, Vector space of degree 4 and dimension 1 over Finite Field of size 7
+    User basis matrix:
+    [1 4 6 1]),
+    (1, Vector space of degree 4 and dimension 1 over Finite Field of size 7
+    User basis matrix:
+    [1 3 3 4]),
+    (2, Vector space of degree 4 and dimension 2 over Finite Field of size 7
+    User basis matrix:
+    [1 0 2 3]
+    [0 1 6 0])
+    ]
+
+Récupérons ces espaces propres::
+
+    sage: E = dict(A.eigenspaces_left())
+    sage: E[2]
+    Vector space of degree 4 and dimension 2 over Finite Field of size 7
+    User basis matrix:
+    [1 0 2 3]
+    [0 1 6 0]
+
+``E[2]`` n'est pas une *liste de vecteurs* ni une matrice, mais un
+*objet* qui modélise l'espace propre `E_2`, comme le sous-espace de
+`(\ZZ/7\ZZ)^4` décrit par sa base échelon réduite. On peut donc lui
+poser des questions::
+
+    sage: E[2].dimension()
+    2
+    sage: E[2].basis()
+    [
+    (1, 0, 2, 3),
+    (0, 1, 6, 0)
+    ]
+    sage: V = E[2].ambient_vector_space(); V
+    Vector space of dimension 4 over Finite Field of size 7
+
+Voire faire des calculs avec::
+
+    sage: E[2] + E[4]
+    Vector space of degree 4 and dimension 3 over Finite Field of size 7
+    Basis matrix:
+    [1 0 0 0]
+    [0 1 0 5]
+    [0 0 1 5]
+
+    sage: v = V([1,2,0,3])
+    sage: v in E[2]
+    True
+
+    sage: E[2].echelon_coordinates(v)
+    [1, 2]
+
+    sage: E[2].is_subspace(E[4])
+    False
+
+    sage: E[2].is_subspace(V)
+    True
+
+    sage: Q = V/E[2]; Q
+    Vector space quotient V/W of dimension 2 over Finite Field of size 7 where
+    V: Vector space of dimension 4 over Finite Field of size 7
+    W: Vector space of degree 4 and dimension 2 over Finite Field of size 7
+    User basis matrix:
+    [1 0 2 3]
+    [0 1 6 0]
+    sage: Q( V([0,0,0,1]) )
+    (2, 4)
+
+On veut maintenant manipuler `A` comme un morphisme sur `V`::
+
+    sage: phi = End(V)(A); phi
+    Free module morphism defined by the matrix
+    [5 5 4 3]
+    [0 3 3 4]
+    [0 1 5 4]
+    [6 0 6 3]
+    Domain: Vector space of dimension 4 over Finite Field of size 7
+    Codomain: Vector space of dimension 4 over Finite Field of size 7
+
+    sage: v = V.an_element()
+    sage: v
+    (1, 0, 0, 0)
+
+    sage: phi(v)
+    (5, 5, 4, 3)
+
+    sage: (phi^-1)(v)
+    (1, 2, 3, 4)
+
+..    sage: P(phi)                        # todo: not implemented
+
+::
+
+    sage: phi^4 + 5*phi^3 + 6*phi + 2
+    Free module morphism defined by the matrix
+    [0 0 0 0]
+    [0 0 0 0]
+    [0 0 0 0]
+    [0 0 0 0]
+    Domain: Vector space of dimension 4 over Finite Field of size 7
+    Codomain: Vector space of dimension 4 over Finite Field of size 7
+
+    sage: (phi - 1).image()
+    Vector space of degree 4 and dimension 3 over Finite Field of size 7
+    Basis matrix:
+    [1 0 0 0]
+    [0 1 0 5]
+    [0 0 1 5]
+
+    sage: (phi - 1).kernel() == E[1]
+    True
+
+    sage: phi.restrict(E[2])
+    Free module morphism defined by the matrix
+    [2 0]
+    [0 2]
+    Domain: Vector space of degree 4 and dimension 2 over Finite Field of ...
+    Codomain: Vector space of degree 4 and dimension 2 over Finite Field of ...
+
+
+En résumé
+---------
+
+- *« Mathematics is the art of reducing any problem to linear algebra »* William Stein
+
+- Il serait en principe suffisant d'implanter l'algèbre linéaire sur les matrices
+
+- Le pari de Sage: *modéliser au plus près les mathématiques*, pour
+  que l'utilisateur ou le programmeur puisse s'exprimer dans le
+  langage adapté au problème considéré.
+
+Combinatoire
+============
+
+Selon le même principe, lorsque l'on demande toutes les partitions de
+l'entier 5, le résultat est un objet qui modélise cet ensemble::
+
+    sage: P = Partitions(5); P
+    Partitions of the integer 5
+
+Pour obtenir la *liste* de ces objets, il faut le demander explicitement::
+
+    sage: P.list()
+    [[5], [4, 1], [3, 2], [3, 1, 1], [2, 2, 1], [2, 1, 1, 1], [1, 1, 1, 1, 1]]
+
+Cela permet de manipuler *formellement* des grands ensembles::
+
+    sage: Partitions(100000).cardinality()
+    27493510569775696512677516320986352688173429315980054758203125984302147328114964173055050741660736621590157844774296248940493063070200461792764493033510116079342457190155718943509725312466108452006369558934464248716828789832182345009262853831404597021307130674510624419227311238999702284408609370935531629697851569569892196108480158600569421098519
+
+Et de calculer paresseusement avec. Ici, on tire au hasard une main de
+cinq cartes à jouer::
+
+    sage: Symboles = Set(["Coeur", "Carreau", "Pique", "Trefle"])
+    sage: Valeurs  = Set([2, 3, 4, 5, 6, 7, 8, 9, 10, "Valet", "Dame", "Roi", "As"])
+    sage: Cartes   = CartesianProduct(Valeurs, Symboles).map(tuple)
+    sage: Mains    = Subsets(Cartes, 5)
+    sage: Mains.cardinality()
+    2598960
+    sage: Mains.random_element()                           # random
+    {(2, 'Coeur'), (6, 'Pique'), (10, 'Carreau'), ('As', 'Pique'), ('Valet', 'Coeur')}
+
+et là on manipule un mot infini défini comme point fixe d'un morphisme::
+
+    sage: m = WordMorphism('a->acabb,b->bcacacbb,c->baba')
+    sage: m.fixed_point('a')
+    word: acabbbabaacabbbcacacbbbcacacbbbcacacbbac...
+
+Probas?
+=======
+
+.. skip
+
+Une session rêvée::
+
+    sage: X = random_variable(BernouilliDistribution(1/2))
+    sage: Y = random_variable(BinomialDistribution(3, 1/3))
+    sage: Z = X + 2*Y
+    sage: Z.mean()
+    sage: Z.variance()
+    sage: plot(Z.distribution())
+    sage: event = ( Z <= 1 )
+    sage: event.probability()
+
+- Ce type de modélisation serait-il utile?
+
+  - Pour l'enseignement?
+  - Pour fournir des modèles exacts pour des tests statistiques? (à la `StatXact <http://www.cytel.com/software/StatXact.aspx>`_)
+
+- Implantable à partir des fondamentaux de Sage? (combinatoire, intégration, ...)?
+
+Combinatoire algébrique
+=======================
+
+Et pour faire joli, un système de racine affine et un groupe de Weyl::
+
+    sage: L = RootSystem(['A',2,1]).weight_space()
+    sage: L.plot(size=[[-1..1],[-1..1]], alcovewalks=[[0,2,0,1,2,1,2,0,2,1]])
+
+    sage: W = WeylGroup(["B", 3])
+    sage: W.cayley_graph(side = "left").plot3d(color_by_label = True)
+
+
+Graphes
+=======
+
+Nous montrons maintenant quelques fonctionnalités de Sage autour des
+graphes::
+
+    sage: g = graphs.ChvatalGraph()
+    sage: g.show()
+
+    sage: c = g.hamiltonian_cycle()
+    sage: g.show(edge_colors = {"red": c.edges()} )
+
+Grâce à GAP et à (un port de) Nauty, on peut étudier de près les
+questions de symétries et d'isomorphisme dans les graphes. Voici tous
+les graphes simples sur cinq sommets avec moins de quatre arêtes::
+
+    sage: show(graphs(5, lambda G: G.size() <= 4))
+
+Le groupe de symétries (automorphismes) du graphe de Petersen::
+
+    sage: petersen = graphs.PetersenGraph()
+    sage: petersen.show()
+
+    sage: group = petersen.automorphism_group(); group
+    Permutation Group with generators [(3,7)(4,5)(8,9), (2,6)(3,8)(4,5)(7,9), (1,4,5)(2,3,8,6,9,7), (1,10)(2,4,6,5)(3,9,8,7)]
+
+Et quelques-unes de ses propriétés::
+
+    sage: group.cardinality()
+    120
+
+    sage: group.character_table()
+    [ 1  1  1  1  1  1  1]
+    [ 1 -1  1 -1  1 -1  1]
+    [ 4 -2  0  1  1  0 -1]
+    [ 4  2  0 -1  1  0 -1]
+    [ 5  1  1  1 -1 -1  0]
+    [ 5 -1  1 -1 -1  1  0]
+    [ 6  0 -2  0  0  0  1]
+
+    sage: [N.cardinality() for N in group.normal_subgroups()]
+    [1, 60, 120]
+
+    sage: group.is_isomorphic(SymmetricGroup(5))
+    True
+
+Calculons quelques propriétés classiques de ce graphe.
+Il faut trois couleurs pour le colorier::
+
+    sage: petersen.chromatic_number()
+    3
+
+    sage: petersen.show(partition=petersen.coloring())
+
+Mais ce n'est cependant pas un graphe parfait::
+
+    sage: petersen.is_perfect()
+    False
+
+Tant que l'on ne supprime pas plus de quatre sommets ou quatre arêtes,
+le graphe reste connexe::
+
+    sage: petersen.vertex_connectivity()
+    3
+
+    sage: petersen.edge_connectivity()
+    3
+
+
+Programmation linéaire
+======================
+
+La plupart des calculs précédents se ramènent à de la *programmation
+linéaire en entiers*. Pour commencer, nous montrons comment résoudre
+le programme linéaire suivant:
+
+    `\begin{array}{lrrrl}\text{Max : }    & x&+ y &- 3z\\\text{Tel que : }& x&+2y      &&\leq 4 \\ &     &- y &+ 5z &\leq 8\\ \end{array}`
+
+à l'aide de Sage::
+
+    sage: p = MixedIntegerLinearProgram()
+    sage: x, y, z = p['x'], p['y'], p['z']
+    sage: p.set_objective ( x +   y + 3*z       )
+    sage: p.add_constraint( x + 2*y        <= 4 )
+    sage: p.add_constraint(   -   y + 5*z  <= 8 )
+    sage: p.solve()
+    8.800000000...
+
+    sage: p.get_values(x), p.get_values(y), p.get_values(z)
+
+Nous resolvons maintenant le même système en imposant que `z` soit entier::
+
+    sage: p.set_integer(z)
+    sage: p.solve()
+    8.0
+    sage: p.get_values(x), p.get_values(y), p.get_values(z)
+
+
+Maintenant, nous montrons comment Sage calcule un ensemble indépendant
+maximal du graphe de Petersen::
+
+    sage: I = petersen.independent_set(); I
+    [0, 3, 6, 7]
+
+    sage: petersen.show(vertex_colors = {'red' : I})
+
+La recherche d'un ensemble indépendant maximal peut s'encoder en le
+programme linéaire en nombres entiers suivant:
+
+   `\begin{array}{ll}\text{Max : }     & \displaystyle\sum_{v\in E(G)} b_v                \\\text{Tel que : } & \forall u,v\in E(G),\  b_u+b_v \leq 1  \\ &                   b_v\text{ variable binaire }\end{array}`
+
+Ce qui en Sage donne::
+
+    sage: LP = MixedIntegerLinearProgram(maximization=True)
+    sage: b = LP.new_variable()
+    sage: LP.set_objective(sum([b[v] for v in petersen]))
+    sage: for (u,v) in petersen.edges(labels=None): # For any edge, we define a constraint
+    ....:     LP.add_constraint(b[u]+b[v],max=1)
+    sage: LP.set_binary(b)
+
+On trouve alors un indépendant de taille quatre::
+
+    sage: LP.solve()
+    4.0
+
+    sage: b_sol = LP.get_values(b)
+    sage: print b_sol
+    {0: 0.0, 1: 1.0, 2: 0.0, 3: 0.0, 4: 1.0, 5: 0.0, 6: 0.0, 7: 1.0, 8: 1.0, 9: 0.0}
+
+    sage: I = [ v for v in petersen.vertices() if b_sol[v] ]; I
+    [1, 4, 7, 8]
+    sage: petersen.show(vertex_colors = {'red' : I})
+
+Pour finir, on manipule l'ensemble de tous les points entiers d'un polytope::
+
+    sage: A = random_matrix(ZZ,3,6,x=7)
+    sage: L = LatticePolytope(A)
+    sage: L.plot3d()
+
+Un grand merci au passage à Nathann Cohen qui a fourni une bonne part
+des exemples et fonctionnalités ci-dessus.
+
+.. seealso::
+
+    - :ref:`linear_programming`
+    - `<http://www-sop.inria.fr/members/Nathann.Cohen/tut/LP/>`_
+
+Catégories
+==========
+
+Comme on l'a vu, Sage a une large gamme de fonctionnalités,
+développées par des enseignants, chercheurs et volontaires d'horizons
+très différents. Il intègre de plus des outils dont les approches sont
+variées. Comment s'assurer qu'il conserve une certaine cohérence
+interne?
+
+Revenons sur notre corps fini::
+
+    sage: K = GF(7); K
+    Finite Field of size 7
+
+Toujours dans l'idée de modéliser les mathématiques au plus près, Sage
+a des informations sur la *structure mathématique* de `K`::
+
+    sage: K.category()
+    Category of finite fields
+
+Voilà ce qu'il peut en déduire:
+
+.. skip
+
+::
+
+    sage: graph = K.category().category_graph()
+    sage: graph.set_latex_options(format="dot2tex")
+    sage: view(graph, viewer="pdf", tightpage=True)
+
+En quoi est-ce utile?
+
+1. Cohérence des spécifications::
+
+    sage: K.cardinality()
+    7
+
+    sage: Partitions(10).cardinality()
+    42
+
+    sage: EllipticCurve([GF(5)(0),0,1,-1,0]).cardinality()
+    8
+
+   Cela n'est cependant pas encore parfaitement au point::
+
+    sage: LatticePolytope(A).npoints()            # random
+    4
+
+2. Partage de code générique::
+
+    sage: K.multiplication_table(names = 'elements')
+    *  0 1 2 3 4 5 6
+     +--------------
+    0| 0 0 0 0 0 0 0
+    1| 0 1 2 3 4 5 6
+    2| 0 2 4 6 1 3 5
+    3| 0 3 6 2 5 1 4
+    4| 0 4 1 5 2 6 3
+    5| 0 5 3 1 6 4 2
+    6| 0 6 5 4 3 2 1
+
+    sage: K.multiplication_table.__module__
+    'sage.categories.magmas'
+
+   La hierarchie de catégorie est traduite automatiquement en une
+   hierarchie de classes::
+
+    sage: for cls in K.__class__.mro():
+    ....:     print cls
+    <class 'sage.rings.finite_rings.finite_field_prime_modn.FiniteField_prime_modn_with_category'>
+    ...
+    <class 'sage.categories.finite_fields.FiniteFields.parent_class'>
+    <class 'sage.categories.fields.Fields.parent_class'>
+    <class 'sage.categories.euclidean_domains.EuclideanDomains.parent_class'>
+    <class 'sage.categories.principal_ideal_domains.PrincipalIdealDomains.parent_class'>
+    <class 'sage.categories.unique_factorization_domains.UniqueFactorizationDomains.parent_class'>
+    <class 'sage.categories.gcd_domains.GcdDomains.parent_class'>
+    ...
+    <class 'sage.categories.magmas.Magmas.parent_class'>
+    ...
+    <class 'sage.categories.finite_sets.FiniteSets.parent_class'>
+    ...
+    <type 'object'>
+
+
+3. Partage de tests génériques::
+
+    sage: TestSuite(K).run(verbose=True)
+    running ._test_additive_associativity() . . . pass
+    running ._test_an_element() . . . pass
+    running ._test_associativity() . . . pass
+    running ._test_category() . . . pass
+    running ._test_distributivity() . . . pass
+    running ._test_elements() . . .
+      Running the test suite of self.an_element()
+      running ._test_category() . . . pass
+      running ._test_eq() . . . pass
+      running ._test_not_implemented_methods() . . . pass
+      running ._test_pickling() . . . pass
+      pass
+    running ._test_elements_eq() . . . pass
+    running ._test_enumerated_set_contains() . . . pass
+    running ._test_enumerated_set_iter_cardinality() . . . pass
+    running ._test_enumerated_set_iter_list() . . . pass
+    running ._test_eq() . . . pass
+    running ._test_len() . . . pass
+    running ._test_not_implemented_methods() . . . pass
+    running ._test_one() . . . pass
+    running ._test_pickling() . . . pass
+    running ._test_prod() . . . pass
+    running ._test_some_elements() . . . pass
+    running ._test_zero() . . . pass
+
+
+A demonstration of Sage + GAP4 + GAP3 + Chevie + Semigroupe
+===========================================================
+
+Let us create the Coxeter group W::
+
+    sage: W = CoxeterGroup(["H",4]); W
+    Permutation Group with generators [(3,8)(4,64)(7,12)(10,14)(11,16)(13,18)(15,20)(17,22)(19,23)(21,26)(24,27)(25,29)(28,30)(31,33)(34,36)(37,39)(40,43)(42,46)(45,48)(47,50)(49,52)(51,53)(59,60)(63,68)(67,72)(70,74)(71,76)(73,78)(75,80)(77,82)(79,83)(81,86)(84,87)(85,89)(88,90)(91,93)(94,96)(97,99)(100,103)(102,106)(105,108)(107,110)(109,112)(111,113)(119,120), (2,7)(3,63)(4,8)(5,10)(6,11)(9,13)(15,17)(19,21)(20,24)(22,27)(23,28)(26,30)(29,32)(33,35)(36,38)(37,40)(39,42)(41,45)(43,46)(44,47)(52,54)(53,55)(58,59)(62,67)(64,68)(65,70)(66,71)(69,73)(75,77)(79,81)(80,84)(82,87)(83,88)(86,90)(89,92)(93,95)(96,98)(97,100)(99,102)(101,105)(103,106)(104,107)(112,114)(113,115)(118,119), (1,5)(2,62)(3,7)(6,9)(8,12)(11,15)(13,17)(16,20)(18,22)(21,25)(26,29)(28,31)(30,33)(32,35)(34,37)(36,39)(38,41)(42,45)(46,48)(47,49)(50,52)(55,56)(57,58)(61,65)(63,67)(66,69)(68,72)(71,75)(73,77)(76,80)(78,82)(81,85)(86,89)(88,91)(90,93)(92,95)(94,97)(96,99)(98,101)(102,105)(106,108)(107,109)(110,112)(115,116)(117,118), (1,61)(2,6)(5,9)(7,11)(10,13)(12,16)(14,18)(15,19)(17,21)(20,23)(22,26)(24,28)(27,30)(31,34)(33,36)(35,38)(41,44)(45,47)(48,50)(49,51)(52,53)(54,55)(56,57)(62,66)(65,69)(67,71)(70,73)(72,76)(74,78)(75,79)(77,81)(80,83)(82,86)(84,88)(87,90)(91,94)(93,96)(95,98)(101,104)(105,107)(108,110)(109,111)(112,113)(114,115)(116,117)]
+
+It is constructed as a group of permutations, from root data given by
+GAP3+Chevie (thanks to Franco's interface)::
+
+    sage: W._gap_group
+    CoxeterGroup("H",4)
+    sage: (W._gap_group).parent()
+    Gap3
+
+with operations on permutations implemented in Sage::
+
+    sage: W.an_element()^3
+    (3,8)(4,64)(7,12)(10,14)(11,16)(13,18)(15,20)(17,22)(19,23)(21,26)(24,27)(25,29)(28,30)(31,33)(34,36)(37,39)(40,43)(42,46)(45,48)(47,50)(49,52)(51,53)(59,60)(63,68)(67,72)(70,74)(71,76)(73,78)(75,80)(77,82)(79,83)(81,86)(84,87)(85,89)(88,90)(91,93)(94,96)(97,99)(100,103)(102,106)(105,108)(107,110)(109,112)(111,113)(119,120)
+
+and group operations implemented in GAP 4::
+
+    sage: len(W.conjugacy_classes_representatives())
+    34
+    sage: W.cardinality()
+    14400
+
+Now, assume we want to do intensive computations on this group,
+requiring heavy access to the left and right Cayley graphs
+(e.g. Bruhat interval calculations, representation theory, ...). Then
+we can use Jean-Eric Pin's Semigroupe, a software written in C::
+
+    sage: S = semigroupe.AutomaticSemigroup(W.semigroup_generators(), W.one(),
+    ....:                                   category = CoxeterGroups().Finite())
+
+The following triggers the full expansion of the group and its Cayley
+graph in memory::
+
+    sage: S.cardinality()
+    14400
+
+And we can now iterate through the elements, in length-lexicographic
+order w.r.t. their reduced word::
+
+    sage: var('t')
+    t
+    sage: sum( t^p.length() for p in S)
+    t^60 + 4*t^59 + 9*t^58 + 16*t^57 + 25*t^56 + 36*t^55 + 49*t^54 + 64*t^53 + 81*t^52 + 100*t^51 + 121*t^50 + 144*t^49 + 168*t^48 + 192*t^47 + 216*t^46 + 240*t^45 + 264*t^44 + 288*t^43 + 312*t^42 + 336*t^41 + 359*t^40 + 380*t^39 + 399*t^38 + 416*t^37 + 431*t^36 + 444*t^35 + 455*t^34 + 464*t^33 + 471*t^32 + 476*t^31 + 478*t^30 + 476*t^29 + 471*t^28 + 464*t^27 + 455*t^26 + 444*t^25 + 431*t^24 + 416*t^23 + 399*t^22 + 380*t^21 + 359*t^20 + 336*t^19 + 312*t^18 + 288*t^17 + 264*t^16 + 240*t^15 + 216*t^14 + 192*t^13 + 168*t^12 + 144*t^11 + 121*t^10 + 100*t^9 + 81*t^8 + 64*t^7 + 49*t^6 + 36*t^5 + 25*t^4 + 16*t^3 + 9*t^2 + 4*t + 1
+    sage: S[0:10]
+    [[], [1], [2], [3], [4], [1, 2], [1, 3], [1, 4], [2, 1], [2, 3]]
+    sage: S[-1]
+    [1, 2, 1, 2, 1, 3, 2, 1, 2, 1, 3, 2, 1, 2, 3, 4, 3, 2, 1, 2, 1, 3, 2, 1, 2, 3, 4, 3, 2, 1, 2, 1, 3, 2, 1, 2, 3, 4, 3, 2, 1, 2, 1, 3, 2, 1, 2, 3, 4, 3, 2, 1, 2, 1, 3, 2, 1, 2, 3, 4]
+
+The elements of S are handles to C objects from ``Semigroupe``::
+
+    sage: x = S.an_element()
+    sage: x
+    [1, 2, 3, 4]
+
+Products are calculated by ``Semigroupe``::
+
+    sage: x * x
+    [1, 2, 1, 2, 3, 2, 4, 3]
+
+Powering operations are handled by Sage::
+
+    sage: x^3
+    [1, 2, 1, 2, 3, 2, 1, 2, 3, 4, 3, 2]
+
+    sage: x^(10^10000)
+    [1, 2, 1, 2, 3, 2, 1, 2, 1, 3, 2, 4, 3, 2, 1, 2, 1, 3, 2, 1, 2, 3, 4, 3, 2, 1, 2, 1, 3, 2, 1, 2, 3, 4, 3, 2, 1, 2, 3, 4]
+
+Altogether, S is a full fledged Sage Coxeter group, which passes all
+the generic tests::
+
+    sage: TestSuite(S).run(verbose = True, skip = "_test_associativity")
+    running ._test_an_element() . . . pass
+    ...
+    running ._test_has_descent() . . . pass
+    ...
+    running ._test_reduced_word() . . . pass
+    ...
+
+And of course it works for general semigroups too, and can further
+compute much more information about those, like the (Knuth-Bendix
+completion of the) relations between the generators::
+
+    sage: W = CoxeterGroup(["A",3])
+    sage: S = semigroupe.AutomaticSemigroup(W.simple_reflections(), W.one())
+
+.. skip
+
+::
+
+    sage: S.print_relations()
+    aa = 1
+    bb = 1
+    ca = ac
+    cc = 1
+    bab = aba
+    cbc = bcb
+    cbac = bcba
+
+which contains the usual commutation + braid relations.
+
+Let's try now the 0-Hecke monoid::
+
+    sage: from sage.combinat.j_trivial_monoids import *
+    sage: S = semigroupe.AutomaticSemigroup(W.simple_projections(), W.one(), by_action = True)
+    sage: S.cardinality()
+    24
+
+.. skip
+
+::
+
+    sage: S.print_relations()
+    aa = a
+    bb = b
+    ca = ac
+    cc = c
+    bab = aba
+    cbc = bcb
+    cbac = bcba
+    abacba = 0
+
+    sage: S.cardinality()
+    24
+
+    sage: S = semigroupe.AutomaticSemigroup(W.simple_projections(), W.one(), by_action = True,
+    ....:                                   category = JTrivialMonoids().Finite())
+    sage: H = S.algebra(QQ)
+    sage: H._repr_term = lambda x: '['+''.join(str(i) for i in x.reduced_word())+']'
+    sage: for x in H.orthogonal_idempotents():
+    ....:     print x
+    [121321]
+    -[121321] - [21321] + [2132] + [13] - [12132] + [2321] - [132] + [1213] - [12321] + [1232] + [1321] - [213]
+    [232] - [2321] - [1232] + [12321]
+    [121321] - [21321] + [32] + [12] - [12132] - [2] + [] - [121] + [2321] - [12321] - [321] + [23] + [2132] + [13] - [232] - [123] + [21] - [213] + [1213] - [3] + [1232] + [1321] - [1] - [132]
+    [121] - [1213] + [12321] - [1321]
+    -[12] + [21321] - [2132] - [232] + [12132] + [2] - [21] + [121] + [132] - [1213] - [1321] + [213]
+    -[121321] + [21321] - [32] + [12132] - [2321] + [12321] + [321] - [23] - [2132] - [13] + [232] + [123] + [213] - [1213] + [3] - [1232] - [1321] + [132]
+    -[121] - [13] + [1213] - [12321] + [1321] + [1]
+

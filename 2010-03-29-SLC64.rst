@@ -1,0 +1,511 @@
+.. _demo.2010-03-29-SLC64:
+
+===================================
+SLC 64: Sage and Sage-Combinat demo
+===================================
+
+.. MODULEAUTHOR:: Florent Hivert <florent.hivert@univ-rouen.fr>, Nicolas M. Thiéry <nthiery at users.sf.net>
+
+Sage demo
+=========
+
+::
+
+    sage: %hide
+    sage: pretty_print_default()
+
+
+    sage: 1 + 1
+
+    sage: plot(sin(x), -pi, pi, fill = 'axis')
+
+Interactive plots
+-----------------
+
+::
+
+    sage: @interact
+    ....: def _(a=(0,2)):
+    ....:     show(plot(sin(x*(1+a*x)), (x,0,6)))
+
+
+    sage: @interact
+    ....: def plottaylor(order=(1..15)):
+    ....:     f = sin(x) * e^(-x)
+    ....:     g = f.taylor(x, 0, order)
+    ....:     html('$f(x)\;=\;%s$'%latex(f))
+    ....:     html('$\hat{f}(x;%s)\;=\;%s+\mathcal{O}(x^{%s})$'%(0,latex(g),order+1))
+    ....:     F = plot(f,-1, 5, thickness=2)
+    ....:     G = plot(g,-1, 5, color='green', thickness=2)
+    ....:     show(F+G, ymin = -.5, ymax = 1)
+
+    sage: var('y')
+    ....: f = sin(x) - cos(x*y) + 1 / (x^3+1)
+    ....: f
+
+    sage: f.integrate(x)
+
+
+Introspection
+-------------
+
+::
+
+    sage: f.i
+
+    sage: f.is_idempotent
+
+    sage: f.is_idempotent
+
+
+Elementary combinatorics
+========================
+
+Combinatorial objects
+---------------------
+
+::
+
+    sage: p = Partition([3,3,2,1])
+    sage: p
+
+    sage: p.pp()
+
+    sage: p.conjugate().pp()
+
+::
+
+    sage: s = Permutation([5,3,2,6,4,8,9,7,1])
+    sage: s
+
+    sage: (p,q) = s.robinson_schensted()
+    sage: p.pp()
+    1  4  7  9
+    2  6  8
+    3
+    5
+
+    sage: q.pp()
+    1  4  6  7
+    2  5  8
+    3
+    9
+
+    sage: G = p.row_stabilizer()
+    sage: G
+    Permutation Group with generators [(), (7,9), (6,8), (4,7), (2,6), (1,4)]
+
+    sage: G.
+
+Enumerated sets (combinatorial classes)
+---------------------------------------
+
+::
+
+    sage: P5 = Partitions(5)
+    sage: P5
+    Partitions of the integer 5
+
+    sage: P5.list()
+    [[5], [4, 1], [3, 2], [3, 1, 1], [2, 2, 1], [2, 1, 1, 1], [1, 1, 1, 1, 1]]
+
+    sage: P5.cardinality()
+    7
+
+    sage: Partitions(100000).cardinality()
+    27493510569775696512677516320986352688173429315980054758203125984302147328114964173055050741660736621590157844774296248940493063070200461792764493033510116079342457190155718943509725312466108452006369558934464248716828789832182345009262853831404597021307130674510624419227311238999702284408609370935531629697851569569892196108480158600569421098519
+
+    sage: Permutations(20).random_element()
+    [15, 6, 8, 14, 17, 16, 4, 7, 11, 3, 10, 5, 19, 9, 12, 2, 20, 18, 1, 13]
+
+    sage: Compositions(10).unrank(100)      # TODO: non stupid algorithm
+    [1, 1, 3, 1, 2, 1, 1]
+
+    sage: for p in StandardTableaux([3,2]):
+    ....:     print "-----------------------------"
+    ....:     p.pp()
+    -----------------------------
+      1  3  5
+      2  4
+    -----------------------------
+      1  2  5
+      3  4
+    -----------------------------
+      1  3  4
+      2  5
+    -----------------------------
+      1  2  4
+      3  5
+    -----------------------------
+      1  2  3
+      4  5
+
+Trees
+-----
+
+ToDo
+
+Summary:
+
+ * Every mathematical object (element, set, category, ...) is modeled by a Python object</li>
+ * All combinatorial classes share a uniform interface</li>
+
+Constructions
+-------------
+
+::
+
+    sage: C = DisjointUnionEnumeratedSets( [ Compositions(4), Permutations(3)] )
+    sage: C
+    Union of Family (Compositions of 4, Standard permutations of 3)
+
+    sage: C.cardinality()
+    14
+
+    sage: C.list()
+    [[1, 1, 1, 1], [1, 1, 2], [1, 2, 1], [1, 3], [2, 1, 1], [2, 2], [3, 1], [4], [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+
+::
+
+    sage: C = CartesianProduct(Compositions(8), Permutations(20))
+    sage: C
+    Cartesian product of Compositions of 8, Standard permutations of 20
+
+    sage: C.cardinality()
+    311411457046609920000
+
+::
+
+    sage: F = Family(NonNegativeIntegers(), Permutations)
+    sage: F
+    Lazy family (Permutations(i))_{i in Set of non negative integers}
+
+    sage: F[1000]
+    Standard permutations of 1000
+
+    sage: U = DisjointUnionEnumeratedSets(F)
+    sage: U.cardinality()
+    +Infinity
+
+    sage: for p in U:
+    ....:     print p
+    []
+    [1]
+    [1, 2]
+    [2, 1]
+    [1, 2, 3]
+    [1, 3, 2]
+    [2, 1, 3]
+    [2, 3, 1]
+    [3, 1, 2]
+    ...
+
+Summary:
+
+ * Basic combinatorial classes + constructions give a flexible toolbox
+ * This is made possible by uniform interfaces
+ * Lazy algorithms and data structures for large / infinite sets (iterators, ...)
+
+Enumeration kernels
+-------------------
+
+Integer lists::
+
+    sage: IntegerVectors(10, 3, min_part = 2, max_part = 5, inner = [2, 4, 2]).list()
+    [[4, 4, 2], [3, 5, 2], [3, 4, 3], [2, 5, 3], [2, 4, 4]]
+
+    sage: Compositions(5, max_part = 3, min_length = 2, max_length = 3).list()
+    [[1, 1, 3], [1, 2, 2], [1, 3, 1], [2, 1, 2], [2, 2, 1], [2, 3], [3, 1, 1], [3, 2]]
+
+    sage: Partitions(5, max_slope = -1).list()
+    [[5], [4, 1], [3, 2]]
+
+    sage: IntegerListsLex(10, length=3, min_part = 2, max_part = 5, floor = [2, 4, 2]).list()
+    [[4, 4, 2], [3, 5, 2], [3, 4, 3], [2, 5, 3], [2, 4, 4]]
+
+    sage: IntegerListsLex(5, min_part = 1, max_part = 3, min_length = 2, max_length = 3).list()
+    [[3, 2], [3, 1, 1], [2, 3], [2, 2, 1], [2, 1, 2], [1, 3, 1], [1, 2, 2], [1, 1, 3]]
+
+    sage: IntegerListsLex(5, min_part = 1, max_slope = -1).list()
+    [[5], [4, 1], [3, 2]]
+
+    sage: c = Compositions(5)[1]
+    sage: c
+    [1, 1, 1, 2]
+
+    sage: c = IntegerListsLex(5, min_part = 1)[1]
+
+Species / decomposable classes
+++++++++++++++++++++++++++++++
+
+::
+
+    sage: from sage.combinat.species.library import *
+    sage: o   = var("o")
+
+Fibonacci words::
+
+    sage: Eps =  EmptySetSpecies()
+    sage: Z0  =  SingletonSpecies()
+    sage: Z1  =  Eps*SingletonSpecies()
+    sage: FW  = CombinatorialSpecies()
+    sage: FW.define(Eps + Z0*FW  +  Z1*Eps + Z1*Z0*FW)
+    sage: FW
+
+    sage: L = FW.isotype_generating_series().coefficients(15)
+    sage: L
+
+    sage: sloane_find(L)
+    Searching Sloane's online database...
+    [[45, 'Fibonacci numbers: F(n) = F(n-1) + F(n-2), F(0) = 0, F(1) = 1, F(2) = 1, ...', [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811, 514229, 832040, 1346269, 2178309, 3524578, 5702887, 9227465, 14930352, 24157817, 39088169]], [24595, 'a(n) = s(1)t(n) + s(2)t(n-1) + ... + s(k)t(n+1-k), where k = [ (n+1)/2 ], s = (F(2), F(3), ...), t = A023533.', [1, 0, 0, 1, 2, 3, 5, 0, 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1598, 2586, 4184, 6770, 10954, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28658, 46370, 75028, 121398, 196426]], [25109, 'a(n) = s(1)t(n) + s(2)t(n-1) + ... + s(k)t(n-k+1), where k = [ n/2 ], s = (F(2), F(3), F(4), ...), t = A023533.', [0, 0, 1, 2, 3, 0, 0, 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1598, 2586, 4181, 6770, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28658, 46370, 75028, 121398, 196426, 317824, 514250]], [132636, 'Fib(n) mod n^3.', [0, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 1685, 7063, 4323, 4896, 12525, 15937, 19271, 10483, 2060, 22040, 5674, 15621, 2752, 3807, 9340, 432, 46989, 19305, 11932, 62155, 31899, 12088, 22273, 3677, 32420]], [132916, 'a(0)=0; a(1)=1; a(n) = Sum a(n-k), k= 1 ... [n^(1/3)] for n&gt;=2.', [0, 1, 1, 1, 1, 1, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 21892, 39603, 72441, 133936, 245980, 452357, 832273, 1530610, 2815240, 5178123, 9523973, 17517336, 32219432, 59260741, 108997509, 200477682]], [147316, 'A000045 Fibonacci mirror sequence Binet: f(n)=(1/5)*2^(-n) ((5 - 2 *Sqrt[5]) (1 + Sqrt[5])^n + (1 - Sqrt[5])^n(5 + 2 * Sqrt[5])).', [1597, -987, 610, -377, 233, -144, 89, -55, 34, -21, 13, -8, 5, -3, 2, -1, 1, 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597]], [39834, 'a(n+2)=-a(n+1)+a(n) (signed Fibonacci numbers); or Fibonacci numbers (A000045) extended to negative indices.', [1, 1, 0, 1, -1, 2, -3, 5, -8, 13, -21, 34, -55, 89, -144, 233, -377, 610, -987, 1597, -2584, 4181, -6765, 10946, -17711, 28657, -46368, 75025, -121393, 196418, -317811, 514229, -832040, 1346269, -2178309, 3524578, -5702887, 9227465, -14930352, 24157817]], [152163, 'a(n)=a(n-1)+a(n-2), n&gt;1 ; a(0)=1, a(1)=-1 .', [1, -1, 0, -1, -1, -2, -3, -5, -8, -13, -21, -34, -55, -89, -144, -233, -377, -610, -987, -1597, -2584, -4181, -6765, -10946, -17711, -28657, -46368, -75025, -121393, -196418, -317811, -514229, -832040, -1346269, -2178309, -3524578, -5702887]]]
+
+    sage: BT = CombinatorialSpecies()
+    sage: Leaf =  SingletonSpecies()
+    sage: BT.define(Leaf+(BT*BT))
+    sage: BT5 = BT.isotypes([o]*5)
+
+    sage: BT5.list()
+    [o*(o*(o*(o*o))), o*(o*((o*o)*o)), o*((o*o)*(o*o)), o*((o*(o*o))*o), o*(((o*o)*o)*o), (o*o)*(o*(o*o)), (o*o)*((o*o)*o), (o*(o*o))*(o*o), ((o*o)*o)*(o*o), (o*(o*(o*o)))*o, (o*((o*o)*o))*o, ((o*o)*(o*o))*o, ((o*(o*o))*o)*o, (((o*o)*o)*o)*o]
+
+    sage: %hide
+    sage: def pbt_to_coordinates(t):
+    ....:     e = {}
+    ....:     queue = [t]
+    ....:     while queue:
+    ....:         z = queue.pop()
+    ....:         if not isinstance(z[0], int):
+    ....:             e[z[1]._labels[0]-1] = z
+    ....:             queue.extend(z)
+    ....:     coord = [(len(e[i][0]._labels) * len(e[i][1]._labels))
+    ....:                     for i in range(len(e))]
+    ....:     return sage.geometry.polyhedra.Polytopes.project_1(coord)
+    ....:
+    sage: K4 = Polyhedron(vertices=[pbt_to_coordinates(t) for t in BT.isotypes(range(5))])
+    sage: K4.show(fill=True).show(frame=False)
+
+Lattice points of polytopes
++++++++++++++++++++++++++++
+
+::
+
+    sage: A=random_matrix(ZZ,3,6,x=7)
+    sage: L=LatticePolytope(A)
+    sage: L.plot3d()
+
+    sage: L.npoints()  # should be cardinality!
+    28
+
+This example used PALP and J-mol.
+
+Graphs up to an isomorphism
++++++++++++++++++++++++++++
+
+::
+
+    sage: show(graphs(5, lambda G: G.size() <= 4))
+
+Words
+=====
+
+An infinite periodic word::
+
+    sage: p = Word([0,1,1,0,1,0,1]) ^ Infinity
+    sage: p
+    word: 0110101011010101101010110101011010101101...
+
+The fixed point of a morphism::
+
+    sage: m = WordMorphism('a->acabb,b->bcacacbb,c->baba')
+    sage: w = m.fixed_point('a')
+    sage: w
+    word: acabbbabaacabbbcacacbbbcacacbbbcacacbbac...
+
+
+Predefined algebraic structures
+===============================
+
+Root systems, Coxeter groups, ...
+---------------------------------
+
+::
+
+    sage: L = RootSystem(['A',2,1]).weight_space()
+    sage: L.plot(size=[[-1..1],[-1..1]],alcovewalks=[[0,2,0,1,2,1,2,0,2,1]])
+
+    sage: W = WeylGroup(["B", 3])
+    sage: W.cayley_graph(side = "left").plot3d(color_by_label = True)
+
+    sage: print W.character_table()  # Thanks GAP!
+    CT1
+
+	  2  4  4  3  3  4  3  1  1  3  4
+	  3  1  .  .  .  .  .  1  1  .  1
+
+	    1a 2a 2b 4a 2c 2d 6a 3a 4b 2e
+
+    X.1      1  1  1  1  1  1  1  1  1  1
+    X.2      1  1  1 -1 -1 -1 -1  1  1 -1
+    X.3      1  1 -1 -1  1 -1  1  1 -1  1
+    X.4      1  1 -1  1 -1  1 -1  1 -1 -1
+    X.5      2  2  .  . -2  .  1 -1  . -2
+    X.6      2  2  .  .  2  . -1 -1  .  2
+    X.7      3 -1  1  1  1 -1  .  . -1 -3
+    X.8      3 -1 -1 -1  1  1  .  .  1 -3
+    X.9      3 -1 -1  1 -1 -1  .  .  1  3
+    X.10     3 -1  1 -1 -1  1  .  . -1  3
+
+    sage: rho = SymmetricGroupRepresentation([3, 2], "orthogonal"); rho
+    Orthogonal representation of the symmetric group corresponding to [3, 2]
+    sage: rho([1, 3, 2, 4, 5])
+    1 & 0 & 0 & 0 & 0 \\
+    0 & -\frac{1}{2} & \frac{1}{2} \, \sqrt{3} & 0 & 0 \\
+    0 & \frac{1}{2} \, \sqrt{3} & \frac{1}{2} & 0 & 0 \\
+    0 & 0 & 0 & -\frac{1}{2} & \frac{1}{2} \, \sqrt{3} \\
+    0 & 0 & 0 & \frac{1}{2} \, \sqrt{3} & \frac{1}{2}
+
+Symmetric functions
+-------------------
+
+Classical basis::
+
+    sage: Sym = SymmetricFunctions(QQ)
+    sage: Sym
+    Symmetric Functions over Rational Field
+    sage: s = Sym.schur()
+    sage: h = Sym.complete()
+    sage: e = Sym.elementary()
+    sage: m = Sym.monomial()
+    sage: p = Sym.powersum()
+
+    sage: m(( ( h[2,1] * ( 1 + 3 * p[2,1]) ) + s[2](s[3])))
+
+Macdonald polynomials::
+
+    sage: J = MacdonaldPolynomialsJ(QQ)
+    sage: P = MacdonaldPolynomialsP(QQ)
+    sage: Q = MacdonaldPolynomialsQ(QQ)
+    sage: J
+    Macdonald polynomials in the J basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field
+    sage: f = P(J[2,2] + 3 * Q[3,1])
+    sage: f
+    (q^2*t^6-q^2*t^5-q^2*t^4-q*t^5+q^2*t^3+2*q*t^3+t^3-q*t-t^2-t+1)*McdP[2, 2] + ((3*q^3*t^5-6*q^3*t^4+3*q^3*t^3-3*q^2*t^4+6*q^2*t^3-3*q^2*t^2-3*q*t^3+6*q*t^2-3*q*t+3*t^2-6*t+3)/(q^7*t-2*q^6*t+2*q^4*t-q^4-q^3*t+2*q^3-2*q+1))*McdP[3, 1]
+
+    sage: Sym = SymmetricFunctions(J.base_ring())
+    sage: s = Sym.s()
+    sage: s(f)
+
+
+
+A demonstration of Sage + GAP4 + GAP3 + Chevie + Semigroupe
+===========================================================
+
+Let us create the Coxeter group W::
+
+    sage: W = CoxeterGroup(["H",4])
+
+It is constructed as a group of permutations, from root data given by
+GAP3+Chevie (thanks to Franco's interface)::
+
+    sage: W._gap_group
+    CoxeterGroup("H",4)
+    sage: (W._gap_group).parent()
+    Gap3
+
+with operations on permutations implemented in Sage::
+
+    sage: W.an_element()^3
+    (1,5)(2,62)(3,7)(6,9)(8,12)(11,15)(13,17)(16,20)(18,22)(21,25)(26,29)(28,31)(30,33)(32,35)(34,37)(36,39)(38,41)(42,45)(46,48)(47,49)(50,52)(55,56)(57,58)(61,65)(63,67)(66,69)(68,72)(71,75)(73,77)(76,80)(78,82)(81,85)(86,89)(88,91)(90,93)(92,95)(94,97)(96,99)(98,101)(102,105)(106,108)(107,109)(110,112)(115,116)(117,118)
+
+and group operations implemented in GAP::
+
+    sage: len(W.conjugacy_classes_representatives())
+    34
+    sage: W.cardinality()
+    14400
+
+Now, assume we want to do intensive computations on this group,
+requiring heavy access to the left and right Cayley graphs
+(e.g. Bruhat interval calculations, representation theory, ...). Then
+we can use Jean-Eric Pin's Semigroupe, a software written in C::
+
+    sage: S = semigroupe.AutomaticSemigroup(W.semigroup_generators(), W.one(), category = FiniteCoxeterGroups())
+
+The following triggers the full expansion of the group and its Cayley
+graph in memory::
+
+    sage: S.cardinality()
+    14400
+
+And we can now iterate through the elements, in length-lexicographic
+order w.r.t. their reduced word::
+
+    sage: sum( x^p.length() for p in S)
+    x^60 + 4*x^59 + 9*x^58 + 16*x^57 + 25*x^56 + 36*x^55 + 49*x^54 + 64*x^53 + 81*x^52 + 100*x^51 + 121*x^50 + 144*x^49 + 168*x^48 + 192*x^47 + 216*x^46 + 240*x^45 + 264*x^44 + 288*x^43 + 312*x^42 + 336*x^41 + 359*x^40 + 380*x^39 + 399*x^38 + 416*x^37 + 431*x^36 + 444*x^35 + 455*x^34 + 464*x^33 + 471*x^32 + 476*x^31 + 478*x^30 + 476*x^29 + 471*x^28 + 464*x^27 + 455*x^26 + 444*x^25 + 431*x^24 + 416*x^23 + 399*x^22 + 380*x^21 + 359*x^20 + 336*x^19 + 312*x^18 + 288*x^17 + 264*x^16 + 240*x^15 + 216*x^14 + 192*x^13 + 168*x^12 + 144*x^11 + 121*x^10 + 100*x^9 + 81*x^8 + 64*x^7 + 49*x^6 + 36*x^5 + 25*x^4 + 16*x^3 + 9*x^2 + 4*x + 1
+    sage: S[0:10]
+    [[], [0], [1], [2], [3], [0, 1], [0, 2], [0, 3], [1, 0], [1, 2]]
+    sage: S[-1]
+    [0, 1, 0, 1, 0, 2, 0, 1, 0, 1, 2, 0, 1, 0, 2, 3, 2, 0, 1, 0, 1, 2, 0, 1, 0, 2, 3, 2, 0, 1, 0, 1, 2, 0, 1, 0, 2, 3, 2, 0, 1, 0, 1, 2, 0, 1, 0, 2, 3, 2, 0, 1, 0, 1, 2, 0, 1, 0, 2, 3]
+
+The elements of S are handles to C objects from ``Semigroupe``::
+
+    sage: x = S.an_element()
+    sage: x
+    [0, 1, 2, 3]
+
+Products are calculated by ``Semigroupe``::
+
+    sage: x * x
+    [0, 1, 0, 2, 0, 1, 3, 2]
+
+Powering operations are handled by Sage::
+
+    sage: x^3
+    [0, 1, 0, 2, 0, 1, 0, 2, 3, 2, 0, 1]
+
+
+    sage: x^(10^10000)
+
+Altogether, S is a full fledged Sage Coxeter group, which passes all
+the generic tests::
+
+    sage: TestSuite(S).run(verbose = True, skip = "_test_associativity")
+
+And of course it works for general semigroups too, like the 0-Hecke
+monoid, and can further compute much more information about those,
+like the (Knuth-Bendix completion of the) relations between the
+generators::
+
+    sage: S.print_relations()
+    aa = 1
+    bb = 1
+    cb = bc
+    cc = 1
+    da = ad
+    db = bd
+    dd = 1
+    cac = aca
+    dcd = cdc
+    ...
+    dcababcabacdcababcabacdcababcabacdcababcabacdc = cdcababcabacdcababcabacdcababcabacdcababcabacd
+
+which contains the usual commutation + braid relations::
+
+    sage: from sage.combinat.j_trivial_monoids import *
+    sage: S = semigroupe.AutomaticSemigroup(W.simple_projections(), W.one(), by_action = True)
+    sage: S.cardinality()
+    48
+
+    sage: S.print_relations()
+    aa = a
+    bb = b
+    ca = ac
+    cc = c
+    bab = aba
+    cbcb = bcbc
+    cbacba = bcbacb
+    abacbacbc = 0
+
+    sage: W = CoxeterGroup(["A",3])
+    sage: S = semigroupe.AutomaticSemigroup(W.simple_projections(), W.one(), by_action = True, category = FiniteJTrivialMonoids())
+    sage: H = S.algebra(QQ)
+    sage: H.orthogonal_idempotents()

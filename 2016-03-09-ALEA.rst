@@ -1,0 +1,195 @@
+
+Counting
+========
+
+::
+
+    sage: Partitions(100000).cardinality()
+
+Random generation
+=================
+
+::
+
+    sage: M = BinaryTrees(100)
+    sage: t = M.random_element()
+    sage: view(t, tightpage=True)
+
+Species
+=======
+
+::
+
+    sage: from sage.combinat.species.library import *
+    sage: BT = CombinatorialSpecies()
+    sage: Leaf =  SingletonSpecies()
+    sage: BT.define(Leaf+(BT*BT))
+
+    sage: o = var("o")
+    sage: BT.isotypes([o]*5).list()
+    [o*(o*(o*(o*o))), o*(o*((o*o)*o)), o*((o*o)*(o*o)), o*((o*(o*o))*o), o*(((o*o)*o)*o), (o*o)*(o*(o*o)), (o*o)*((o*o)*o), (o*(o*o))*(o*o), ((o*o)*o)*(o*o), (o*(o*(o*o)))*o, (o*((o*o)*o))*o, ((o*o)*(o*o))*o, ((o*(o*o))*o)*o, (((o*o)*o)*o)*o]
+
+    sage: S = BT.isotype_generating_series()
+    sage: S
+    x + x^2 + 2*x^3 + 5*x^4 + 14*x^5 + O(x^6)
+
+    sage: S[100]
+    227508830794229349661819540395688853956041682601541047340
+
+    sage: S
+    x + x^2 + 2*x^3 + 5*x^4 + 14*x^5 + 42*x^6 + 132*x^7 + 429*x^8 + 1430*x^9 + ... + O(x^101)
+
+Words
+=====
+
+::
+
+    sage: m = WordMorphism('a->acabb,b->bcacacbb,c->baba')
+    sage: m.fixed_point('a')
+    word: acabbbabaacabbbcacacbbbcacacbbbcacacbbac...
+
+Lattice points of polytopes
+===========================
+
+::
+
+    sage: A = random_matrix(ZZ, nrows=6,ncols=3,x=7)
+    sage: L = LatticePolytope(A)
+    sage: L.plot3d()
+
+    sage: L.npoints()  # should be cardinality!
+    28
+
+This example used PALP and J-mol
+
+Graphs up to an isomorphism
+===========================
+
+::
+
+    sage: show(graphs(5, lambda G: G.size() <= 4))
+
+
+
+Guessing and the like
+=====================
+
+::
+
+    sage: data = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]
+
+    sage: oeis(data)
+    0: A000045: Fibonacci numbers: F(n) = F(n-1) + F(n-2) with F(0) = 0 and F(1) = 1.
+
+    sage: from ore_algebra import guess, OreAlgebra
+    sage: guess(data, OreAlgebra(ZZ['x'], 'Dx'))
+    (x^2 + x - 1)*Dx + 2*x + 1
+
+    sage: L = _
+
+    sage: x = var('x')
+    sage: F = function('F')(x)
+    sage: equation = sum( L[i] * diff(F, x, i) for i in range(L.order()+1) )
+    sage: equation
+    (2*x + 1)*F(x) + (x^2 + x - 1)*D[0](F)(x)
+
+    sage: solution = desolve(equation, F, ics=[0,1])
+    sage: solution
+    -1/(x^2 + x - 1)
+
+    sage: solution.series(x)
+    1 + 1*x + 2*x^2 + 3*x^3 + 5*x^4 + 8*x^5 + 13*x^6 + 21*x^7 + 34*x^8 + 55*x^9 + 89*x^10 + 144*x^11 + 233*x^12 + 377*x^13 + 610*x^14 + 987*x^15 + 1597*x^16 + 2584*x^17 + 4181*x^18 + 6765*x^19 + Order(x^20)
+
+    sage: L.rational_solutions()
+    [(1/(x^2 + x - 1),)]
+
+    sage: L.generalized_series_solutions(15)
+    [1 + x + 2*x^2 + 3*x^3 + 5*x^4 + 8*x^5 + 13*x^6 + 21*x^7 + 34*x^8 + 55*x^9 + 89*x^10 + 144*x^11 + 233*x^12 + 377*x^13 + 610*x^14 + O(x^15)]
+
+    sage: L.generalized_series_solutions(1000)
+    [1 + x + 2*x^2 + 3*x^3 + 5*x^4 + 8*x^5 + ... + O(x^1000)]
+
+    sage: L = guess(data, OreAlgebra(ZZ['n'], 'Sn'))
+    sage: L
+    -Sn^2 + Sn + 1
+
+    sage: L.generalized_series_solutions()
+    [(1.618033988749895?)^n*(1 + O(n^(-5))), (-0.618033988749895?)^n*(1 + O(n^(-5)))]
+
+    sage: s = L.generalized_series_solutions()[0]
+    sage: s.exponential_part()
+    1.618033988749895?
+
+    sage: s.exponential_part().minpoly()
+    x^2 - x - 1
+
+    sage: data = [1, 1, 2, 5, 14]
+
+    sage: oeis(data)
+    0: A000108: Catalan numbers: C(n) = binomial(2n,n)/(n+1) = (2n)!/(n!(n+1)!). Also called Segner numbers.
+    1: A120588: G.f. satisfies: 3*A(x) = 2 + x + A(x)^2, with a(0) = 1.
+    2: A080937: Number of Catalan paths (nonnegative, starting and ending at 0, step +/-1) of 2*n steps with all values <= 5.
+
+    sage: data = _[0].first_terms()
+    sage: data
+    (1, 1, 2, 5, 14, 42, 132, ...)
+
+    sage: L = guess(data, OreAlgebra(ZZ['x'], 'Dx'))
+    sage: L
+    (4*x^2 - x)*Dx^2 + (10*x - 2)*Dx + 2
+
+    sage: L.power_series_solutions(10)
+    [1 + x + 2*x^2 + 5*x^3 + 14*x^4 + 42*x^5 + 132*x^6 + 429*x^7 + 1430*x^8 + O(x^9)]
+    sage: L.power_series_solutions(1000)
+    [1 + x + 2*x^2 + 5*x^3 + 14*x^4 + 42*x^5 + 132*x^6 + 429*x^7 + ... + O(x^1000)]
+
+    sage: equation = sum( L[i] * diff(F, x, i) for i in range(L.order()+1) ); equation
+    2*(5*x - 1)*D[0](F)(x) + (4*x^2 - x)*D[0, 0](F)(x) + 2*F(x)
+
+    sage: res = desolve(equation, F)
+    sage: res
+
+    sage: res = res.subs(_K2=I/2, _K1=-1)
+    sage: res.series(x)
+    1 + 1*x + 2*x^2 + 5*x^3 + 14*x^4 + 42*x^5 + 132*x^6 + ... + 1767263190*x^19 + Order(x^20)
+
+    sage: res.canonicalize_radical()
+    1/2*(I*sqrt(4*x - 1) + 1)/x
+
+    sage: M = guess(data, OreAlgebra(ZZ['n'], 'Sn'))
+    sage: M
+    (-n - 2)*Sn + 4*n + 2
+
+Asymptotic expansion::
+
+    sage: M.generalized_series_solutions()
+    [4^n*n^(-3/2)*(1 - 9/8*n^(-1) + 145/128*n^(-2) - 1155/1024*n^(-3) + 36939/32768*n^(-4) + O(n^(-5)))]
+
+    sage: M.generalized_series_solutions(10)
+    [4^n*n^(-3/2)*(1 - 9/8*n^(-1) + 145/128*n^(-2) - 1155/1024*n^(-3) + 36939/32768*n^(-4) - 295911/262144*n^(-5) + 4735445/4194304*n^(-6) - 37844235/33554432*n^(-7) + 2421696563/2147483648*n^(-8) - 19402289907/17179869184*n^(-9) + O(n^(-10)))]
+
+Symmetric functions
+===================
+
+::
+
+    sage: S = SymmetricFunctions(QQ)
+    sage: S.inject_shorthands()
+
+Arithmetic::
+
+    sage: s[2,1] * s[2,1]
+    s[2, 2, 1, 1] + s[2, 2, 2] + s[3, 1, 1, 1] + 2*s[3, 2, 1] + s[3, 3] + s[4, 1, 1] + s[4, 2]
+
+    sage: p( m[1] * ( e[3]*s[2] + 1 ))
+    p[1] + 1/12*p[1, 1, 1, 1, 1, 1] - 1/6*p[2, 1, 1, 1, 1] - 1/4*p[2, 2, 1, 1] + 1/6*p[3, 1, 1, 1] + 1/6*p[3, 2, 1]
+
+Hopf structure::
+
+    sage: s[3,2,1].coproduct()
+    s[] # s[3, 2, 1] + s[1] # s[2, 2, 1] + s[1] # s[3, 1, 1] + s[1] # s[3, 2] + s[1, 1] # s[2, 1, 1] + s[1, 1] # s[2, 2] + s[1, 1] # s[3, 1] + s[1, 1, 1] # s[2, 1] + s[2] # s[2, 1, 1] + s[2] # s[2, 2] + s[2] # s[3, 1] + s[2, 1] # s[1, 1, 1] + 2*s[2, 1] # s[2, 1] + s[2, 1] # s[3] + s[2, 1, 1] # s[1, 1] + s[2, 1, 1] # s[2] + s[2, 2] # s[1, 1] + s[2, 2] # s[2] + s[2, 2, 1] # s[1] + s[3] # s[2, 1] + s[3, 1] # s[1, 1] + s[3, 1] # s[2] + s[3, 1, 1] # s[1] + s[3, 2] # s[1] + s[3, 2, 1] # s[]
+
+Plethysms::
+
+    sage: p[3](p[6])
+    sage: s[3,2](s[2,1]+p[3])

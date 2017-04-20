@@ -1,0 +1,23 @@
+.. _demo.2010-07-07-Toronto:
+
+=======================================================================
+Affine Schubert Calculus Workshop, Toronto: Sage and Sage-Combinat demo
+=======================================================================
+
+.. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>
+
+* :ref:`demo-basics`
+* :ref:`demo-plot-short`
+* :ref:`demo-doc`
+* :ref:`demo-constructions-categories-short`
+* :ref:`demo-GAP3-Semigroupe`
+* :ref:`demo-cython`
+* :ref:`sage.combinat.demo`
+
+
+Tutorials
+=========
+
+* :ref:`tutorial-notebook-and-help`
+* :ref:`tutorial-first-exercises`
+* :ref:`sage.modules.tutorial_free_modules`

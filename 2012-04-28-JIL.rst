@@ -1,0 +1,24 @@
+.. _demo.2012-04-28-JIL:
+
+==============================================================================================================================================
+Journée de l'Informatique Libre, 28/04/2012: Développement collaboratif libre d'applications métier; étude de cas: Sage pour les Mathématiques
+==============================================================================================================================================
+
+.. linkall
+
+* :ref:`demo-basics`
+
+* :ref:`demo-symbolics`
+
+* :ref:`demo-plot-short`
+
+* :ref:`demo-doc`
+
+* :ref:`demo-modelling-mathematics`
+
+* :ref:`demo-number-theory`
+
+Tutorials
+=========
+
+* :ref:`tutorial-notebook-and-help-long`

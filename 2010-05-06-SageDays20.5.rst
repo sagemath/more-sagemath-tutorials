@@ -1,0 +1,11 @@
+.. _demo.2010-05-06-SageDays20.5:
+
+============================================================
+Sage Days 20.5: Representation theory of finite monoids demo
+============================================================
+
+.. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>
+
+* :ref:`demo-GAP3-Semigroupe`
+* :ref:`demo-monoids-jtrivial`
+* :ref:`demo-monoids-character_rings`

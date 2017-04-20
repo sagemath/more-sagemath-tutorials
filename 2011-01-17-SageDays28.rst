@@ -1,0 +1,40 @@
+.. _demo.2011-01-17-SageDays28:
+
+=====================================================
+Orsay, January 17-19 of 2011: Sage Demo and Tutorials
+=====================================================
+
+.. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>
+
+Main Sage Demonstration
+=======================
+
+* :ref:`demo-basics`
+* :ref:`demo-plot-short`
+* :ref:`demo-doc`
+* :ref:`demo-number-theory`
+* :ref:`sage.databases.demo_short`
+* :ref:`demo-constructions-categories-short`
+* :ref:`demo-cython`
+* :ref:`sage.combinat.demo_short`
+* :ref:`sage.combinat.demo_algebraic_combinatorics`
+
+Other demonstrations
+====================
+
+* :ref:`demo-origamis`
+* :ref:`sage.combinat.demo`
+* :ref:`sage.combinat.words.demo`
+
+Tutorials
+=========
+
+* :ref:`tutorial-notebook-and-help-long`
+* :ref:`sage.combinat.tutorial_enumerated_sets`
+* `Tutorial: Undegraduate Algebra and Calculus <http:../../tutorial/tour_algebra.html>`_
+  (`Version française <http://www.sagemath.org/fr/html/tutorial/tour_algebra.html>`_)
+
+* :ref:`tutorial-programming-python`
+* :ref:`sage.modules.tutorial_free_modules`
+* :ref:`tutorial-implementing-algebraic-structures`
+* :ref:`2011-01-27-how-to-contribute`

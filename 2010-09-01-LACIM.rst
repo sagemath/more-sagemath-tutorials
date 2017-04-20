@@ -1,0 +1,15 @@
+.. _demo.2010-09-01-LACIM:
+
+=================================================
+LACIM 2010, Montreal: Sage and Sage-Combinat demo
+=================================================
+
+.. MODULEAUTHOR:: Florent Hivert <florent.hivert@univ-rouen.fr>
+
+* :ref:`demo-basics`
+* :ref:`demo-plot-short`
+* :ref:`demo-doc`
+* :ref:`demo-constructions-categories-short`
+* :ref:`demo-cython`
+* :ref:`sage.combinat.demo`
+* :ref:`demo-monoids-jtrivial`
