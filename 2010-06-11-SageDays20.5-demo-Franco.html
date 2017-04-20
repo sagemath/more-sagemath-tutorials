@@ -1,0 +1,372 @@
+jsMath
+SageThe Sage Notebook Searching for Sage server...
+Version 4.4.3
+
+    * admin
+    * Toggle
+    * Home
+    * Published
+    * Log
+    * Settings
+    * Help
+    * Report a Problem
+    * Sign out
+
+Sage Days 20.5: Demo
+last edited on June 11, 2010 12:40 AM by admin
+SaveSave & quitDiscard & quit
+ Typeset
+PrintPrint Worksheet Edit Text Undo Share Publish
+> >> Exit
+ 
+ 
+<< <
+View plain text
+
+<h1 style="text-align: center;">Sage Days 20.5 : Demo</h1>
+<p>&nbsp;</p>
+<h2>The Sage notebook: an interface to your software!</h2>
+sage: 2+3
+<h2>Interface with Magma (you need to have Magma installed)</h2>
+<p>We use Sage to construct a random $150\times150$ matrix over the integers with entries of size up to $2^{128}$.</p>
+sage: a = random_matrix(ZZ,150,x=-2^128,y=2^128)
+<p>A random entry of the matrix:</p>
+sage: a[72,17]
+<p>We use Magma to compute the determinant of the matrix:</p>
+sage: b = magma(a)
+sage: magma.eval('time e := Determinant(%s);'%b.name())
+<p>We can also do this with Sage, and it's faster!</p>
+sage: time d = a.determinant()
+<p>And we get the same answer:</p>
+sage: d == magma('e')
+<p>Here's an example of Sage and Magma computing the <a title="Wikipedia: Hermite normal form" href="http://en.wikipedia.org/wiki/Hermite_normal_form" target="_blank">Hermite normal form</a> of a random matrix of size $100\times100$ over the integers.&nbsp;</p>
+sage: a = random_matrix(ZZ,100,x=-2^64,y=2^64)
+sage: time h = a.hermite_form()
+sage: b = magma(a)
+sage: magma.eval('time e := HermiteForm(%s);'%b.name())
+sage: h == magma('e')
+<h2>Interface with Maple (you need to have Maple installed)</h2>
+
+<p>Below we use Maple and Sage to compute the number of <a title="Wikipedia: Partition (number theory)" href="http://en.wikipedia.org/wiki/Partition_(number_theory)" target="_blank">partitions</a> of $27020$.</p>
+sage: time maple('combinat[numbpart](27020)')
+sage: time number_of_partitions(27020)
+<p>Not only is Sage faster, it also returns the correct answer: <a href="http://www.research.att.com/~njas/sequences/A110375">http://www.research.att.com/~njas/sequences/A110375</a>.</p>
+<h2>Embed Java Applets into the Sage Notebook</h2>
+sage: load DATA+'EuclideanK44Mech.sage'
+sage: html(jsp_string)
+<h2>Beautiful documentation</h2>
+<p>Type <strong>plot(</strong> and then press the <strong>TAB</strong> key.</p>
+sage: plot(
+<p>Click on <a title="documentation" href="../../../help" target="_blank">Help</a> at the top of this page.</p>
+<p>There is also <a title="live documentation" href="../../../doc/live/reference/index.html" target="_blank">Live Documentation</a> in which you can evaluate the examples.</p>
+<h2>Interact with your mathematics by creating interactive widgets</h2>
+
+<h2>interact: curves of pursuit</h2>
+sage: npi = RDF(pi)
+sage: def rot(t):
+....:     from math import cos,sin
+....:     return matrix([[cos(t),sin(t)],[-sin(t),cos(t)]])
+....:
+sage: def pursuit(n,x0,y0,lamb,steps = 100, threshold = .01):
+....:     paths = [[[x0,y0]]]
+....:     for i in range(1,n):
+....:         rx,ry = list(rot(2*npi*i/n)*vector([x0,y0]))
+....:         paths.append([[rx,ry]])
+....:     oldpath = [x[-1] for x in paths]
+....:     for q in range(steps):
+....:         diffs = [[oldpath[(j+1)%n][0]-oldpath[j][0],oldpath[(j+1)%n][1]-oldpath[j][1]] for j in range(n)]
+....:         npath = [[oldpath[j][0]+lamb*diffs[j][0],oldpath[j][1]+lamb*diffs[j][1]] for j in range(n)]
+....:         for j in range(n):
+....:             paths[j].append(npath[j])
+....:         oldpath = npath
+....:     return paths
+....:
+sage: html('<h3>Curves of Pursuit</h3>')
+sage: @interact
+sage: def curves_of_pursuit(n = slider([2..20],default = 5, label="# of points"),steps = slider([floor(1.4^i) for i in range(2,18)],default = 10, label="# of steps"), stepsize = slider(srange(.01,1,.01),default = .2, label="stepsize"), colorize = selector(['BW','Line color', 'Filled'],default = 'BW')):
+....:     outpaths = pursuit(n,0,1,stepsize, steps = steps)
+....:     mcolor = (0,0,0)
+....:     outer = line([q[0] for q in outpaths]+[outpaths[0][0]], rgbcolor = mcolor)
+....:     polys = Graphics()
+....:     if colorize=='Line color':
+....:         colors = [hue(j/steps,1,1) for j in range(len(outpaths[0]))]
+....:     elif colorize == 'BW':
+....:         colors = [(0,0,0) for j in range(len(outpaths[0]))]
+....:     else:
+....:         colors = [hue(j/steps,1,1) for j in range(len(outpaths[0]))]
+....:         polys = sum([polygon([outpaths[(i+1)%n][j+1],outpaths[(i+1)%n][j], outpaths[i][j+1]], rgbcolor = colors[j]) for i in range(n) for j in range(len(outpaths[0])-1)])
+....:         #polys = polys[0]
+....:         colors = [(0,0,0) for j in range(len(outpaths[0]))]
+....:     nested = sum([line([q[j] for q in outpaths]+[outpaths[0][j]], rgbcolor = colors[j]) for j in range(len(outpaths[0]))])
+....:     lpaths = [line(x, rgbcolor = mcolor) for x in outpaths]
+....:     show(sum(lpaths)+nested+polys, axes = False, figsize = [5,5], xmin = -1, xmax = 1, ymin = -1, ymax =1)
+<html><font color='black'><h3>Curves of Pursuit</h3></font></html>
+<html><!--notruncate--><div padding=6 id="div-interact-36"> <table width=800px height=20px bgcolor="#c5c5c5"
+                 cellpadding=15><tr><td bgcolor="#f9f9f9" valign=top align=left><table><tr><td align=right><font color="black"># of points&nbsp;</font></td><td><table><tr><td>
+        <div id="slider-n-36" style="margin:0px; margin-left: 1.0em; margin-right: 1.0em; width: 15.0em;"></div>
+        </td><td><font color="black" id="slider-n-36-lbl"></font></td></tr></table><script>(function(){ var values = ["2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20"]; setTimeout(function() {
+    $('#slider-n-36').slider({
+        step: 1, min: 0, max: 18, value: 3,
+        change: function (e,ui) { var position = ui.value; if(values!=null) $('#slider-n-36-lbl').text(values[position]); interact(36, '_interact_.update(\'36\', \'n\', 11, _interact_.standard_b64decode(\''+encode64(position)+'\'), globals()); _interact_.recompute(\'36\');'); },
+        slide: function(e,ui) { if(values!=null) $('#slider-n-36-lbl').text(values[ui.value]); }
+    });
+    if(values != null) $('#slider-n-36-lbl').text(values[$('#slider-n-36').slider('value')]);
+    }, 1); })();</script></td></tr>
+<tr><td align=right><font color="black"># of steps&nbsp;</font></td><td><table><tr><td>
+        <div id="slider-steps-36" style="margin:0px; margin-left: 1.0em; margin-right: 1.0em; width: 15.0em;"></div>
+        </td><td><font color="black" id="slider-steps-36-lbl"></font></td></tr></table><script>(function(){ var values = ["1","2","3","5","7","10","14","20","28","40","56","79","111","155","217","304"]; setTimeout(function() {
+    $('#slider-steps-36').slider({
+        step: 1, min: 0, max: 15, value: 5,
+        change: function (e,ui) { var position = ui.value; if(values!=null) $('#slider-steps-36-lbl').text(values[position]); interact(36, '_interact_.update(\'36\', \'steps\', 12, _interact_.standard_b64decode(\''+encode64(position)+'\'), globals()); _interact_.recompute(\'36\');'); },
+        slide: function(e,ui) { if(values!=null) $('#slider-steps-36-lbl').text(values[ui.value]); }
+    });
+    if(values != null) $('#slider-steps-36-lbl').text(values[$('#slider-steps-36').slider('value')]);
+    }, 1); })();</script></td></tr>
+<tr><td align=right><font color="black">stepsize&nbsp;</font></td><td><table><tr><td>
+        <div id="slider-stepsize-36" style="margin:0px; margin-left: 1.0em; margin-right: 1.0em; width: 15.0em;"></div>
+        </td><td><font color="black" id="slider-stepsize-36-lbl"></font></td></tr></table><script>(function(){ var values = ["0.0100000000000000","0.0200000000000000","0.0300000000000000","0.0400000000000000","0.0500000000000000","0.0600000000000000","0.0700000000000000","0.0800000000000000","0.0900000000000000","0.100000000000000","0.110000000000000","0.120000000000000","0.130000000000000","0.140000000000000","0.150000000000000","0.160000000000000","0.170000000000000","0.180000000000000","0.190000000000000","0.200000000000000","0.210000000000000","0.220000000000000","0.230000000000000","0.240000000000000","0.250000000000000","0.260000000000000","0.270000000000000","0.280000000000000","0.290000000000000","0.300000000000000","0.310000000000000","0.320000000000000","0.330000000000000","0.340000000000000","0.350000000000000","0.360000000000000","0.370000000000000","0.380000000000000","0.390000000000000","0.400000000000000","0.410000000000000","0.420000000000000","0.430000000000000","0.440000000000000","0.450000000000000","0.460000000000000","0.470000000000000","0.480000000000000","0.490000000000000","0.500000000000000","0.510000000000000","0.520000000000000","0.530000000000000","0.540000000000000","0.550000000000000","0.560000000000000","0.570000000000000","0.580000000000000","0.590000000000000","0.600000000000000","0.610000000000000","0.620000000000000","0.630000000000000","0.640000000000000","0.650000000000000","0.660000000000000","0.670000000000000","0.680000000000000","0.690000000000000","0.700000000000000","0.710000000000000","0.720000000000000","0.730000000000000","0.740000000000000","0.750000000000000","0.760000000000000","0.770000000000000","0.780000000000000","0.790000000000000","0.800000000000000","0.810000000000000","0.820000000000001","0.830000000000001","0.840000000000001","0.850000000000001","0.860000000000001","0.870000000000001","0.880000000000001","0.890000000000001","0.900000000000001","0.910000000000001","0.920000000000001","0.930000000000001","0.940000000000001","0.950000000000001","0.960000000000001","0.970000000000001","0.980000000000001","0.990000000000001"]; setTimeout(function() {
+    $('#slider-stepsize-36').slider({
+        step: 1, min: 0, max: 98, value: 19,
+        change: function (e,ui) { var position = ui.value; if(values!=null) $('#slider-stepsize-36-lbl').text(values[position]); interact(36, '_interact_.update(\'36\', \'stepsize\', 13, _interact_.standard_b64decode(\''+encode64(position)+'\'), globals()); _interact_.recompute(\'36\');'); },
+        slide: function(e,ui) { if(values!=null) $('#slider-stepsize-36-lbl').text(values[ui.value]); }
+    });
+    if(values != null) $('#slider-stepsize-36-lbl').text(values[$('#slider-stepsize-36').slider('value')]);
+    }, 1); })();</script></td></tr>
+<tr><td align=right><font color="black">colorize&nbsp;</font></td><td><select onchange="interact(36, '_interact_.update(\'36\', \'colorize\', 14, _interact_.standard_b64decode(\''+encode64(this.options[this.selectedIndex].value)+'\'), globals()); _interact_.recompute(\'36\');');"><option value="0" selected>BW</option>
+<option value="1" >Line color</option>
+<option value="2" >Filled</option>
+</select></td></tr>
+</table><div id="cell-interact-36"><?__SAGE__START>
+        <table border=0 bgcolor="white" width=100% height=100%>
+        <tr><td bgcolor="white" align=left valign=top><pre>
+<font color='black'><img src=/home/admin/41/cells/36/sage0.png?12></font>
+</pre></td></tr>
+        <tr><td  align=left valign=top></td></tr>
+        </table><?__SAGE__END></div></td>
+                 </tr></table></div>
+                 </html>
+<h2>interact: Taylor polynomials</h2>
+sage: var('x')
+sage: @interact
+sage: def g(f=sin(x)*e^(-x), c=0, n=(1..30), xinterval=range_slider(-5, 5, 1, default=(-1,4), label="x-interval"), yinterval=range_slider(-50, 50, 1, default=(-1,1), label="y-interval")):
+....:    x0 = c
+....:    degree = n
+....:    xmin,xmax = xinterval
+....:    ymin,ymax = yinterval
+....:    p   = plot(f, xmin, xmax, thickness=4)
+....:    dot = point((x0,f(x=x0)),pointsize=80,rgbcolor=(1,0,0))
+....:    ft = f.taylor(x,x0,degree)
+....:    pt = plot(ft, xmin, xmax, color='red', thickness=2, fill=f)
+....:    show(dot + p + pt, ymin=ymin, ymax=ymax, xmin=xmin, xmax=xmax)
+....:    html('$f(x)\;=\;%s$'%latex(f))
+....:    html('$P_{%s}(x)\;=\;%s+R_{%s}(x)$'%(degree,latex(ft),degree))
+<html><!--notruncate--><div padding=6 id="div-interact-38"> <table width=800px height=20px bgcolor="#c5c5c5"
+                 cellpadding=15><tr><td bgcolor="#f9f9f9" valign=top align=left><table><tr><td align=right><font color="black">f&nbsp;</font></td><td><input type="text" value="e^(-x)*sin(x)" size=80 onchange="interact(38, '_interact_.update(\'38\', \'f\', 1, _interact_.standard_b64decode(\''+encode64(this.value)+'\'), globals()); _interact_.recompute(\'38\');')"></input></td></tr>
+<tr><td align=right><font color="black">c&nbsp;</font></td><td><input type="text" value="0" size=80 onchange="interact(38, '_interact_.update(\'38\', \'c\', 2, _interact_.standard_b64decode(\''+encode64(this.value)+'\'), globals()); _interact_.recompute(\'38\');')"></input></td></tr>
+<tr><td align=right><font color="black">n&nbsp;</font></td><td><table><tr><td>
+        <div id="slider-n-38" style="margin:0px; margin-left: 1.0em; margin-right: 1.0em; width: 15.0em;"></div>
+        </td><td><font color="black" id="slider-n-38-lbl"></font></td></tr></table><script>(function(){ var values = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30"]; setTimeout(function() {
+    $('#slider-n-38').slider({
+        step: 1, min: 0, max: 29, value: 0,
+        change: function (e,ui) { var position = ui.value; if(values!=null) $('#slider-n-38-lbl').text(values[position]); interact(38, '_interact_.update(\'38\', \'n\', 3, _interact_.standard_b64decode(\''+encode64(position)+'\'), globals()); _interact_.recompute(\'38\');'); },
+        slide: function(e,ui) { if(values!=null) $('#slider-n-38-lbl').text(values[ui.value]); }
+    });
+    if(values != null) $('#slider-n-38-lbl').text(values[$('#slider-n-38').slider('value')]);
+    }, 1); })();</script></td></tr>
+<tr><td align=right><font color="black">x-interval&nbsp;</font></td><td><table><tr><td>
+        <div id="slider-xinterval-38" style="margin:0px; margin-left: 1.0em; margin-right: 1.0em; width: 20.0em;"></div>
+        </td></tr><tr><td><font color="black" id="slider-xinterval-38-lbl"></font></td></tr></table><script>(function()
+    {
+        var values = ["-5","-4","-3","-2","-1","0","1","2","3","4","5"];
+        var pos = [4, 9];
+        var sel = '#slider-xinterval-38';
+        var updatePos = function()
+        {
+            pos[0]=$(sel).slider('values', 0);
+            pos[1]=$(sel).slider('values', 1);
+            if(values!=null) $(sel+'-lbl').text('('+values[pos[0]]+', '+values[pos[1]]+')');
+        };
+        setTimeout(function()
+        {
+            $(sel).slider(
+            {
+                range: true,
+                step: 1,
+                min: 0,
+                max: 10,
+                values: [4, 9],
+                change: function(e,ui){ updatePos(); interact(38, '_interact_.update(\'38\', \'xinterval\', 4, _interact_.standard_b64decode(\''+encode64(pos[0]+' '+pos[1])+'\'), globals()); _interact_.recompute(\'38\');'); },
+                slide: updatePos
+            });
+            updatePos();
+        }, 1);
+    })();</script></td></tr>
+<tr><td align=right><font color="black">y-interval&nbsp;</font></td><td><table><tr><td>
+        <div id="slider-yinterval-38" style="margin:0px; margin-left: 1.0em; margin-right: 1.0em; width: 20.0em;"></div>
+        </td></tr><tr><td><font color="black" id="slider-yinterval-38-lbl"></font></td></tr></table><script>(function()
+    {
+        var values = ["-50","-49","-48","-47","-46","-45","-44","-43","-42","-41","-40","-39","-38","-37","-36","-35","-34","-33","-32","-31","-30","-29","-28","-27","-26","-25","-24","-23","-22","-21","-20","-19","-18","-17","-16","-15","-14","-13","-12","-11","-10","-9","-8","-7","-6","-5","-4","-3","-2","-1","0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"];
+        var pos = [49, 51];
+        var sel = '#slider-yinterval-38';
+        var updatePos = function()
+        {
+            pos[0]=$(sel).slider('values', 0);
+            pos[1]=$(sel).slider('values', 1);
+            if(values!=null) $(sel+'-lbl').text('('+values[pos[0]]+', '+values[pos[1]]+')');
+        };
+        setTimeout(function()
+        {
+            $(sel).slider(
+            {
+                range: true,
+                step: 1,
+                min: 0,
+                max: 100,
+                values: [49, 51],
+                change: function(e,ui){ updatePos(); interact(38, '_interact_.update(\'38\', \'yinterval\', 5, _interact_.standard_b64decode(\''+encode64(pos[0]+' '+pos[1])+'\'), globals()); _interact_.recompute(\'38\');'); },
+                slide: updatePos
+            });
+            updatePos();
+        }, 1);
+    })();</script></td></tr>
+</table><div id="cell-interact-38"><?__SAGE__START>
+        <table border=0 bgcolor="white" width=100% height=100%>
+        <tr><td bgcolor="white" align=left valign=top><pre>
+<font color='black'><img src=/home/admin/41/cells/38/sage0.png?7></font>
+<font color='black'><span class="math">f(x)\;=\;e^{\left(-x\right)} \sin\left(x\right)</span></font>
+<font color='black'><span class="math">P_{1}(x)\;=\;x+R_{1}(x)</span></font>
+</pre></td></tr>
+        <tr><td  align=left valign=top></td></tr>
+        </table><?__SAGE__END></div></td>
+                 </tr></table></div>
+                 </html>
+<h2>interact: Taylor polynomials</h2>
+sage: var('x')
+sage: @interact
+sage: def _(f=arctan(x), c=0, n=(0..25), xinterval=range_slider(-5, 5, 1, default=(-1,1), label="x-interval"), yinterval=range_slider(-50, 50, 1, default=(-1,1), label="y-interval")):
+....:    x0 = c
+....:    degree = n
+....:    xmin,xmax = xinterval
+....:    ymin,ymax = yinterval
+....:    p   = plot(f, xmin, xmax, thickness=4)
+....:    dot = point((x0,f(x=x0)),pointsize=80,rgbcolor=(1,0,0))
+....:    ft = f.taylor(x,x0,degree)
+....:    pt = plot(ft, xmin, xmax, color='red', thickness=2, fill=f)
+....:    show(dot + p + pt, ymin = ymin, ymax = ymax, xmin=xmin, xmax=xmax)
+....:    html('$f(x)\;=\;%s$'%latex(f))
+....:    html('$P_{%s}(x)\;=\;%s+R_{%s}(x)$'%(degree,latex(ft),degree))
+<html><!--notruncate--><div padding=6 id="div-interact-35"> <table width=800px height=20px bgcolor="#c5c5c5"
+                 cellpadding=15><tr><td bgcolor="#f9f9f9" valign=top align=left><table><tr><td align=right><font color="black">f&nbsp;</font></td><td><input type="text" value="arctan(x)" size=80 onchange="interact(35, '_interact_.update(\'35\', \'f\', 6, _interact_.standard_b64decode(\''+encode64(this.value)+'\'), globals()); _interact_.recompute(\'35\');')"></input></td></tr>
+<tr><td align=right><font color="black">c&nbsp;</font></td><td><input type="text" value="0" size=80 onchange="interact(35, '_interact_.update(\'35\', \'c\', 7, _interact_.standard_b64decode(\''+encode64(this.value)+'\'), globals()); _interact_.recompute(\'35\');')"></input></td></tr>
+<tr><td align=right><font color="black">n&nbsp;</font></td><td><table><tr><td>
+        <div id="slider-n-35" style="margin:0px; margin-left: 1.0em; margin-right: 1.0em; width: 15.0em;"></div>
+        </td><td><font color="black" id="slider-n-35-lbl"></font></td></tr></table><script>(function(){ var values = ["0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25"]; setTimeout(function() {
+    $('#slider-n-35').slider({
+        step: 1, min: 0, max: 25, value: 0,
+        change: function (e,ui) { var position = ui.value; if(values!=null) $('#slider-n-35-lbl').text(values[position]); interact(35, '_interact_.update(\'35\', \'n\', 8, _interact_.standard_b64decode(\''+encode64(position)+'\'), globals()); _interact_.recompute(\'35\');'); },
+        slide: function(e,ui) { if(values!=null) $('#slider-n-35-lbl').text(values[ui.value]); }
+    });
+    if(values != null) $('#slider-n-35-lbl').text(values[$('#slider-n-35').slider('value')]);
+    }, 1); })();</script></td></tr>
+<tr><td align=right><font color="black">x-interval&nbsp;</font></td><td><table><tr><td>
+        <div id="slider-xinterval-35" style="margin:0px; margin-left: 1.0em; margin-right: 1.0em; width: 20.0em;"></div>
+        </td></tr><tr><td><font color="black" id="slider-xinterval-35-lbl"></font></td></tr></table><script>(function()
+    {
+        var values = ["-5","-4","-3","-2","-1","0","1","2","3","4","5"];
+        var pos = [4, 6];
+        var sel = '#slider-xinterval-35';
+        var updatePos = function()
+        {
+            pos[0]=$(sel).slider('values', 0);
+            pos[1]=$(sel).slider('values', 1);
+            if(values!=null) $(sel+'-lbl').text('('+values[pos[0]]+', '+values[pos[1]]+')');
+        };
+        setTimeout(function()
+        {
+            $(sel).slider(
+            {
+                range: true,
+                step: 1,
+                min: 0,
+                max: 10,
+                values: [4, 6],
+                change: function(e,ui){ updatePos(); interact(35, '_interact_.update(\'35\', \'xinterval\', 9, _interact_.standard_b64decode(\''+encode64(pos[0]+' '+pos[1])+'\'), globals()); _interact_.recompute(\'35\');'); },
+                slide: updatePos
+            });
+            updatePos();
+        }, 1);
+    })();</script></td></tr>
+<tr><td align=right><font color="black">y-interval&nbsp;</font></td><td><table><tr><td>
+        <div id="slider-yinterval-35" style="margin:0px; margin-left: 1.0em; margin-right: 1.0em; width: 20.0em;"></div>
+        </td></tr><tr><td><font color="black" id="slider-yinterval-35-lbl"></font></td></tr></table><script>(function()
+    {
+        var values = ["-50","-49","-48","-47","-46","-45","-44","-43","-42","-41","-40","-39","-38","-37","-36","-35","-34","-33","-32","-31","-30","-29","-28","-27","-26","-25","-24","-23","-22","-21","-20","-19","-18","-17","-16","-15","-14","-13","-12","-11","-10","-9","-8","-7","-6","-5","-4","-3","-2","-1","0","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27","28","29","30","31","32","33","34","35","36","37","38","39","40","41","42","43","44","45","46","47","48","49","50"];
+        var pos = [49, 51];
+        var sel = '#slider-yinterval-35';
+        var updatePos = function()
+        {
+            pos[0]=$(sel).slider('values', 0);
+            pos[1]=$(sel).slider('values', 1);
+            if(values!=null) $(sel+'-lbl').text('('+values[pos[0]]+', '+values[pos[1]]+')');
+        };
+        setTimeout(function()
+        {
+            $(sel).slider(
+            {
+                range: true,
+                step: 1,
+                min: 0,
+                max: 100,
+                values: [49, 51],
+                change: function(e,ui){ updatePos(); interact(35, '_interact_.update(\'35\', \'yinterval\', 10, _interact_.standard_b64decode(\''+encode64(pos[0]+' '+pos[1])+'\'), globals()); _interact_.recompute(\'35\');'); },
+                slide: updatePos
+            });
+            updatePos();
+        }, 1);
+    })();</script></td></tr>
+</table><div id="cell-interact-35"><?__SAGE__START>
+        <table border=0 bgcolor="white" width=100% height=100%>
+        <tr><td bgcolor="white" align=left valign=top><pre>
+<font color='black'><img src=/home/admin/41/cells/35/sage0.png?11></font>
+<font color='black'><span class="math">f(x)\;=\;\sin\left(x\right)</span></font>
+<font color='black'><span class="math">P_{15}(x)\;=\;-\frac{1}{1307674368000} \, x^{15} + \frac{1}{6227020800} \, x^{13} - \frac{1}{39916800} \, x^{11} + \frac{1}{362880} \, x^{9} - \frac{1}{5040} \, x^{7} + \frac{1}{120} \, x^{5} - \frac{1}{6} \, x^{3} + x+R_{15}(x)</span></font>
+</pre></td></tr>
+        <tr><td  align=left valign=top></td></tr>
+        </table><?__SAGE__END></div></td>
+                 </tr></table></div>
+                 </html>
+<h2>Cython: Python $\longmapsto$ C</h2>
+<p>Here is a function that computes $\sum_{k=0}^N k$ in pure Python.</p>
+sage: def mysum(N):
+....:     s = int(0)
+....:     for k in range(1,N):
+....:         s += k
+....:     return s
+sage: time mysum(10^7)
+<p>Let us compare this with the Cython version.</p>
+sage: %cython
+sage: def mysum_cython(N):
+....:     cdef long long s = 0
+....:     cdef int k
+....:     for k in range(1,N):
+....:         s += k
+....:     return s
+sage: time mysum_cython(10^7)
+<h2>Drawing graphs</h2>
+sage: HS = graphs.HyperStarGraph(6,3)
+sage: HS.plot()
+<html><font color='black'><img src='cell://sage0.png'></font></html>
+sage: HS.plot3d()
+sage: graph_editor(HS)
+<h2>Use the source!</h2>
+sage: import scipy
+sage: from scipy import io
+sage: x=io.loadmat('%s/yodapose.mat'%DATA) # you can change it to yodapose/yodapose_low to use the high/low res version
+sage: from sage.plot.plot3d.index_face_set import IndexFaceSet
+sage: V=x['V']
+sage: F3=x['F3']-1
+sage: F4=x['F4']-1
+sage: yoda=IndexFaceSet(F3,V,color='green')+IndexFaceSet(F4,V,color='green')
+sage: yoda.show(figsize=5, frame=False)
+/opt/sage/local/lib/python2.6/site-packages/scipy/io/matlab/mio.py:84: FutureWarning: Using struct_as_record default value (False) This will change to True in future versions
+  return MatFile5Reader(byte_stream, **kwargs)
