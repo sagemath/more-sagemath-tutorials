@@ -33,6 +33,7 @@ extensions = [
     'sphinx.ext.todo',
     'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
+    'sphinx.ext.extlinks',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -287,6 +288,9 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
 
+##############################################################################
+# Stuff that should be generalized to any Sage package
+# See <Sage>/src/doc/common/conf.py
 
 # Example configuration for intersphinx: refer to the Python standard library.
 intersphinx_mapping = {'https://docs.python.org/': None,
@@ -294,3 +298,16 @@ intersphinx_mapping = {'https://docs.python.org/': None,
                        'http://doc.sagemath.org/html/en/tutorial/': None,
                        'http://doc.sagemath.org/html/en/prep/': None,
                        'http://doc.sagemath.org/html/en/thematic_tutorials/': None}
+
+pythonversion = sys.version.split(' ')[0]
+# Sage trac ticket shortcuts. For example, :trac:`7549` .
+extlinks = {
+    'python': ('https://docs.python.org/release/'+pythonversion+'/%s', ''),
+    'trac': ('https://trac.sagemath.org/%s', 'trac ticket #'),
+    'wikipedia': ('https://en.wikipedia.org/wiki/%s', 'Wikipedia article '),
+    'arxiv': ('http://arxiv.org/abs/%s', 'Arxiv '),
+    'oeis': ('https://oeis.org/%s', 'OEIS sequence '),
+    'doi': ('https://dx.doi.org/%s', 'doi:'),
+    'pari': ('http://pari.math.u-bordeaux.fr/dochtml/help/%s', 'pari:'),
+    'mathscinet': ('http://www.ams.org/mathscinet-getitem?mr=%s', 'MathSciNet ')
+    }
