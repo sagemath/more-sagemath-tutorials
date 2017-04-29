@@ -48,27 +48,6 @@ Document tree to please Sphinx
    2012-10-29-CIMPA-Bobo/introduction
    2012-10-29-CIMPA-Bobo/dynamique
    2012-10-29-CIMPA-Bobo/index
-   official/tutorial-comprehensions
-   official/sws2rst
-   official/coercion_and_categories
-   official/tutorial-implementing-algebraic-structures
-   official/tutorial-notebook-and-help-long
-   official/profiling
-   official/tutorial-objects-and-classes
-   official/polytope_tikz
-   official/polytutorial
-   official/structures_in_coding_theory
-   official/index
-   official/algebraic_combinatorics
-   official/functional_programming
-   official/tutorial-programming-python
-   official/numtheory_rsa
-   official/cython_interface
-   official/linear_programming
-   official/sandpile
-   official/lie
-   official/group_theory
-   official/coding_theory
    2009-01-01-SienaTutorials/Worksheet04-CalculusPlottingInteract
    2009-01-01-SienaTutorials/Worksheet10-IntroductionToCython
    2009-01-01-SienaTutorials/Worksheet09-CombinatoricsIteratorsGenerators
@@ -90,60 +69,3 @@ Document tree to please Sphinx
    agregation-option-calcul-formel/codes_correcteurs
    agregation-option-calcul-formel/algebre_lineaire
    agregation-option-calcul-formel/programmation_lineaire
-   official/algebraic_combinatorics/rsk
-   official/algebraic_combinatorics/n_cube
-   official/algebraic_combinatorics/tsetlin_library
-   official/algebraic_combinatorics/walks
-   official/explicit_methods_in_number_theory/number_fields
-   official/explicit_methods_in_number_theory/nf_galois_groups
-   official/explicit_methods_in_number_theory/elliptic_curves
-   official/explicit_methods_in_number_theory/nf_orders
-   official/explicit_methods_in_number_theory/nf_introduction
-   official/explicit_methods_in_number_theory/birds_other
-   official/explicit_methods_in_number_theory/index
-   official/explicit_methods_in_number_theory/generators_for_rings
-   official/explicit_methods_in_number_theory/integer_factorization
-   official/explicit_methods_in_number_theory/introduction
-   official/explicit_methods_in_number_theory/birds_eye_view
-   official/explicit_methods_in_number_theory/method_of_graphs
-   official/explicit_methods_in_number_theory/l_series
-   official/explicit_methods_in_number_theory/half_integral
-   official/explicit_methods_in_number_theory/modabvar
-   official/explicit_methods_in_number_theory/level_one_forms
-   official/explicit_methods_in_number_theory/modular_symbols
-   official/explicit_methods_in_number_theory/modular_forms
-   official/explicit_methods_in_number_theory/modular_forms_and_hecke_operators
-   official/numerical_sage/comparison_to_cython
-   official/numerical_sage/parallel_laplace_solver
-   official/numerical_sage/using_compiled_code_iteractively
-   official/numerical_sage/scipy
-   official/numerical_sage/parallel_computation
-   official/numerical_sage/f2py_examples
-   official/numerical_sage/installation
-   official/numerical_sage/installation_osx
-   official/numerical_sage/index
-   official/numerical_sage/numerical_tools
-   official/numerical_sage/ctypes
-   official/numerical_sage/f2py
-   official/numerical_sage/ctypes_examples
-   official/numerical_sage/mpi4py
-   official/numerical_sage/plotting
-   official/numerical_sage/cvxopt
-   official/numerical_sage/numpy
-   official/numerical_sage/weave
-   official/numerical_sage/installation_linux
-   official/numerical_sage/visualization
-   official/lie/bibliography
-   official/lie/introduction
-   official/lie/kazhdan_lusztig_polynomials
-   official/lie/weight_ring
-   official/lie/weyl_character_ring
-   official/lie/infinity_crystals
-   official/lie/weyl_groups
-   official/lie/iwahori_hecke_algebra
-   official/lie/crystals
-   official/lie/lie_basics
-   official/lie/affine_hw_crystals
-   official/lie/branching_rules
-   official/lie/elementary_crystals
-   official/lie/affine_finite_crystals
