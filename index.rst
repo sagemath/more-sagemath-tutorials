@@ -36,8 +36,6 @@ to some of the latter.
 Some documents are related to special events (workshops, courses,
 :ref:`talks`).
 
-:mod:`functools`
-
 Introduction to Sage
 ====================
 
