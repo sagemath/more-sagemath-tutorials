@@ -33,8 +33,7 @@ its `official thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutor
 For the convenience of the reader, the index below also includes links
 to some of the latter.
 
-Some documents are related to special events (workshops, courses,
-:ref:`talks`).
+Some documents are related to special events: :ref:`talks`.
 
 Introduction to Sage
 ====================
