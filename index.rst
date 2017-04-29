@@ -35,6 +35,10 @@ to some of the latter.
 
 Some documents are related to special events: :ref:`talks`.
 
+Contributions are more than welcome. See the
+`README <https://github.com/nthiery/sage-thematic-tutorials/blob/master/README.rst>`_
+on the `project's repository <https://github.com/sagemath/more-thematic-tutorials>`_.
+
 Introduction to Sage
 ====================
 
