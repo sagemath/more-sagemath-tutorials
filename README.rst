@@ -6,9 +6,9 @@ Sage thematic tutorials
     :alt: Documentation Status
 
 This repository is meant as a place to collectively share and evolve
-thematic tutorials for the [SageMath](http://sagemath.org) with the
+thematic tutorials for the `SageMath <http://sagemath.org>`_ with the
 aim to merge the mature ones into Sage's
-[official thematic tutorials](http://doc.sagemath.org/html/en/thematic_tutorials/index.html).
+`official thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html`_.
 
 Rationale
 ---------
