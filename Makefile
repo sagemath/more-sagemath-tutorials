@@ -215,7 +215,7 @@ pseudoxml:
 	@echo
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
 
-RST=$(wildcard *.rst */*.rst)
+RST=$(wildcard *.rst */*.rst */*/*.rst)
 DOC=$(RST:%.rst=%)
 
 toctree.rst:
