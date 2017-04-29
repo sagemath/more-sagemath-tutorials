@@ -45,19 +45,19 @@ Introduction to Sage
 * :ref:`sage.databases.demo_short`
 * :ref:`demo-number-theory`
 
-* `Logging on to a Sage Server and Creating a Worksheet (PREP) <http:../prep/Logging-On.html>`_
-* `Introductory Sage Tutorial (PREP) <http:../prep/Intro-Tutorial.html>`_
+* :ref:`Logging-On`
+* :ref:`Intro-Tutorial`
 * :ref:`tutorial-notebook-and-help-long`
-* `Sage's main tutorial <http:../tutorial/>`_
+* :ref:`tutorial`
 
 
 Calculus
 ========
 
 * :ref:`demo-symbolics`
-* `Tutorial: Symbolics and Plotting (PREP) <http:../prep/Symbolics-and-Basic-Plotting.html>`_
-* `Tutorial: Calculus (PREP) <http:../prep/Calculus.html>`_
-* `Tutorial: Advanced-2D Plotting (PREP) <http:../prep/Advanced-2DPlotting.html>`_
+* :ref:`Symbolics-and-Basic-Plotting`
+* :ref:`Calculus`
+* :ref:`Advanced-2DPlotting`
 
 Algebra
 =======
@@ -101,9 +101,10 @@ Combinatorics
 Algebraic Combinatorics
 -----------------------
 
+* :ref:`algebraic_combinatorics`
 * :ref:`sage.combinat.demo_algebraic_combinatorics`
 * :ref:`demo-symmetric-functions`
-* :class:`Tutorial Symmetric Functions <SymmetricFunctions>`
+* :class:`Tutorial Symmetric Functions <sage.combinat.sf.sf.SymmetricFunctions>`
 * :ref:`lie`
 * :ref:`abelian_sandpile_model`
 
@@ -126,7 +127,7 @@ Programming and Design
 
 * :ref:`demo-cython`
 
-* `Tutorial: Sage Introductory Programming (PREP) <http:../prep/Programming.html>`_
+* :ref:`Programming`
 * :ref:`tutorial-comprehensions`
 * :ref:`tutorial-programming-python`
 * :ref:`agregation.tris_et_complexite`
