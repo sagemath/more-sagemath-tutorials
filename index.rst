@@ -6,7 +6,7 @@
 More Sage Thematic Tutorials
 ============================
 
-This is a repository of [SageMath](http://sagemath.org)
+This is a repository of `SageMath <http://sagemath.org>`_
 demonstrations, quick reference cards, primers, and thematic
 tutorials, grouped by theme, and licensed under a
 `Creative Commons Attribution-Share Alike 3.0 License`__.
@@ -27,9 +27,9 @@ __ http://creativecommons.org/licenses/by-sa/3.0/
   more to get through.
 
 This repository is meant as a place to collectively share and evolve
-documents for [SageMath](http://sagemath.org) with the aim to merge
+documents for `SageMath <http://sagemath.org>`_ with the aim to merge
 the mature ones into Sage's official documentation, and in particular
-its [official thematic tutorials](http://doc.sagemath.org/html/en/thematic_tutorials/index.html).
+its `official thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_.
 For the convenience of the reader, the index below also includes links
 to some of the latter.
 
