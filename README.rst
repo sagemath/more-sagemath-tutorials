@@ -1,6 +1,10 @@
 Sage thematic tutorials
 =======================
 
+.. image:: https://readthedocs.org/projects/more-sagemath-thematic-tutorials/badge/?version=latest
+:target: http://more-sagemath-thematic-tutorials.readthedocs.io/en/latest/?badge=latest
+:alt: Documentation Status
+
 This repository is meant as a place to collectively share and evolve
 thematic tutorials for the [SageMath](http://sagemath.org) with the
 aim to merge the mature ones into Sage's
