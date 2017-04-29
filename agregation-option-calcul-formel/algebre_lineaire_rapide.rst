@@ -22,7 +22,7 @@ On a vu que l'algorithme de Gauß était de complexité `O(n^3)`, au
 moins dans son implantation naïve. Vérifions cela expérimentalement
 avec les petits outils suivants:
 
-.. include:: ../media/gauss.py
+.. include:: media/gauss.py
     :literal:
 
 ::
@@ -608,7 +608,7 @@ Fixons un entier `n`. On va considérer la matrice `T_n` dont
   si l'on supprime cette arête on obtient un graphe isomorphe à `f`.
 
 
-.. figure:: ../media/tree-incidence-matrix-6.png
+.. figure:: media/tree-incidence-matrix-6.png
    :align: center
    :alt: La matrice d'incidence `T_6` des graphes acycliques à `6` sommets et `5` arêtes versus ceux à `4` arêtes
 

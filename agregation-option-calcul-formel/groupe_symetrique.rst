@@ -228,13 +228,13 @@ Relations:
 -  `\tau_{i}\tau_{j}=\tau_{j}\tau_{i}` si
    `\left|i-j\right|>1`.
 
-.. figure:: ../media/right-permutohedron-3.png
+.. figure:: media/right-permutohedron-3.png
    :align: center
    :alt: Le permutoèdre pour n=3
 
    Le permutoèdre pour `S_3`
 
-.. figure:: ../media/right-permutohedron-4.png
+.. figure:: media/right-permutohedron-4.png
    :align: center
    :alt: Le permutoèdre pour n=4
 
@@ -480,10 +480,10 @@ Le fichier `GroupeSymetrique-correction.py
 <../_images/GroupeSymetrique-correction.py>`_
 contient une correction partielle.
 
-.. image:: ../media/GroupeSymetrique.py
+.. image:: media/GroupeSymetrique.py
    :alt:
 
-.. image:: ../media/GroupeSymetrique-correction.py
+.. image:: media/GroupeSymetrique-correction.py
    :alt:
 
 La formule d'énumération de Pólya permet de dénombrer des objets
@@ -495,7 +495,7 @@ identiques, mais pas le troisième (on pourrait autoriser le
 retournement, mais on ne le fera pas dans un premier temps pour
 simplifier).
 
-.. figure:: ../media/Colliers.svg
+.. figure:: media/Colliers.svg
    :align: center
    :alt: image
 

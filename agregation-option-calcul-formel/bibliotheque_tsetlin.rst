@@ -73,7 +73,7 @@ On peut représenter l'ensemble `\Omega_n` muni des opérations `\tau_i`
 par un digraphe (essentiellement un automate); voici ce que l'on
 obtient pour `n=3`:
 
-.. figure:: ../media/tsetlin-library.png
+.. figure:: media/tsetlin-library.png
    :align: center
    :alt: Le graphe de transition de la bibliothèque de Tsetlin avec trois livres {1,2,3}
 
