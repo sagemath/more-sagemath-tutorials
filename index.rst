@@ -79,6 +79,13 @@ Number Theory
 * :ref:`demo-number-theory`
 * :ref:`numtheory_rsa`
 * :ref:`sage.rings.padics.tutorial`
+* :ref:`explicit_methods_in_number_theory`
+
+Geometry
+--------
+
+* :ref:`polytutorial`
+* :ref:`polytikz`
 
 Monoids, representation Theory
 ------------------------------
@@ -125,6 +132,12 @@ Dynamics
 
 .. * :ref:`sage.dynamics.interval_exchanges.tutorial`
 
+Numerical computations
+----------------------
+
+* :ref:`numerical_computing`
+* :ref:`linear_programming`
+
 Programming and Design
 ======================
 
@@ -138,11 +151,12 @@ Programming and Design
 * :ref:`tutorial-objects-and-classes`
 * :ref:`tutorial-parallel`
 
-Sage development
-----------------
+Advanced programming
+--------------------
 
-* :ref:`tutorial-editing-sage-sources`
-* :ref:`tutorial-how-to-contribute`
+* :ref:`demo-profiling`
+* :ref:`cython_interface`
+* :ref:`profiling`
 
 Design and Categories
 ---------------------
@@ -153,6 +167,13 @@ Design and Categories
 * :ref:`coercion_and_categories`
 * :ref:`sage.categories.primer`
 * :ref:`sage.categories.tutorial`
+
+Sage development
+----------------
+
+* :ref:`tutorial-editing-sage-sources`
+* :ref:`tutorial-how-to-contribute`
+* :ref:`sws2srt`
 
 Indices and tables
 ==================
