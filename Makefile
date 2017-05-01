@@ -215,7 +215,7 @@ pseudoxml:
 	@echo
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
 
-PYALL=$(wildcard sage/*.py sage/*/*.py sage/*/*/*.py)
+PYALL=$(wildcard sage/*.py mocksage/*/*.py mocksage/*/*/*.py)
 PY=$(PYALL:%/__init__.py=)
 PYRST=$(PY:%.py=%.rst)
 RST=$(wildcard *.rst */*.rst */*/*.rst) $(PYRST)

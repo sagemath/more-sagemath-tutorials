@@ -63,10 +63,17 @@ Document tree to please Sphinx
    demo-tsetlin
    index-sage-combinat
    mocksage/combinat/demo
+   mocksage/combinat/demo
+   mocksage/combinat/demo_algebraic_combinatorics
    mocksage/combinat/demo_algebraic_combinatorics
    mocksage/combinat/demo_short
+   mocksage/combinat/demo_short
    mocksage/combinat/tutorial_enumerated_sets
+   mocksage/combinat/tutorial_enumerated_sets
+   mocksage/combinat/words/demo
    mocksage/databases/demo_short
+   mocksage/databases/demo_short
+   mocksage/plot/demo
    mocksage/plot/demo
    README
    talks
