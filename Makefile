@@ -219,6 +219,6 @@ RST=$(wildcard *.rst */*.rst */*/*.rst)
 DOC=$(RST:%.rst=%)
 
 toctree.rst:
-	@echo "Document tree to please Sphinx\n\n.. toctree::\n   :maxdepth: 2\n" > toctree.rst
-	@for x in $(DOC); do if [ "$$x" != toctree -a "$$x" != index ]; then echo "   $$x" >> toctree.rst; fi; done
+	@echo "Document tree to please Sphinx\n\n.. toctree::\n   :maxdepth: 2\n" > $@
+	@for x in $(DOC); do if [ "$$x" != toctree -a "$$x" != index ]; then echo "   $$x"; fi; done | sort >> $@
 
