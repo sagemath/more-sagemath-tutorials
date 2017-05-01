@@ -29,6 +29,10 @@ documentation conventions. Rationale:
     Python and Sage documentation are fully supported;
   - Paves the way for integration into the Sage.
 
+If you want to join the party, pull requests are very welcome. For
+regular contributions, ask e.g. @nthiery for direct push access to the
+repository.
+
 Recommendations
 ---------------
 
