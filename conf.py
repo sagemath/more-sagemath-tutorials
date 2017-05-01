@@ -12,7 +12,6 @@
 # All configuration values have a default; values that are commented out
 # serve to show the default.
 
-import sys
 import os
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -29,11 +28,8 @@ import os
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
-    'sphinx.ext.intersphinx',
-    'sphinx.ext.todo',
-    'sphinx.ext.mathjax',
     'sphinx.ext.ifconfig',
-    'sphinx.ext.extlinks',
+    'sphinx_ext_sage',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -113,7 +109,8 @@ todo_include_todos = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-html_theme = 'alabaster'
+#html_theme = 'sage'
+#html_theme_path = ['themes']
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
@@ -287,36 +284,3 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
-
-##############################################################################
-# Stuff that should be generalized to any Sage package
-# See <Sage>/src/doc/common/conf.py
-
-# Example configuration for intersphinx: refer to the Python standard library.
-intersphinx_mapping = {'https://docs.python.org/': None,
-                       'http://doc.sagemath.org/html/en/reference/': None,
-                       'http://doc.sagemath.org/html/en/reference/categories/': None,
-                       'http://doc.sagemath.org/html/en/reference/combinat/': None,
-                       'http://doc.sagemath.org/html/en/reference/databases/': None,
-                       'http://doc.sagemath.org/html/en/reference/dynamics/': None,
-                       'http://doc.sagemath.org/html/en/reference/libs/': None,
-                       'http://doc.sagemath.org/html/en/reference/modular/': None,
-                       'http://doc.sagemath.org/html/en/reference/modules/': None,
-                       'http://doc.sagemath.org/html/en/reference/plot/': None,
-                       'http://doc.sagemath.org/html/en/reference/rings/': None,
-                       'http://doc.sagemath.org/html/en/tutorial/': None,
-                       'http://doc.sagemath.org/html/en/prep/': None,
-                       'http://doc.sagemath.org/html/en/thematic_tutorials/': None}
-
-pythonversion = sys.version.split(' ')[0]
-# Sage trac ticket shortcuts. For example, :trac:`7549` .
-extlinks = {
-    'python': ('https://docs.python.org/release/'+pythonversion+'/%s', ''),
-    'trac': ('https://trac.sagemath.org/%s', 'trac ticket #'),
-    'wikipedia': ('https://en.wikipedia.org/wiki/%s', 'Wikipedia article '),
-    'arxiv': ('http://arxiv.org/abs/%s', 'Arxiv '),
-    'oeis': ('https://oeis.org/%s', 'OEIS sequence '),
-    'doi': ('https://dx.doi.org/%s', 'doi:'),
-    'pari': ('http://pari.math.u-bordeaux.fr/dochtml/help/%s', 'pari:'),
-    'mathscinet': ('http://www.ams.org/mathscinet-getitem?mr=%s', 'MathSciNet ')
-    }
