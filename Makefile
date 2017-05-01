@@ -52,7 +52,7 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 .PHONY: html
-html:	automodules
+html:	automodules toctree.rst
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
@@ -215,6 +215,9 @@ pseudoxml:
 	@echo
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
 
+##############################################################################
+# Stuff in addition of the standard Sphinx's makefile
+
 PYALL=$(wildcard sage/*.py mocksage/*/*.py mocksage/*/*/*.py)
 PY=$(PYALL:%/__init__.py=)
 PYRST=$(PY:%.py=%.rst)
@@ -231,5 +234,5 @@ automodules: $(PYRST)
 	module=`echo $* | tr / .`; \
 	echo ".. automodule:: $$module" > $@
 
-clean-automodules:
-	rm $(PYRST)
+distclean:
+	rm $(PYRST) toctree.rst
