@@ -58,6 +58,7 @@ Document tree to please Sphinx
    demo-number-theory
    demo-origamis
    demo-plot-short
+   demo-profiling
    demo-symbolics
    demo-symmetric-functions
    demo-tsetlin
