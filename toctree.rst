@@ -62,13 +62,13 @@ Document tree to please Sphinx
    demo-symmetric-functions
    demo-tsetlin
    index-sage-combinat
+   mocksage/combinat/demo
+   mocksage/combinat/demo_algebraic_combinatorics
+   mocksage/combinat/demo_short
+   mocksage/combinat/tutorial_enumerated_sets
+   mocksage/databases/demo_short
+   mocksage/plot/demo
    README
-   sagemock/combinat/demo
-   sagemock/combinat/demo_algebraic_combinatorics
-   sagemock/combinat/demo_short
-   sagemock/combinat/tutorial_enumerated_sets
-   sagemock/databases/demo_short
-   sagemock/plot/demo
    talks
    tutorial-editing-sage-sources
    tutorial-first-exercises
