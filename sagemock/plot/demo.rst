@@ -1,0 +1,1 @@
+.. automodule:: mocksage.plot.demo

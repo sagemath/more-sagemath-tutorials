@@ -63,19 +63,12 @@ Document tree to please Sphinx
    demo-tsetlin
    index-sage-combinat
    README
-   sage/combinat/demo
-   sage/combinat/demo
-   sage/combinat/demo_algebraic_combinatorics
-   sage/combinat/demo_algebraic_combinatorics
-   sage/combinat/demo_short
-   sage/combinat/demo_short
-   sage/combinat/tutorial_enumerated_sets
-   sage/combinat/tutorial_enumerated_sets
-   sage/combinat/words/demo
-   sage/databases/demo_short
-   sage/databases/demo_short
-   sage/plot/demo
-   sage/plot/demo
+   sagemock/combinat/demo
+   sagemock/combinat/demo_algebraic_combinatorics
+   sagemock/combinat/demo_short
+   sagemock/combinat/tutorial_enumerated_sets
+   sagemock/databases/demo_short
+   sagemock/plot/demo
    talks
    tutorial-editing-sage-sources
    tutorial-first-exercises
