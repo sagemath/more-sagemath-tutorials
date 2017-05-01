@@ -18,6 +18,12 @@ class SageTest(TestCommand):
         if errno != 0:
             sys.exit(1)
 
+# Adapted from https://stackoverflow.com/questions/27664504/how-to-add-package-data-recursively-in-python-setup-py
+def package_files(directory):
+    return [os.path.join('..', path, filename)
+                for (path, directories, filenames) in os.walk(directory)
+                for filename in filenames]
+
 setup(
     name = "more_thematic_tutorials",
     version = "0.0.1", #readfile("VERSION"), # the VERSION file is shared with the documentation
@@ -42,8 +48,9 @@ setup(
     keywords = "SageMath packaging",
     cmdclass = {'test': SageTest}, # adding a special setup command for tests
 
-    py_modules=["sphinx_ext_sage"],
+    packages=["sagemath_packaging"],
+    package_data = { 'sagemath_packaging': package_files("sagemath_packaging/themes") },
     entry_points = {
-        'sphinx_themes': ['path = sphinx_ext_sage:get_path']
+        'sphinx_themes': ['path = sagemath_packaging.sphinx:themes_path']
         },
 )

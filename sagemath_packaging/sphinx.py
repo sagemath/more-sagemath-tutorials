@@ -17,6 +17,7 @@ sage_modules = [
     "curves", "games", "libs", "modules", "probability", "schemes",
 ]
 
+import os
 import sys
 pythonversion = sys.version.split(' ')[0]
 
@@ -54,10 +55,7 @@ def setup(app):
 
 
 # From Sphinx's theme documentation
-from os import path
-package_dir = path.abspath(path.dirname(__file__))
-template_path = path.join(package_dir, 'themes')
-
-def get_path():
-    return "/opt/more-sagemath-tutorials/themes"
-    #return template_path
+def themes_path():
+    package_dir = os.path.abspath(os.path.dirname(__file__))
+    return os.path.join(package_dir, 'themes')
+    #return "/opt/more-sagemath-tutorials/themes"
