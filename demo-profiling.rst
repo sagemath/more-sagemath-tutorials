@@ -1,5 +1,12 @@
-A micro demo of profiling Sage / Python code
-============================================
+.. nodoctest
+.. _demo-profiling::
+
+A micro demo of profiling Sage / Python code (draft)
+====================================================
+
+.. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery@users.sf.net>
+
+.. linkall
 
 This is a brief demo presented at Sage Days 86. See also
 :ref:`profiling`.
