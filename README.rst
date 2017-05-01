@@ -1,5 +1,5 @@
-Sage thematic tutorials
-=======================
+More SageMath thematic tutorials
+================================
 
 .. image:: https://readthedocs.org/projects/more-sagemath-thematic-tutorials/badge/?version=latest
     :target: http://more-sagemath-thematic-tutorials.readthedocs.io/en/latest/?badge=latest
