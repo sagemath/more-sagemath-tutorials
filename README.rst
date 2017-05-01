@@ -77,12 +77,13 @@ Recommendations
 Usage
 -----
 
-The documents on
-`ReadTheDocs <https://more-sagemath-tutorials.readthedocs.io/en/latest/>`_
-are automatically updated each time commits are pushed on the
-repository. This takes a couple minutes. In case something the
-configuration needs to be tweaked, the repoitory there is owned by
-@nthiery.
+A copy of the html outputs is built and hosted on `ReadTheDocs
+<https://more-sagemath-tutorials.readthedocs.io/en/latest/>`_ It's
+automatically updated each time commits are pushed on the repository.
+This takes a couple minutes. In case some configuration needs to be
+tweaked, the `ReadTheDoc's project
+<https://readthedocs.org/projects/more-sagemath-tutorials/>`_ is
+currently owned by @nthiery.
 
 To compile the documents locally::
 
