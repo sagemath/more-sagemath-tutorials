@@ -65,5 +65,4 @@ Let's use it::
 
 .. TODO::
 
-    Add a demo of using the Python deboggueur to trace through the
-    code.
+    Add a demo of using the Python debugger to trace through the code.
