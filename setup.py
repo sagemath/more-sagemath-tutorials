@@ -48,7 +48,7 @@ setup(
     keywords = "SageMath packaging",
     cmdclass = {'test': SageTest}, # adding a special setup command for tests
 
-    packages = ["sagemath_packaging", "mocksage"],
+    packages = find_packages(exclude=["*build"]),
     package_data = { 'sagemath_packaging': package_files("sagemath_packaging/themes") },
     entry_points = {
         'sphinx_themes': ['path = sagemath_packaging.sphinx:themes_path']
