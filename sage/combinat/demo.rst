@@ -1,0 +1,1 @@
+.. automodule:: sage.combinat.demo

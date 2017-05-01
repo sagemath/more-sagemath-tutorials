@@ -1,0 +1,1 @@
+.. automodule:: sage.plot.demo

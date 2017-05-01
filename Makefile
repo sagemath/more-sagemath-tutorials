@@ -52,7 +52,7 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 .PHONY: html
-html:
+html:	automodules
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
@@ -215,10 +215,21 @@ pseudoxml:
 	@echo
 	@echo "Build finished. The pseudo-XML files are in $(BUILDDIR)/pseudoxml."
 
-RST=$(wildcard *.rst */*.rst */*/*.rst)
+PYALL=$(wildcard sage/*.py sage/*/*.py sage/*/*/*.py)
+PY=$(PYALL:%/__init__.py=)
+PYRST=$(PY:%.py=%.rst)
+RST=$(wildcard *.rst */*.rst */*/*.rst) $(PYRST)
 DOC=$(RST:%.rst=%)
 
 toctree.rst:
 	@echo "Document tree to please Sphinx\n\n.. toctree::\n   :maxdepth: 2\n" > $@
 	@for x in $(DOC); do if [ "$$x" != toctree -a "$$x" != index ]; then echo "   $$x"; fi; done | sort >> $@
 
+automodules: $(PYRST)
+
+%.rst: %.py
+	module=`echo $* | tr / .`; \
+	echo ".. automodule:: $$module" > $@
+
+clean-automodules:
+	rm $(PYRST)
