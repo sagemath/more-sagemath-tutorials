@@ -15,7 +15,7 @@ Here is a function that computes `\sum_{k=0}^N k` in pure Python::
 
 Let us compare this with the Cython version::
 
-    sage: %cython
+    sage: %%cython
     sage: def mysum_cython(N):
     ....:     cdef long long s = 0
     ....:     cdef int k
@@ -59,7 +59,7 @@ into odd parts::
 
 Make two changes::
 
-    sage: %cython
+    sage: %%cython
     sage: def cybuying(coins, total):
     ....:   cdef int i, j, k, coin
     ....:   vlist = [ [0] * len(coins) for _ in range(total + 1) ]
