@@ -29,9 +29,17 @@ documentation conventions. Rationale:
     Python and Sage documentation are fully supported;
   - Paves the way for integration into the Sage.
 
-If you want to join the party, pull requests are very welcome. For
-regular contributions, ask e.g. @nthiery for direct push access to the
-repository.
+Contributing
+------------
+
+Contributions of all kinds are most welcome! If you spot a typo
+while reading the
+[documents on ReadTheDocs](http://more-sagemath-thematic-tutorials.readthedocs.io/en/latest/)
+please follow "Edit on GitHub" -> "Edit this file" and submit your
+change (this requires a GitHub account).
+
+For larger changes, pull requests are very welcome. For regular
+contributions, ask e.g. @nthiery for direct access to the repository.
 
 Recommendations
 ---------------
