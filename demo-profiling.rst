@@ -1,5 +1,5 @@
 .. nodoctest
-.. _demo-profiling::
+.. _demo-profiling:
 
 A micro demo of profiling Sage / Python code (draft)
 ====================================================
