@@ -48,8 +48,8 @@ Introduction to Sage
 * :ref:`sage.databases.demo_short`
 * :ref:`demo-number-theory`
 
-* :ref:`Logging-On`
-* :ref:`Intro-Tutorial`
+* :ref:`prep-logging-on`
+* :ref:`prep-intro-tutorial`
 * :ref:`tutorial-notebook-and-help-long`
 * :ref:`tutorial`
 
@@ -58,9 +58,9 @@ Calculus
 ========
 
 * :ref:`demo-symbolics`
-* :ref:`Symbolics-and-Basic-Plotting`
-* :ref:`Calculus`
-* :ref:`Advanced-2DPlotting`
+* :ref:`prep-symbolics-and-basic-plotting`
+* :ref:`prep-calculus`
+* :ref:`prep-advanced-2dplotting`
 
 Algebra
 =======
@@ -143,7 +143,7 @@ Programming and Design
 
 * :ref:`demo-cython`
 
-* :ref:`Programming`
+* :ref:`prep-programming`
 * :ref:`tutorial-comprehensions`
 * :ref:`tutorial-programming-python`
 * :ref:`agregation.tris_et_complexite`
