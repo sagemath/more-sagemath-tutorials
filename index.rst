@@ -33,11 +33,11 @@ its `official thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutor
 For the convenience of the reader, the index below also includes links
 to some of the latter.
 
-Some documents are related to special events: :ref:`talks`.
+Some documents are related to special events; see :ref:`talks`.
 
-Contributions are more than welcome. See the
-`README <https://github.com/sagemath/more-sagemath-tutorials/blob/master/README.rst>`_
-on the `project's repository <https://github.com/sagemath/more-sagemath-tutorials>`_.
+Contributions, from typo fixes to full-fledged tutorials are more than
+welcome. See :ref:`contributing`.
+
 
 Introduction to Sage
 ====================
