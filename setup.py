@@ -3,41 +3,24 @@ import os
 import sys
 from setuptools import setup, find_packages
 from codecs import open # To open the README file with proper encoding
-from setuptools.command.test import test as TestCommand # for tests
 
-
-# Get information from separate files (README, VERSION)
-def readfile(filename):
-    with open(filename,  encoding='utf-8') as f:
-        return f.read()
-
-# For the tests
-class SageTest(TestCommand):
-    def run_tests(self):
-        errno = os.system("sage -t --force-lib .")
-        if errno != 0:
-            sys.exit(1)
-
-# Adapted from https://stackoverflow.com/questions/27664504/how-to-add-package-data-recursively-in-python-setup-py
-def package_files(directory):
-    return [os.path.join('..', path, filename)
-                for (path, directories, filenames) in os.walk(directory)
-                for filename in filenames]
+description = 'More SageMath Thematic Tutorials'
+version = "0.0.1"
+author = 'The SageMath community'
+copyright = "2017, " + author
+license = 'GPLv2+'
 
 setup(
-    name = "more_thematic_tutorials",
-    version = "0.0.1", #readfile("VERSION"), # the VERSION file is shared with the documentation
-    description='More SageMath Thematic Tutorials',
-    long_description = readfile("README.rst"), # get the long description from the README
+    name = "more_sagemath_tutorials",
+    version = version,
+    description = description,
+    # get the long description from the README
+    long_description = open("README.rst", encoding='utf-8').read(),
     url='https://github.com/sagemath/more-sagemath-tutorials',
-    author='Sage math developers',
+    author=author,
     author_email='nthiery@users.sf.net', # choose a main contact email
-    license='GPLv2+', # This should be consistent with the LICENCE file
+    license=license, # This should be consistent with the LICENCE file
     classifiers=[
-      # How mature is this project? Common values are
-      #   3 - Alpha
-      #   4 - Beta
-      #   5 - Production/Stable
       'Development Status :: 4 - Beta',
       'Intended Audience :: Science/Research',
       'Topic :: Software Development :: Build Tools',
@@ -46,11 +29,31 @@ setup(
       'Programming Language :: Python :: 2.7',
     ], # classifiers list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
     keywords = "SageMath packaging",
-    cmdclass = {'test': SageTest}, # adding a special setup command for tests
-
-    packages = find_packages(exclude=["*build"]),
-    package_data = { 'sagemath_packaging': package_files("sagemath_packaging/themes") },
+    packages = find_packages(),
+    setup_requires   = ['sage-package'],
+    install_requires = ['sage-package', 'sphinx'],
     entry_points = {
-        'sphinx_themes': ['path = sagemath_packaging.sphinx:themes_path']
+        "distutils.commands": [
+            "test = sage_package.setuptools:SageTest",
+            "html = sphinx.setup_command:BuildDoc",
+        ],
+    },
+    # Experimental: the html entry point and command options enable
+    # compiling the doc with `python setup.py html` while overriding
+    # the metadata in conf.py from that here.
+    # See http://www.sphinx-doc.org/en/master/setuptools.html
+    # Presumably ReadTheDocs calls directly sphinx-build which just
+    # uses `conf.py`, so at this stage, we still need to duplicate the
+    # metadata there.
+    command_options={
+        'html': {
+            'project': ('setup.py', description),
+            'version': ('setup.py', version),
+            'release': ('setup.py', version),
+            'copyright': ('setup.py', copyright),
+            #'master_doc': ('setup.py', 'index'),
+            'build_dir':  ('setup.py', '_build'),
+            #'authors': ('setup.py', author),
         },
+    }
 )
