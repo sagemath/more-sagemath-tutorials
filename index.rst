@@ -13,6 +13,13 @@ tutorials, grouped by theme, and licensed under a
 
 __ http://creativecommons.org/licenses/by-sa/3.0/
 
+.. WARNING::
+
+    Most of the files below have been recently resurrected from an old
+    repository. They are of varying quality and may be outdated or
+    require additional software. It is planned to add status
+    information on each of them.
+
 - A *demonstration* is a short document giving a broad view of the
   available features on a given theme; it is typically presented
   during a talk, and lasts a couple minutes.
