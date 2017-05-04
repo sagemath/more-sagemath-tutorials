@@ -67,7 +67,7 @@ Recommendations
   extension.
 
 - Whenever relevant: explain the math behind. Think you are writing a
-*math book*, illustrated with Sage.
+  *math book*, illustrated with Sage.
 
 - If there is a natural location for the unit in the Sage sources
   (e.g. a tutorial about rings in Sage could go in
