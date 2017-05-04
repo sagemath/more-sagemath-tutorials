@@ -28,7 +28,7 @@ setup(
       'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
       'Programming Language :: Python :: 2.7',
     ], # classifiers list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
-    keywords = "SageMath packaging",
+    keywords = "SageMath tutorials",
     packages = find_packages(),
     setup_requires   = ['sage-package'],
     install_requires = ['sage-package', 'sphinx'],
