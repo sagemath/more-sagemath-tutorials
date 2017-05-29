@@ -28,6 +28,9 @@ courses. This page contains some material for those sessions.
 For regular use, we recommend installing them on your computer and are
 happy to give a hand.
 
+
+:ref:`crm.2017.exercises`
+
 Links:
 
 - The `official SageMath thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_.
@@ -35,3 +38,4 @@ Links:
 - :ref:`lie`; see in particular the chapter on Coxeter Groups
 - :ref:`sage.combinat.root_system`, :func:`~sage.combinat.root_system.coxeter_group.CoxeterGroup`, :func:`~sage.combinat.root_system.reflection_group_real.ReflectionGroup`, ...
 - `Lie algebras in GAP <https://www.gap-system.org/Manuals/doc/ref/chap64.html>`_
+

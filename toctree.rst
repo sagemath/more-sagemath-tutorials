@@ -34,6 +34,7 @@ Document tree to please Sphinx
    2012-10-29-CIMPA-Bobo/index
    2012-10-29-CIMPA-Bobo/introduction
    2016-03-09-ALEA
+   2017-05-29-CRM/exercises
    2017-05-29-CRM/index
    agregation-option-calcul-formel/algebre_lineaire
    agregation-option-calcul-formel/algebre_lineaire_rapide
