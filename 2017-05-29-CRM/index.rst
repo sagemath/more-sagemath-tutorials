@@ -16,10 +16,10 @@ Quite a few of those researchers will be among the participants of the
 `Algebraic and Geometric Combinatorics of Reflection Groups
 <http://www.crm.umontreal.ca/2017/Reflexion17/index_e.php>`_ school
 and workshop, and happy to share their expertise. To this end we will
-run informal "computational sessions" every afternoon after the main
-courses. This page contains some material.
+run informal computational sessions every afternoon after the main
+courses. This page contains some material for those sessions.
 
-Sagemath and GAP are open source, and can be used online:
+`Sagemath <http://www.sagemath.org/>`_ and `GAP <https://www.gap-system.org/>`_ are open source, and can be used online:
 
 - The `SageMath cell server <http://sagecell.sagemath.org/?z=eJwrKMrMK1Fwzq9ILUktci_KLy3QiFZyVdKxiNXUS04sSsnMS8zJLKnU0OTl4uXyUbBVCMrPLwmuLC5JzQUqdFfSMdIxBCpNzE3KTM0riS8uSExOBSn20SvIyS8BsQAl4R4v&lang=sage>`_ for simple calculations
 
