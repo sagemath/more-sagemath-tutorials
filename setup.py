@@ -30,8 +30,8 @@ setup(
     ], # classifiers list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
     keywords = "SageMath tutorials",
     packages = find_packages(),
-    setup_requires   = ['sage-package'],
-    install_requires = ['sage-package', 'sphinx', 'nbsphinx'],
+    setup_requires   = ['sage-package','nbsphinx'],
+    install_requires = ['sage-package', 'sphinx'],
     entry_points = {
         "distutils.commands": [
             "test = sage_package.setuptools:SageTest",
