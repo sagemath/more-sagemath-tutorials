@@ -17,7 +17,13 @@ Quite a few of those researchers will be among the participants of the
 <http://www.crm.umontreal.ca/2017/Reflexion17/index_e.php>`_ school
 and workshop, and happy to share their expertise. To this end we will
 run informal computational sessions every afternoon after the main
-courses. This page contains some material for those sessions.
+courses.
+
+There are no prerequisites to attend the sessions. If possible, bring
+your laptop. This page contains some material for those sessions.
+
+Software
+========
 
 `Sagemath <http://www.sagemath.org/>`_ and `GAP <https://www.gap-system.org/>`_ are open source, and can be used online:
 
@@ -28,14 +34,25 @@ courses. This page contains some material for those sessions.
 For regular use, we recommend installing them on your computer and are
 happy to give a hand.
 
+`Magma <http://magma.maths.usyd.edu.au/>`_ can be used online for
+small calculations:
+
+- `Magma calculator <http://magma.maths.usyd.edu.au/calc/>`_
+
 Session 1
 =========
 
 During this session, we started by exploring together the basic
-reflection groups features available in SageMath; see this `notebook
-<reflection-groups-live-demo.html>`_. Later participants worked
-together in small groups on :ref:`exercises <crm.2017.exercises>` or
-their own pet problems.
+reflection group features available in SageMath; see this `notebook
+<https://github.com/sagemath/more-sagemath-tutorials/blob/master/2017-05-29-CRM/reflection-groups-live-demo.ipynb>`_.
+Later participants worked together in small groups on :ref:`exercises
+<crm.2017.exercises>` or their own pet problems.
+
+Session 2
+=========
+
+Software installation, group work on exercises, demo of Magma's
+features (invariant theory, ...)
 
 References
 ==========
