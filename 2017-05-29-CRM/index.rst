@@ -28,10 +28,17 @@ courses. This page contains some material for those sessions.
 For regular use, we recommend installing them on your computer and are
 happy to give a hand.
 
+Session 1
+=========
 
-:ref:`crm.2017.exercises`
+During this session, we started by exploring together the basic
+reflection groups features available in SageMath; see this `notebook
+<reflection-groups-live-demo.html>`_. Later participants worked
+together in small groups on :ref:`exercises <crm.2017.exercises>` or
+their own pet problems.
 
-Links:
+References
+==========
 
 - The `official SageMath thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_.
 - `More SageMath thematic tutorials <../>`_.
