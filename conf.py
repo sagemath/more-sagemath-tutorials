@@ -29,7 +29,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.ifconfig',
     'sage_package.sphinx',
-    'nbsphinx'
+#    'nbsphinx'
 ]
 
 # Add any paths that contain templates here, relative to this directory.

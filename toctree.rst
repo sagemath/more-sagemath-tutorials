@@ -36,7 +36,6 @@ Document tree to please Sphinx
    2016-03-09-ALEA
    2017-05-29-CRM/exercises
    2017-05-29-CRM/index
-   2017-05-29-CRM/reflection-groups-live-demo.ipynb
    agregation-option-calcul-formel/algebre_lineaire
    agregation-option-calcul-formel/algebre_lineaire_rapide
    agregation-option-calcul-formel/bibliotheque_tsetlin

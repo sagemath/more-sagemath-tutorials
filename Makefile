@@ -223,7 +223,7 @@ PY=$(PYALL:%/__init__.py=)
 PYRST=$(PY:%.py=%.rst)
 RST=$(wildcard *.rst */*.rst */*/*.rst) $(PYRST)
 IPYNB=$(wildcard *.ipynb */*.ipynb */*/*.ipynb)
-DOC=$(RST:%.rst=%) $(IPYNB)
+DOC=$(RST:%.rst=%) # $(IPYNB)
 
 toctree.rst:
 	@echo "Document tree to please Sphinx\n\n.. toctree::\n   :maxdepth: 2\n" > $@
