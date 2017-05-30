@@ -31,7 +31,7 @@ setup(
     keywords = "SageMath tutorials",
     packages = find_packages(),
     setup_requires   = ['sage-package'],
-    install_requires = ['sage-package', 'sphinx', 'entrypoints', 'nbsphinx'],
+    install_requires = ['sage-package', 'sphinx', 'nbsphinx'],
     entry_points = {
         "distutils.commands": [
             "test = sage_package.setuptools:SageTest",
