@@ -3,3 +3,5 @@ _build/
 dist/
 *.egg-info/
 build/
+.ipynb_checkpoints
+.eggs
