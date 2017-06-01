@@ -55,8 +55,8 @@ Exploring the available features for reflection groups in Sage
 
     #. Try with other types.
 
-Around Piotr's lecture
-======================
+Around Piotr's lectures
+=======================
 
 .. TOPIC:: Exercises
 
@@ -73,22 +73,23 @@ Around Piotr's lecture
 
     #.  Implement the (truncated) Davis complex
 
-Around Vic's lecture
-====================
+Around Vic's lectures
+=====================
 
-.. TOPIC:: Exercise (product formulae)
+.. TOPIC:: Exercise (product formula for inversions)
 
     #. Check the product formula for the inversions statistic in the
         symmetric group
 
-    #. Search for analogues of this product formula for other
+    #. Retrieve the analogue product formula for some other
        reflection groups
 
-.. TOPIC:: Exercise
+.. TOPIC:: Exercise (other product formula)
 
     #. Implement a function that, given a polynomial
        `\prod(1-q^{d_i})` in expanded form, recovers the `d_i` (see
        the related pen and paper exercise)
 
     #. Use it to recover the degrees, exponents, and coexponents for a
-       couple reflection groups from their Hilbert series.
+       couple reflection groups from their Molien formula, and check
+       the product formula of the lectures.
