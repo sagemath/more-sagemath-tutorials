@@ -79,17 +79,17 @@ Around Vic's lectures
 .. TOPIC:: Exercise (product formula for inversions)
 
     #. Check the product formula for the inversions statistic in the
-        symmetric group
+        symmetric group;
 
     #. Retrieve the analogue product formula for some other
-       reflection groups
+       reflection groups.
 
 .. TOPIC:: Exercise (other product formula)
 
     #. Implement a function that, given a polynomial
        `\prod(1-q^{d_i})` in expanded form, recovers the `d_i` (see
-       the related pen and paper exercise)
+       exercise 2 in Vic's exercise sheet);
 
     #. Use it to recover the degrees, exponents, and coexponents for a
        couple reflection groups from their Molien formula, and check
-       the product formula of the lectures.
+       the product formula of the lectures (see :ref:`demo-reflection-groups-molien`).

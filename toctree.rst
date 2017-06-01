@@ -61,6 +61,7 @@ Document tree to please Sphinx
    demo-origamis
    demo-plot-short
    demo-profiling
+   demo-reflection-groups
    demo-symbolics
    demo-symmetric-functions
    demo-tsetlin
