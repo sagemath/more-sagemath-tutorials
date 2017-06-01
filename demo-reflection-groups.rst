@@ -237,6 +237,8 @@ polynomial ring `\CC[V]^W` with the exponents
 
 .. math:: \frac{1}{|W|} \sum_{w\in W} \frac{\chi_V^*(w)}{\det(1-qw)} =  \Hilb(\CC[V]^W,q) \quad ( q^{e_1^*} + \cdots + q^{e_n^*})
 
+::
+
     sage: 1/W.cardinality() * sum( w.to_matrix().trace()/det(1-q*w.to_matrix()) for w in W   ) / H
     q^5 + q^3
 
@@ -245,7 +247,7 @@ polynomial ring `\CC[V]^W` with the exponents
     q^3 + q
 
 Let's do a consistency check with the degrees (which are the `e_i+1`)
-and the codegrees (which are the `e_i^*-1`):
+and the codegrees (which are the `e_i^*-1`)::
 
     sage: W.degrees()
     (4, 6)
@@ -259,20 +261,22 @@ Solomon's formula
 .. TOPIC:: Exercise
 
     Compute the Hilbert series of `\CC[V]^W\otimes \bigwedge^\cdot V^W`
-    using Solomon's formula::
+    using Solomon's formula:
 
     .. math:: \Hilb(\CC[V]^W\otimes \bigwedge^\cdot V^W,q,t) = \frac{1}{|W|} \sum_{w\in W} \frac{\det(1+tw)}{\det(1-qw)}
 
 
 .. TOPIC:: Solution
 
-    sage: QQqt = QQ['q,t'].fraction_field()
-    sage: q,t = QQqt.gens()
-    sage: Solomon = 1/W.cardinality() * sum( det(1+t*w.to_matrix()) / det(1-q*w.to_matrix()) for w in W   )
-    sage: QQqt(Solomon) / H
-    q^8*t^2 + q^5*t + q^3*t + 1
-    sage: _.factor()
-    (q^3*t + 1) * (q^5*t + 1)
+    ::
 
+        sage: QQqt = QQ['q,t'].fraction_field()
+        sage: q,t = QQqt.gens()
+        sage: Solomon = 1/W.cardinality() * sum( det(1+t*w.to_matrix()) / det(1-q*w.to_matrix()) for w in W   )
+        sage: QQqt(Solomon) / H
+        q^8*t^2 + q^5*t + q^3*t + 1
+        sage: _.factor()
+        (q^3*t + 1) * (q^5*t + 1)
+    
 
 
