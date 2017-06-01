@@ -25,20 +25,16 @@ your laptop. This page contains some material for those sessions.
 Software
 ========
 
-`Sagemath <http://www.sagemath.org/>`_ and `GAP <https://www.gap-system.org/>`_ are open source, and can be used online:
+`Sagemath <http://www.sagemath.org/>`_ and `GAP
+<https://www.gap-system.org/>`_ are open source, and can be used
+online. For regular use, we recommend installing them on your computer
+and are happy to give a hand. `Magma <http://magma.maths.usyd.edu.au/>`_ can be used online for
+small calculations. Installing it require a license.
 
 - The `SageMath cell server <http://sagecell.sagemath.org/?z=eJwrKMrMK1Fwzq9ILUktci_KLy3QiFZyVdKxiNXUS04sSsnMS8zJLKnU0OTl4uXyUbBVCMrPLwmuLC5JzQUqdFfSMdIxBCpNzE3KTM0riS8uSExOBSn20SvIyS8BsQAl4R4v&lang=sage>`_ for simple calculations
-
-- `Cocalc <https://cocalc.org>`_ for a full featured computational environment
-
-For regular use, we recommend installing them on your computer and are
-happy to give a hand.
-
-`Magma <http://magma.maths.usyd.edu.au/>`_ can be used online for
-small calculations:
-
-- `Magma calculator <http://magma.maths.usyd.edu.au/calc/>`_
-
+- `Cocalc <https://cocalc.org>`_: a full featured computational
+  environment with Sage, GAP and many other software
+- The `Magma calculator <http://magma.maths.usyd.edu.au/calc/>`_
 - `CHAMP: A CHerednik Algebra Magma Package <https://thielul.github.io/CHAMP/>`_
 
 Session 1 (Monday)
@@ -56,8 +52,8 @@ Session 2 (Tuesday)
 
 - Software installation
 - Joint exploration of Sage features:
-  - `Symmetric functions <https://github.com/sagemath/more-sagemath-tutorials/blob/master/2017-05-29-CRM/symmetric-functions-demo.ipynb>`_.
-  - `Posets related to coxeter groups <https://github.com/sagemath/more-sagemath-tutorials/blob/master/2017-05-29-CRM/coxeter-posets-demo.ipynb>`_.
+    - `Symmetric functions <https://github.com/sagemath/more-sagemath-tutorials/blob/master/2017-05-29-CRM/symmetric-functions-demo.ipynb>`_.
+    - `Posets related to coxeter groups <https://github.com/sagemath/more-sagemath-tutorials/blob/master/2017-05-29-CRM/coxeter-posets-demo.ipynb>`_.
 - Help desk, work in small groups
 
 Session 3 (Wednesday)
