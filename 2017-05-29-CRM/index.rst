@@ -39,20 +39,46 @@ small calculations:
 
 - `Magma calculator <http://magma.maths.usyd.edu.au/calc/>`_
 
-Session 1
-=========
+- `CHAMP: A CHerednik Algebra Magma Package <https://thielul.github.io/CHAMP/>`_
+
+Session 1 (Monday)
+==================
 
 During this session, we started by exploring together the basic
 reflection group features available in SageMath; see this `notebook
 <https://github.com/sagemath/more-sagemath-tutorials/blob/master/2017-05-29-CRM/reflection-groups-live-demo.ipynb>`_.
-Later participants worked together in small groups on :ref:`exercises
-<crm.2017.exercises>` or their own pet problems.
+Later participants worked together in small groups on
+:ref:`computational exercises <crm.2017.exercises>` or
+their own pet problems.
 
-Session 2
-=========
+Session 2 (Tuesday)
+===================
 
-Software installation, group work on exercises, demo of Magma's
-features (invariant theory, ...)
+- Software installation
+- Joint exploration of Sage features:
+  - `Symmetric functions <https://github.com/sagemath/more-sagemath-tutorials/blob/master/2017-05-29-CRM/symmetric-functions-demo.ipynb>`_.
+  - `Posets related to coxeter groups <https://github.com/sagemath/more-sagemath-tutorials/blob/master/2017-05-29-CRM/coxeter-posets-demo.ipynb>`_.
+- Help desk, work in small groups
+
+Session 3 (Wednesday)
+=====================
+
+- Help desk, work in small groups
+
+Session 4 (Thursday)
+====================
+
+- Demo by Cédric of computing with Cherednik algebras on Magma
+  (+ brainstorm on porting to SageMath?)
+
+- Demo by Vic + N. illustrating Vic's course
+
+- Pen and paper exercise sessions by Vic and Cédric
+
+- :ref:`Computational exercises <crm.2017.exercises>`
+
+Session 5 (Friday)
+==================
 
 References
 ==========
@@ -62,4 +88,3 @@ References
 - :ref:`lie`; see in particular the chapter on Coxeter Groups
 - :ref:`sage.combinat.root_system`, :func:`~sage.combinat.root_system.coxeter_group.CoxeterGroup`, :func:`~sage.combinat.root_system.reflection_group_real.ReflectionGroup`, ...
 - `Lie algebras in GAP <https://www.gap-system.org/Manuals/doc/ref/chap64.html>`_
-
