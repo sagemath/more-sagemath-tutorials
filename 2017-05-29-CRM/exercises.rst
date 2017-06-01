@@ -1,12 +1,15 @@
 .. -*- coding: utf-8 -*-
 .. _crm.2017.exercises:
 
+==============
 Exercise sheet
 ==============
 
-This sheet contains some exercises for exploring the available
-features for reflection groups in Sage.
+This sheet contains some computational exercises related to the
+lectures.
 
+Exploring the available features for reflection groups in Sage
+==============================================================
 
 .. TOPIC:: Exercise (basic computations + explore the classification)
 
@@ -52,7 +55,10 @@ features for reflection groups in Sage.
 
     #. Try with other types.
 
-.. TOPIC:: Exercises (around Piotr's lecture)
+Around Piotr's lecture
+======================
+
+.. TOPIC:: Exercises
 
     #.  Draw the (truncated) Cayley graph for Gamma = 3,3,3
 
@@ -67,10 +73,22 @@ features for reflection groups in Sage.
 
     #.  Implement the (truncated) Davis complex
 
-.. TOPIC:: Exercises (around Vic's lecture)
+Around Vic's lecture
+====================
+
+.. TOPIC:: Exercise (product formulae)
 
     #. Check the product formula for the inversions statistic in the
         symmetric group
 
     #. Search for analogues of this product formula for other
        reflection groups
+
+.. TOPIC:: Exercise
+
+    #. Implement a function that, given a polynomial
+       `\prod(1-q^{d_i})` in expanded form, recovers the `d_i` (see
+       the related pen and paper exercise)
+
+    #. Use it to recover the degrees, exponents, and coexponents for a
+       couple reflection groups from their Hilbert series.
