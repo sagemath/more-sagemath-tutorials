@@ -68,7 +68,7 @@ Session 4 (Thursday)
 
 - Demo by Vic + N. illustrating Vic's course (see :ref:`demo-reflection-groups-molien`);
 
-- Pen and paper exercise sessions by Vic and Cédric:
+- Pen and paper exercise sessions by Cédric, Nathan, Vic:
     - Vic's `exercise sheet <http://www-users.math.umn.edu/~reiner/Talks/CRM_LaCIM_exercises.pdf>`_;
 
 - :ref:`Computational exercises <crm.2017.exercises>`.
