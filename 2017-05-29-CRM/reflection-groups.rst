@@ -2,7 +2,7 @@
 .. _crm.2017.reflection-groups:
 
 ===================================================================================================================
-Computational sessions at the CRM ``Algebraic and Geometric Combinatorics of Reflection Groups' school and workshop
+Computational sessions at the CRM ``Algebraic and Geometric Combinatorics of Reflection Groups'' school and workshop
 ===================================================================================================================
 
 .. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>

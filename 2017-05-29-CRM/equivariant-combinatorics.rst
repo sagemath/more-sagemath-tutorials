@@ -1,8 +1,8 @@
 .. -*- coding: utf-8 -*-
-.. _crm.2017:
+.. _crm.2017.equivariant-combinatorics:
 
 ==================================================================================
-Computational sessions at the CRM ``Equivariant combinatorics' school and workshop
+Computational sessions at the CRM ``Equivariant combinatorics'' school and workshop
 ==================================================================================
 
 .. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>
