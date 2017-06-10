@@ -1,5 +1,5 @@
 .. -*- coding: utf-8 -*-
-.. _crm.2017.exercises:
+.. _crm.2017.reflection-groups-exercises:
 
 ==============
 Exercise sheet
