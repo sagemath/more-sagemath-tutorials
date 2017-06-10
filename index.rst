@@ -40,11 +40,13 @@ its `official thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutor
 For the convenience of the reader, the index below also includes links
 to some of the latter.
 
-Some documents are related to special events; see :ref:`talks`.
-
 Contributions, from typo fixes to full-fledged tutorials are more than
 welcome. See :ref:`contributing`.
 
+Documents for specific events
+=============================
+
+* :ref:`Talks, workshops, courses <events>`.
 
 Introduction to Sage
 ====================
@@ -192,7 +194,12 @@ Indices and tables
 .. A hidden toctree. Sphinx wants everything to be in some toctree.
 
 .. toctree::
+   :glob:
    :hidden:
-   :maxdepth: 3
 
-   toctree
+   events
+   demo-*
+   tutorial-*
+   *
+   mocksage/*/*
+   mocksage/*/*/*

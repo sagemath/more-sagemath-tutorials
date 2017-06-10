@@ -52,7 +52,7 @@ clean:
 	rm -rf $(BUILDDIR)/*
 
 .PHONY: html
-html:	automodules toctree.rst
+html:	automodules
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
 	@echo "Build finished. The HTML pages are in $(BUILDDIR)/html."
@@ -224,10 +224,6 @@ PYRST=$(PY:%.py=%.rst)
 RST=$(wildcard *.rst */*.rst */*/*.rst) $(PYRST)
 IPYNB=$(wildcard *.ipynb */*.ipynb */*/*.ipynb)
 DOC=$(RST:%.rst=%) # $(IPYNB)
-
-toctree.rst:
-	@echo "Document tree to please Sphinx\n\n.. toctree::\n   :maxdepth: 2\n" > $@
-	@for x in $(DOC); do if [ "$$x" != toctree -a "$$x" != index ]; then echo "   $$x"; fi; done | sort >> $@
 
 automodules: $(PYRST)
 

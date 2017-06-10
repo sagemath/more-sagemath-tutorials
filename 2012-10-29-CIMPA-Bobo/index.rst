@@ -122,3 +122,9 @@ Redémarer:
 
     reboot
 
+
+.. toctree::
+   :glob:
+   :hidden:
+
+   *

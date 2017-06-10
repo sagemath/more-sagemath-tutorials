@@ -1,9 +1,9 @@
 .. -*- coding: utf-8 -*-
 .. _crm.2017.reflection-groups:
 
-===================================================================================================================
-Computational sessions at the CRM ``Algebraic and Geometric Combinatorics of Reflection Groups'' school and workshop
-===================================================================================================================
+==================================================================================================================
+Computational sessions at the CRM «Algebraic and Geometric Combinatorics of Reflection Groups» school and workshop
+==================================================================================================================
 
 .. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>
 
@@ -16,7 +16,7 @@ Session 1 (Monday 4-6pm)
   SageMath (see: :ref:`demo-reflection-groups`)
 
 - Help desk, work in small groups on :ref:`computational exercises
-  <crm.2017.reflection-groups.exercises>` or personal problems.
+  <crm.2017.reflection-groups-exercises>` or personal problems.
 
 Session 2 (Tuesday 4-6pm)
 =========================
@@ -42,7 +42,7 @@ Session 4 (Thursday 4-6pm)
 - Pen and paper exercise sessions by Cédric, Nathan, Vic:
     - Vic's `exercise sheet <http://www-users.math.umn.edu/~reiner/Talks/CRM_LaCIM_exercises.pdf>`_;
 
-- :ref:`Computational exercises <crm.2017.exercises>`.
+- :ref:`Computational exercises <crm.2017.reflection-groups-exercises>`.
 
 Session 5 (Friday 4-6pm)
 ========================

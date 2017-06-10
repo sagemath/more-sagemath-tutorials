@@ -1,31 +1,31 @@
-.. _talks:
+.. _events:
 
-Talks, workshops, courses
-=========================
+Events: Talks, workshops, courses
+=================================
 
-2017:
------
+2017
+----
 
 * :ref:`crm.2017`
+* :ref:`agregation`
 
-2012:
------
+2012
+----
 
 * :ref:`bobo.2012`
 * :ref:`demo.2012-04-28-JIL`
 * :ref:`demo.2012-02-16-Sage-Paris`
-* :ref:`agregation`
 
-2011:
------
+2011
+----
 
 * :ref:`demo.2011-12-13-ScienceWorkshop`
 * :ref:`demo.2011-05-23-SMAI`
 * :ref:`demo.2011-05-02-SageDays30`
 * :ref:`demo.2011-01-17-SageDays28`
 
-2010:
------
+2010
+----
 
 * :ref:`demo.2010-12-11-Nikolaus`
 * :ref:`demo.2010-11-29-MontrealPython`
@@ -38,7 +38,16 @@ Talks, workshops, courses
 * :ref:`demo.2010-03-29-SLC64`
 
 
-2009:
------
+2009
+----
 
 * :ref:`tutorials.siena2009`
+
+.. toctree::
+   :glob:
+   :hidden:
+   :reversed:
+
+   20*/index
+   20*
+   agregation-option-calcul-formel/index

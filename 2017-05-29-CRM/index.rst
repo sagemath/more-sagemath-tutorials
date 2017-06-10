@@ -49,3 +49,9 @@ References
 - :ref:`lie`; see in particular the chapter on Coxeter Groups
 - :ref:`sage.combinat.root_system`, :func:`~sage.combinat.root_system.coxeter_group.CoxeterGroup`, :func:`~sage.combinat.root_system.reflection_group_real.ReflectionGroup`, ...
 - `Lie algebras in GAP <https://www.gap-system.org/Manuals/doc/ref/chap64.html>`_
+
+.. toctree::
+   :glob:
+   :hidden:
+
+   *
