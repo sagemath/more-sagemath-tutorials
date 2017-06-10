@@ -225,6 +225,11 @@ RST=$(wildcard *.rst */*.rst */*/*.rst) $(PYRST)
 IPYNB=$(wildcard *.ipynb */*.ipynb */*/*.ipynb)
 DOC=$(RST:%.rst=%) # $(IPYNB)
 
+ipynb: $(RST:%.rst=%.ipynb)
+
+%.ipynb: %.rst
+	rst2ipynb -k "SageMath" $< -o  $@
+
 automodules: $(PYRST)
 
 %.rst: %.py

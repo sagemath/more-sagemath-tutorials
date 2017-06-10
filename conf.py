@@ -284,3 +284,11 @@ texinfo_documents = [
 
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
+
+import subprocess
+def build_ipynb(app, exception):
+    if exception is None:
+        subprocess.call("make ipynb", shell=True)
+
+def setup(app):
+    app.connect('build-finished', build_ipynb)
