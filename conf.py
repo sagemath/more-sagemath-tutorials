@@ -292,5 +292,4 @@ def build_ipynb(app, exception):
         subprocess.call("make ipynb", shell=True)
 
 def setup(app):
-    #app.connect('build-finished', build_ipynb)
-    pass
+    app.connect('build-finished', build_ipynb)
