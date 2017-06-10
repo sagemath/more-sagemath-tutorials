@@ -225,9 +225,11 @@ RST=$(wildcard *.rst */*.rst */*/*.rst) $(PYRST)
 IPYNB=$(wildcard *.ipynb */*.ipynb */*/*.ipynb)
 DOC=$(RST:%.rst=%) # $(IPYNB)
 
-ipynb: $(RST:%.rst=%.ipynb)
+RST2IPYNB=$(RST:%.rst=$(BUILDDIR)/html/%.ipynb)
 
-%.ipynb: %.rst
+ipynb: $(RST2IPYNB)
+
+$(BUILDDIR)/html/%.ipynb: %.rst
 	rst2ipynb -k "SageMath" $< -o  $@
 
 automodules: $(PYRST)
@@ -237,4 +239,4 @@ automodules: $(PYRST)
 	echo ".. automodule:: $$module" > $@
 
 distclean:
-	rm $(PYRST) toctree.rst
+	rm $(PYRST)
