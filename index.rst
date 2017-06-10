@@ -197,9 +197,9 @@ Indices and tables
    :glob:
    :hidden:
 
+   README
    events
    demo-*
    tutorial-*
-   *
    mocksage/*/*
    mocksage/*/*/*
