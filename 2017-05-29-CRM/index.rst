@@ -22,8 +22,8 @@ your laptop. This page contains some material for those sessions.
 Schools and workshops
 =====================
 
-- :ref:`_crm.2017.reflection-groups`
-- :ref:`_crm.2017.equivariant-combinatorics`
+- :ref:`crm.2017.reflection-groups`
+- :ref:`crm.2017.equivariant-combinatorics`
 
 Software
 ========
