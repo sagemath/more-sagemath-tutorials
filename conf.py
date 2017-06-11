@@ -286,10 +286,13 @@ texinfo_documents = [
 # If true, do not generate a @detailmenu in the "Top" node's menu.
 #texinfo_no_detailmenu = False
 
-import subprocess
-def build_ipynb(app, exception):
+def rtd_finalize(app, exception):
+    import subprocess
     if exception is None:
         subprocess.call("make ipynb", shell=True)
+        subprocess.call("make media", shell=True)
 
 def setup(app):
-    app.connect('build-finished', build_ipynb)
+    import os
+    if os.environ.get('READTHEDOCS') == 'True':
+        app.connect('build-finished', rtd_finalize)

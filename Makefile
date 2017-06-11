@@ -224,15 +224,19 @@ PY=$(PYALL:%/__init__.py=)
 PYRST=$(PY:%.py=%.rst)
 RST=$(wildcard *.rst $(wildcard $(DIRS:%=%/*.rst))) $(PYRST)
 IPYNB=$(wildcard *.ipynb $(DIRS:%=%/*.ipynb))
+PDF=$(wildcard *.pdf $(DIRS:%=%/*.pdf))
 
-BUILDDIR_IPYNB=$(RST:%.rst=$(BUILDDIR)/html/%.ipynb) $(IPYNB:%=$(BUILDDIR)/html/%)
+RSTIPYNB=$(RST:%.rst=$(BUILDDIR)/html/%.ipynb)
+MEDIA= $(IPYNB:%=$(BUILDDIR)/html/%) $(PDF:%=$(BUILDDIR)/html/%)
 
-ipynb: $(BUILDDIR_IPYNB)
+ipynb: $(RSTIPYNB)
+
+media: $(MEDIA)
 
 $(BUILDDIR)/html/%.ipynb: %.rst
 	rst2ipynb -k "SageMath" $< -o  $@
 
-$(BUILDDIR)/html/%.ipynb: %.ipynb
+$(BUILDDIR)/html/%: %
 	cp $<  $@
 
 automodules: $(PYRST)
