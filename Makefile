@@ -230,8 +230,6 @@ RST2IPYNB=$(RST:%.rst=$(BUILDDIR)/html/%.ipynb)
 ipynb: $(RST2IPYNB)
 
 $(BUILDDIR)/html/%.ipynb: %.rst
-	which rst2ipynb-sageblock-filter
-	ls -l `which  rst2ipynb-sageblock-filter`
 	rst2ipynb -k "SageMath" $< -o  $@
 
 automodules: $(PYRST)
