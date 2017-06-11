@@ -23,8 +23,8 @@ Session 2 (Tuesday 4-6pm)
 
 - Software installation;
 - Joint exploration of Sage features
-   (see `Symmetric functions <https://github.com/sagemath/more-sagemath-tutorials/blob/master/2017-05-29-CRM/symmetric-functions-demo.ipynb>`_,
-   `Posets related to coxeter groups <https://github.com/sagemath/more-sagemath-tutorials/blob/master/2017-05-29-CRM/coxeter-posets-demo.ipynb>`_);
+   (see `Symmetric functions <symmetric-functions-demo.html>`_,
+   `Posets related to coxeter groups <coxeter-posets-demo.html>`_);
 - Help desk, work in small groups.
 
 Session 3 (Wednesday 4-6pm)

@@ -218,19 +218,22 @@ pseudoxml:
 ##############################################################################
 # Stuff in addition of the standard Sphinx's makefile
 
-PYALL=$(wildcard sage/*.py mocksage/*/*.py mocksage/*/*/*.py)
+DIRS=$(wildcard 20* mocksage mocksage/combinat mocksage/combinat/words mocksage/plot mocksage/databases agregation-option-calcul-formel)
+PYALL=$(wildcard $(DIRS:%=%/*.py))
 PY=$(PYALL:%/__init__.py=)
 PYRST=$(PY:%.py=%.rst)
-RST=$(wildcard *.rst */*.rst */*/*.rst) $(PYRST)
-IPYNB=$(wildcard *.ipynb */*.ipynb */*/*.ipynb)
-DOC=$(RST:%.rst=%) # $(IPYNB)
+RST=$(wildcard *.rst $(wildcard $(DIRS:%=%/*.rst))) $(PYRST)
+IPYNB=$(wildcard *.ipynb $(DIRS:%=%/*.ipynb))
 
-RST2IPYNB=$(RST:%.rst=$(BUILDDIR)/html/%.ipynb)
+BUILDDIR_IPYNB=$(RST:%.rst=$(BUILDDIR)/html/%.ipynb) $(IPYNB:%=$(BUILDDIR)/html/%)
 
-ipynb: $(RST2IPYNB)
+ipynb: $(BUILDDIR_IPYNB)
 
 $(BUILDDIR)/html/%.ipynb: %.rst
 	rst2ipynb -k "SageMath" $< -o  $@
+
+$(BUILDDIR)/html/%.ipynb: %.ipynb
+	cp $<  $@
 
 automodules: $(PYRST)
 
