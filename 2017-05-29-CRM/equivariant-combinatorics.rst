@@ -20,8 +20,8 @@ Monday 4-5:30pm
 - Joint exploration of symmetric function features available in
   SageMath. See also:
 
-   - Sage's tutorial on :ref:`Symmetric functions <SymmetricFunctions>`
-   - An in-the-work :ref:`improved tutorial <tutorial-symmetric-functions>`
+   - Sage's tutorial on :class:`Symmetric functions <SymmetricFunctions>`
+   - An in-the-work `improved tutorial <../tutorial-symmetric-functions.html>`_
      (prepared by Pauline Hubert and Mélodie Lapointe)
    - A tutorial on `integer partitions <../tutorial-integer-partitions.html>`_
    - A `compendium of symmetric function formulas <compendium-symmetric-function-formulas.pdf>`_
