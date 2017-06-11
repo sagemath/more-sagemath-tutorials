@@ -3,6 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+============================
 More Sage Thematic Tutorials
 ============================
 
@@ -12,13 +13,6 @@ tutorials, grouped by theme, and licensed under a
 `Creative Commons Attribution-Share Alike 3.0 License`__.
 
 __ http://creativecommons.org/licenses/by-sa/3.0/
-
-.. WARNING::
-
-    Most of the files below have been recently resurrected from an old
-    repository. They are of varying quality and may be outdated or
-    require additional software. It is planned to add status
-    information on each of them.
 
 - A *demonstration* is a short document giving a broad view of the
   available features on a given theme; it is typically presented
@@ -42,6 +36,13 @@ to some of the latter.
 
 Contributions, from typo fixes to full-fledged tutorials are more than
 welcome. See :ref:`contributing`.
+
+.. WARNING::
+
+    Most of the documents below have been recently resurrected from an old
+    repository. They are of varying quality and may be outdated or
+    require additional software. It is planned to add status
+    information on each of them.
 
 Documents for specific events
 =============================
