@@ -31,8 +31,8 @@ setup(
     keywords = "SageMath tutorials",
     packages = find_packages(),
     setup_requires   = ['sage-package'],
-    install_requires = ['sage-package', 'sphinx'], # 'nbsphinx', 'rst2ipynb'
-    dependency_links=['http://github.com/nthiery/rst2ipynb/tarball/master#egg=dev'],
+    install_requires = ['sage-package', 'sphinx', 'rst2ipynb'], # 'nbsphinx',
+    #dependency_links=['http://github.com/nthiery/rst2ipynb/tarball/master#egg=dev'],
     entry_points = {
         "distutils.commands": [
             "test = sage_package.setuptools:SageTest",
