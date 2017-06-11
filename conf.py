@@ -109,7 +109,7 @@ todo_include_todos = True
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#html_theme = 'sage'            # force `sage` theme (the setting in sage_package.sphinx seems to be ignored by RTD)
+html_theme = 'sage'            # force `sage` theme (the setting in sage_package.sphinx seems to be ignored by RTD)
 #html_theme_path = ['themes']
 
 # Theme options are theme-specific and customize the look and feel of a theme
