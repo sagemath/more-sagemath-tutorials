@@ -263,11 +263,11 @@ Solomon's formula
     Compute the Hilbert series of `(\CC[V]\otimes \bigwedge^\cdot V^*)^W`
     via a Molien-type calculation:
 
-    .. math:: \Hilb(\CC[V]^W\otimes \bigwedge^\cdot V^W,q,t) = \frac{1}{|W|} \sum_{w\in W} \frac{\det(1+tw)}{\det(1-qw)}
+    .. math:: \Hilb((\CC[V]\otimes \bigwedge^\cdot V^*)^W,q,t) = \frac{1}{|W|} \sum_{w\in W} \frac{\det(1+tw)}{\det(1-qw)}
 
     and then compare it to the prediction of Solomon's formula, namely:
 
-    .. math:: \Hilb(\CC[V]^W\otimes \bigwedge^\cdot V^W,q,t) = \frac{\prod_{i=1}^n ( 1 + q^{e_i}t )}{\prod_{i=1}^n  1 / (1 - q^{d_i} )}
+    .. math:: \Hilb((\CC[V]\otimes \bigwedge^\cdot V^*)^W,q,t) = \frac{\prod_{i=1}^n ( 1 + q^{e_i}t )}{\prod_{i=1}^n  1 / (1 - q^{d_i} )}
 
 .. TOPIC:: Solution
 
