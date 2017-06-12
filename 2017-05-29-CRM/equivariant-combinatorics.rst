@@ -43,7 +43,8 @@ Monday 4-5:30pm
 - Help desk, work in small groups on pen&paper and/or computational
   exercises or personal problems.
 
-..  :ref:`computational exercises <crm.2017.equivariant-combinatorics.exercises>`
+  For suggestions of exercises, see the lecturers notes and
+  :ref:`computational exercises <crm.2017.equivariant-combinatorics.exercises>`
 
 Tuesday 4-5:30pm
 ================
