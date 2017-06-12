@@ -85,7 +85,7 @@ Cours:
 Liens
 =====
 
-* :ref:`thematic_tutorials.sage_combinat`
+* :ref:`more_sage_thematic_tutorials`
 
 * :ref:`sage.combinat.tutorial`
 

@@ -3,6 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+.. _more_sage_thematic_tutorials:
+
 ============================
 More Sage Thematic Tutorials
 ============================
@@ -75,7 +77,7 @@ Calculus
 Algebra
 =======
 
-* :ref:`demo.ideals`
+* :ref:`demo-ideals`
 
 * :ref:`linear_programming`
 * :ref:`group_theory`
