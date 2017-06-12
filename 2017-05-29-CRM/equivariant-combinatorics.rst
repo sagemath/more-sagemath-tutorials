@@ -1,9 +1,9 @@
 .. -*- coding: utf-8 -*-
 .. _crm.2017.equivariant-combinatorics:
 
-==============================================================================================
-Exercise and computational sessions at the CRM «Equivariant combinatorics» school and workshop
-==============================================================================================
+===================================================================================================
+Exercise and computational sessions at the 2017 CRM «Equivariant combinatorics» school and workshop
+===================================================================================================
 
 .. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>
 
@@ -24,6 +24,7 @@ Documents and references
 - A tutorial on `integer partitions <../tutorial-integer-partitions.html>`_
 - A `compendium of symmetric function formulas <compendium-symmetric-function-formulas.pdf>`_
   (prepared by Nancy Wallace)
+- A brief :ref:`demo-ideals`
 
 - `Chow, a SageMath library for computations in intersection theory
   <http://www.math.sciences.univ-nantes.fr/~sorger/chow_en.html>`_, by
@@ -44,7 +45,7 @@ Monday 4-5:30pm
   exercises or personal problems.
 
   For suggestions of exercises, see the lecturers notes and
-  :ref:`computational exercises <crm.2017.equivariant-combinatorics.exercises>`
+  :ref:`computational exercises <crm.2017.equivariant-combinatorics-exercises>`
 
 Tuesday 4-5:30pm
 ================
