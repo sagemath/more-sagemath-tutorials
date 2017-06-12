@@ -25,6 +25,14 @@ Documents and references
 - A `compendium of symmetric function formulas <compendium-symmetric-function-formulas.pdf>`_
   (prepared by Nancy Wallace)
 
+- `Chow, a SageMath library for computations in intersection theory
+  <http://www.math.sciences.univ-nantes.fr/~sorger/chow_en.html>`_, by
+  Christophe Sorger and  Manfred Lehn.
+
+- `multipolynomial_bases <https://pypi.python.org/pypi/multipolynomial_bases/>`_,
+  a SageMath library for computing with various bases of multivariate
+  polynomials: Schubert polynomials, Grothendieck polynomials,
+  Demazure characters, by Viviane Pons
 
 Monday 4-5:30pm
 ===============
