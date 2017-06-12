@@ -75,6 +75,8 @@ Calculus
 Algebra
 =======
 
+* :ref:`demo.ideals`
+
 * :ref:`linear_programming`
 * :ref:`group_theory`
 * :ref:`agregation.groupes_de_permutations`
