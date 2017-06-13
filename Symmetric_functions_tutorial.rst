@@ -1,10 +1,12 @@
 .. -*- coding: utf-8 -*-
+.. _tutorial-symmetric-functions:
 
 Symmetric Functions Tutorial
 ========================================
 
-Pauline Hubert (hubert.pauline@courrier.uqam.ca) and Mélodie Lapointe (lapointe.melodie@courrier.uqam.ca)
+.. MODULEAUTHOR:: Pauline Hubert (hubert.pauline@courrier.uqam.ca) and Mélodie Lapointe (lapointe.melodie@courrier.uqam.ca)
 
+.. linkall
 
 To have our outputs printed in latex, we will use the following command which can be commented.
 

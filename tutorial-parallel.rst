@@ -1,18 +1,25 @@
 .. _tutorial-parallel:
 
-==========================================
-Tutorial: Testing a conjecture in parallel
-==========================================
+==================================================
+Tutorial: Testing a conjecture in parallel (draft)
+==================================================
+
+.. MODULEAUTHOR:: Nicolas M. Thiéry
 
 In this tutorial, we illustrate how to test a conjecture in parallel
 on a multicore machine using the ``@parallel`` decorator.
 
+.. TOPIC:: See also
+
+    :ref:`sage.parallel`
+
+.. TODO:: expand and move to sage.parallel.tutorial?
+
 .. linkall
 
-We want to check that a conjecture. For illustration purpose, we take
-something stupid, namely that the number `n=49` has no divisor in the
-range `2,...,9`. Let us start with a little function that checks the
-conjecture on a given `n` and `i`::
+For illustration purpose, we take a stupid conjecture, namely that the
+number `n=49` has no divisor in the range `2,...,9`. Let us start with
+a little function that checks the conjecture on a given `n` and `i`::
 
      sage: def check_conjecture(i, n):
      ....:      return not i.divides(n)
@@ -104,12 +111,12 @@ insert the counter-example in the global name space::
      > <ipython console>(2)<module>()
      (Pdb) p input[0][0]
      7
-     (Pdb) import sage
-     (Pdb) sage.my_counter_example = input[0][0]
+     (Pdb) import __main__
+     (Pdb) __main__.my_counter_example = input[0][0]
 
 Now we can play with it::
 
-     sage: sage.my_counter_example             # not tested
+     sage: my_counter_example             # not tested
      7
-     sage: sage.my_counter_example.divides(49) # not tested
+     sage: my_counter_example.divides(49) # not tested
      True

@@ -45,7 +45,7 @@ References
 ==========
 
 - The `official SageMath thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_.
-- `More SageMath thematic tutorials <../>`_.
+- :ref:`more_sage_thematic_tutorials`
 - :ref:`lie`; see in particular the chapter on Coxeter Groups
 - :ref:`sage.combinat.root_system`, :func:`~sage.combinat.root_system.coxeter_group.CoxeterGroup`, :func:`~sage.combinat.root_system.reflection_group_real.ReflectionGroup`, ...
 - `Lie algebras in GAP <https://www.gap-system.org/Manuals/doc/ref/chap64.html>`_

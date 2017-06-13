@@ -1,16 +1,25 @@
+.. -*- coding: utf-8 -*-
 .. _demo-reflection-groups:
 
-=======================
-Demo: reflection groups
-=======================
+===============================
+Demo: reflection groups (draft)
+===============================
 
 .. MODULEAUTHOR:: Nicolas M. Thiéry, Vic Reiner, ...
 
 `\def\QQ{\mathbb{Q}}\def\CC{\mathbb{C}}\def\Hilb{\operatorname{Hilb}}`
 
-This document grew out of a live demo improvised with the participants
-during interactive sessions at the CRM workshop on reflection groups
-on May 29th of 2017.
+This demonstration review some of the features of Coxeter and
+reflection groups (basic manipulations, related posets, calculation of
+Molien type series). It grew out of a live demo improvised with the
+participants during interactive sessions at the CRM workshop on
+reflection groups on May 29th of 2017.
+
+.. TOPIC:: Requirements
+
+    This demonstration requires
+    `gap3 <http://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/gap3.html>`_
+    to be installed.
 
 .. linkall
 
@@ -130,7 +139,7 @@ and with the absolute poset of a reflection group::
 
 .. _demo-reflection-groups-molien:
 
-Computing molien-type sums for reflection groups
+Computing Molien-type sums for reflection groups
 ================================================
 
 Let's start by exploring the Shephard-Todd reflection group ``G_4``::
