@@ -39,23 +39,25 @@ Documents and references
 Monday 4-5:30pm
 ===============
 
-- Brief introduction to Sage'
+- Brief introduction to Sage
 - Joint exploration of symmetric function features available in
-  SageMath;
+  SageMath (`notebook <demo-symmetric-functions.html>`_);
 - Help desk, work in small groups on pen&paper and/or computational
   exercises or personal problems.
 
   For suggestions of exercises, see the lecturers notes and
   :ref:`computational exercises <crm.2017.equivariant-combinatorics-exercises>`
 
-Tuesday 4-5:30pm
-================
+Tuesday 2pm-5:30pm
+==================
+
+- Informal help desk
 
 Wednesday 4-5:30pm
 ==================
 
-Thursday 4-5:30pm
-=================
+- Demo of Schubert polynomials by Viviane Pons
+- ...
 
 Friday 4-5:30pm
 ===============
