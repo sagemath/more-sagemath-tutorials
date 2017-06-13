@@ -22,6 +22,7 @@ Documents and references
 - An in-the-work `improved symmetric functions tutorial <../tutorial-symmetric-functions.html>`_
   (prepared by Pauline Hubert and Mélodie Lapointe)
 - A tutorial on `integer partitions <../tutorial-integer-partitions.html>`_
+  (prepared by Pauline Hubert and Mélodie Lapointe)
 - A `compendium of symmetric function formulas <compendium-symmetric-function-formulas.pdf>`_
   (prepared by Nancy Wallace)
 - A brief :ref:`demo-ideals`
