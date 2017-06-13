@@ -1,12 +1,17 @@
 .. _tutorial-notebook-and-help:
 
-===========================================================
-Tutorial: Using the notebook and navigating the help system
-===========================================================
+======================================================================
+Tutorial: Using the notebook and navigating the help system (outdated)
+======================================================================
 
 This worksheet is based on William Stein's `JPL09__intro_to_sage.sws
 <http://modular.math.washington.edu/talks/20090701-sage_graphics_tutorial/JPL09___intro_to_sage.sws>`_
 worksheet.
+
+.. WARNING::
+
+    Some of this tutorial needs to be updated w.r.t. the new Jupyter
+    based notebook.
 
 Making this help page into a worksheet
 --------------------------------------

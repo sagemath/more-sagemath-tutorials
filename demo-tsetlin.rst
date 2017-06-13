@@ -1,10 +1,18 @@
+.. -*- coding: utf-8 -*-
 .. _demo-tsetlin-library:
 
-==============================================================================================
-Demonstration: Representation theory of monoids and Markov chains: generalized Tsetlin library
-==============================================================================================
+=============================================================================================================
+Demonstration: Representation theory of monoids and Markov chains: generalized Tsetlin library (experimental)
+=============================================================================================================
 
 .. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>,
+
+.. TOPIC:: Requirements
+
+    This demonstration requires experimental code that has not yet
+    been migrated from the Sage-Combinat queue to the
+    `sage-semigroups <https://github.com/nthiery/sage-semigroups/>`_
+    package.
 
 In a first step, we construct a poset, its set of linear extensions,
 and endow this set with the promotion action::

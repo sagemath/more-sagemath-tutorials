@@ -1,7 +1,21 @@
+.. -*- coding: utf-8 -*-
 .. _demo-GAP3-Semigroupe:
 
-Demonstration: Sage + GAP4 + GAP3 + Chevie + Semigroupe
-=======================================================
+======================================================================
+Demonstration: Sage + GAP4 + GAP3 + Chevie + Semigroupe (experimental)
+======================================================================
+
+.. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>
+
+.. TOPIC:: Requirements
+
+    - some experimental code that has not yet been migrated from the
+      Sage-Combinat queue to the `sage-semigroups
+      <https://github.com/nthiery/sage-semigroups/>`_ package.
+    - `gap3 <http://doc.sagemath.org/html/en/reference/interfaces/sage/interfaces/gap3.html>`_
+    - the `Semigroupe <https://trac.sagemath.org/ticket/8360>`_ package
+
+.. TODO:: update to use `libsemigroups <https://github.com/james-d-mitchell/libsemigroups/>`_
 
 Let us create the Coxeter group W::
 
