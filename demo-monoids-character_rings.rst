@@ -1,8 +1,18 @@
+.. -*- coding: utf-8 -*-
 .. _demo-monoids-character_rings:
 
-======================================================================
-Demonstration: Calculations with character rings of the biHecke monoid
-======================================================================
+=====================================================================================
+Demonstration: Calculations with character rings of the biHecke monoid (experimental)
+=====================================================================================
+
+.. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>
+
+.. WARNING::
+
+    This demonstration requires experimental code that has not yet
+    been migrated from the Sage-Combinat queue to the
+    `sage-semigroups <https://github.com/nthiery/sage-semigroups/>`_
+    package.
 
 ::
 

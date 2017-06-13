@@ -1,9 +1,18 @@
 .. -*- coding: utf-8 -*-
 .. _demo-monoids-characters:
 
-=====================================================================
-Demonstration: Computational representation theory for finite monoids
-=====================================================================
+====================================================================================
+Demonstration: Computational representation theory for finite monoids (experimental)
+====================================================================================
+
+.. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>
+
+.. TOPIC:: Requirements
+
+    This demonstration requires experimental code that has not yet
+    been migrated from the Sage-Combinat queue to the
+    `sage-semigroups <https://github.com/nthiery/sage-semigroups/>`_
+    package.
 
 Running example
 ===============
