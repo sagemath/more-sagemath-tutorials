@@ -22,7 +22,7 @@ lectures.
 
     Define the operators
 
-    .. MATH:: D_{q,k} = (1+qx_1\partial_1)\partial_1^k+\ldots+ (1+qx_n\partial_n)\partial_1^k`
+    .. MATH:: D_{q,k} = (1+qx_1\partial_1)\partial_1^k+\cdots+ (1+qx_n\partial_n)\partial_n^k
 
     acting on the polynomial ring `\mathbb{Q}[x_1,\dots,x_n]`. At `q=0`, the
     operators degenerate to the symmetric powersums, seen as
