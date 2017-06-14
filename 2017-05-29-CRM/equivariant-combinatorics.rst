@@ -60,6 +60,9 @@ Wednesday 4-5:30pm
 - Demo of Schubert polynomials by Viviane Pons
 - ...
 
+  For suggestions of exercises, see the lecturers notes and
+  :ref:`computational exercises <crm.2017.equivariant-combinatorics-exercises>`
+
 Friday 4-5:30pm
 ===============
 

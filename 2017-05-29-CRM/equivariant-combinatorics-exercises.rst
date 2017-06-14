@@ -5,8 +5,8 @@
 Exercise sheet
 ==============
 
-This sheet contains (for now very few) additional computational
-exercises related to the lectures.
+This sheet contains a few additional exercises related to the
+lectures.
 
 .. TOPIC:: Exercise: parabola in projective space
 
