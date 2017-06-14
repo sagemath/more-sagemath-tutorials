@@ -57,7 +57,8 @@ Tuesday 2pm-5:30pm
 Wednesday 4-5:30pm
 ==================
 
-- `Demo of Schubert polynomials <demoSchubert.html>`_ by Viviane Pons
+- `Demo of Schubert polynomials <demoSchubert.html>`_ by
+  `Viviane Pons <https://www.lri.fr/~pons/>`_
 - Other demos as requested
 - Help desk, work in small groups on pen&paper and/or computational
   exercises or personal problems.
