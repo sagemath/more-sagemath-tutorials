@@ -32,10 +32,10 @@ lectures.
 
     Conjecture [Wood with successive refinements by Hivert & T., D'Aderrio & Mocci, Bergeron & Borie & T.]:
 
-    - The same holds for *`q`-harmonic polynomials*, defined as the
+    - The same holds for `q`-*harmonic polynomials*, defined as the
       joint zeroes of the operators `D_{q,k}, k\geq 1`.
 
-    - Exceptions: `q=-a/b` for `a,b \in \NN` with `1\leq a \leq n \leq b`.
+    - Exceptions: `q=-a/b` for `a,b \in \mathbb{NN}` with `1\leq a \leq n \leq b`.
 
     - This extends to Coxeter groups `G(m,p,n)` and diagonal harmonics.
 
