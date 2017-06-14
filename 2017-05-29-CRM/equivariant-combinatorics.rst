@@ -57,8 +57,10 @@ Tuesday 2pm-5:30pm
 Wednesday 4-5:30pm
 ==================
 
-- Demo of Schubert polynomials by Viviane Pons
-- ...
+- `Demo of Schubert polynomials <demoSchubert.ipynb>`_ by Viviane Pons
+- Other demos as requested
+- Help desk, work in small groups on pen&paper and/or computational
+  exercises or personal problems.
 
   For suggestions of exercises, see the lecturers notes and
   :ref:`computational exercises <crm.2017.equivariant-combinatorics-exercises>`
