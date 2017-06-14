@@ -24,20 +24,20 @@ lectures.
 
     .. MATH:: D_{q,k} = (1+qx_1\partial_1)\partial_1^k+\ldots+ (1+qx_n\partial_n)\partial_1^k`
 
-    acting on the polynomial ring `\QQ[x_1,\dots,x_n`. At `q=0`, the
+    acting on the polynomial ring `\mathbb{Q}[x_1,\dots,x_n]`. At `q=0`, the
     operators degenerate to the symmetric powersums, seen as
     differential operators. Their joint zeroes form the space of
     harmonic polynomials, which is of dimension `n!`, carries the
     graded regular representation of `S_n`, etc.
 
-    .. TOPIC:: Conjecture [Wood with successive refinements by Hivert & T., D'Aderrio & Mocci, Bergeron & Borie & T.]
+    Conjecture [Wood with successive refinements by Hivert & T., D'Aderrio & Mocci, Bergeron & Borie & T.]:
 
-        The same holds for *`q`-harmonic polynomials*, defined as the
-        joint zeroes of the operators `D_{q,k}, k\geq 1`.
+    - The same holds for *`q`-harmonic polynomials*, defined as the
+      joint zeroes of the operators `D_{q,k}, k\geq 1`.
 
-        Exceptions: `q=-a/b` for `a,b \in \NN` with `1\leq a \leq n \leq b`.
+    - Exceptions: `q=-a/b` for `a,b \in \NN` with `1\leq a \leq n \leq b`.
 
-        This extends to Coxeter groups `G(m,p,n)` and diagonal harmonics.
+    - This extends to Coxeter groups `G(m,p,n)` and diagonal harmonics.
 
     Many things have been tried, but I (Nicolas) believe nobody tried
     to use the Cherednik algebra to tackle this problem.
