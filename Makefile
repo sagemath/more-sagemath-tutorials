@@ -225,9 +225,10 @@ PYRST=$(PY:%.py=%.rst)
 RST=$(wildcard *.rst $(wildcard $(DIRS:%=%/*.rst))) $(PYRST)
 IPYNB=$(wildcard *.ipynb $(DIRS:%=%/*.ipynb))
 PDF=$(wildcard *.pdf $(DIRS:%=%/*.pdf))
+TEX=$(wildcard *.tex $(DIRS:%=%/*.tex))
 
 RSTIPYNB=$(RST:%.rst=$(BUILDDIR)/html/%.ipynb)
-MEDIA= $(IPYNB:%=$(BUILDDIR)/html/%) $(PDF:%=$(BUILDDIR)/html/%)
+MEDIA= $(IPYNB:%=$(BUILDDIR)/html/%) $(PDF:%=$(BUILDDIR)/html/%) $(TEX:%.tex=$(BUILDDIR)/html/%.pdf)
 
 ipynb: $(RSTIPYNB)
 
@@ -238,6 +239,10 @@ $(BUILDDIR)/html/%.ipynb: %.rst
 
 $(BUILDDIR)/html/%: %
 	cp $<  $@
+
+$(BUILDDIR)/html/%.pdf: %.tex
+	cp $< `dirname $@`
+	cd `dirname $@` && pdflatex `basename $@ .pdf`
 
 automodules: $(PYRST)
 

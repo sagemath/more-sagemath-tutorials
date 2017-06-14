@@ -12,7 +12,8 @@ This is part of a series of :ref:`crm.2017`.
 Documents and references
 ========================
 
-- Maria's lecture notes on `Schubert Calculus Variations <https://www.math.ucdavis.edu/~mgillespie/papers/SchubertCalculusVariations.pdf>`_
+- Maria Gillespie's lecture notes on `Schubert Calculus Variations <https://www.math.ucdavis.edu/~mgillespie/papers/SchubertCalculusVariations.pdf>`_
+- Stephen Griffeth's lecture notes on `Algebraic combinatorics and representations of Cherednik algebras <NotesOnCherednikAlgebrasMontreal.pdf>`_
 
 - The `official SageMath thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_.
 - `More SageMath thematic tutorials <../>`_.
