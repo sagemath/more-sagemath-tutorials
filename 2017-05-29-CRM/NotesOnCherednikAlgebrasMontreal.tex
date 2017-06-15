@@ -276,9 +276,50 @@ $$(r_1 \otimes w_1)(r_2 \otimes w_2)=r_1 w_1(r_2) \otimes w_1 w_2 \quad \hbox{fo
 
 \subsection{The rational Cherednik algebra}
 
-Let $\hh$ be a finite dimensional $\CC$-vector space and let $W \subseteq \mathrm{GL}(\hh)$ be a finite group of linear transformations of $\hh$. 
+Let $\hh$ be a finite dimensional $\CC$-vector space and let $W \subseteq \mathrm{GL}(\hh)$ be a finite group of linear transformations of $\hh$. Let
+$$R=\{r \in W \ | \ \mathrm{codim}(\mathrm{fix}(r))=1 \}$$ be the set of \emph{reflections} in $W$. For each $r \in R$, choose $\alpha_r \in \hh^*$ and $\alpha_r^\vee$ in $\hh$ with
+$$r(x)=x-\la x, \alpha_r^\vee \ra \alpha_r \quad \hbox{for all $x \in \hh^*$}.$$ Fix $\kappa \in \CC$ and $c_r \in \CC$ for each $r \in R$ with the property that
+$c_r=c_{w r w^{-1}}$ for all $r \in R$ and $w \in W$. 
+
+The \emph{rational Cherednik algebra} $H_{\kappa,c}=H_{\kappa,c}(W,V)$ is the quotient of $T(V) \rtimes W$ by the relations
+$$yx-xy=0 \quad \hbox{if $x,y \in \hh$ or $x,y \in \hh^*$}$$ and
+$$yx-xy=\kappa \la x,y \ra - \sum_{r \in R} c_r \la \alpha_r,y \ra \la x,\alpha_r^\vee \ra r \quad \hbox{if $y \in \hh$ and $x \in \hh^*$.}$$
+
+\begin{exercise}
+Check that the quantity $\la \alpha_r,y \ra \la x, \alpha_r^\vee \ra$ is independent of the choice of $\alpha_r$ and $\alpha_r^\vee$ satisfying $r(x)=x-\la x,\alpha_r ^\vee \ra \alpha_r$.	
+\end{exercise} According to the exercise, the Cherednik algebra depends only upon the parameters $\kappa$ and $c_r$, justifying the notation.
+
 
 The second lecture ended here.
+
+\subsection{Fourier transform} There is an anti-automorphism of the Weyl algebra $A_1$ interchanging $x$ and $\partial$, sometimes known as the \emph{Fourier transform}. Its existence follows immediately from the definition: such an anti-automorphism exists for the free associative algebra on $x$ and $\partial$ and maps the relation $\partial x -x \partial- 1$ to itself.
+
+There is also a Fourier transform for the Cherednik algebra, interchanging $\hh$ and $\hh^*$. However, because such an anti-automorphism must respect the $W$-action (in order to exist already for $T(V) \rtimes W$), we are forced to define it to be conjugate linear instead of $\CC$-linear. More precisely, a map $f:\hh \rightarrow \hh^*$ is \emph{conjugate linear} if 
+$$f(x+y)=f(x)+f(y) \quad \text{and} \quad f(a x)=\overline{a} f(x) \quad \hbox{for all $x,y \in \hh$ and $a \in \CC$.}$$ 
+
+\begin{exercise}
+Prove that there exists a conjugate linear isomorphism $f:\hh \rightarrow \hh^*$ such that
+$$f(w(y))=w(f(y)) \quad \hbox{for all $w \in W$ and $y \in \hh$.}$$ Prove that if $W$ acts irreducibly on $\hh$ then such an isomorphism is unique up to scalars.
+\end{exercise}	
+
+We choose and fix an isomorphism as constructed in the exercise, and write it as conjugation: thus for $y \in \hh$ its image in $\hh^*$ will be written $\overline{y}$, and we will use the same notation for the inverse, mapping $x \in \hh^*$ to $\overline{x}$. Thus $\overline{\overline{y}}=y$. 
+
+\begin{exercise}
+Check that for $r \in R$ we have
+$$r^{-1}(x)=x-\la x, \overline{\alpha_r} \ra \overline{\alpha_r^\vee} \quad \hbox{for all $x \in \hh^*$.}$$	
+\end{exercise}
+
+
+\begin{lemma}
+Let $\hh \rightarrow \hh^*$, written $y \mapsto \overline{y}$ as above, be a $W$-equivariant conjugate linear isomorphism. Write $\overline{c}$ for the parameter defined by $\overline{c}_r=\overline{c_{r^{-1}}}$. There is a unique anti-isomorphism $\phi:H_{\kappa,c} \rightarrow H_{\overline{\kappa}, \overline{c}}$ such that $$\phi(x)=\overline{x}, \ \phi(y)=\overline{y} \quad \text{and} \quad \phi(w)=w^{-1} \quad \hbox{for all $x \in \hh^*$, $y \in \hh$, and $w \in W$.}$$
+\end{lemma}
+\begin{proof}
+There is an anti-isomorphism $\phi:T(V) \rtimes W \rightarrow T(V) \rtimes W$	defined by these formulas, using the compatibility of $\overline{y}$ with the $W$-action. We must check that it maps the defining ideal for $H_{\kappa,c}$ into that for $H_{\overline{\kappa},\overline{c}}$. We have 
+\begin{align*}\phi(yx-&xy-\kappa \la x,y \ra+\sum_{r \in R} c_r \la\alpha_r, y \ra \la x,\alpha_r^\vee \ra r) \\
+&=\overline{x}\overline{y}-\overline{y} \overline{x}-\overline{\kappa} \overline{\la x,y \ra}+\sum_{r \in R} \overline{c_r} \overline{\la \alpha_r,y \ra} \overline{ \la x,\alpha_r^\vee \ra} r^{-1} \\
+&=\overline{x}\overline{y}-\overline{y} \overline{x}-\overline{\kappa} \la \overline{y},\overline{x} \ra+\sum_{r \in R} c_{r^{-1}} \la \overline{\alpha_r^\vee},\overline{x} \ra \la \overline{y},\overline{\alpha_r}\ra r^{-1}\end{align*} Using the fact that 
+$r^{-1}(x)=x-\la x, \overline{\alpha_r} \ra \overline{\alpha_r^\vee}$ for all $x \in \hh^*$ finishes the proof.
+\end{proof}
 
 \subsection{Filtered deformations of $\mathrm{Sym}(V) \rtimes W$}
 
@@ -351,16 +392,60 @@ With the preceding exercise as motivation, we define a \emph{polynomial represen
 $$\Delta_{\kappa,c}(1)=\mathrm{Ind}_{\CC[\hh]^* \rtimes W}^{H_{\kappa,c}}(\CC),$$ where $\CC$ is the one-dimensional $\CC[\hh]^* \rtimes W$-module on which $W$ acts trivially and each $y \in \hh$ acts by $0$.
 \begin{exercise}
 Prove that as a $\CC[\hh] \rtimes S_n$-module we have
-$$\Delta_{\kappa,c}(1)=\CC[V],$$ and that the action of $y \in \hh$ is given by
+$$\Delta_{\kappa,c}(1)=\CC[\hh],$$ and that the action of $y \in \hh$ is given by
 $$y(f)=\kappa \partial_y(f)-\sum_{r \in R} c_r \la \alpha_r,y \ra \frac{f-r(f)}{\alpha_r}$$ for all $f \in \CC[\hh]$. 
 \end{exercise} These are the famous \emph{Dunkl operators}. They commute! This follows from what we have done, but it is not at all obvious from the formula that it should be so (nor was it an obvious thing to arrive to the formula in the first place, which historically did not occur in the way in which we have derived it).
 
+\subsection{Standard modules and contravariant forms}
+
+In this section we generalize the construction above that produced Dunkl operators by replacing the trivial representation of $W$ by another representation. Let $E$ be an irreducible $\CC W$-module. The \emph{standard module} $\Delta_{\kappa,c}(E))$ is defined by
+$$\Delta_{\kappa,c}(E)=\mathrm{Ind}_{\CC[\hh^*] \rtimes W}^{H_{\kappa,c}} (E),$$ where we define the action of $\CC[\hh^*]$ on $E$ by $ye=0$ for all $y \in \hh$ and $e \in E$, making $E$ a $\CC[\hh^*] \rtimes W$-module.
+\begin{exercise}
+Prove that $\Delta_{\kappa,c}(E) \cong \CC[\hh] \otimes_\CC E$ as a $\CC[\hh] \rtimes W$-module, and that via this identification the action of $y \in \hh$ on $f \otimes e$ for $f \in \CC[\hh]$ and $e \in E$ is given by the formula
+$$y(f \otimes e)=\kappa \partial_y(f) \otimes e-\sum_{r \in R} c_r \la \alpha_r,y \ra \frac{f-r(f)}{\alpha_r} \otimes r(e).$$ 	
+\end{exercise}
+
+As motivation for the definition of the contravariant form on the standard module, we recall the following very useful construction with polynomials: one may define a non-degenerate bilinear form by $(f,g)=(f(\partial)g)(0)$ for $f,g \in \CC[x]$. There is also a positive definite Hermitian version of this definition, obtained by conjugating the coefficients of $f$. This form on $\CC[x]$ is compatible with the $A_1$ action in the sense that $(x f,g)=(f,\partial g)$.
+
+Now suppose the parameters $\kappa$ and $c$ are real in the sense that $\kappa$ is real and $\overline{c_r}=c_{r^{-1}}$. Thus the Fourier transform $\phi$ is an anti-automorphism of $H_{\kappa,c}$. Each standard module carries a \emph{contravariant form}, defined by the formula
+$$(f_1 \otimes e_1,f_2 \otimes e_2 )_{\kappa,c}=(e_1,(\phi(f_1) \cdot f_2 \otimes e)(0)),$$ where we evaluate at zero by regarding each element of $\CC[\hh] \otimes E$ as a function on $\hh$ with values in $E$, and where we have fixed a positive definite Hermitian $W$-invariant form $(\cdot,\cdot)$ on $E$.
+
+\begin{lemma}
+The contravariant form is linear in the second variable, conjugate linear in the first variable, and satisfies
+$$(f_1,f_2)_{\kappa,c}=\overline{(f_2,f_1)_{\kappa,c}}.$$ Moreover, for all $h \in H_{\kappa,c}$ and $f_1,f_2 \in \Delta_{\kappa,c}(E)$ we have
+$$(h f_1,f_2)_{\kappa,c}=(f_1,\phi(h) f_2)_{\kappa,c}.$$
+\end{lemma}
+\begin{exercise}
+Prove the lemma.	
+\end{exercise}
+
+With the contravariant form in hand we can define a distinguished irreducible quotient $L_{\kappa,c}(E)$ of $\Delta_{\kappa,c}(E)$: we take $R$ to be the radical of  the contravariant form and define
+$$L_{\kappa,c}(E)=\Delta_{\kappa,c}(E)/R.$$
+
+\begin{exercise}
+Check that this quotient is irreducible and graded (with respect to polynomial degree), and that it is the unique graded irreducible quotient of the standard module.\end{exercise}
+As it turns out, the standard modules have an internal grading when $\kappa \neq 0$, so every quotient is graded and hence $L_{\kappa,c}(E)$ is in fact the unique irreducible quotient in this case.
+
 \section{Cherednik algebras and Garsia-Haiman modules}
+
+In this section we will study the algebra $H_{\kappa,c}(S_n,\CC^n)$ in more detail, and explain its relationship to the combinatorial problems we mentioned in the first section.
+
+\subsection{Jucys-Murphy-Young elements} The symmetric groups form a chain $S_1 \subseteq S_2 \subseteq S_3 \subseteq \cdots$, and it is natural to study their representation theory starting with the study of the restriction functor from $k S_n$-mod to $k S_{n-1}$-mod (for $k$ a field). Given an endomorphism of this functor, one can hope to decompose it into eigenfunctors and study the result; this theme has been very fruitful in modern representation theory, and is currently studied as part of \emph{categorification}. 
+
+Concretely, endomorphisms of the restriction functor come from elements of the centralizer of $k S_{n-1}$ in $k S_n$. The most obvious such elements are orbit sums such as the \emph{Jucys-Murphy-Young element} 
+$$\phi_n=(1n)+(2n)+\cdots+(n-1,n).$$ Here we state (but will not prove) the resulting decomposition rule for $k=\CC$.
+\begin{theorem}
+The restriction of $S^\lambda_\CC$ to $S_{n-1}$ is
+
+$$\mathrm{res}(S^\lambda_\CC)=\bigoplus_{\text{removable boxes}} S^{\lambda \setminus b}_\CC,$$ and the action of $\phi_n$ on the component obtained by removing $b$ is by the scalar $\mathrm{ct}(b)$.
+\end{theorem}
+ 
+\subsection{The trigonometric Dunkl operators} 
 
 Noting that for $i \neq j$ then working in $H_{0,1}$ we have
 $$[y_i,x_j]=s_{ij}$$ implies that the trace of $s_{ij}$ on any finite-dimensional representation of $H_{0,1}$ is zero. This observation generalizes as follows: if $w(i)=i$ then $$[y_i,w x_j]=[y_i,w]x_j+w[y_i,x_j]=(y_i w-wy_i)x_j+w s_{ij}=w s_{ij}$$ since $wy_i=y_i w$. Now for $v \in S_n$ non-trivial we choose $i \neq j$ with $i=v(j)$ and set $w=v s_{ij}$. Then $v=w s_{ij}$ and the preceding calculation shows that $v$ is a commutator. It follows that the trace of $v$ on any finite-dimensional $H_{0,1}$-module is $0$, and hence that each finite-dimensional $H_{0,1}$-module is a multiple of the regular representation.
 
-\subsection{The center of $H_{0,1}$} We can describe the center very explicitly. It contains the subalgebras $$\CC[x_1,\dots,x_n]^{S_n}, \quad \CC[y_1,\dots,y_n]^{S_n}, \quad \text{and} \quad \CC[z_1,\dots,z_n]^{S_n}.$$ Leading terms of elements of the subalgebra generated by these three subalgebras generate the ring of diagonally symmetric functions $\CC[x_1,\dots,x_n,y_1,\dots,y_n]^{S_n}$, and it follows from this and the theorem \ref{} that the center of $H_{0,1}$ is generated by symmetric polynomials in the $x$
+\subsection{The center of $H_{0,1}$} We can describe the center very explicitly. It contains the subalgebras $$\CC[x_1,\dots,x_n]^{S_n}, \quad \CC[y_1,\dots,y_n]^{S_n}, \quad \text{and} \quad \CC[z_1,\dots,z_n]^{S_n}.$$ Leading terms of elements of the subalgebra generated by these three subalgebras generate the ring of diagonally symmetric functions $\CC[x_1,\dots,x_n,y_1,\dots,y_n]^{S_n}$, and it follows from this and the theorem \ref{} that the center of $H_{0,1}$ is generated by these three subalgebras.
 
 \begin{lemma}
 Let $Z$ be the center of $H_{0,1}$ and let $\phi:Z \rightarrow \CC$ be a homomorphism with kernel $I$. The dimension of $H_{0,1}/I H_{0,1}$ is at most $n!^2$.\end{lemma}
