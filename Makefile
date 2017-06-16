@@ -242,7 +242,7 @@ $(BUILDDIR)/html/%: %
 
 $(BUILDDIR)/html/%.pdf: %.tex
 	cp $< `dirname $@`
-	cd `dirname $@` && pdflatex `basename $@ .pdf`
+	file=`basename $@ .pdf`; cd `dirname $@`; pdflatex $$file; bibtex $$file; pdflatex $$file; pdflatex $$file
 
 automodules: $(PYRST)
 
