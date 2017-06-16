@@ -10,13 +10,18 @@ lectures.
 
 .. TOPIC:: Exercise: parabola in projective space
 
-   Plot a parabola in 3D, and illustrate that it degenerates into an
-   ellipse when looking tangentially.
+    Plot a parabola in 3D, and illustrate that it degenerates into an
+    ellipse when looking tangentially.
 
-   Hint: see :func:`parametric_plot3d` and the options
-   ``aspect_ratio``, ``frame``, and ``viewer='threejs'`` of
-   :func:`show`.
+    Hint: see :func:`parametric_plot3d` and the options
+    ``aspect_ratio``, ``frame``, and ``viewer='threejs'`` of
+    :func:`show`.
 
+    A solution::
+
+        sage: var('u')
+        sage: p = parametric_plot3d((u, -u^2, 0), (u,-40,40), boundary_style=None)
+        sage: p.show(viewer="threejs", frame=False)
 
 .. TOPIC:: Research problem
 
