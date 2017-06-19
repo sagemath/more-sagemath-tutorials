@@ -1,12 +1,12 @@
 .. -*- coding: utf-8 -*-
-.. _tutorial-symmetric-functions:
 
-Symmetric Functions Tutorial
-========================================
+Symmetric Functions (polynomials) Tutorial
+==========================================
 
-.. MODULEAUTHOR:: Pauline Hubert (hubert.pauline@courrier.uqam.ca) and Mélodie Lapointe (lapointe.melodie@courrier.uqam.ca)
+Pauline Hubert (hubert.pauline@courrier.uqam.ca) and Mélodie Lapointe (lapointe.melodie@courrier.uqam.ca)
 
-.. linkall
+**Caveat:** often the term symmetric "functions" stands for "abstract" symmetric polynomials, in which variables are not made explicit. Indeed for most practical calculations variables need not appear. Moreover, one may show that this does not cause any trouble in the calculations.
+
 
 To have our outputs printed in latex, we will use the following command which can be commented.
 
@@ -16,7 +16,15 @@ To have our outputs printed in latex, we will use the following command which ca
     
 .. end of output
 
-If you don't want to use this option in your worksheet but want to use it for specific outputs, you can also use the command *show()*.
+Once this is done, to get the usual output one may use ``print()``
+
+::
+
+    sage: print(2*x^5+x^2)
+    
+.. end of output
+
+If you don't want to latex outputs in all your worksheet but only for specific outputs, you can also use the command ``show()``.
 
 ::
 
@@ -30,36 +38,37 @@ For the impatient
 
 Before going into details with symmetric functions in sage, here is a quick example of what we can do in sage.
 
-We recall that the homogeneous symmetric functions :math:`h_d` are defined in terms of the power sum symmetric functions :math:`p_{\mu}` by the following formula. 
+We recall that the **complete homogeneous** symmetric functions :math:`h_d` are defined in terms of the **power sum** symmetric functions :math:`p_{\mu}` by the formula :
 
-:math:`h_d = \sum \limits_{\mu \vdash d} \dfrac{1}{z_{\mu}} p_{\mu}`
+.. MATH:: h_d = \sum \limits_{\mu \vdash d} \dfrac{1}{z_{\mu}} p_{\mu}
 
-Here is how to obtain both sides of this equality. 
+where :math:`z_\mu` is the number of "automorphisms" of a permutation having cycle structure :math:`\mu`.
+
+Here is how to obtain both sides of this equality in the ring of symmetric function ":math:`\mathrm{Sym}`" over :math:`\mathbb{Q}`.
 
 :: 
 
     sage: Sym = SymmetricFunctions(QQ)
     sage: Sym.inject_shorthands()
-    sage: d = 6
 
 .. end of output
 
 :: 
 
-    sage: p(h[d])
+    sage: p(h[6])
 
 .. end of output
 
 :: 
 
-    sage: sum((1/Partition(i).aut())*p(i) for i in Partitions(d).list())
+    sage: sum((1/Partition(i).aut())*p(i) for i in Partitions(6).list())
 
 .. end of output
 
-The classical bases of symmetric functions
-------------------------------------------
+Classical bases of symmetric functions
+--------------------------------------
 
-The algebra of symmetric functions is defined over a ring, so the first step to using symmetric functions is to declare that ring. For example, if we want symmetric functions with rational coefficients ( :math:`\mathbb{Q}`) we write the following.
+The algebra of symmetric functions, with coefficients in a given ring, is declare as follows. With rational coefficients ( :math:`\mathbb{Q}`) in the following example.
 
 
 ::
@@ -69,7 +78,7 @@ The algebra of symmetric functions is defined over a ring, so the first step to 
 
 .. end of output
 
-Another field which will be useful to work with is the fraction field of polynomials in q, t variables over a rational field, i.e. :math:`\mathbb{Q}[q,t]`. To use :math:`\mathbb{Q}[q,t]`, we first declare the field. Then, since :math:`\mathbb{Q}[q,t]` is over the variables q and t, we need to inject these variables to be able to use them in further calculations. Finally, we can declare the ring of symmetric functions over :math:`\mathbb{Q}[q,t]`.
+Another often used coefficient ring is the fraction field :math:`\mathbb{Q}(q,t)` of rational expressions in :math:`q`, :math:`t` over :math:`\mathbb{Q}[q,t]`. Thus, declaring first :math:`\mathbb{Q}(q,t)` (and "injecting" variables :math:`q` and :math:`t` to make them available), one may introduce the ring of symmetric functions over :math:`\mathbb{Q}[q,t]` as follows. The ``Symqt.inject_shorthands()`` command makes the "usual" short names (as in Macdonald book) available. (It will give you a warning message you can ignore.)
 
 ::
 
@@ -79,16 +88,15 @@ Another field which will be useful to work with is the fraction field of polynom
 
 .. end of output
 
-From there, we can call all of the classical bases we want to work with. They can all be called by their full name (e.g. monomial() for the monomial basis) or by the letter we usually use for them (e.g. m() for the monomial basis).
+We can also declare each basis one by one. They can all be called by their full name (e.g. ``monomial()`` for the monomial basis) or by the letter we usually use for them (e.g. ``m()`` for the monomial basis).
 
-Here is a list of these bases :
+Usual classical bases are available.
 
-- The power sum symmetric functions : power() or p()
-- The homogeneous symmetric functions : homogeneous() or complete() or h()
-- The elementary symmetric functions : elementary() or e()
-- The Schur functions : schur() or s()
-- The forgotten symmetric functions : forgotten() or f()
-
+- The **power sum** symmetric functions :math:`p(\mu)`: power() or p()
+- The **(complete)homogeneous** symmetric functions :math:`h(\mu)`: homogeneous() or complete() or h()
+- The **elementary** symmetric functions :math:`e(\mu)`: elementary() or e()
+- The **Schur** functions :math:`s(\mu)`: schur() or s()
+- The **forgotten** symmetric functions :math:`f(\mu)`: forgotten() or f() *(This basis is not in the shorthands.)*
 
 ::
 
@@ -102,15 +110,9 @@ Here is a list of these bases :
 
 .. end of output
 
-We could create each basis one by one, but the command inject_shorthands() automatically creates all of these bases for us. Note that if you have already created some of the bases sage will give you a warning message you can ignore. 
 
-::
-
-    sage: Sym.inject_shorthands()
-    
-.. end of output
-
-Now that we have acces to all the bases we need, we can start to manipulate them. All these symmetric functions are defined over partitions. The integers are considered as partitions of size one (don't forget the brackets!).
+Now that we have acces to all the bases we need, we can start to manipulate them.
+Symmetric functions are indexed by partitions :math:`\mu`, with integers considered as partitions having size one (don't forget the brackets!).
 
 
 ::
@@ -119,7 +121,7 @@ Now that we have acces to all the bases we need, we can start to manipulate them
 
 .. end of output
 
-The parentheses are not mandatory. For example m[] works.
+For non-empty partitions, the parentheses are not mandatory. For example the following works.
 
 ::
 
@@ -135,50 +137,56 @@ But the following doesn't.
 
 .. end of output
 
-The following is a way of having nice outputs for symmetric function on the empty partition (i.e. :math:`s_0, m_0, \cdots`) which are in fact equal to 1.
+We get nicer outputs for partitions occuring as indices (written without comma), as follows. 
+
+(Parts of size larger than 9 are followed by a "dot".)
 
 ::
 
-    sage: One = s([])
-    sage: One
-    
-.. end of output
-
-And here is a way of having the induced partitions written without comma. Be careful, as this doesn't work for partitions which have parts greater than or equal to 10. 
-
-::
-
-    sage: s._latex_term = lambda mu: "1" if mu==[] else "s_{%s}"%(''.join(str(i) for i in mu))
-    sage: p._latex_term = lambda mu: "1" if mu==[] else "p_{%s}"%(''.join(str(i) for i in mu))
-    sage: h._latex_term = lambda mu: "1" if mu==[] else "h_{%s}"%(''.join(str(i) for i in mu))
-    sage: e._latex_term = lambda mu: "1" if mu==[] else "e_{%s}"%(''.join(str(i) for i in mu))
-    sage: m._latex_term = lambda mu: "1" if mu==[] else "m_{%s}"%(''.join(str(i) for i in mu))
+    sage: def mystr(i): 
+    sage:     if i<10: 
+    sage:         return str(i) 
+    sage:     else: 
+    sage:         return ''.join([str(i),"."])
+    sage: def compact(mu): 
+    sage:     return (''.join(mystr(i) for i in mu))
+    sage: Partition._latex_= compact
     
 .. end of output
 
 ::
 
-    sage: s[4,3,2,1]
+    sage: s._latex_term = lambda mu: "1" if mu==[] else "s_{%s}"%(''.join(mystr(i) for i in mu))
+    sage: p._latex_term = lambda mu: "1" if mu==[] else "p_{%s}"%(''.join(mystr(i) for i in mu))
+    sage: h._latex_term = lambda mu: "1" if mu==[] else "h_{%s}"%(''.join(mystr(i) for i in mu))
+    sage: e._latex_term = lambda mu: "1" if mu==[] else "e_{%s}"%(''.join(mystr(i) for i in mu))
+    sage: m._latex_term = lambda mu: "1" if mu==[] else "m_{%s}"%(''.join(mystr(i) for i in mu))
     
 .. end of output
 
 ::
 
-    sage: One
+    sage: s[101,14,13,1,1]
+    
+.. end of output
+
+::
+
+    sage: s[101,14,13,11]
     
 .. end of output
 
 
-Note that for the multiplicative basis, the multiplication is automatically replaced by a partition.
+Note that for the multiplicative bases (ie: :math:`e`, :math:`h` and :math:`p`) , products are replaced by the corresponding partition indexed expression.
 
 
 ::
 
-    sage: p([2])*p([1])*p([5])
+    sage: p([2,1,1])*p([5,2])
 
 .. end of output
 
-And for the non-multiplicative bases, such as the Schur functions, the multiplication is computed to express the result as a sum in the same basis.
+For the non-multiplicative bases, such as the Schur functions, multiplication are expanded as linear combinations in the same (linear) basis.
 
 
 ::
@@ -193,7 +201,16 @@ And for the non-multiplicative bases, such as the Schur functions, the multiplic
 
 .. end of output
 
-When we mix different bases, the result will be given in the first basis encountered in the expression.
+These calculations are relatively fast as illustrated in the following, showing only the length of the output rather than printing it out in all its glory.
+
+::
+
+    sage: len(s[10,5,5,3]*s[12,5,2])
+    
+.. end of output
+
+
+When we mix different bases, the result will be expressed in terms of the first basis encountered in the expression.
 
 
 ::
@@ -214,191 +231,34 @@ When we mix different bases, the result will be given in the first basis encount
 
 .. end of output
 
-Sage is pretty fast at computing; even for high degree multiplications. As an exemple, we compute the sum of the coefficients of :math:`m_{7,5}s_{5,4,2,1}`.
-
-::
-
-    sage: sum((m([7,5])*s([5,4,2,1])).coefficients())
-    
-.. output
-
-**Change of basis**
-
-The next question that naturally comes up at this point is how to convert a symmetric function written in a given basis into another one. Or how to choose the basis in which a result will be computed.
-
-In fact, all the basis we have seen so far can take in as parameters not only partitions but also symmetric functions. In this case, the result will be the computation of the given symmetric function expressed in the specified basis.
-
-For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis. 
-
-
-::
-
-    sage: e(p([2,2])+m([1,1])*s([2,1]))
-
-.. end of output
-
-***Exercise:***
-
- *Print all the Schur functions on partitions of size 5 and convert them into the elementary basis.* 
-
-
-::
-
-    sage: for mu in Partitions(5) :
-    sage:     show(s(mu))
-    sage:     show(e(s(mu)))
-
-
-.. end of output
-
-***Exercise:***
-
- *Compute the sum of the homogeneous functions on partitions of size 4 in the power sum basis.* 
-
-
-::
-
-    sage: p(sum(h(mu) for mu in Partitions(4)))
-
-.. end of output
-
-***Exercise:***
-
- *It is well konwn that  :math:`h_n(X) = \sum \limits_{\mu \vdash n} \dfrac{p_{\mu}(x)}{z_{\mu}}`. Verify this result for  :math:`n \in \{1,2,3,4\}`* 
-
- *Note that there exists a function zee() which takes a partition  :math:`\mu` and gives back the value of  :math:`z_{\mu}`. To use this function, you should import it from* sage.combinat.sf.sfa. 
-
-
-::
-
-    sage: from sage.combinat.sf.sfa import *
-    sage: zee([4,4,2,1])
-
-.. end of output
-
-::
-
-    sage: for n in range (1,5) :
-    sage:     print p(h([n]))
-    sage:     print sum(p(mu)/zee(mu) for mu in Partitions(n))
-    
-    
- *Note that there also exists a function aut() which is the same as zee() but doesn't have to be imported. If you prefer the name zee you can also create a little procedure to "rename" the aut() function.*
- 
-::
-
-    sage: def zee(mu): 
-    sage:   mu=Partition(mu)
-    sage:   return mu.aut()
-    
-.. end of output
-
-
-We can see that the terms of a calculation are always given in a precise order on the partitions. This order can be changed.
-
-First, the function  *get_print_style()*  applied to a basis gives us the order used on the partitions for this basis. Then, with  *set_print_style()*  we can set another printing order. The possible orders are :
-
--  *lex*   : lexicographic order.
--  *length*   : by length of the partitions, and for partitions of same length by lexicographic order.
--  *maximal_part :*  by the value of the biggest part of the partition.
-
-
-::
-
-    sage: s.get_print_style()
-
-.. end of output
-
-::
-
-    sage: s.set_print_style('lex')
-    sage: s(p[4,1,1])
-
-.. end of output
-
-::
-
-    sage: s.set_print_style('length')
-    sage: s(p[4,1,1])
-
-.. end of output
-
-::
-
-    sage: s.get_print_style()
-
-.. end of output
-
-::
-
-    sage: s.set_print_style('maximal_part')
-    sage: s(p[4,1,1])
-
-.. end of output
-
-Some nice commands on symmetric functions
------------------------------------------
-
-The function coefficient() returns the coefficient associated to a given partition. 
-
-::
-
-    sage: f = s[5,2,2,1]
-    sage: e(f)
-    
-.. end of output
-
-::
-
-    sage: e(f).coefficient([4,3,2,1])
-    
-.. end of output
-
-The function degree() gives the degree of a symmetric function. 
-
-::
-
-    sage: f.degree()
-    
-.. end of output
-
-Finally, the function support() returns the list of partitions that appear in a given symmetric function. The result will depend on the basis of the function. In the following example, we also use the function sorted() to get an ordered list. 
-
-::
-
-    sage: print f.support()
-    sage: print sorted(h(f).support())
-
-.. end of output
-
 **Expanding a symmetric function into a polynomial on a given number of variables**
 
 
-Until now, we worked with symmetric functions all expressed in terms of the classical bases. We could also want to know how those symmetric functions expand in a given number of variables  :math:`x_0, x_1, \dots, x_{n-1}`.
+Up to this point, we have worked with "abstract" symmetric functions, i.e.: with no variables. To expand symmetric functions in a given number of variables :math:`x_0, x_1, \dots, x_{n-1}`, we use the following tools.
 
-By default the alphabet is on variables :math:`x_0, x_1, \dots` and if there is only one variable in the expansion this variable is :math:`x`. But you can also specify the alphabet on which you want to expand your symmetric functions.
+By default, variables are :math:`x_0, x_1, \dots,x_{n-1}`, but one may use any other set (=alphabet).
 
 
 ::
 
-    sage: f = s[2,1]
-	sage: f.expand(3, alphabet =['x','y','z'])
+    sage: g = s[2,1]
+	sage: g.expand(3, alphabet =['x','y','z'])
 
 .. end of output
 
 ::
 
     sage: n = 3
-    sage: f.expand(n)
+    sage: g.expand(n)
     
 .. end of output
 
-If you want a lot of variables, here is a trick to declare them.
+To handle lots variables, one may proceed as follows.
 
 ::
 
-    sage: f = p[2]
-    sage: f.expand(26,alphabet=['y'+str(i) for i in range(26)])
+    sage: g = p[2]
+    sage: g.expand(26,alphabet=['y'+str(i) for i in range(26)])
 
 .. end of output
 
@@ -442,71 +302,220 @@ If you want a lot of variables, here is a trick to declare them.
 
 **Convert a symmetric polynomial into a symmetric function**
 
-It is also possible to do the inverse, that is to say, to convert a symmetric polynomial (expressed with a finite number of variables) into a symmetric function in any basis.
-
-Here is an exemple. First, we expand it into two variables so we get a symmetric polynomial. Then we convert this polynomial again into a symmetric function in the Schur basis. 
+Conversely, a "concrete" symmetric polynomial, i.e.: explicitly expressed in the variables, maybe written as a formal symmetric function in any chosen basis.
 
 
 ::
 
     sage: pol1 = (p([2])+e([2,1])).expand(2)
     sage: print pol1
-    sage: s.from_polynomial(pol1)
+    
+.. end of output
+
+::
+
+    sage: m.from_polynomial(pol1)
 
 .. end of output
 
-A more interesting use of this function is to convert a symmetric polynomial, already written with a finite number of variables, into a symmetric function. 
+A more interesting use of this function is to convert a symmetric polynomial, written with a finite number of variables, into a symmetric function. 
 
-Note that the function 'from_polynomial()' takes a polynomial whose base ring should be the rationnal field. 
-
-To do that, we have to declare a polynomial. So first we need to declare the correct ring with the needed number of variables and to inject the variables. This step is very important in order to use these variables.
+The ``pol`` input of the function ``from_polynomial(pol)`` is assumed to lie in a polynomial ring over the same base field as that used for the symmetric functions, which thus has to be delared beforehand.
 
 Here, we will work with two variables (:math:`x_0` and :math:`x_1`).
-Finally, we can declare our polynomial and convert it into a symmetric function, for example in the monomial basis.   
+We declare our polynomial and convert it into a symmetric function, for example in the monomial basis.   
 
 ::
     
-    sage: R = PolynomialRing(QQ,'x',2)
+    sage: n = 3
+    sage: R = PolynomialRing(QQ,'y',n)
     sage: R.inject_variables()
     
 .. end of output
 
-In the following example, you can see that the base ring of our new polynomial is the same as the base ring of the polynomial used in the previous example. 
-
-::
-
-    sage: pol2 = x0+x1
-    sage: print pol1.base_ring()
-    sage: print pol2.base_ring()
-    
-.. end of output
-
-Here, we will work with two variables (:math:`x_0` and :math:`x_1`).
+Here, we will work with three variables (:math:`y_0, y_1` and :math:`y_2`).
 Finally, we can declare our polynomial and convert it into a symmetric function in the monomial basis for example.   
 
 
 ::
 
+    sage: pol2 = y0^2*y1 + y0*y1^2 + y0^2*y2 + 2*y0*y1*y2 + y1^2*y2 + y0*y2^2 + y1*y2^2
     sage: m.from_polynomial(pol2)
 
 .. end of output
 
-Let :math:`f \in \mathbb{Q}[q,t]` be a symmetric function. It can also be transformed into a symmetric function in any basis.
+In the preceeding example, the base ring of polynomials is the same as the base ring of symmetric polynomials considered, as checked by the following. 
+
+::
+
+    sage: print s.base_ring()
+    sage: print pol2.base_ring()
+    
+.. end of output
+
+
+Thus a concrete symmetric polynomial over :math:`\mathbb{Q}(q,t)` may be transformed into an abstract symmetric function in any basis.
 
 ::
 
     sage: Symqt.inject_shorthands()
-    sage: R = PolynomialRing(QQ['q','t'],'x',2)
+    sage: R = PolynomialRing(QQ['q','t'],'y',3)
     sage: R.inject_variables()
-    sage: pol2 = (x0*x1)*(q+t)
+    sage: pol2 = 1+(y0*y1+y0*y2+y1*y2)*(q+t)+(y0*y1*y2)*(q*t)
     sage: s.from_polynomial(pol2)
     
 .. end of output
 
-Other bases
------------
 
-Other less known bases are implemented in sage.
+**Change of basis**
+
+Many calculations on symmetric functions involve a change of (linear) basis.
+
+For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis.
+
+
+::
+
+    sage: e(p([2,2])+m([1,1])*s([2,1]))
+
+.. end of output
+
+***Exercise:***
+
+ *Print all the Schur functions on partitions of size 5 and convert them into the elementary basis.* 
+
+
+::
+
+    sage: for mu in Partitions(5) :
+    sage:     show(s(mu))
+    sage:     show(e(s(mu)))
+
+
+.. end of output
+
+***Exercise:***
+
+ *Compute the sum of the homogeneous functions on partitions of size 4 in the power sum basis.* 
+
+
+::
+
+    sage: p(sum(h(mu) for mu in Partitions(4)))
+
+.. end of output
+
+***Exercise:***
+
+ *It is well konwn that  :math:`h_n(X) = \sum \limits_{\mu \vdash n} \dfrac{p_{\mu}(x)}{z_{\mu}}`. Verify this result for  :math:`n \in \{1,2,3,4\}`* 
+
+ *Note that there exists a function ``zee()`` which takes a partition  :math:`\mu` and gives back the value of  :math:`z_{\mu}`. To use this function, you should import it from* ``sage.combinat.sf.sfa``. 
+
+
+::
+
+    sage: from sage.combinat.sf.sfa import *
+    sage: zee([4,4,2,1])
+
+.. end of output
+
+::
+
+    sage: for n in range (1,5) :
+    sage:     show(p(h([n])))
+    sage:     show(sum(p(mu)/zee(mu) for mu in Partitions(n)))
+    
+    
+ *Note that there also exists a function ``aut()`` which is the same as ``zee()`` but doesn't have to be imported.*
+
+
+We can see that the terms of a calculation are always given in a precise order on the partitions. This order can be changed.
+
+First, the function  ``get_print_style()``  applied to a basis gives us the order used on the partitions for this basis. Then, with  ``set_print_style()``  we can set another printing order. The possible orders are :
+
+-  ``lex``   : lexicographic order.
+-  ``length``   : by length of the partitions, and for partitions of same length by lexicographic order.
+-  ``maximal_part`` :  by the value of the biggest part of the partition.
+
+::
+
+    sage: s.get_print_style()
+
+.. end of output
+
+::
+
+    sage: s.set_print_style('lex')
+    sage: s(p[4,1,1])
+
+.. end of output
+
+::
+
+    sage: s.set_print_style('length')
+    sage: s(p[4,1,1])
+
+.. end of output
+
+::
+
+    sage: s.get_print_style()
+
+.. end of output
+
+::
+
+    sage: s.set_print_style('maximal_part')
+    sage: s(p[4,1,1])
+
+.. end of output
+
+More basic commands on symmetric functions
+---------------------------------------------------
+
+The function ``coefficient()`` returns the coefficient associated to a given partition. 
+
+::
+
+    sage: f = s[5,2,2,1]
+    sage: e(f)
+    
+.. end of output
+
+::
+
+    sage: e(f).coefficient([4,3,2,1])
+    
+.. end of output
+
+The function ``degree()`` gives the degree of a symmetric function. 
+
+::
+
+    sage: f.degree()
+    
+.. end of output
+
+Finally, the function ``support()`` returns the list of partitions that appear in a given symmetric function. The result will depend on the basis of the function. In the following example, we also use the function ``sorted()`` to get an ordered list. 
+
+::
+
+    sage: print f.support()
+    
+.. end of output
+
+::
+
+    sage: print sorted(h(f).support())
+
+.. end of output
+
+
+
+Other well-known bases
+----------------------
+
+Other important bases are implemented in SAGE.
 
 - The forgotten symmetric functions
 - The Hall-littlewood basis 
@@ -519,80 +528,112 @@ Other less known bases are implemented in sage.
 The well known Macdonald symmetric functions are also implemented in sage. For more details, you can consult the following sage reference : 
 http://doc.sagemath.org/html/en/reference/combinat/sage/combinat/sf/macdonald.html
 
-Here are some little examples of computation with Macdonald symmetric functions. These are the Macdonald polynomials on the :math:`Ht` basis whose elements are eigenvectors of the operator :math:`\nabla`. (See below for more informations about :math:`\nabla`.)
+Here are some examples involving the "combinatorial" Macdonald symmetric functions. These are eigenfunctions of the operator :math:`\nabla`. (See below for more informations about :math:`\nabla`.)
 
 ::
 
-    sage: Ht = Symqt.macdonald().Ht(); Ht
-    
-.. end of output
-
-::
-
+    sage: Symqt = SymmetricFunctions(FractionField(QQ['q','t']))
     sage: Symqt.inject_shorthands()
-    sage: e(Ht([2,1]))
+    sage: H = Symqt.macdonald().Ht()
+    sage: H.print_options(prefix="H")
+
+.. end of output
+
+::
+
+    sage: s(H([2,1]))
     
 .. end of output
 
 ::
 
-    sage: Ht(s[2,1])
+    sage: H(s[2,1])
     
 .. end of output
 
 ::
 
-    sage: [Ht(mu).nabla() for mu in Partitions(4)]
+    sage: [H(mu).nabla() for mu in Partitions(4)]
     
 .. end of output
 
 
-Scalar Product
---------------
+Scalar Products
+---------------
 
 The Hall scalar product is the standard scalar product on the algebra of symmetric functions. It makes the Schur functions into an orthonormal basis. The value of the scalar product between :math:`p_{\mu}` and :math:`p_{\lambda}` is given by :math:`z_{\mu}` if :math:`\mu = \lambda` or zero otherwise.
 
-Here is an example on how to use it.
+Thus, we get
 
 ::
 
-	sage: p1 = p([2,1])
-	sage: p2 = p([2,1])
-	sage: p1.scalar(p2)
+	sage: p([2,2,1]).scalar(p([2,2,1]))
 
 .. end of output
 
-You can specify an optional argument which is a function on partitions giving the value for the scalar product between :math:`p_{\mu}` and :math:`p_{\lambda}`. By default, this value is :math:`z_{\mu}` given by the sage function zee() mentioned above.
+One may specify an optional argument which is a function on partitions giving the value for the scalar product between :math:`p_{\mu}` and :math:`p_{\mu}`. Power sums remain orthogonal for the resulting scalar product. By default, this value is :math:`z_{\mu}`, but other interesting cases include:
 
+.. MATH:: \langle p_{\mu},p_{\mu}\rangle_{q,t} = z_\mu\,\prod_i\frac{1-q^{\mu_i}}{1-t^{\mu_i}}.
 
-Operators on symmetric functions
---------------------------------
-
-Here is an example of an operator on symmetric functions you can find in sage. The operator nabla :math:`\nabla` is defined in terms of modified Macdonald symmetric functions :math:`\tilde{H}_{\mu}(z;q,t)` as follow : 
-
-:math:`\nabla \tilde{H}_{\mu} = t^{n(\mu)} q^{n(\mu')} \tilde{H}_{\mu}` 
-
-where :math:`\mu` is a partition, :math:`\mu'` its conjugate and :math:`n(\mu) = \sum_i (i-1)\mu_i`. 
-
-As :math:`\nabla` works on symmetric functions with coefficients in :math:`\mathbb{Q}[q,t]`, we first have to declare our basis on that field to use it. 
+This is already refined as ``scalar_qt()``.
 
 ::
 
-    sage: Symqt.inject_shorthands()
-    sage: s([2,2,1]).nabla()
+    sage: factor(p([2,2,1]).scalar_qt(p[2,2,1]))
+    
+.. end of output
+
+
+Some interesting operators on symmetric functions
+-------------------------------------------------
+
+Operators on symmetric functions may be found in SAGE. Among these, the **nabla operator** is characterized as having the combinatorial Macdonald symmetric functions :math:`H_{\mu}=H_{\mu}(\mathbf{x};q,t)` as eigenfunctions:
+
+.. MATH:: \nabla H_{\mu} = t^{n(\mu)} q^{n(\mu')} H_{\mu},
+
+where :math:`\mu` is a partition, :math:`\mu'` its conjugate, and :math:`n(\mu)` is set to be equal to :math:`\sum_i (i-1)\mu_i`.
+This operator :math:`\nabla` is thus defined over symmetric functions with coefficients in the fraction field :math:`\mathbb{Q}[q,t]`, as is declared above.
+
+It has been shown by Haiman that :math:`\nabla(e_n)` is the Frobenius transform of the bigraded character of the :math:`\mathbb{S}_n`-module of diagonal harmonic polynomials. Recall that the Frobernius transform encodes irreducible as Schur functions.
+
+::
+
+    sage: s(e[3].nabla())
     
 .. end of output 
+
+The global dimension of this module is :math:`(n+1)^{n-1}`, and the dimension of its alternating component (see exercise below) is the Catalan number :math:`C_n=\frac{1}{n+1}\binom{2n}{n}`. And there are many other interesting properties of the bigraded version.
+
+::
+
+    sage: Hilb_qt=s(e[3].nabla()).scalar(p[1]^3); Hilb_qt
+    
+.. end of output
+
+::
+
+    sage: Hilb_qt.substitute({q:1,t:1})
+    
+.. end of output
+
+There are also interesting conjectures on the effect of :math:`\nabla` on Schur functions. 
+
+::
+
+    sage: (-s([2,2,1])).nabla()
+    
+.. end of output
 
 
 ***Exercise:***
 
- *We have the following relation between :math:`\nabla (e_n)` and the q,t-Catalan numbers :*
+ We have the following relation between :math:`\nabla (e_n)` and the q,t-Catalan numbers :
 
- *:math:`C_n(q,t) = \langle \nabla e_n , e_n \rangle`*.
+ .. MATH:: C_n(q,t) = \langle \nabla e_n , e_n \rangle.
 
  *Check this relation for :math:`1 \leq n \leq 5`*
 
- *Note that the n-th q,t-Catalan number can be computed by using the command qt_catalan_number(n) which has to be imported from* sage.combinat.q_analogues *if it hasn't already been done.*
+ *Note that the n-th q,t-Catalan number can be computed by using the command ``qt_catalan_number(n)`` which has to be imported from* ``sage.combinat.q_analogues`` if it hasn't already been done.*
 
 ::
 
@@ -612,26 +653,33 @@ As :math:`\nabla` works on symmetric functions with coefficients in :math:`\math
 Plethysm
 --------
 
-The function plethysm() returns the plethysm of :math:`f` with :math:`g` usually denoted by :math:`f[g]`. 
-You can specify a list of variables to be treated like variables in the plethysm by using the option *include* or a list of variables to be treated as constants in the plethysm by using the option *exclude*. Here are some examples. 
+As its name strongly suggests, the ``plethysm()`` function computes the **plethysm** :math:`f\circ g`, of two symmetric functions :math:`f` and :math:`g`. Recall that this is the operation characterized by the properties
+
+- :math:`(f_1+f_2)\circ g =(f_1\circ g)+(f_2\circ g)`,
+- :math:`(f_1\cdot f_2)\circ g =(f_1\circ g)\cdot (f_2\circ g)`,
+- :math:`p_k\circ(g_1+g_2) =(p_k\circ g_1)+(p_k\circ g_2)`,
+- :math:`p_k\circ (g_1\cdot g_2) =(p_k\circ g_1)+(p_k\circ g_2)`,
+- :math:`p_k\circ p_n =p_{kn}`,
+- :math:`p_k\circ x =x^k`, if :math:`x` is a **variable**
+- :math:`p_k\circ c =c`, if :math:`c` is a **constant**
+
+One may specify a list of SAGE-variables to be treated as **variables** in a plethysm, using the option ``include=[x1,x2,...,xk]``, and/or a list of SAGE-variables to be considered as **constants**, using the option ``exclude=[c1,c2,...,ck]``. Here are some examples.
 
 ::
 
-    sage: p([3]).plethysm(h([3,1]))
+    sage: p([3,2]).plethysm(h([3,1]))
     
 .. end of output
 
 ::
 
-    sage: p = Symqt.p()
-    sage: f = p([1]) + t*s([2,1])
-    sage: print(p([2]).plethysm(f,include=[t]))
-    sage: print(p([2]).plethysm(f,exclude=[t]))
+    sage: g = p([1]) + t*s([2,1])
+    sage: show(p([2]).plethysm(g,include=[t]))
+    sage: show(p([2]).plethysm(g,exclude=[t]))
 
 .. end of output
 
-There also exists an easier way of using plethysm that also has the avantage of being closer to the usual mathematical notation.
-For example, to compute the plethysm :math:`s_2[s_4]`, we simply write the following. 
+It is costumary to also write :math:`f[g]` for :math:`f\circ g` in mathematical texts, but SAGE uses the shorthand notation :math:`f(g)` for better compatibility with python. For instance, the plethysm :math:`s_4\circ s_2`, may also be computed as
 
 ::
 
@@ -639,11 +687,59 @@ For example, to compute the plethysm :math:`s_2[s_4]`, we simply write the follo
     
 .. end of output
 
+To have nice expressions for plethystic substitutions, one may set aliases for the  symmetric function on the empty partition (i.e. :math:`s_0, m_0, \dots`, all equal to the constant 1), and the symmetric function (unique up to a scalar) of degree 1.
+
+::
+
+    sage: One = s([])
+    sage: X = s[1]
+
+.. end of output
+
+::
+
+    sage: s[3](s[4](One*(1+q)))
+
+.. end of output
+
+One should compare this with
+
+::
+
+    sage: q_binomial(7,3)
+
+.. end of output
+
+::
+
+    sage: s[4](X*(1+q))
+
+.. end of output
+
+::
+
+    sage: s[4](X/(1-q)).map_coefficients(factor)
+
+.. end of output
+
+::
+
+    sage: s[3](s[4])-s[2](s[6])
+
+.. end of output
+
+Suggests that we have the following positive coefficient polynomial
+
+::
+
+    sage: q_binomial(7,3)-q_binomial(8,2)
+    
+.. end of output
 
 Schur Positivity
 ----------------
 
-When studying symmetric functions, we often want to know whether a given symmetric function is Schur positive or not. This function returns *True* if the given symmetric function is Schur positive and *False* if not. 
+When computing with symmetric functions, one often wants to check a given symmetric function is Schur positive or not. In our current setup, this means that coefficients polynomials in :math:`\mathbb{N}[q,t]`. The following function returns ``True`` if the given symmetric function is Schur positive and ``False`` if not.
 
 ::
 
@@ -670,7 +766,7 @@ For example, we can verify the well-known Schur positivity of product of Schur f
 
 ***Exercise:***
 
- *The shuffle conjecture claims that :math:`\nabla (e_n)` is Schur positive. Verify the conjecture for :math:`1 \leq n \leq 6`.*
+ *Its representation theoretic signification implies that :math:`\nabla (e_n)` is Schur positive. Verify this for :math:`1 \leq n \leq 6`.*
 
 ::
 
@@ -680,3 +776,153 @@ For example, we can verify the well-known Schur positivity of product of Schur f
 
 .. end of output
 
+Schur positivity is a rare phenomena in general, but symmetric functions that come from representation theory are Schur positive. One can show that the probability that a degree :math:`n` monomial positive is Schur positive is equal to
+
+.. MATH:: \prod_{\mu\vdash n}\frac{1}{k_\mu},\qquad {\rm where}\qquad k_\mu:=\sum_{\nu\vdash n} K_{\mu,\nu},
+   
+with :math:`K_{\mu,\nu}` the **Kostka numbers**. Recall that these occur in the expansion of the Schur functions in terms of the monomial functions:
+
+.. MATH:: s_\mu=\sum_\nu K_{\mu,\nu}\, m_\nu.
+
+For instance, we have
+
+::
+
+    sage: m(s[3,2])
+    
+.. end of output
+
+hence defining
+
+::
+
+    sage: def K(mu,nu):
+    sage:     return s(mu).scalar(h(nu))
+
+.. end of output
+
+so that the above expression is indeed seen to be
+
+::
+
+    sage: add(K([3,2],nu)*m(nu) for nu in Partitions(5))
+    
+.. end of output
+
+Now, we set
+
+::
+
+    sage: def k(mu):
+    sage:     n=add(j for j in mu)
+    sage:     return add(K(mu,nu) for nu in Partitions(n))
+    
+.. end of output
+
+so that the above probability is calculated by the function
+
+::
+
+    sage: def prob_Schur_positive(n): 
+    sage:     return 1/mul(k(mu) for mu in Partitions(n))
+    
+.. end of output
+
+One can then illustrate how very rare Schur-positivity is, as a function of the degree:
+
+::
+
+    sage: [prob_Schur_positive(n) for n in range(1,8)]
+    
+.. end of output
+
+
+Hopf structure and important identities
+---------------------------------------
+
+
+Many important identities between symmetric functions can be linked to "the" Hopf algebra structure on the ring of symmetric function. In part, this means that we have a **coproduct** on symmetric functions that may be described in either of the two forms: 
+
+.. MATH:: 
+    \Delta(g) = \sum_{k+j=n}\sum_{\mu\vdash k,\ \nu\vdash j} a_{\mu,\nu}\, s_\mu\otimes s_\nu
+
+.. MATH::
+    g(\mathbf{x}+\mathbf{y})= \sum_{k+j=n}\sum_{\mu\vdash k,\ \nu\vdash j} a_{\mu,\nu}\, s_\mu(\mathbf{x}) s_\nu(\mathbf{y})
+
+For instance, we have
+
+::
+
+    sage: s[3,2,1].coproduct()
+    
+.. end of output
+
+**Skew Schur fonctions** arise when one considers the effect of coproduct on Schur functions themselves
+
+.. MATH:: \Delta(s_\lambda) = \sum_{\mu\subseteq \lambda} s_{\lambda/\mu}\otimes s_\mu.
+
+Skew Schur functions are also implemented in SAGE. For instance, we have the skew Schur :math:`s_{321/2}`.
+
+::
+
+    sage: s[3,2,1].skew_by(s[2])
+    
+.. end of output
+
+Thus we get the same result as above.
+
+::
+
+    sage: add(tensor([s[3,2,1].skew_by(s(mu)),s(mu)]) for k in range(7) for mu in Partitions(k))
+    
+.. end of output
+
+In particular, we get
+
+.. MATH:: \Delta(h_n) = \sum_{k+j=n} h_k\otimes h_j.
+
+::
+
+    sage: h[4].coproduct()
+    
+.. end of output
+
+Cauchy kernel formula
+---------------------
+
+The Cauchy kernel is the expression
+
+.. MATH:: \sum_{n\geq 0} h_n(\mathbf{x}\mathbf{y})=\prod_{i,j}\frac{1}{1-x_iy_j}
+written here using plethystic notation. Its degree :math:`n` homogeneous component plays a crucial role in the description of "dual bases" with respect to the scalar product. We have
+
+.. MATH:: h_n(\mathbf{x}\mathbf{y})=\sum_{\mu\vdash n} F_\mu\otimes G_\mu
+    \qquad {\rm iff}\qquad 
+    \langle F_\mu,G_\lambda\rangle=\delta_{\mu\lambda}, \qquad
+    (\delta_{\mu \lambda}:\ \hbox{Kronecker "delta"})`
+ 
+where one "thinks" :math:`\mathbf{x}=s_1\otimes \mathbb{1}` and :math:`\mathbf{y}= \mathbb{1}\otimes s_1`. One says that :math:`\{F_\mu\}_\mu` and :math:`\{G_\lambda\}_\lambda` are **dual bases**. Schur functions are self dual, the dual of the :math:`h_{\mu}` are the :math:`m_\mu`, that of the :math:`p_\mu` are the :math:`p_{\mu}/z_{\mu}`. The "forgotten" symmetric function :math:`f_{\mu}` appear as the dual of the :math:`e_{\mu}`.
+ 
+::
+
+    sage: h4xy=add(tensor([s(mu),s(mu)]) for mu in Partitions(4)); h4xy
+    
+.. end of output
+
+::
+
+    sage: tensor([h,m])(h4xy)
+    
+.. end of output
+
+::
+
+    sage: f = Symqt.f()
+    sage: tensor([e,f])(h4xy)
+    
+.. end of output
+
+::
+
+    sage: tensor([p,p])(h4xy)
+
+.. end of output

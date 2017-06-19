@@ -8,13 +8,14 @@ Mélodie Lapointe (lapointe.melodie@courrier.uqam.ca) and Pauline Hubert (hubert
 Partitions
 ----------
 
-Recall that a **partition** :math:`\mu` of :math:`n`, one writes :math:`\mu \vdash n` or :math:`n  = |\mu|`, is an sequence of intergers :math:`(\mu_0,\mu_1,\dots,\mu_{k-1})` (the :math:`m_i`'s are the **parts** of :math:`\mu`) with :math:`\mu_0 \geq \mu_1 \geq \dots \geq \mu_{k-1} \geq 0` and :math:`n = \mu_0 + \mu_1 + \dots + \mu_{k-1}`. The number :math:`\ell(\mu):= k` of parts of :math:`\mu` is said to be its **length**. A partition :math:`\mu` may also be described as a **Ferrers diagram**, which is the :math:`n`-subset of :math:`\mathbb{N}\times \mathbb{N}`:
+Recall that a **partition** :math:`\mu` of :math:`n`, one writes :math:`\mu \vdash n` or :math:`n  = |\mu|`, is an sequence of intergers :math:`(\mu_0,\mu_1,\dots,\mu_{k-1})` (the :math:`m_i`'s are the **parts** of :math:`\mu`) with :math:`\mu_0 \geq \mu_1 \geq \dots \geq \mu_{k-1} \geq 0` and :math:`n = \mu_0 + \mu_1 + \dots + \mu_{k-1}`. The number :math:`\ell(\mu):= k` of parts of :math:`\mu` is said to be its **length**. A partition :math:`\mu` may also be described as a **Ferrers diagram**, which is the :math:`n`-subset of :math:`\mathbb{N}\times \mathbb{N}` :
 
-    :math:`\left\{(a,b)|0 \leq a \leq \mu_i \text{ and } b < \ell(\mu)\right\}.`
+.. Math:: 
+    \left\{(a,b)|0 \leq a \leq \mu_i \text{ and } b < \ell(\mu)\right\}.
 
 This set is also denoted :math:`\mu`, and its elements are the cells of :math:`\mu`. The **conjugate** of :math:`\mu`, is the partition :math:`\mu'` such that 
 
-    :math:`\mu' = \{(b,a) \vert (a,b) \in \mu\}.`
+.. MATH:: \mu' = \{(b,a) \vert (a,b) \in \mu\}.
 
 Parts of :math:`\mu` are the lengths of the **rows** of its diagram, and parts of :math:`\mu` are the lengths of its **columns**.
 
@@ -153,9 +154,9 @@ The default (total) order on partitions is the lexicographic order.
 
 ***Exercise:***
 
- *Let :math:`\lambda` be the partition  :math:`[15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]`. Compute:
+ Let :math:`\lambda` be the partition  :math:`[15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]`. Compute:
  
-    :math:`\begin{eqnarray}\sum\limits_{i=0}^{20} \sum\limits_{\mu \vdash i \subseteq \lambda} q^i.\end{eqnarray}`*
+.. MATH:: \sum\limits_{i=0}^{20} \sum\limits_{\mu \vdash i \subseteq \lambda} q^i.
 
 ::
    
@@ -230,7 +231,7 @@ Hook formula for the number of standard tableaux of shape :math:`mu`
 
 The classical hook formula
 
-:math:`\begin{eqnarray}f^{\mu}: = \frac{n!}{\prod_{c \in \mu} h(c,\mu)},\end{eqnarray}`
+.. MATH:: \begin{eqnarray}f^{\mu}: = \frac{n!}{\prod_{c \in \mu} h(c,\mu)},\end{eqnarray}
 
 with :math:`h((i,j),\mu) := \mu_i + \mu'_j -i -j - 1`, may be coded as
 
