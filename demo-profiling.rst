@@ -1,10 +1,11 @@
+.. -*- coding: utf-8 -*-
 .. nodoctest
 .. _demo-profiling:
 
 A micro demo of profiling Sage / Python code (draft)
 ====================================================
 
-.. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery@users.sf.net>
+.. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>
 
 .. linkall
 

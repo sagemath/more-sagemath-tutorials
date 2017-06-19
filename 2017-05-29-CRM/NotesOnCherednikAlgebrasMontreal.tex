@@ -1,0 +1,537 @@
+\documentclass[12pt, reqno]{amsart}
+\usepackage{amsfonts,amssymb,graphicx,enumerate,youngtab}
+
+\newcommand{\fiverm}{}
+
+\textheight=8.5in
+\textwidth=6.5in
+\hoffset=-.85in
+\voffset=-.25in
+%\oddsidemargin=0.75in
+%\evensidemargin=\oddsidemargin
+
+\numberwithin{equation}{section}
+
+\theoremstyle{definition}
+\newtheorem{remark}{Remark}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{example}[theorem]{Example}
+\newtheorem{exercise}{Exercise}
+
+
+\renewcommand{\theenumi}{\alph{enumi}}
+\renewcommand{\labelenumi}{(\theenumi)}
+
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\ep}{\epsilon}
+\newcommand{\ga}{\gamma}
+\newcommand{\Ga}{\Gamma}
+\newcommand{\CC}{\mathbf{C}}
+\newcommand{\HH}{\mathbf{H}}
+\newcommand{\RR}{\mathbf{R}}
+\newcommand{\QQ}{\mathbf{Q}}
+\newcommand{\ZZ}{\mathbf{Z}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\OO}{\mathcal{O}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\hh}{\mathfrak{h}}
+\newcommand{\bb}{\mathfrak{b}}
+\newcommand{\ov}{\overline}
+\newcommand{\Hom}{\text{Hom}}
+\newcommand{\Ha}{\tilde{H}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+\newcommand{\one}{\mathbf{1}}
+\newcommand{\h}{\mathbf{h}}
+\newcommand{\g}{\mathfrak{g}}
+\newcommand{\ttt}{\mathfrak{t}}
+\newcommand{\dd}{\mathfrak{d}}
+\newcommand{\fixw}{\text{codim}(\text{fix}_\hh(w))}
+\newcommand{\bone}{b_1}
+\newcommand{\btwo}{b_2}
+\newcommand{\bthree}{b_3}
+\newcommand{\bfour}{b_4}
+\newcommand{\bfive}{b_5}
+\newcommand{\bsix}{b_6}
+\newcommand{\bseven}{b_7}
+
+
+\begin{document}
+
+\title{Notes on Cherednik algebras and algebraic combinatorics, Montreal 2017}
+
+\author{Stephen Griffeth}
+
+\address{Instituto de Matem\'atica y F\'isica \\
+Universidad de Talca  \\}
+
+
+\maketitle
+
+\section{Introduction}
+
+The purpose of these notes is to explain some of the interactions between the representation theory of rational Cherednik algebras and algebraic combinatorics, for an audience consisting of graduate students and researchers in algebraic combinatorics. We will begin here by introducing objects of interest on the combinatorial side, briefly mentioning how each arises in representation theory. In the rest of the notes, we will explain several instances of a general philosophy: in many cases, a ring or module of interest in algebraic combinatorics carries a much more rigid structure than is at first apparent. Namely, it is an irreducible module for the rational Cherednik algebra. 
+
+\subsection{Preliminaries} We will work throughout with the polynomial rings $$R=\CC[x_1, x_2, \dots,x_n]$$ and 
+$$S=\CC[x_1,x_2,\dots,x_n,y_1,y_2,\dots,y_n],$$ on which the symmetric group $S_n$ acts by permuting the variables, 
+$$w(x_i)=x_{w(i)} \quad \text{and} \quad w(y_i)=y_{w(i)} \quad \hbox{for $w \in S_n$ and $1 \leq i \leq n$.}$$ We use the usual notation $\ZZ,\QQ,\RR,\CC$ for the integers, rational numbers, real numbers, and complex numbers.
+
+We will identify integer partitions with their Young diagrams. Thus for instance the partition $9=4+2+2+1$ of $9$ is represented graphically by the Young diagram
+$$\yng(1,2,2,4).$$ A \emph{tableau} on a partition $\lambda$ is a filling of the boxes of $\lambda$ by elements of some other set. For a partition $\lambda$ of $n$, a \emph{standard Young tableau} of shape $\lambda$ is a filling of the boxes of $\lambda$ by the integers $1,2,\dots,n$ in such a way that the entries are strictly increasing from left to right and from bottom to top. We will write $\mathrm{SYT}(\lambda)$ for the set of all standard Young tableau on $\lambda$.
+
+The irreducible complex representations of the symmetric group $S_n$ are indexed by integer partitions of $n$. Here is one realization: the \emph{Specht module} $S^\lambda$ indexed by $\lambda$ is the $\ZZ$-span of the polynomials $f_T$ for $T$ ranging over all standard tableaux of shape $\lambda$, where $f_T$ is defined to be the product of the Vandermonde determinants over the columns of $T$. Thus for the standard Young tableau $T$
+$$\young(6,45,123)$$ we have $$f_T=(x_1-x_4)(x_1-x_6)(x_4-x_6)(x_2-x_5).$$ This gives a representation $$S^\lambda= \ZZ \{ f_T \ \vert \ T \in \mathrm{SYT}(\lambda) \}$$ of the integral group ring $\ZZ S_n$. Extending scalars to $\CC$ gives an irreducible representation 
+$$S^\lambda_\CC=\CC \otimes_\ZZ S^\lambda=\CC\{f_T \ | \ T \in \mathrm{SYT}(\lambda) \}$$ of $\CC S_n$, and up to isomorphism every irreducible representation of $\CC S_n$ occurs exactly once in this fashion.
+
+\begin{exercise}
+For the partition $\lambda=(2,1)$ with Young diagram $$\yng(1,2)$$ work out the matrices of the permutations $(12)$ and $(23)$ on the basis $f_T$ of $S^\lambda$. 
+\end{exercise}
+
+These polynomials $f_T$ are sometimes called \emph{Garnir polynomials}. The span of the Garnir polynomials of shape $\lambda$ is the lowest degree occurrence of the irreducible module $S^\lambda_\CC$, and the multiplicity in this degree is one. We will write $n(\lambda)$ for the degree of the Garnir polynomials of shape $\lambda$.
+
+\begin{exercise}
+Give a formula for $n(\lambda)$.	
+\end{exercise}
+The next exercise is significantly more difficult than the preceding ones.
+\begin{exercise} \label{Garnir exercise}
+Prove that $S^\lambda_\CC$ is indeed irreducible, that it is the lowest degree occurrence of its isotype in the polynomial ring, and that its multiplicity in degree $n(\lambda)$ is one. It may help to prove first that the polynomial $f_T$ satisfies
+$(ij)f_T=-f_T$ for all pairs $i \neq j$ appearing in the same column of $T$, and divides every other polynomial with this property. 	
+\end{exercise} In fact, the exercise remains true for any field $F$ of characteristic $0$ in place of $\CC$, so don't be worried if your solution works in this greater generality! 
+
+A \emph{graded} $\CC S_n$-module is a $\CC S_n$-module $M$ equipped with a direct sum decomposition 
+$$M=\bigoplus_{d \in \ZZ} M_d.$$ The \emph{graded character} of a graded $\CC S_n$-module is the expression
+$$\mathrm{ch}(M)=\sum_{d,\lambda} [M_d:S^\lambda_\CC] s_\lambda q^d.$$ Here $s_\lambda$ is the Schur function indexed by $\lambda$. Likewise, a \emph{doubly graded} $\CC S_n$ module is an $\CC S_n$-module $M$ equipped with a direct sum decomposition $M=\bigoplus M_{ij}$, and its graded character is then
+
+$$\mathrm{ch}(M)=\sum_{i,j,\lambda} [M_{ij}:S^\lambda_\CC] s_\lambda q^i t^j.$$ It should always be clear from context how to interpret $\mathrm{ch}(M)$. If $M$ is finite dimensional, its character is a symmetric function with (with $q,t$-coefficients).
+
+\subsection{Garsia-Procesi rings, Hall-Littlewood polynomials, and Springer fibers} Given a partition $\lambda$ of $n$ there is a unique ideal $I_\lambda \subseteq R$ maximal among ideals $J$ with the properties
+\begin{enumerate}
+\item[(a)] $J$ is homogeneous and $S_n$-stable,
+\item[(b)] $J \cap S^\lambda_\CC=\{ 0 \}$.
+\end{enumerate} The \emph{Garsia-Procesi ring} $\mathrm{GP}_\lambda$ is the quotient
+$$\mathrm{GP}_\lambda=R / I_\lambda.$$ It is a graded, finite dimensional $\CC S_n$ module, and its graded character is the \emph{Hall-Littlewood polynomial} 
+$$H_\lambda=\mathrm{ch}(\mathrm{GP}_\lambda).$$ There is of course another (more traditional) definition of the Hall-Littlewood polynomial, and the identification with $\mathrm{ch}(\mathrm{GP}_\lambda$ is a non-trivial theorem.
+
+\begin{exercise}
+Check that there is indeed a unique maximal ideal satisfying the defining properties (a) and (b) above. Exercise \ref{Garnir exercise} may be helpful.
+\end{exercise}
+
+\begin{exercise}
+Let $\CC[y_1,\dots,y_n]$ act on $\CC[x_1,\dots,x_n]$ by partial differentiation:
+$$y_i(f)=\partial_i(f) \quad \hbox{for $f \in \CC[x_1,\dots,x_n]$}$$ and let $R_\lambda$ be the submodule generated by the Garnir polynomials (so it is spanned by the Garnir polynomials and all their partial derivatives of all order). Show that the natural map $R_\lambda \rightarrow \mathrm{GP}_\lambda$ is an isomorphism of graded $S_n$-modules. 
+\end{exercise}	
+
+
+The Garsia-Procesi rings arise in representation theory via the nilpotent cone, flag variety and the Springer resolution. The \emph{nilpotent cone} is the set $\mathcal{N}$ of all $n$ by $n$ nilpotent matrices with complex entries. The \emph{flag variety} is the algebraic variety $G/B$, where $G=\mathrm{GL}_n(\CC)$ and $B$ is the subgroup consisting of invertible upper triangular matrices. As a set, $G/B$ may be identified with the set of all \emph{flags} $$0=V_0 \subseteq V_1 \subseteq \cdots \subseteq V_n=\CC^n$$ of subspaces of $\CC^n$, or alternatively we the set of all Borel subalgebras $\mathfrak{b}$ of the Lie algebra of $n$ by $n$ matrices. The cotangent bundle of $G/B$ is in bijection with the set of pairs
+$$T^*(G/B)=\{(x,\mathfrak{b}) \ | \ \hbox{$x$ is a nilpotent matrix and $\mathfrak{b}$ is a Borel subalgebra containing $x$} \}.$$ Projection onto the first coordinate $x$ is the \emph{Springer resolution} of $\mathcal{N}$, 
+$$T^*(G/B) \longrightarrow \mathcal{N}.$$ The fibers of this map are the \emph{Springer fibers}. The group $\mathrm{GL}_n$ acts by conjugation on pairs $(x,\mathfrak{b})$ and on $\mathcal{N}$, so the isomorphism class of the fiber over $x \in \mathcal{N}$ depends only on the conjugacy class of $x$. In other words, the Springer fibers are indexed, up to isomorphism, by partitions of $n$. We will write $F_\lambda$ for the Springer fiber indexed by the partition $\lambda$. If we fix a nilpotent matrix $x$ of Jordan type $\lambda$, then as a set
+$$F_\lambda=\{V_* \in G/B \ | \ x V_i \subseteq V_i \ \hbox{for all $i$.} \}.$$
+
+The largest Springer fiber occurs for $x=0$, corresponding to the partition $\lambda=(1^n)$. The corresponding Springer fiber $F_{(1^n)}$ is isomorphic to $G/B$, and via a construction due to Borel, its cohomology ring $H^*(G/B,\CC)$ is isomorphic to the \emph{coinvariant ring} $R/I$, where $I$ is the ideal generated by all homogeneous symmetric polynomials of positive degree. Each Garsia-Procesi ring is a quotient of the coinvariant ring by a certain ideal.
+
+The following theorem describes the connection between Springer fibers and the Garsia-Procesi rings. In various forms it is due to Kraft \cite{Kra}, DeConcini-Procesi \cite{DCoPr}, Garsia-Procesi \cite{GaPr}, and Bergeron-Garsia \cite{BeGa}.
+\begin{theorem}
+The natural map $H^*(G/B,\CC) \rightarrow H^*(F_\lambda,\CC)$ induces an isomorphism of graded rings $\mathrm{GP}_\lambda \longrightarrow H^*(F_\lambda,\CC)$. 
+\end{theorem}
+
+\subsection{The type $S_n$ rational Cherednik algebra} Before we continue on to introduce more complicated algebro-combinatorial objects, we pause to define the Cherednik algebra of the symmetric groups. This is the algebra $H_{t,c}(S_n,\CC^n)$ generated by the symmetric group $S_n$, commuting variables $x_1,\dots,x_n$, commuting variables $y_1,\dots,y_n$, and central parameters $\kappa$ and $c$ subject to the relations
+$$w x_i w^{-1}=x_{w(i)} \quad \text{and} \quad w y_i w^{-1}=y_{w(i)} \quad \hbox{for $w \in S_n$ and $1 \leq i \leq n$,}$$ 
+$$y_i x_j=x_j y_i+c(ij) \quad \hbox{for $1 \leq i \neq j \leq n$,}$$ and
+$$y_i x_i=x_i y_i+\kappa-c \sum_{j \neq i} (ij).$$ 
+
+Without going into too much detail, we observe that the defining relations allow one to rewrite any word in the generators as a linear combination of \emph{normally ordered} words 
+$$x_1^{a_1} \cdots x_n^{a_n} y_1^{b_1} \cdots y_n^{b_n} w$$ where $w \in S_n$. It is a somewhat deeper fact, usually referred to as the \emph{PBW theorem} for rational Cherednik algebras, that the normally ordered words are linearly independent. We will indicate two proofs of this fact when we study Cherednik algebras more systematically.
+
+When the parameters $\kappa$ and $c$ are specialized to $c=0=\kappa$, we obtain the ring 
+$$H_{0,0}(S_n,\CC^n)=S\rtimes S_n,$$ whose representations are the same thing as representations of $S$ on which $S_n$ acts in a compatible fashion. Much of the rest of these notes explores how various bigraded $S \rtimes S_n$-modules may be deformed to $H_{\kappa,c}$-modules for certain parameters $\kappa$ and $c$, and even in such a way as to become irreducible.
+
+\subsection{Garsia-Haiman modules and Macdonald polynomials} The ring $\mathrm{GP}_\lambda$ is an algebraic avatar for Hall-Littlewood polynomials in the sense that its graded character is one. There is a similar algebraic avatar for Macdonald polynomials, which was first introduced by Garsia-Haiman \cite{GaHa}. Namely, write $\mathrm{GP}_\lambda(x)=\mathrm{GP}_\lambda$ and let $\mathrm{GP}_\lambda(y)$ be the analogous quotient of $\CC[y_1,\dots,y_n]$ in the $y$ variables. 
+
+A finite dimensional graded and commutative $\CC$-algebra is \emph{Gorenstein} if its socle is one-dimensional.
+
+\begin{proposition}
+There is a unique bigraded Gorenstein quotient $\mathrm{GH}_\lambda$ of $\mathrm{GP}_\lambda(x) \otimes \mathrm{GP}_{\lambda^t}(y)$ that contains a copy of the sign representation.
+\end{proposition}
+
+The following theorem is due to Haiman and is variously known as the \emph{$n!$ theorem} or \emph{$n!$ conjecture}.
+\begin{theorem}
+The dimension of $\mathrm{GH}_\lambda$ is $n!$. Moreover, 
+$$\mathrm{ch}(\mathrm{GH}_\lambda)=\widetilde{H}_\lambda,$$ where $\widetilde{H}_\lambda$ is the plethystically transformed Macdonald polynomial (which we do not define precisely in these notes).
+\end{theorem} We will see that $\mathrm{GH}_\lambda$ maybe obtained as the associated graded of an irreducible representation $L(\lambda)$ of $H_{0,1}$.
+
+\begin{exercise}
+Coordinatize the boxes of the partition $\lambda$ by labeling the box in the $i$th row from the bottom and $j$th column from the left with $(i-1,j-1)$. Enumerate the boxes in some way by the numbers $1,2,\dots,n$, and let $(a_i,b_i)$ be the coordinates of the $i$th box. Define
+$$\Delta_\lambda=\mathrm{det}(x_j^{a_i} y_j^{b_i}).$$Check that up to sign, this does not depend on the choice of enumeration of the boxes of $\lambda$, and that when $\lambda$ is a single row or column, this is just the usual Vandermonde determinant in one set of variables. Prove (for all $\lambda$) that it is \emph{alternating} in the sense $(ij)\Delta_\lambda=-\Delta_\lambda$ for all $1 \leq i < j \leq n$.\end{exercise}
+
+\begin{exercise}
+With the notation of the previous exercise, let $S$ act on itself by the rule $$x_i(f)=\frac{\partial}{\partial x_i}(f) \quad \text{and} \quad y_i(f)=\frac{\partial}{\partial y_i}(f) \quad \hbox{for $f \in S$ and $1 \leq i \leq n$.}$$	 Show that the annihilator of $\Delta_\lambda$ with respect to this action is precisely the ideal $I_\lambda$ such that $S/I_\lambda=\mathrm{GH}_\lambda$
+\end{exercise}
+
+\subsection{Diagonal coinvariant rings, Catalan numbers, and parking functions} Just as the Garsia-Procesi rings are quotients of the coinvariant ring, each Garsia-Haiman ring is a quotient of the ring $S=\CC[x_1,\dots,x_n,y_1,\dots,y_n]$ of polynomials in two sets of variables by an ideal containing all positive degree diagonally symmetric polynomials. In other words, each $\mathrm{GH}_\lambda$ is a quotient of the \emph{diagonal coinvariant ring}
+$$D=S / I, \quad \text{where} \quad I=\la f \ | \ f \in S^{S_n} \ \hbox{is homogeneous of positive degree} \ra.$$
+
+In fact, the diagonal coinvariant ring $D$ also arises as the associated graded of an irreducible representation $L_{(n+1)/n}(\mathrm{triv})$ of the rational Cherednik algebra $H_{1,(n+1)/n}(S_n,V)$, where $V$ is the \emph{reflection representation} of $S_n$.
+
+\subsection{The $k$-equals arrangement} Given positive integers $k$ and $n$ with $1 \leq k \leq n$, the \emph{$k$-equals arrangement} in $\CC^n$ is the subset $X_{k,n} \subseteq \CC^n$ consisting of points $(a_1,a_2,\dots,a_n)$ having at least $k$ coordinates equal to one another. In other words,
+$$X_{k,n}=S_n \{(x_1,\dots,x_n) \ | \ x_1=x_2=\cdots=x_k \}.$$ We will write $I_{k,n}$ for the ideal of the $k$-equals arrangement. As it turns out, $I_{k,n}$ is generated by the Garnir polynomials $f_T$ for $T$ of shape $(k-1)^q,r)$, where we have performed division with remainder to obtain $n=q(k-1)+r$ for positive integers $q$ and $r<k-1$.
+
+But much more is true: $I_{k,n}$ is a \emph{unitary} representation of the rational Cherednik algebra of type $S_n$, and it seems very likely that one can use this fact to compute the $S_n$-modules $$\mathrm{Tor}^i_{\CC[x_1,\dots,x_n]}(I_{k,n},\CC),$$ as conjectured by Christine Berkesch-Zamaere, Steven Sam, and the author \cite{BGS}.
+
+\begin{exercise}
+Check that the Garnir polynomials above really do vanish on $X_{k,n}$.
+\end{exercise}
+
+This is the end of the first lecture.
+
+\section{PBW theorems: Weyl algebras and rational Cherednik algebras}
+
+Our first goal is to introduce the rational Cherednik algebra for an arbitrary linear group, and indicate how to prove the PBW theorem in two ways. As a warm-up, we think about those two proofs for the Weyl algebra. 
+
+\subsection{The Weyl algebra in dimension one} We write $\CC[x]$ for the ring of polynomials in one variable with complex coefficients. 
+
+Let $A_1$ be the algebra generated by formal symbols $x$ and $\partial$ satisfying the relation
+$$\partial x - x \partial=1.$$ 
+\begin{exercise}
+For each positive integer $m$, prove the formula
+$$\partial x^m=x^m \partial+m x^{m-1},$$ allowing us to commute a $\partial$ past any power of $x$.
+\end{exercise}
+\begin{theorem}
+The algebra $A_1$ has basis consisting of all monomials $x^m \partial^n$ for $m,n$ non-negative integers.\end{theorem}
+\begin{proof}
+Let $S$ be the linear span of these monomials. Then using the defining relation for $A_1$ gives
+$$x x^m \partial^n=x^{m+1} \partial^n \quad \text{and} \quad \partial x^m \partial^n=x^m \partial^{n+1}+mx^{m-1} \partial^n,$$ so $S$ is closed under multiplication by the generators $x$ and $\partial$ of $A_1$ and hence is equal to $A_1$. We have proved that the given monomials span $A_1$.
+
+To prove linear independence, we will define an action of $A_1$ on the polynomial ring $\CC[z,w]$, imagining that it is the left regular representation of $A_1$ on itself. To do this we mimic the preceding calculation: define the action of $x$ and $\partial$ by the formulas
+$$x (z^m w^n)=z^{m+1}w^{n} \quad \text{and} \quad \partial (z^m w^n)=z^m w^{n+1}+m z^{m-1} w^n.$$ In order to verify that this defines a representation, we must check that these operators satisfy the defining relation for $A_1$:
+$$(\partial x - x \partial) z^m w^n=z^{m+1} w^{n+1}+(m+1) z^m w^n-(z^{m+1} w^{n+1}+m z^m w^n)=z^m w^n.$$ 
+
+Now suppose we have a linear dependence $\sum c_{mn} x^m \partial^n=0$ in $A_1$ and apply the left hand side to the element $1 \in \CC[z,w]$. We obtain
+$$0=\sum c_{mn} z^m w^n$$ in $\CC[z,w]$, implying that all $c_{mn}=0$.
+\end{proof} The above proof is the pattern which all subsequent proofs of basis theorems (in particular the PBW theorem for the rational Cherednik algebra) will follow. Such a proof has two steps: the first (usually easier) step is to observe that the defining relations allow us to rewrite any word in the generators as a linear combination of words in which the letters appear in a pre-ordained order. This proves that these normally ordered words span the algebra. The second step consists in verifying that they are linearly independent by explicitly constructing a particular representation; in the case above, this was the left regular representation. Sometimes, as in the case of Hecke algebras of Coxeter groups, it is more convenient to construct the regular bimodule.
+
+There is a second proof of the basis theorem for the Weyl algebra that also generalizes to rational Cherednik  algebras. Namely, instead of using the left regular representation, we can use the representation of $A_1$ on $\CC[x]$ by differential operators. We will not follow this idea through in detail.
+
+In the Weyl algebra, multiplying two monomials $x^m \partial^n$ and $x^p \partial^q$ gives
+$$x^m \partial^n x^p \partial^q=x^{m+p} \partial^{n+q}+\text{lower terms},$$ where the lower terms that appear are monomials of total degree less than $m+n+p+q$ (or, $\partial$ degree less than $n+q$). Thus, ignoring these lower degree terms produces multiplication of commutative polynomials in two variables. So the polynomial ring $\CC[x,y]$ in two variables is an approximation to the Weyl algebra $A_1$ in a certain sense. We will make precise what we mean by this using filtered algebras and their associated graded algebras.
+
+The natural generality for discussing this is as follows: let $R$ be a ring. A (non-negative, increasing) \emph{filtration} on $R$ is a nested sequence $F$ of additive subgroups $$F=(F_0 \subseteq F_1 \subseteq F_2 \subseteq \cdots)$$ of the underlying additive group of $R$ with the property that for all non-negative integers $i,j$ we have
+$$F_i F_j \subseteq F_{i+j}.$$ If $R$ is an algebra over a commutative ring $k$, then we ask in addition that the $F_i$ are $k$-submodules. The \emph{associated graded ring} has underlying additive group
+$$\mathrm{gr}_F(R)=\bigoplus_{d \in \ZZ_{\geq 0}} F_d / F_{d-1},$$ where by convention $F_{-1}={0}$. Multiplication is defined by
+$$\overline{r} \overline{s}=\overline{rs} \quad \hbox{for $r \in F_i/F_{i-1}$ and $s \in F_j/F_{j-1}$,} $$ where we use the symbol $\overline{\cdot}$ to denote projection onto a quotient.
+
+\begin{exercise}
+Check that this is well-defined, and that with this definition $\mathrm{gr}_F(R)$ is indeed a ring.\end{exercise}
+
+\begin{exercise}
+Suppose $(R,F)$ is a filtered ring such that $\mathrm{gr}_F(R)$ is left (resp., right) Noetherian. Show that $R$ is left (resp., right) Noetherian as well. 
+\end{exercise}
+ 
+\begin{exercise}
+If $R$ Suppose $(R,F)$ is a filtered ring such that $\mathrm{gr}_F(R)$ is a domain. Show that $R$ is a domain.
+\end{exercise}
+
+
+The ring $A_1$ isn't commutative, but it is \emph{almost commutative} in the sense that it may be endowed with a filtration $F$ in such a way that the associated graded algebra $\mathrm{gr}_F(A_1) \cong \CC[x,y]$ is isomorphic to the (commutative) ring of polynomials in two variables. There are several possible choices for $F$: one may take $F^{\leq d}$ to be the span of all words of degree $d$ in $x$ and $\partial$, where we consider $x$ and $\partial$ to both be of degree $1$. This is known as the \emph{Bernstein} filtration. Or, we may take the filtration in which $\partial$ has degree one and $x$ has degree $0$; this is known as the \emph{order} filtration.
+
+\begin{exercise} Show that with respect to either of these filtrations, the associated graded algebra is isomorphic to a polynomial ring in two variables.
+\end{exercise}
+
+\subsection{The Weyl algebra in general} Let $V$ be a finite dimensional $\CC$-vector space with dual space $V^*$. We will write $T(V^* \oplus V)$ for the tensor algebra on the vector space direct sum $V^* \oplus V$. If we fix a basis $y_1,\dots,y_n$ of $V$ with dual basis $x_1,\dots,x_n$ of $V^*$, then we may identify $T(V^* \oplus V)$ with the free associative algebra on $x_1,\dots,x_n,y_1,\dots,y_n$ (sometimes called the polynomial ring in non-commuting variables). 
+
+The \emph{Weyl algebra} of $V$ is the algebra $D(V)$ defined by
+$$D(V)=T(V^* \oplus V) / (yx-xy=\la x,y \ra \ \vert \ \hbox{for $x \in V^*$ and $y \in V$.}).$$
+
+\begin{exercise}
+Choose a basis $y_1,\dots,y_n$ of $V$ with dual basis $x_1,\dots,x_n$ of $V^*$. Prove that the monomials $x_1^{a_1}\cdots x_n^{a_n} y_1^{b_1} \cdots y_n^{b_n}$ are a basis of $D(V)$. 
+\end{exercise}
+\begin{exercise}
+Define the Bernstein and order filtrations on $D(V)$ and prove that the associated graded algebras for both are isomorphic to polynomial rings in $2n$ variables, where $n$ is the dimension of $V$.	
+\end{exercise}
+
+\subsection{Localization, or, rings of fractions} Let $R$ be a ring and $S \subseteq R$ a subset. We say that $S$ is \emph{multiplicative} if $1 \in S$ and if $s,t \in S$ then $st \in S$. We say that $S$ \emph{satisfies the right Ore conditions} if 
+\begin{itemize}
+\item[(a)] $S$ is a multiplicative subset of $R$,
+
+\item[(b)] For all $r \in R$ and $s \in S$ we have $rS \cap s R \neq \emptyset$, and
+
+\item[(c)] If $r \in R$ and $s \in S$ with $sr=0$ then there is some $t \in S$ with $rt=0$.
+\end{itemize}
+Note that if $R$ is a commutative ring then every multiplicative subset satisfies the Ore conditions. 
+
+Given a a ring $R$ and a subset $S \subseteq R$ satisfying the right Ore conditions, we may define the \emph{right ring of fractions} $RS^{-1}$ by ???
+
+As an example, suppose $f \in \CC[x]$ is a non-zero polynomial. Take $S=\{f^n \ | \ n \in \ZZ_{\geq 0} \}$ to be the set of all powers of $f$, which is a subset of the Weyl algebra $A_1$. This is evidently a multiplicative subset. To see that it satisfies the Ore condition (b), given $a \in A_1$ and $f^n \in S$ we seek $b \in A_1$ and $f^m \in S$ with $af^m=f^nb$.
+
+\subsection{Semidirect products} Let $R$ be a $\CC$-algebra and suppose $W$ is a group acting on $R$ by algebra automorphisms. Given $r \in R$ and $w \in W$ we will write $w(r)$ for the action of $w$ on $r$. We define an new algebra $R \rtimes W$ as follows: as a $\CC$-vector space $R \rtimes W=R \otimes_\CC \CC W$ is the tensor product of $R$ and the group algebra of $W$. The multiplication is determined by the formula
+$$(r_1 \otimes w_1)(r_2 \otimes w_2)=r_1 w_1(r_2) \otimes w_1 w_2 \quad \hbox{for $r_1,r_2 \in R$ and $w_1, w_2 \in W$.}$$ 
+
+\subsection{The rational Cherednik algebra}
+
+Let $\hh$ be a finite dimensional $\CC$-vector space and let $W \subseteq \mathrm{GL}(\hh)$ be a finite group of linear transformations of $\hh$. Let
+$$R=\{r \in W \ | \ \mathrm{codim}(\mathrm{fix}(r))=1 \}$$ be the set of \emph{reflections} in $W$. For each $r \in R$, choose $\alpha_r \in \hh^*$ and $\alpha_r^\vee$ in $\hh$ with
+$$r(x)=x-\la x, \alpha_r^\vee \ra \alpha_r \quad \hbox{for all $x \in \hh^*$}.$$ Fix $\kappa \in \CC$ and $c_r \in \CC$ for each $r \in R$ with the property that
+$c_r=c_{w r w^{-1}}$ for all $r \in R$ and $w \in W$. 
+
+The \emph{rational Cherednik algebra} $H_{\kappa,c}=H_{\kappa,c}(W,V)$ is the quotient of $T(V) \rtimes W$ by the relations
+$$yx-xy=0 \quad \hbox{if $x,y \in \hh$ or $x,y \in \hh^*$}$$ and
+$$yx-xy=\kappa \la x,y \ra - \sum_{r \in R} c_r \la \alpha_r,y \ra \la x,\alpha_r^\vee \ra r \quad \hbox{if $y \in \hh$ and $x \in \hh^*$.}$$
+
+\begin{exercise}
+Check that the quantity $\la \alpha_r,y \ra \la x, \alpha_r^\vee \ra$ is independent of the choice of $\alpha_r$ and $\alpha_r^\vee$ satisfying $r(x)=x-\la x,\alpha_r ^\vee \ra \alpha_r$.	
+\end{exercise} According to the exercise, the Cherednik algebra depends only upon the parameters $\kappa$ and $c_r$, justifying the notation.
+
+
+The second lecture ended here.
+
+\subsection{Fourier transform} There is an anti-automorphism of the Weyl algebra $A_1$ interchanging $x$ and $\partial$, sometimes known as the \emph{Fourier transform}. Its existence follows immediately from the definition: such an anti-automorphism exists for the free associative algebra on $x$ and $\partial$ and maps the relation $\partial x -x \partial- 1$ to itself.
+
+There is also a Fourier transform for the Cherednik algebra, interchanging $\hh$ and $\hh^*$. However, because such an anti-automorphism must respect the $W$-action (in order to exist already for $T(V) \rtimes W$), we are forced to define it to be conjugate linear instead of $\CC$-linear. More precisely, a map $f:\hh \rightarrow \hh^*$ is \emph{conjugate linear} if 
+$$f(x+y)=f(x)+f(y) \quad \text{and} \quad f(a x)=\overline{a} f(x) \quad \hbox{for all $x,y \in \hh$ and $a \in \CC$.}$$ 
+
+\begin{exercise}
+Prove that there exists a conjugate linear isomorphism $f:\hh \rightarrow \hh^*$ such that
+$$f(w(y))=w(f(y)) \quad \hbox{for all $w \in W$ and $y \in \hh$.}$$ Prove that if $W$ acts irreducibly on $\hh$ then such an isomorphism is unique up to scalars.
+\end{exercise}	
+
+We choose and fix an isomorphism as constructed in the exercise, and write it as conjugation: thus for $y \in \hh$ its image in $\hh^*$ will be written $\overline{y}$, and we will use the same notation for the inverse, mapping $x \in \hh^*$ to $\overline{x}$. Thus $\overline{\overline{y}}=y$. 
+
+\begin{exercise}
+Check that for $r \in R$ we have
+$$r^{-1}(x)=x-\la x, \overline{\alpha_r} \ra \overline{\alpha_r^\vee} \quad \hbox{for all $x \in \hh^*$.}$$	
+\end{exercise}
+
+
+\begin{lemma}
+Let $\hh \rightarrow \hh^*$, written $y \mapsto \overline{y}$ as above, be a $W$-equivariant conjugate linear isomorphism. Write $\overline{c}$ for the parameter defined by $\overline{c}_r=\overline{c_{r^{-1}}}$. There is a unique anti-isomorphism $\phi:H_{\kappa,c} \rightarrow H_{\overline{\kappa}, \overline{c}}$ such that $$\phi(x)=\overline{x}, \ \phi(y)=\overline{y} \quad \text{and} \quad \phi(w)=w^{-1} \quad \hbox{for all $x \in \hh^*$, $y \in \hh$, and $w \in W$.}$$
+\end{lemma}
+\begin{proof}
+There is an anti-isomorphism $\phi:T(V) \rtimes W \rightarrow T(V) \rtimes W$	defined by these formulas, using the compatibility of $\overline{y}$ with the $W$-action. We must check that it maps the defining ideal for $H_{\kappa,c}$ into that for $H_{\overline{\kappa},\overline{c}}$. We have 
+\begin{align*}\phi(yx-&xy-\kappa \la x,y \ra+\sum_{r \in R} c_r \la\alpha_r, y \ra \la x,\alpha_r^\vee \ra r) \\
+&=\overline{x}\overline{y}-\overline{y} \overline{x}-\overline{\kappa} \overline{\la x,y \ra}+\sum_{r \in R} \overline{c_r} \overline{\la \alpha_r,y \ra} \overline{ \la x,\alpha_r^\vee \ra} r^{-1} \\
+&=\overline{x}\overline{y}-\overline{y} \overline{x}-\overline{\kappa} \la \overline{y},\overline{x} \ra+\sum_{r \in R} c_{r^{-1}} \la \overline{\alpha_r^\vee},\overline{x} \ra \la \overline{y},\overline{\alpha_r}\ra r^{-1}\end{align*} Using the fact that 
+$r^{-1}(x)=x-\la x, \overline{\alpha_r} \ra \overline{\alpha_r^\vee}$ for all $x \in \hh^*$ finishes the proof.
+\end{proof}
+
+\subsection{Filtered deformations of $\mathrm{Sym}(V) \rtimes W$}
+
+In order to prove the PBW theorem for rational Cherednik algebras, it turns out to be more efficient to work with more general hypotheses. In this section we will work with a field $F$, a finite dimensional $F$-vector space $V$ and a finite group $W \subseteq \mathrm{GL}(V)$ of linear transformations of $V$.
+
+Write $T(V)$ for the tensor algebra of $V$. If we fix a basis $v_1,\dots,v_n$ of $V$ then $T(V)$ has basis consisting of all words in the letters $v_1,\dots,v_n$, and multiplication is simply concatenation of words. The group $W$ acts by automorphisms on $T(V)$ so we may form the semi-direct product algebra $T(V) \rtimes W$.
+
+Now $\mathrm{Sym}(V) \rtimes W$ is the quotient of $T(V) \rtimes W$ by the two-sided ideal generated by the elements $yx-xy$ for $x,y \in V$. We attempt to deform the relation $yx-xy=0$ by replacing $0$ by an element $(x, y) \in FW$ of the group algebra, and ask what conditions on $(x,y)$ ensure that the PBW theorem holds. That is, if we fix a basis $v_1,\dots,v_n$ of $V$ as above, what conditions on $(x,y)$ imply that the elements $v_1^{e_1} \cdots v_n^{e_n} w$ for $e_i \in \ZZ_{\geq 0}$ and $w \in W$ are a basis of the quotient
+$$H=T(V) \rtimes W / \la yx-xy-(x,y) \ | \ x,y \in V \ra.$$ 
+
+Our aim is to prove:
+\begin{theorem}
+Let $(\cdot,\cdot): V \otimes_F V \rightarrow F W$ be a skew-symmetric $F$-bilinear form on $V$ with values in $FW$ and fix a basis $v_1,\dots,v_n$ of $V$. Write
+$$(x,y)=\sum_{w \in W} (x,y)_w w$$ for $F$-valued bilinear forms $(x,y)_w$. The words $v_1^{e_1} \cdots v_n^{e_n} w$ for $e_i \in \ZZ_{\geq 0}$ and $w \in W$ are a basis of the quotient
+$$H=T(V) \rtimes W / \la yx-xy-(x,y) \ | \ x,y \in V \ra$$ if and only if
+\begin{itemize}
+\item[(a)] $(w(x),w(y))=w (x,y) w^{-1}$ for all $x,y \in V$ and $w \in W$, and
+\item[(b)] For $x,y,z \in V$ and $w \in W$,
+$$(x,y)_w (w(z)-z)+(y,z)_w(w(x)-x)+(z,x)_w(w(y)-y)=0.$$
+\end{itemize}	
+\end{theorem}	
+\begin{proof}
+First suppose the PBW theorem holds. The equality
+$$w (x,y) w^{-1}=w[x,y]w^{-1}=[w(x),w(y)]=(w(x),w(y))$$ implies that (a) holds. The equality
+$$0=[[x,y],z]]+[[y,z],x]+[[z,x],y]=\sum_w ((x,y)_w(w(z)-z)+(y,z)_w(w(x)-x)+(z,x)_w(w(y)-y)))w$$	implies that (b) holds.
+
+For the converse, we observe first that the relations allow us to rewrite any word in $v_1,v_2,\dots,v_n$ and $W$ in the specified order. This implies that the normally ordered words span $H$. We now define a representation of $H$ on the vector space
+$$F[u_1,\dots,u_n] \otimes_F FW$$ as follows. 
+For $1 \leq i \leq n$, the action of $v_i$ is defined inductively by
+$$v_i \cdot w=v_i w \quad \hbox{for $w \in W$,}$$
+$$v_i \cdot u_{i_1} u_{i_2} \cdots u_{i_p} w=u_i u_{i_1} \cdots u_{i_p} w \quad \hbox{if $i \leq i_1$,}$$
+$$v_i \cdot u_{i_1} u_{i_2} \cdots u_{i_p} w=v_{i_1} \cdot \left(v_i \cdot u_{i_2} \cdots u_{i_p} w\right)+(v_i,v_{i_1}) \cdot u_{i_2} \cdots u_{i_p} w$$ for $i>i_1$, and finally, for $w \in W$,
+$$w u_1^{a_1} \cdots u_n^{a_n} w'= (w (v_1))^{a_1} \cdots (w (v_n))^{a_n} \cdot ww'.$$ Note that there are really two inductions going on here: the first is in the length $p$ of the word on which we are acting, and the second is on the index $i$ of the element that is acting. We leave as a (long!) exercise the verification that these satisfy the defining relations. The proof now ends exactly as for the Weyl algebra.
+\end{proof}
+\begin{exercise}
+Check that the operators defined above satisfy the defining relations for $H$ and complete the proof of the theorem.
+\end{exercise}	
+
+Now suppose $\hh$ is a finite dimensional $F$-vector space and $W \subseteq \mathrm{GL}(\hh)$ is a finite group of linear transformations of $\hh$. We put $V=\hh^* \oplus \hh$, and observe that we then have a natural embedding $W \subseteq \mathrm{GL}(V)$ given by the actions of $W$ on $\hh$ and $\hh^*$. In this situation we can make the conditions (a) and (b) in the PBW theorem much more explicit.
+
+Notice that (b) implies that if $(x,y)_w \neq 0$ then the image of $w-1$ is contained in the span of $w(x)-x$ and $w(y)-y$, and hence is at most two dimensional. In other words, the fixed space of $w$ acting on $V$ must have codimension at most two. But this fixed space is precisely the sum of the fixed spaces of $w$ on $\hh$ and $\hh^*$, so there are two possibilities: either $w$ is the identity element, or the fixed space of $w$ on $\hh$ has codimension $1$. Linear transformations with this property are called \emph{reflections} (sometimes, one asks for semisimplicity of $w$, which is automatic if $F$ has characteristic $0$). We have proved that $(x,y)_w=0$ for all $w$ except possibly the identity and the reflections.
+
+\begin{lemma}
+Suppose $F=\CC$. As before, let
+$$R=\{r \in W \ | \ \mathrm{codim}_\hh(\mathrm{fix}_{\hh}(r))=1 \}$$ be the set of reflections in $W$. Then for each $r \in R$, the space of $r$-invariant skew-symmetric bilinear forms $(x,y)_r$ satisfying condition (b) in the theorem for $w=r$ is one dimensional, spanned by the skew-symmetric form $(x,y)_r$ defined by
+$$(x,y)_r=\la \alpha_r y \ra \la x, \alpha_r^\vee \ra$$ for $x \in \hh^*$ and $y \in \hh$, while $(x,y)=0$ if $x,y \in \hh$ or $x,y \in \hh^*$.
+\end{lemma}
+\begin{proof}
+We first observe that if $x,y \in \mathrm{fix}_V(r)$ then $(x,y)_r=0$ by condition (b). Likewise, if $x \in \mathrm{fix}_V(r)$ and $y \in V$, then by $r$-invariance
+$$(x,(1-r)y)_r=(x,y)_r-(x,r(y))_r=(x,y)_r-(r^{-1}(x),y)_r=0.$$ Since we are working over $\CC$ each linear transformation of finite order is semi-simple, and hence $V$ is the direct sum of $\mathrm{fix}_V(r)$ and the image of $1-r$. Thus the radical of the form contains $\mathrm{fix}_V(r)$, which is codimension two in $V$. But there is a one-dimensional space of skew-symmetric forms on a two-dimensional vector space. It remains only to observe that the given form is $r$-invariant and satisfies (b). The $r$-invariance is easy,  and to verify (b) by linearity and the cyclic symmetry of the identity we may assume that $x,y \in \hh^*$ and $z \in \hh$. Then (b) holds by a very short calculation. 
+\end{proof}
+
+\begin{corollary}
+The rational Cherednik algebra satisfyies the PBW theorem.	
+\end{corollary}
+
+\subsection{Dunkl operators}
+
+Here we briefly explain the relation to Dunkl operators. 
+\begin{exercise}
+Prove by induction on $d$ that for a polynomial $f \in \CC[V]$ of degree $d$ and any $y \in V$ we have, working in $H_{\kappa,c}$,
+$$yf=fy+\kappa \partial_y(f)-\sum_{r \in R} c_r \la \alpha_r, y \ra \frac{f-r(f)}{\alpha_r} r.$$
+\end{exercise}
+
+\begin{exercise} The polynomial representation $\CC[x]$ of the first Weyl algebra $A_1$ may be constructed as an induced representation
+$$\CC[x]=\mathrm{Ind}_{\CC[\partial]}^{A_1}(\CC),$$ where $\CC$ is the one-dimensional $\CC[\partial]$-module on which $\partial$ acts by $0$.
+\end{exercise}
+
+With the preceding exercise as motivation, we define a \emph{polynomial representation} of the rational Cherednik algebra by
+$$\Delta_{\kappa,c}(1)=\mathrm{Ind}_{\CC[\hh]^* \rtimes W}^{H_{\kappa,c}}(\CC),$$ where $\CC$ is the one-dimensional $\CC[\hh]^* \rtimes W$-module on which $W$ acts trivially and each $y \in \hh$ acts by $0$.
+\begin{exercise}
+Prove that as a $\CC[\hh] \rtimes S_n$-module we have
+$$\Delta_{\kappa,c}(1)=\CC[\hh],$$ and that the action of $y \in \hh$ is given by
+$$y(f)=\kappa \partial_y(f)-\sum_{r \in R} c_r \la \alpha_r,y \ra \frac{f-r(f)}{\alpha_r}$$ for all $f \in \CC[\hh]$. 
+\end{exercise} These are the famous \emph{Dunkl operators}. They commute! This follows from what we have done, but it is not at all obvious from the formula that it should be so (nor was it an obvious thing to arrive to the formula in the first place, which historically did not occur in the way in which we have derived it).
+
+The third lecture ended here.
+
+\subsection{Standard modules and contravariant forms}
+
+In this subsection we generalize the construction above that produced Dunkl operators by replacing the trivial representation of $W$ by another representation. Let $E$ be an irreducible $\CC W$-module. The \emph{standard module} $\Delta_{\kappa,c}(E))$ is defined by
+$$\Delta_{\kappa,c}(E)=\mathrm{Ind}_{\CC[\hh^*] \rtimes W}^{H_{\kappa,c}} (E),$$ where we define the action of $\CC[\hh^*]$ on $E$ by $ye=0$ for all $y \in \hh$ and $e \in E$, making $E$ a $\CC[\hh^*] \rtimes W$-module.
+\begin{exercise}
+Prove that $\Delta_{\kappa,c}(E) \cong \CC[\hh] \otimes_\CC E$ as a $\CC[\hh] \rtimes W$-module, and that via this identification the action of $y \in \hh$ on $f \otimes e$ for $f \in \CC[\hh]$ and $e \in E$ is given by the formula
+$$y(f \otimes e)=\kappa \partial_y(f) \otimes e-\sum_{r \in R} c_r \la \alpha_r,y \ra \frac{f-r(f)}{\alpha_r} \otimes r(e).$$ 	
+\end{exercise}
+
+As motivation for the definition of the contravariant form on the standard module, we recall the following very useful construction with polynomials: one may define a non-degenerate bilinear form by $(f,g)=(f(\partial)g)(0)$ for $f,g \in \CC[x]$. There is also a positive definite Hermitian version of this definition, obtained by conjugating the coefficients of $f$. This form on $\CC[x]$ is compatible with the $A_1$ action in the sense that $(x f,g)=(f,\partial g)$.
+
+Now suppose the parameters $\kappa$ and $c$ are real in the sense that $\kappa$ is real and $\overline{c_r}=c_{r^{-1}}$. Thus the Fourier transform $\phi$ is an anti-automorphism of $H_{\kappa,c}$. Each standard module carries a \emph{contravariant form}, defined by the formula
+$$(f_1 \otimes e_1,f_2 \otimes e_2 )_{\kappa,c}=(e_1,(\phi(f_1) \cdot f_2 \otimes e)(0)),$$ where we evaluate at zero by regarding each element of $\CC[\hh] \otimes E$ as a function on $\hh$ with values in $E$, and where we have fixed a positive definite Hermitian $W$-invariant form $(\cdot,\cdot)$ on $E$.
+
+\begin{lemma}
+The contravariant form is linear in the second variable, conjugate linear in the first variable, and satisfies
+$$(f_1,f_2)_{\kappa,c}=\overline{(f_2,f_1)_{\kappa,c}}.$$ Moreover, for all $h \in H_{\kappa,c}$ and $f_1,f_2 \in \Delta_{\kappa,c}(E)$ we have
+$$(h f_1,f_2)_{\kappa,c}=(f_1,\phi(h) f_2)_{\kappa,c}.$$
+\end{lemma}
+\begin{exercise}
+Prove the lemma.	
+\end{exercise}
+
+With the contravariant form in hand we can define a distinguished irreducible quotient $L_{\kappa,c}(E)$ of $\Delta_{\kappa,c}(E)$: we take $R$ to be the radical of  the contravariant form and define
+$$L_{\kappa,c}(E)=\Delta_{\kappa,c}(E)/R.$$
+
+\begin{exercise}
+Check that this quotient is irreducible and graded (with respect to polynomial degree), and that it is the unique graded irreducible quotient of the standard module.\end{exercise}
+As it turns out, the standard modules have an internal grading when $\kappa \neq 0$, so every quotient is graded and hence $L_{\kappa,c}(E)$ is in fact the unique irreducible quotient in this case.
+
+\section{Cherednik algebras and Garsia-Haiman modules}
+
+In this section we will study the algebra $H_{\kappa,c}=H_{\kappa,c}(S_n,\CC^n)$, and explain its relationship to the Garsia-Haiman modules in more detail.
+
+\subsection{Jucys-Murphy-Young elements} The symmetric groups form a chain $S_1 \subseteq S_2 \subseteq S_3 \subseteq \cdots$, and it is natural to study their representation theory starting with the study of the restriction functor from $k S_n$-mod to $k S_{n-1}$-mod (for $k$ a field). Given an endomorphism of this functor, one can hope to decompose it into eigenfunctors and study the result; this theme has been very fruitful in modern representation theory, and is currently studied as part of \emph{categorification}. 
+
+Concretely, endomorphisms of the restriction functor come from elements of the centralizer of $k S_{n-1}$ in $k S_n$. The most obvious such elements are orbit sums such as the \emph{Jucys-Murphy-Young element} 
+$$\phi_n=(1n)+(2n)+\cdots+(n-1,n).$$ Here we state (but will not prove) the resulting decomposition rule for $k=\CC$.
+\begin{theorem}
+The restriction of $S^\lambda_\CC$ to $S_{n-1}$ is
+
+$$\mathrm{res}(S^\lambda_\CC)=\bigoplus_{\text{removable boxes}} S^{\lambda \setminus b}_\CC,$$ and the action of $\phi_n$ on the component obtained by removing $b$ is by the scalar $\mathrm{ct}(b)$.
+\end{theorem}
+\begin{exercise}
+Write $s_i=(i,i+1)$ for the simple transposition interchanging $i$ and $i+1$. Then show $s_i \phi_i s_i=\phi_{i+1}-s_i$, or in other words $s_i \phi_i=\phi_{i+1} s_i-1$. (This is the origin of the relation between affine Hecke algebras and the KLR algebras).	
+\end{exercise}
+
+ 
+\subsection{The trigonometric Dunkl operators} 
+
+Working in $H_{\kappa,c}(S_n,\CC^n)$, we define the \emph{trigonometric Dunkl operators} $z_i$ by
+$$z_i=y_i x_i+c \phi_i.$$ Computing with the defining relations gives
+$$[y_i x_i,y_j x_j]=c(y_j x_j-y_i x_i) (ij)$$ and hence for $i<j$
+$$[y_i x_i+c \phi_i,y_j x_j+c\phi_j]=c(y_j x_j-y_i x_i)(ij)+c[y_i x_i,\phi_j]=c(y_j x_j-y_i x_i)(ij)+c(y_i x_i-y_j x_j)(ij)=0.$$ Thus the $z_i$'s commute with one another. 
+
+What about their relations with the other generators of $H_{\kappa,c}$? Evidently $z_j$ commutes with $s_i$ for $j \neq i,i+1$. Next, we have
+$$s_i z_i=s_i y_i x_i+ c s_i \phi_i=y_{i+1} x_{i+1} s_i+c(\phi_{i+1}s_i-1)=z_{i+1} s_i-c.$$ By induction on the degree of the polynomial $f(z_1,\dots,z_n)$ one proves the more general relation
+$$s_i f=s_i(f) s_i-c \frac{f-s_i(f)}{z_i-z_{i+1}},$$ where we have written $s_i(f)$ for the polynomial in $z_1,\dots,z_n$ obtained from $f$ by swapping $z_i$ and $z_{i+1}$. It follows that symmetric polynomials in the $z_i$'s commute with $S_n$. 
+
+The $z_i$'s don't seem to have particularly nice commutation relations with $x_i$'s or $y_i$'s. As a replacement, define the \emph{Knop-Sahi} intertwiners $$\Phi=x_n (n,n-1,\dots,2,1) \quad \text{and} \quad \Psi=y_1 (1,2,\dots,n-1,n).$$ We are using cycle notation; we might also write $\Phi=x_n s_{n-1} s_{n-2} \cdots s_2 s_1$ and $\Psi=y_1 s_1 s_2 \cdots s_{n-1}$.
+\begin{exercise}
+Show that
+$$z_i \Phi=\Phi z_{i+1} \quad \hbox{for $1 \leq i \leq n-1$,}$$ and
+$$z_n \Phi=\Phi (z_1 +\kappa).$$	Conclude that if $\kappa=0$ then any symmetric polynomial in $z_i$'s commutes with $\Phi$. Apply the Fourier transform to show that if $\kappa=0$ then any symmetric polynomial in $z_i$'s commutes with $\Psi$.
+\end{exercise}
+
+Since $H_{\kappa,c}$ is generated as an algebra by $S_n$, $\Phi$, and $\Psi$. Thus $\CC[z_1,\dots,z_n]^{S_n}$ is central in $H_{0,c}(S_n,\CC^n)$.
+
+\subsection{Finite dimensional representations of $H_{\kappa,c}(S_n,\CC^n)$: Etingof's trick} 
+Noting that for $i \neq j$ then working in $H_{\kappa,c}$ we have
+$$[y_i,x_j]=c s_{ij}$$ implies that if $c \neq 0$ then the trace of $s_{ij}$ on any finite-dimensional representation of $H_{0,1}$ is zero. This observation generalizes as follows: if $w(i)=i$ then $$[y_i,w x_j]=[y_i,w]x_j+w[y_i,x_j]=(y_i w-wy_i)x_j+c w s_{ij}=c w s_{ij}$$ since $wy_i=y_i w$. Now for $v \in S_n$ non-trivial we choose $i \neq j$ with $i=v(j)$ and set $w=v s_{ij}$. Then $v=w s_{ij}$ and the preceding calculation shows that $v$ is a commutator if $c \neq 0$. It follows that the trace of $v$ on any finite-dimensional $H_{\kappa,c}$-module is $0$ if $c \neq 0$, and hence that each finite-dimensional $H_{\kappa,c}$-module is a multiple of the regular representation. As it turns out, there is a copy of $A_1$ inside $H_{1,c}$, which therefore has no finite dimensional modules. However, the finite dimensional modules of $H_{0,1}$ are both plentiful and interesting.
+
+\begin{exercise}
+Show that the subalgebra of $H_{1,c}$ generated by $x_1+x_2+\cdots+x_n$ and $y_1+y_2+\cdots+y_n$ is isomorphic to the Weyl algebra $A_1$. Use this fact to prove that there are no non-zero finite dimensional $H_{1,c}$-modules (by proving that $A_1$ has no non-zero finite dimensional modules).
+\end{exercise}
+
+\subsection{The center of $H_{0,1}$} Will will fix $\kappa=0$ and $c=1$ for this subsection, and abbreviate $H=H_{0,1}$. Writing $Z=Z(H)$ for the center of $H$, we have seen that it contains the subalgebras $$\CC[x_1,\dots,x_n]^{S_n}, \quad \CC[y_1,\dots,y_n]^{S_n}, \quad \text{and} \quad \CC[z_1,\dots,z_n]^{S_n}.$$ 
+
+\begin{exercise}
+Prove that the ring $\CC[x_1,\dots,x_n,y_1,\dots,y_n]^{S_n}$ is generated by $\CC[x_1,\dots,x_n]^{S_n}$, $\CC[y_1,\dots,y_n]^{S_n}$, and $\CC[x_1 y_1,\dots,x_n y_n]^{S_n}$. If it helps, you may assume that the \emph{polarized power sums}
+$$p_{i,j}=x_1^i y_1^j+x_2^i y_2^j+\cdots+x_n^i y_n^j$$ generate it (this is a classical result of Weyl).
+\end{exercise}
+
+\begin{theorem}
+The three subalgebra $$	\CC[x_1,\dots,x_n]^{S_n}, \quad \CC[y_1,\dots,y_n]^{S_n}, \quad \text{and} \quad \CC[z_1,\dots,z_n]^{S_n}$$ generate the center $Z$ of $H$. Moreover, letting $G_d=F_d \cap Z$, where $F$ is the filtration on $H$ defined given by total degree in $x$ and $y$, the natural map
+$$\mathrm{gr}_G(Z) \rightarrow Z(\CC[x_1,\dots,x_n,y_1,\dots,y_n] \rtimes S_n)=\CC[x_1,\dots,x_n,y_1,\dots,y_n]^{S_n}$$ is an isomorphism. 
+\end{theorem}
+\begin{proof}
+We write $Z'$ for the subalgebra of $Z$ generated by the three algebras of symmetric polynomials in the statement of the theorem. We then have injections
+$$\mathrm{gr}_H(Z') \hookrightarrow \mathrm{gr}_G(Z) \hookrightarrow \CC[x_1,\dots,x_n,y_1,\dots,y_n]^{S_n},$$ where $H_d=F_d \cap Z'$ is the induced filtration, and by the previous exercise their composite is surjective. The theorem follows from this.
+\end{proof} The theorem is a consequence of work of Etingof-Ginzburg and Martino, which gives a somewhat different proof. 
+
+\begin{exercise}
+We will not use this in the sequel, but we mention here a corollary of the theorem. Show that the map $Z \rightarrow eHe$	given by $z \mapsto ze$ is a ring isomorphism. Etingof-Ginzburg proved this fact for general symplectic groups $W$, and call this map the \emph{Satake isomorphism}.
+\end{exercise}
+
+
+\begin{corollary}
+Let $L$ be an irreducible $H$-module. Then as a $\CC S_n$-module, $L$ is isomorphic to the regular representation $L \cong \CC S_n$.
+\end{corollary}
+\begin{proof}
+Since $H$ is module-finite over $Z$, every irreducible $H$-module is finite dimensional. By Etingof's trick, $L $ is a multiple of the regular representation. Let $l \in L$ be a non-zero $S_n$-invariant in $L$. The map
+$He \rightarrow L$ given by $he \mapsto hel$ is surjective since $L$ is irreducible. We define $G$ to be the filtration induced on $L$ from the filtration $F_d \cap He$ on $He$. Upon taking the associated graded objects we have a surjection
+$\CC[x_1,\dots,x_n,y_1,\dots,y_n]=\mathrm{gr}_F(He) \rightarrow \mathrm{gr}_G(L),$ and since $Z$ acts by scalars on $L$ it follows that this map factors through the diagonal coinvariant ring. Thus the multiplicity of the trivial $\CC S_n$-module in $L$ is at most one, and hence $L$ is the regular representation. 
+\end{proof}
+
+We will continue to use the filtration $G$ on $L$ defined in the proof above. But first, we observe that the Garsia-Procesi ring $\mathrm{GP}_\lambda$ may be located inside $L$ for $L=L(\lambda)$. To prove this, we need:
+\begin{lemma}
+We have
+$$\{l \in L(\lambda) \ | \ yl=0 \ \hbox{for all $y \in \hh$} \}=L(\lambda)^0=S^\lambda_\CC.$$	
+\end{lemma}
+\begin{proof}
+Suppose that $y l=0$ for 	
+\end{proof}
+
+
+
+%\bibliographystyle{amstex}
+\def\cprime{$'$} \def\cprime{$'$}
+\begin{thebibliography}{GGOR}
+
+\bibitem{Hai}[Hai]
+ M. Haiman, \emph{}
+ 
+ \bibitem{HuWo}[HuWo] 
+ 
+ \end{thebibliography}
+
+
+
+\end{document}
+
+--------------C99F98682F1E0595C486E491--
+
+
+
+

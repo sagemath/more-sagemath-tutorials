@@ -1,0 +1,1415 @@
+\documentclass[12pt]{amsart}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[left=1cm, right=1cm, top=2cm, bottom=1cm]{geometry} % see geometry.pdf on how to lay out the page. There's lots.
+\geometry{letterpaper} % or letter or a5paper or ... etc
+%\geometry{landscape}                		% Activate for for rotated page geometry
+\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps with pdflatex; use eps in DVI mode
+								% Te\bm{x} will automatically convert eps --> pdf in pdflatex
+
+\usepackage{mdframed}
+\usepackage{bm}
+\usepackage{xcolor}		
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\usepackage{color}
+\usepackage{pgf,tikz}
+\usetikzlibrary{arrows}
+\usepackage[colorlinks=true,citecolor=cyan,urlcolor=blue]{hyperref} 
+\hypersetup{colorlinks=true,linkcolor=blue}
+
+\title{Mathemagical Formulas For Symmetric Functions}
+
+%\author{\href{wallace.nancy@courrier.uqam.ca}{Nancy Wallace}} % delete this line to display the current date
+%%% BEGIN DOCUMENT
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+
+ \begin{center}
+\thispagestyle{empty}
+\renewcommand{\contentsname}{ \vspace{-180pt}\textsc{Contents}}   
+\vspace{80pt}
+  \tableofcontents
+  
+\vspace{200pt}
+\renewcommand{\refname}{The Bibliography}   
+\nocite{*}
+\bibliographystyle{plain}
+\bibliography{compendium-symmetric-function-formulas.bib}
+\end{center}
+
+\vspace{40pt}
+\begin{center}\textsc{See also}\end{center}
+[a]\label{part} \url{https://en.wikipedia.org/wiki/Partition_(number_theory)}
+
+[b1]\label{symf} \url{https://en.wikipedia.org/wiki/Symmetric_polynomial}
+
+[b2]\label{gen} \url{https://en.wikipedia.org/wiki/Ring_of_symmetric_functions}
+
+[c]\label{tab} \url{https://en.wikipedia.org/wiki/Young_tableau}
+
+\newpage
+\section{Basic Notations}
+
+\vspace{-17pt}\begin{mdframed}[linecolor=cyan!20, linewidth=3pt]
+\begin{center}\begin{bf}Partitions\end{bf}\end{center}
+\[\mu\vdash n \hspace{15pt} \text{  iff }\hspace{15pt} \mu=\mu_1, \cdots, \mu_k;\hspace{16pt}\mu_1\geq\cdots\geq \mu_k>0;\hspace{16pt} \text{ and }\hspace{16pt}  n=\sum \mu_j:=|\mu|  .\hspace{30pt}\ell(\mu)=k.\]
+
+	\begin{center}
+		\begin{tikzpicture}[scale=.9] 
+			\filldraw[red!40] (1.05,.55)--(1.5,.55)--(1.5,1)--(1.05,1)--(1.05,.55);
+			\draw[-,thick,cyan,-triangle 90] (1.6,.75)--(2.9,.75);
+			\draw[-,thick,cyan,-triangle 90] (2.9,.75)--(1.6,.75);
+			\draw[-,-triangle 90, cyan] (1.25,1.1)--(1.25,2.4);
+			\draw[-,-triangle 90, cyan] (1.25,2.4)-- (1.25,1.1);
+			\node(mu) at (-.5,2){$\mu:$};
+			\draw[-,-triangle 90, cyan] (.1,.5)--(.85,.5);
+			\draw[-,-triangle 90, cyan] (.85,.5)--(.1,.5);
+			\draw[-,-triangle 90, cyan] (1,-.4)--(1,.35);
+			\draw[-,-triangle 90, cyan] (1,.35)--(1,-.4);
+			\draw[very thick, cyan] (0,-.5)--(3,-.5)--(3,1)--(2.5,1)--(2.5,2)--(2,2)--(2,2.5)--(0,2.5)--(0,-.5);
+			\node[circle,fill,inner sep=2pt](point) at (1,.5){};
+			\node(c) at (1.2,.7){$c$};
+			\node(l) at (.8,1.65){$l(c)$};
+			\node(a) at (2.30,0.5){$a(c)$};
+			\node(i) at (.6,.9){$i$};
+			\node(j) at (1.2,0.1){$j$};
+		\end{tikzpicture}\hspace{25pt}
+		\begin{tikzpicture}[scale=.9] 
+			\node(muprime) at (-1,2.5){$\mu':$};
+			\filldraw[red!40] (1.05,.55)--(1.5,.55)--(1.5,1)--(1.05,1)--(1.05,.55);
+			\draw[-,-triangle 90, cyan] (1.6,.75)--(2.4,.75);
+			\draw[-,-triangle 90, cyan] (2.4,.75)--(1.6,.75);
+			\draw[-,-triangle 90,cyan] (1.25,1.1)--(1.25,2.4);
+			\draw[-,-triangle 90, cyan] (1.25,2.4)--(1.25,1.1);
+			\node(a) at (2.0,1){arm};
+			\node(l) at (.9,1.65){leg};
+			\draw[very thick,cyan] (-.5,0)--(2.5,0)--(2.5,2)--(2,2)--(2,2.5)--(1,2.5)--(1,3)--(-.5,3)--(-.5,0);
+		\end{tikzpicture}\hspace{25pt}
+		\begin{tikzpicture}[scale=.9]
+			\node(1n) at (-1.8,2.5){$1^n=\underbrace{1,\cdots,1}_{n \text{  times }}:$};
+			\draw[very thick, cyan] (0,0)--(0,3)--(.5,3)--(.5,0)--(0,0);
+		\end{tikzpicture}\hspace{25pt}
+		\begin{tikzpicture}[scale=.9] 
+			\node(mu) at (-.6,2){$\mu/\lambda:$};
+			\node(mu) at (.8,.15){$\lambda$};
+			\draw[very thick, cyan] (0,1)--(1,1)--(1,.5)--(2,.5)--(2,-.5)--(3,-.5)--(3,1)--(2.5,1)--(2.5,2)--(2,2)--(2,2.5)--(0,2.5)--(0,1);
+			\draw[cyan,dashed] (0,1)--(0,-.5)--(2,-.5);
+		\end{tikzpicture}
+	\end{center}
+	\[l_\mu(c)=l(c):={\mu'}_{i+1}-(j+1);\hspace{15pt} a_\mu(c)=a(c):=\mu_{j+1}-(i+1);\hspace{15pt}h_\mu(c)= h(c):=a(c)+l(c)+1\]
+
+	\begin{minipage}[t]{7.5cm}
+		 \begin{equation}z_\mu:=\prod_{i=1}i^{d_i}d_i! \hspace{10pt}\text{ for }\mu=1^{d_1}\cdots n^{d_n}
+		 \end{equation}
+	 \end{minipage}
+	  \begin{minipage}[t]{11.5cm}
+		 \begin{equation}n(\mu):=\sum_{c\in\mu} l(c)=\sum_{(i,j)\in\mu}j~\text{ and }~n(\mu'):= \sum_{c\in\mu} a(c)=\sum_{(i,j)\in\mu}i		 \end{equation}
+ 	\end{minipage}
+
+ 	\fcolorbox{black}{green!10}{\hyperref[exemple diagramme]{Example 1 clic here}\label{retour diagramme}}
+ 	\hyperref[part]{Wikipedia page on this} 
+\end{mdframed}
+
+\vspace{-10pt}\begin{mdframed}[linecolor=red!20, linewidth=3pt]
+\begin{center}\begin{bf}Tableaux\end{bf}\end{center}
+ \[\mu=\mu_1, \cdots, \mu_k\vdash n \hspace{10pt} \text{  iff }\hspace{10pt} \mu\subset\mathbb{N}\times\mathbb{N}; ~\mu=\{~c~| ~c=(i,j),~ 0\leq j\leq \ell(\mu)-1; ~0\leq i\leq \mu_{j+1}-1~\};~\sum \mu_j=n.\]
+ 
+
+ 	\begin{minipage}[t]{5cm}
+ 		\begin{center}\begin{bf}Tableau\end{bf} \end{center}
+		 \begin{equation*}\tau:\mu \rightarrow \{1,2,\cdots,n\}\end{equation*}
+	 \end{minipage}
+	\begin{minipage}[t]{5.75cm}
+		\begin{center} \begin{bf}Semi-Standard Tableau\end{bf} \end{center}
+		 \begin{equation*}\tau(a,j)<\tau(b,j) \Rightarrow  a\leq b\end{equation*}
+		 \begin{equation*}\text{ and }\tau(i,c)<\tau(i,d) \Rightarrow  c<d \end{equation*}
+	 \end{minipage}
+	  \begin{minipage}[t]{8cm}
+		 \begin{center}\begin{bf}Standard Tableau\end{bf} $\mathbf{f^\mu}$\end{center}
+		 \begin{equation*}\tau \text{ bijection, }\tau(a,j)<\tau(b,j) \Rightarrow  a<b\end{equation*}
+		 \begin{equation*}\text{ and }\tau(i,c)<\tau(i,d) \Rightarrow  c<d\end{equation*}
+	  \end{minipage}
+
+	\begin{minipage}[t]{5.5cm}
+		 \begin{bf}Hook lenght formula:\end{bf}
+		\vspace{3pt}  \begin{equation}f^\mu=\frac{n!}{\prod_{c\in\mu}h(c)}
+		 \end{equation}
+	 \end{minipage}
+	 \begin{minipage}[t]{6cm}
+		\vspace{7pt} \begin{equation}\sum_{\mu\vdash n}(f^\mu)^2=n!\end{equation}
+	 \end{minipage}
+	 \begin{minipage}[t]{8cm}
+		 \begin{bf}Determinental formula:\end{bf}
+		 \begin{equation}f^\mu=n!\textrm{det}\left(\left(\frac{1}{(\mu_i-i+j)!}\right)_{i,j}\right)
+		 \end{equation}
+	 \end{minipage}
+	 \fcolorbox{black}{green!10}{\hyperref[exemple tableau]{Example 2 clic here}\label{retour tableau}}
+	  \hyperref[tab]{Wikipedia page on this} 
+ \end{mdframed}
+
+\vspace{-10pt}\begin{mdframed}[linecolor=cyan!20, linewidth=3pt]
+\section{Classical Basis of $\mathbf{\Lambda}$}
+$\mathbf{\Lambda}=\mathbf{\Lambda}_{\mathbb{Q}}$: ring of symmetric functions; $\bm{x}:=\{x_1,x_2,x_3,\cdots \} $. Basis are indexed by partitions, $g=g(\bm{x})$.
+
+	  \begin{minipage}[t]{9.35cm}
+		 \begin{bf}Monomial symetric functions\end{bf}
+		  \begin{equation}m_\mu:=\underset{\text{ distinct }}{\underset{ i_1, \cdots, i_{k}\in\mathbb{N}^*}{\sum} }x_{i_1}^{\mu_1}x_{i_2}^{\mu_2}\cdots x_{i_{k}}^{\mu_{k}}\end{equation}
+		\end{minipage}
+	   \begin{minipage}[t]{10.25cm}
+		  \begin{bf}Power sum symmetric functions:\end{bf}
+		 \begin{equation}p_n:=\underset{i\in\mathbb{N}}{\sum}x_i^n =m_{(n)}\hspace{10pt}\text{ and }\hspace{10pt} p_\mu:=p_{\mu_1}\cdots p_{\mu_{k}}\end{equation}
+	 \end{minipage} 
+
+  	\begin{minipage}[t]{9.35cm}
+ 		 \begin{bf}Complete homogeneous symmetric functions\end{bf}
+		 \begin{equation} h_n:=\underset{\lambda \vdash n}{\sum} m_\lambda \hspace{20pt}\text{ and }\hspace{20pt} h_\mu:=h_{\mu_1}\cdots h_{\mu_{k}}\end{equation}
+	 \end{minipage}
+	  \begin{minipage}[t]{10.25cm}
+		\begin{bf}Elementary symmetric functions\end{bf}
+		 \begin{equation} e_n:=\hspace{-10pt}\underset{ i_1<\cdots<i_{n}}{\sum} \hspace{-9pt}x_{i_1}\cdots x_{i_{n}} =m_{1^n}\hspace{0pt}\text{ and }\hspace{0pt} e_\mu:=e_{\mu_1}\cdots e_{\mu_{k}}\end{equation}
+ 	\end{minipage}
+ where $h_0=e_0=1$ and $e_k=h_k=0$ for all $k<0$.
+
+	\begin{bf}Schur symmetric functions (Jacobi-Trudi determinant formulas)\end{bf}
+
+	\vspace{-20pt}\begin{minipage}[t]{9.35cm}
+		\begin{equation} s_\mu=\mathrm{det}\left( (h_{\mu_i-i+j})_{i,j}\right);\hspace{20pt} s_{(n)}=h_n
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{10.25cm}
+		\begin{equation} s_{\mu'}=\mathrm{det}\left( (e_{\mu_i-i+j})_{i,j}\right); \hspace{10pt} s_{1^n}=m_{1^n}=e_n
+		\end{equation}
+	\end{minipage}
+
+	\fcolorbox{black}{green!10}{\hyperref[exemple bases]{Example 3 clic here}\label{retour bases}}
+	 \hyperref[symf]{Wikipedia page on this} 
+\end{mdframed}
+
+\newpage
+
+\section{Generating Functions and Identities}
+\vspace{-10pt}\begin{mdframed}[linecolor=red!20, linewidth=3pt, innertopmargin=8pt]
+	\begin{minipage}[t]{11.5cm}
+		\begin{bf}Generating functions\end{bf}
+		\begin{equation}E(t):=\sum_{r\geq 0}e_rt^r=\prod_{i\geq 1}(1+x_it)
+		\end{equation} 
+		\begin{equation}H(t):=\sum_{r\geq 0}h_rt^r=\prod_{i\geq 1}\frac{1}{(1-x_it)}=\frac{1}{E(-t)}
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{1.5cm}
+		\vspace{7pt}$\left.\begin{tikzpicture}
+		\node(!) at (0,0){};
+		\node(2) at (0,1){};
+		\end{tikzpicture} \right\}\Rightarrow$
+	\end{minipage}
+	\begin{minipage}[t]{8cm}
+		\vspace{18pt}\begin{equation} \sum_{r=0}^n (-1)^re_rh_{n-r}=0
+		\end{equation}
+	\end{minipage}
+
+	\begin{minipage}[t]{13cm}
+		\begin{equation}\label{gen P->H} P(t):=\sum_{r\geq 0}p_rt^r=\frac{\textrm{d}}{\textrm{d}t}\textrm{log}H(t)=\frac{H'(t)}{H(t)}		\Leftrightarrow H(t)=e^{P(t)} \hspace{44pt}\Rightarrow
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{6cm}
+		\vspace{-3pt}\begin{equation} nh_n=\sum_{r=1}^n p_rh_{n-r}
+		\end{equation}
+	\end{minipage}
+
+	\begin{minipage}[t]{13cm}
+		\begin{equation}\label{gen P->E}P(-t):=\sum_{r\geq 0}p_rt^r=\frac{\textrm{d}}{\textrm{d}t}\textrm{log}E(t)=\frac{E'(t)}{E(t)}		\Leftrightarrow E(t)=e^{-P(-t)} \hspace{25pt}\Rightarrow
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{6cm}
+		\vspace{-3pt}\begin{equation} ne_n=\sum_{r=1}^n (-1)^{r-1}p_re_{n-r}
+		\end{equation}
+	\end{minipage}
+	 \hyperref[gen]{Wikipedia page on this}
+\end{mdframed}
+
+\vspace{-10pt}\begin{mdframed}[linecolor=cyan!20, linewidth=3pt,innertopmargin=8pt]
+	\begin{bf}Changing basis\end{bf}\label{h->p et e->p}
+	\vspace{-15pt}\\
+	\begin{minipage}[t]{1.5cm}
+		\vspace{4pt}\begin{equation*}
+			(\ref{gen P->H})\Rightarrow
+		 \end{equation*}
+	 \end{minipage}
+	\begin{minipage}[t]{5cm}
+		\begin{equation}\label{h->p}
+			 h_n(\bm{x})=\sum_{\mu\vdash n} \frac{p_\mu(\bm{x})}{z_\mu}
+		 \end{equation}
+	 \end{minipage}
+	 \begin{minipage}[t]{1.5cm}
+		\vspace{4pt}\begin{equation*}
+			(\ref{gen P->E})\Rightarrow
+		 \end{equation*}
+	 \end{minipage}
+	\begin{minipage}[t]{7cm}
+		\vspace{-2pt} \begin{equation}\label{e->p}
+			  e_n(\bm{x})=\sum_{\mu\vdash n} \frac{(-1)^{n-\ell(\mu)}p_\mu(\bm{x})}{z_\mu},
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{2cm}
+		\vspace{2pt} \begin{equation*}\text{see also \ref{h->p2} and \ref{e->p2}}
+		\end{equation*}
+	\end{minipage}
+\end{mdframed}
+
+\vspace{-10pt}\begin{mdframed}[linecolor=red!20, linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{3.55cm}
+		\begin{bf}The $\bm{\omega}$ linear map\end{bf}
+		\begin{align*}\omega:\mathbf{\Lambda}&\rightarrow\mathbf{\Lambda},
+		\\			p_n&\mapsto(-1)^{n-1}p_n 
+		\end{align*}
+	\end{minipage}
+	\begin{minipage}[t]{1.2cm}
+		\vspace{7pt}$\left.\begin{tikzpicture}
+			\node(!) at (0,0){};
+			\node(2) at (0,.5){};
+		\end{tikzpicture} \right\}\Rightarrow$
+	\end{minipage}
+	\begin{minipage}[t]{.35cm}
+		\vspace{7pt}$\left\{\begin{tikzpicture}
+		\node(!) at (0,0){};
+		\node(2) at (0,.5){};
+		\end{tikzpicture} \right.$
+	\end{minipage}
+	\begin{minipage}[t]{5cm}
+		\begin{align*}
+			\omega^2(g(\bm{x}))&=g(\bm{x}),~ \forall g\in\mathbf{\Lambda};
+			\\  \omega(s_\mu)&=s_{\mu'};
+		\end{align*}
+	\end{minipage}
+	\begin{minipage}[t]{9cm}
+		\begin{bf}Changing basis\end{bf}
+		\begin{equation}  \omega(h_n)=e_n ;\end{equation}
+		\begin{equation}\omega(m_\mu)=f_\mu, \{f_\mu\} \text{ is the }\textbf{forgotten base }
+		\end{equation}
+	\end{minipage}
+\end{mdframed}
+
+\vspace{-10pt}\begin{mdframed}[linecolor=cyan!20, linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{7cm}
+		\begin{bf}Scalar procduct\end{bf}
+		\begin{equation}\langle p_\mu,p_\lambda\rangle:=z_\mu\delta_{\mu,\lambda}\end{equation}
+		\begin{equation*}\langle g,d\rangle=\langle \omega(g),\omega(d)\rangle ~ \forall d, g\in\mathbf{\Lambda}.\end{equation*}
+	\end{minipage}
+	\begin{minipage}[t]{6cm}
+		\begin{bf}Cauchy Kernel\end{bf}
+		\begin{equation}\Omega(\bm{x}\bm{y}):=\prod_{i\geq 1}\frac{1}{(1-x_iy_j)}\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{6cm}
+		\begin{bf}$\{f_\mu\}$ and $\{g_\mu\}$ dual basis iff\end{bf}
+		\begin{equation*}\langle d_\mu,g_\lambda\rangle=\delta_{\mu,\lambda} \hspace{10pt}\text{ or } \end{equation*}
+		\begin{equation*}\Omega(\bm{x}\bm{y})=\sum_\mu d_\mu(\bm{x})g_\mu(\bm{y})\end{equation*}
+	\end{minipage}
+
+	\begin{equation}\Omega(\bm{x}\bm{y})=\sum_n h_n(\bm{x}\bm{y})=\sum_\mu s_\mu(\bm{x})s_\mu(\bm{y})=\sum_\mu h_\mu(\bm{x})m_\mu(\bm{y})=\sum_\mu e_\mu(\bm{x})f_\mu(\bm{y})=\sum_\mu p_\mu(\bm{x})\frac{p_\mu(\bm{y})}{z_\mu}
+	\end{equation}
+\end{mdframed}
+
+\vspace{-10pt}
+\section{Frobenius transform and Hilbert series}
+\vspace{-10pt}
+\begin{mdframed}[linecolor=red!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{14cm}
+		\begin{bf}Cyclic structure\end{bf}
+		\begin{equation*}\lambda(\sigma)=\lambda_1,\cdots,\lambda_k \text{ iff } \sigma=(\sigma_1,\cdots,\sigma_{\lambda_1})\cdots(\sigma_{\lambda_1+\cdots+\lambda_{k-1}+1},\cdots,\sigma_{|\lambda|})\end{equation*}
+	\end{minipage}
+	\begin{minipage}[t]{6cm}
+		\begin{bf}Cyclic type\end{bf}
+		\begin{equation*}\sigma=\sigma_\mu \text{ iff } \lambda(\sigma)=\mu \end{equation*}
+	\end{minipage}
+
+	\begin{minipage}[t]{11cm}
+		\begin{bf}Class functions\end{bf}
+		\begin{equation}R(\mathbb{S}_n):=\{\chi:\mathbb{S}_n\rightarrow \mathbb{C}~ |~ \chi(\sigma)=\chi(\tau\sigma\tau^{-1}),~ \forall \tau \in \mathbb{S}_n\}; 
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{8cm}
+		\begin{bf}Characters\end{bf}
+		\begin{equation*}\chi_V+\chi_W=\chi_{V\oplus W}\hspace{20pt}\text{ and }\hspace{20pt}\chi_V\chi_W=\chi_{V\otimes W}			\end{equation*}
+	\end{minipage}
+
+	\begin{minipage}[t]{19cm}
+		\begin{bf}Frobenius transform $\boldmath{\mathcal{F}}$\end{bf} (of an $\mathbb{S}_n$-module $V$)
+		\begin{equation} \mathcal{F}(V)=\mathcal{F}(\chi_V):= \frac{1}{n!}\sum_{\sigma\in\mathbb{S}_n} \frac{1}{n!}\chi_V(\sigma)p_{\lambda(\sigma)}=\sum_{\lambda\vdash n} \frac{1}{z_\mu}\chi_V(\sigma_\lambda)p_\lambda \hspace{20pt}\Rightarrow	\hspace{20pt} \mathcal{F}(V\oplus W)=\mathcal{F}(V)+\mathcal{F}(W)
+		\end{equation}
+	\end{minipage}
+\end{mdframed}
+
+\begin{mdframed}[linecolor=cyan!20, linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{9cm}
+		\begin{bf}Changing basis\end{bf}
+		\begin{equation} \mathcal{F}(\chi^\mu)=\sum_{\lambda\vdash n} \frac{1}{z_\mu}\chi^\mu(\sigma_\lambda)p_\lambda=s_\mu,
+		\end{equation}
+		where $\chi^\mu$ is an irreductible character.
+	\end{minipage}
+	\begin{minipage}[t]{9cm}
+		\begin{equation}\label{h->p2} \mathcal{F}(\chi_{1_{\mathbb{S}_n}})=\sum_{\lambda\vdash n} \frac{1}{z_\mu}p_\lambda=h_n,
+		\end{equation}
+		where $1_{\mathbb{S}_n}$ is the trivial representation.
+	\end{minipage}
+
+	\begin{minipage}[t]{13cm}
+		\begin{equation}\label{e->p2} \mathcal{F}(\chi_{\textrm{Sign}_{\mathbb{S}_n}})=\sum_{\lambda\vdash n} \frac{1}{z_\mu}\chi_{\textrm{Sign}_{\mathbb{S}_n}}(\sigma_\lambda)p_\lambda=\sum_{\mu\vdash n} \frac{1}{z_\mu}(-1)^{n-\ell(\mu)}p_\mu=e_n,
+		\end{equation}
+		where $\textrm{Sign}_{\mathbb{s}_n}$ is the sign representation.
+	\end{minipage}
+	\begin{minipage}[t]{5cm}
+		\begin{align*}
+			\text{Note \ref{h->p2} is equivalent to \ref{h->p} }\\ \text{and \ref{e->p2} is equivalent to \ref{e->p}.}
+		\end{align*}
+	\end{minipage}
+\end{mdframed}
+
+\vspace{-10pt}
+\begin{mdframed}[linecolor=red!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{9cm}
+		 \begin{bf}Graded Frobenius characteristic\end{bf}
+		\begin{equation}\textrm{Frob}_q(V):=\sum_{n\geq 1}\mathcal{F}(V_n)q^n,
+		\end{equation}
+		where $V=\oplus_{n\geq 1}V_{n}$ is a graded $\mathbb{S}_n$-module.
+	\end{minipage}
+	\begin{minipage}[t]{9cm}
+		 \begin{bf}Bigraded Frobenius characteristic\end{bf}
+		\begin{equation}\textrm{Frob}_{q,t}(V):=\sum_{n\geq 1}\mathcal{F}(V_{n,k})q^nt^k,
+		\end{equation}
+		where, $V=\oplus_{n,k\geq 1}V_{n,k}$ is a bigraded $\mathbb{S}_n$-module.
+	\end{minipage}
+\end{mdframed}
+
+\vspace{-10pt}
+\begin{mdframed}[linecolor=cyan!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{9cm}
+		\begin{bf}Hilbert series (poincaré series)\end{bf}
+		\begin{equation}\textrm{Hilb}_q(V):=\sum_{n\geq 1}\textrm{dim}(V_n)q^n,
+		\end{equation}
+		where $V=\oplus_{n\geq 1}V_{n}$ is a graded space.
+	\end{minipage}
+	\begin{minipage}[t]{9cm}
+		\begin{bf}Bigraded Hilbert series \end{bf}
+		\begin{equation}\textrm{Hilb}_{q,t}(V):=\sum_{n\geq 1}\textrm{dim}(V_{n,k})q^nt^k,
+		\end{equation}
+		where, $V=\oplus_{n,k\geq 1}V_{n,k}$ is a bigraded space.
+	\end{minipage}
+\end{mdframed}
+
+\vspace{-10pt}
+ \section{Plethysm ($\lambda$-rings)}
+ \vspace{-10pt}
+ \begin{mdframed}[linecolor=red!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{6cm}
+		 \begin{bf}plethysm\end{bf} is defined by:
+		\begin{equation} p_n[\bm{x}+Y]=p_n[\bm{x}]+p_n[Y],
+		\end{equation}
+		\begin{equation}p_n[\bm{x}Y]=p_n[\bm{x}]p_n[Y]
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{9cm}
+		\begin{bf}\end{bf}
+		\begin{equation}p_n[x]=x^n\text{ therefor } p_n[p_k(\bm{x})]=p_{nk}(\bm{x}),
+		\end{equation}
+		\begin{equation}p_n[c]=c, \text{ if } c \text{ is a constant,}
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{4cm}
+		\begin{bf}\end{bf}
+		\begin{equation*}p_n[q\bm{x}]=q^np_n(\bm{x})\end{equation*}
+		\begin{equation*}p_n[t\bm{x}]=t^np_n(\bm{x})\end{equation*}
+	\end{minipage}
+
+	\fcolorbox{black}{green!10}{\hyperref[exemple plethysme]{Example 4 clic here}\label{retour plethysme}}
+
+\end{mdframed}
+
+\vspace{-10pt}
+\section{Macdonald symmetric functions}
+\vspace{-10pt}
+\begin{mdframed}[linecolor=cyan!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{bf}More scalar product\end{bf}
+
+	\begin{minipage}[t]{9cm}
+		\begin{bf}... for original Macdonald polynomials\end{bf}
+		\begin{equation}\langle p_\mu,p_\lambda\rangle_{q,t}= z_\mu\delta_{\lambda,\mu}\overset{\ell(\mu)}{\underset{i=1}{\prod}}\frac{1-q^{\mu_i}}{1-t^{\mu_i}} 
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{10cm}
+		\begin{bf}...for combinatorial Macdonal polynomials\end{bf}
+		\begin{equation}\langle p_\mu,p_\lambda\rangle_*=(-1)^{|\mu|-\ell(\mu)}z_\mu\delta_{\lambda,\mu}\overset{\ell(\mu)}{\underset{i=1}{\prod}}(1-q^{\mu_i})(1-t^{\mu_i})
+		\end{equation}
+	\end{minipage}
+
+	\begin{minipage}[t]{19cm}
+		\begin{equation}\langle H_\mu,H_\lambda\rangle_*=\mathcal{E}_\mu(q,t)\mathcal{E}_\mu'(q,t) \delta_{\lambda,\mu}, \text{ where } \mathcal{E}_\mu(q,t)=\prod_{c\in\mu}(q^{a(c)}-t^{l(c)+1}) ~\text{ and }~ \mathcal{E}'_\mu(q,t)=\prod_{c\in\mu}(t^{l(c)}-q^{a(c)+1})
+		\end{equation}
+	\end{minipage}
+
+	\begin{minipage}[t]{10cm}
+		\begin{bf}Cauchy formula for the\end{bf} $\bm{H_\mu}$
+		\begin{equation} e_n\left[\frac{\bm{x}\bm{y}}{(1-q)(1-t)}\right]=\sum_{\mu\vdash n}\frac{H_\mu(\bm{x};q,t)H_\mu(\bm{y};q,t)}{\mathcal{E}_\mu(q,t)\mathcal{E}'_\mu(q,t)}
+		\end{equation}
+	\end{minipage}
+\end{mdframed}
+
+\vspace{-10pt}
+\begin{mdframed}[linecolor=red!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{9cm}
+		\begin{bf}Original Macdonald polynomials\end{bf}
+		\\(Gram-Schmidt of the monomial basis
+		\\in respect to $\langle \cdot,\cdot,\rangle_{q,t}$)
+		\begin{equation}P_\mu(\bm{x};q,t)=m_\mu+\sum_{\gamma\prec \mu}u_\gamma(q,t)m_\gamma
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{10cm}
+		\begin{bf}Combinatorial Macdonald polynomials\end{bf}
+
+		\begin{equation}H_\mu(\bm{x};q,t)=P_\mu\left[\frac{\bm{x}}{1-t};q,t^{-1}\right]\underset{c\in \mu}{\prod} (q^{a(c)}-t^{l(c)+1})
+		\end{equation}
+		\fcolorbox{black}{green!10}{\hyperref[exemple Mac]{Example 5 clic here}\label{retour Mac}}
+	\end{minipage}
+
+	\begin{minipage}[t]{9cm}
+		\begin{bf}\end{bf}
+		\begin{equation}H_{\mu}(\bm{x};q,1)=\prod_i H_{\mu_i}(\bm{x};q,1)
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{10cm}
+		\begin{bf}\end{bf}
+		\begin{equation}H_\mu(\bm{x};q,t)=H_{\mu'}(\bm{x};t,q) 
+	\end{equation}
+	\end{minipage}
+
+
+	\begin{minipage}[t]{9cm}
+		\begin{bf}\end{bf}
+		\begin{equation}H_n(\bm{x};q,1)=h_n\left[\frac{\bm{x}}{1-q}\right]\overset{n}{\underset{i=1}{\prod}}(1-q^i)
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{10cm}
+		\begin{bf}\end{bf}
+		\begin{equation}H_n(\bm{x};q,1)=e_n\left[\frac{\bm{x}}{1-q}\right]\overset{n}{\underset{i=1}{\prod}}(1-q^i)
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{19.25cm}
+		 \begin{equation} H_\mu(\bm{x};q,t)=\textrm{Frob}_{q,t}(\mathcal{M}_\mu),  \text{ where }  \mathcal{M_\mu}=\mathbb{C}\{\delta\bm{x}^\alpha\delta\bm{y}^\beta\Delta_\mu(\bm{x}, \bm{y})~|~\alpha, \beta \in \mathbb{N}^n\}\text{ is a Garcia-Haiman} 
+		 \end{equation}
+ module  and $\Delta_\mu=\textrm{det}(x_k^iy_k^j)_{\underset{(i,j)\in\mu}{1\leq k \leq n}}$.
+ 	\end{minipage}
+ 
+	 \begin{minipage}[t]{7cm}
+		\begin{bf}Specialisation\end{bf}
+		\begin{equation}H_\mu(\bm{x};0,0)=s_n
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{6cm}
+		\begin{equation}H_\mu(\bm{x};0,1)=h_\mu
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{6cm}
+		\begin{equation}H_\mu(\bm{x};1,1)=s_{1^n}
+		\end{equation}
+	\end{minipage}
+\end{mdframed}
+
+\vspace{-10pt}
+\begin{mdframed}[linecolor=cyan!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{12cm}
+		\begin{bf}$(q,t)$-Kostka polynomials \end{bf} $\bm{K_{\lambda,\mu}(q,t)}$
+		\begin{equation}
+H_\mu(\bm{x};q,t)=\sum_{\lambda\vdash |\mu|} K_{\lambda,\mu}(q,t)s_\lambda(\bm{x}), \text{ where } K_{\lambda,\mu}(q,t)\in \mathbb{N}[q,t].
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{7.75cm}
+		\begin{equation}K_{\lambda,\mu}(q,t)=K_{\lambda,\mu'}(t,q)
+		\end{equation}
+	\end{minipage}
+
+
+	 \begin{minipage}[t]{12cm}
+		\begin{equation}K_{\lambda,\mu}(q,t)=q^{n(\mu')}t^{n(\mu)}K_{\lambda',\mu}(q^{-1},t^{-1})
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{7.75cm}
+		\begin{equation}K^{-1}_{\lambda,\mu}(t,q)=K^{-1}_{\lambda',\mu}(q,t)
+	\end{equation}
+	\end{minipage}
+\end{mdframed}
+
+
+\section{Macdonald Operators}
+
+\begin{mdframed}[linecolor=red!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{8cm}
+		\begin{bf}The $\bm{\nabla}$ operator\end{bf}
+		\begin{equation}\nabla(H_\mu):=q^{n(\mu')}t^{n(\mu)} H_\mu
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{10.5cm}
+		\begin{equation}\nabla(\mathbf{\Lambda}_{\mathbb{Z}[q,t]})\subseteq\mathbf{\Lambda}_{\mathbb{Z}[q,t]} \text{  and
+} \nabla^{-1}(\mathbf{\Lambda}_{\mathbb{Z}[q,t]})\subseteq\mathbf{\Lambda}_{\mathbb{Z}[q,t,1/q,1/t]}
+		\end{equation}
+	\end{minipage}
+
+	\begin{minipage}[t]{19cm}
+		 \begin{equation} \nabla(e_n)=\textrm{Frob}_{q,t}(\mathcal{DH}_n),
+\text{ where }\mathcal{DH}=\{f\in\mathbb{C}[\bm{x},\bm{y}]~|~p_{h,k}(\delta\bm{x},\delta\bm{y})f(\bm{x},\bm{y})=0, \forall h, k \text{ s.t. } h+k>0\} 
+		  \end{equation}
+		  is the diagonal harmonic space.
+	\end{minipage}
+
+	\begin{minipage}[t]{11.5cm}
+		\begin{bf}\end{bf}
+		 \begin{equation} \nabla(e_n)|_{t=1}=\sum_{\gamma \in \mathcal{D}_{n,n}} q^{\textsl{area}(\gamma)}e_{\rho(\gamma)}, 	\text{ see  figure \ref{aire dans un chemin}.}
+ 		\end{equation}	
+	\end{minipage}
+	\begin{minipage}[t]{7.5cm}
+		\begin{bf}\end{bf}
+		 \begin{equation}\langle \nabla(e_n),en\rangle=C_n(q,t)
+		  \end{equation}
+	\end{minipage}
+	\fcolorbox{black}{green!10}{\hyperref[exemple nabla]{Example 6 clic here}\label{retour nabla}}
+\end{mdframed}
+
+\vspace{-10pt}
+\begin{mdframed}[linecolor=cyan!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{5cm}
+		\begin{bf}The $\bm {\Delta}_F$ operators\end{bf}
+		 \begin{equation} B_\mu:=\sum_{(i,j)\in\mu}q^it^j
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{8cm}
+		\begin{equation} \Delta_FH_\mu(\bm{x};q,t):=F[B_\mu]H_\mu(\bm{x};q,t)
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{6cm}
+		\begin{equation}\Delta_F(\mathbf{\Lambda}_{\mathbb{Z}[q,t]})\subseteq\mathbf{\Lambda}_{\mathbb{Z}[{q,t}]}
+		\end{equation}
+	\end{minipage}
+
+	\begin{minipage}[t]{7cm}
+		\begin{equation}\Delta_{FG}=\Delta_F\circ\Delta_G
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{6cm}
+		\begin{equation}\Delta_{F+G}=\Delta_F+\Delta_G
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{6cm}
+		\begin{equation}\Delta_{cG}=c\Delta_G, \text{ for } c \in \mathbb{Q}\end{equation}
+	\end{minipage}
+
+\end{mdframed}
+
+\vspace{-10pt}
+\begin{mdframed}[linecolor=cyan!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{minipage}[t]{9cm}
+		\begin{bf}$\bm{\omega^*}$ and $\bm{\omega}$\end{bf}
+		\begin{equation}\omega^*(F(\bm{x};q,t)):=\omega\left(F\left(\bm{x};q^{-1},t^{-1}\right)\right)
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{9cm}
+		\begin{bf}\end{bf}
+		\begin{equation} \omega^*(H_\mu(\bm{x};q,t))=q^{-n(\mu')}t^{-n(\mu)}H_\mu(\bm{x};q,t)
+		\end{equation}
+	\end{minipage}
+
+	\begin{minipage}[t]{9cm}
+		\begin{bf}\end{bf}
+		\begin{equation}\omega^*\nabla\omega^*(H_\mu(\bm{x};q,t))=\nabla^{-1}(H_\mu(\bm{x};q,t))
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{9cm}
+		\begin{bf}\end{bf}
+		\begin{equation}\omega(H_\mu(\bm{x};q,t))=q^{n(\mu')}t^{n(\mu)}H_\mu(\bm{x};q^{-1},t^{-1}) \end{equation}
+	\end{minipage}
+
+	\begin{minipage}[t]{10cm}
+		\begin{equation}\langle \nabla_{e_{d-1}}(e_n),F\rangle=\langle \nabla_{\omega F}(e_d),s_d\rangle, \forall F\in \Lambda^n  \Rightarrow
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{5.75cm}
+		\begin{equation*}\forall \mu\vdash n, \langle \nabla_{e_{d-1}}(e_n),s_\mu \rangle=\langle \nabla_{s_{\mu'}}(e_d),s_d\rangle,
+		\end{equation*}
+	\end{minipage}
+\end{mdframed}
+
+\vspace{-10pt}
+\begin{mdframed}[linecolor=red!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{bf}The operator that multiplies by \end{bf}$\bm{e_1}$\hspace{75pt}\begin{bf}The operator that differentiates by \end{bf}$\bm{e_1}$
+
+	\begin{minipage}[t]{.5cm}
+		\begin{equation}
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{9cm}
+		\begin{align*} \underline{e_1}:\mathbf{\Lambda}^d_{\mathbb{Q}(q,t)} &\rightarrow \mathbf{\Lambda}_{\mathbb{Q}(q,t)}^{d+1}
+		\\				H_\mu &\mapsto \sum_{\mu \lessdot \lambda}d_{\lambda,\mu}(q,t) H_\lambda 
+		\end{align*}
+	\end{minipage}
+	\begin{minipage}[t]{.5cm}
+		\begin{equation}
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{9cm}
+		\begin{align*} \delta_{e_1}:\mathbf{\Lambda}^d_{\mathbb{Q}(q,t)} &\rightarrow \mathbf{\Lambda}_{\mathbb{Q}(q,t)}^{d-1}
+		\\				H_\mu &\mapsto\sum_{\lambda \lessdot \mu}c_{\lambda,\mu}(q,t) H_\lambda
+		\end{align*}
+	\end{minipage}
+
+	$d_{\lambda,\mu}(q,t)=\prod_{c\in \mathcal{R}_{\lambda,\mu}}\frac{q^{a_\mu(c)}-t^{l_\mu(c)+1}}{q^{a_\lambda(c)}-t^{l_\lambda(c)	+1}}\prod_{c\in \mathcal{C}_{\lambda,\mu}}\frac{t^{l_\mu(c)}-q^{a_\mu(c)+1}}{t^{l_\lambda(c)}-q^{a_\lambda(c)+1}}
+	$, $c_{\lambda,\mu}(q,t)=\prod_{c\in \mathcal{R}_{\mu,\lambda}}\frac{t^{l_\mu(c)}-q^{a_\mu(c)+1}}{t^{l_\lambda(c)}-q^{a_\lambda(c)+1}}\prod_{c\in \mathcal{C}_{\mu,\lambda}}\frac{q^{a_\mu(c)}-t^{l_\mu(c)+1}}{q^{a_\lambda(c)}-t^{l_\lambda(c)+1}}$
+
+	$\mathcal{R}_{\lambda,\mu}$ is the set of cells in the same row as $\lambda/\mu$\hspace{30pt} $\mathcal{C}_{\lambda,\mu}$ is the set of cells in the same column as $\lambda/\mu$
+
+	It is proven that $\underline{e_1}\left[\frac{\bm{x}}{(1-q)(1-t)}\right]$ is the adjoint of $\delta_{e_1}$ in respect to $\langle\cdot,\cdot\rangle_*$.
+\end{mdframed}
+
+\vspace{-15pt}
+\section{Combinatorial aspects}
+\vspace{-15pt}
+\begin{mdframed}[linecolor=cyan!20,linewidth=3pt,innertopmargin=8pt]
+	 \begin{bf} The Schur symmetric functions:\end{bf}
+	  \begin{equation} s_\mu:=\underset{\tau:\mu \rightarrow \bm{x}}{\sum} x_\tau, \tau \text{ semi-standard and }x_\tau=\underset{c\in \mu}	{\prod}x_{\tau(c)}\end{equation}
+	\fcolorbox{black}{green!10}{\hyperref[exemple schur]{Example 7 clic here}\label{retour schur}}
+\end{mdframed}
+
+\vspace{-10pt}
+\begin{mdframed}[linecolor=red!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{bf}Pieri formula\end{bf}:
+	\begin{minipage}[t]{7.25cm}\begin{equation} h_ns_\mu=\underset{ \theta/\mu ~\text{ia a $n$-horizontal strip}}{\sum_{\theta \vdash n+|\mu| }} s_\theta.
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{7.25cm}
+		\begin{equation} e_ns_\mu=\underset{ \theta/\mu ~\text{ia a $n$-vertical strip}}{\sum_{\theta \vdash n+|\mu| }} s_\theta.
+		\end{equation}
+	\end{minipage}
+
+	\vspace{-20pt}
+	\fcolorbox{black}{green!10}{\hyperref[exemple pieri]{Example 8 clic here}\label{retour pieri}}
+\end{mdframed}
+
+\vspace{-10pt}
+\begin{mdframed}[linecolor=red!20,linewidth=3pt,innertopmargin=8pt]
+	The \begin{bf}Kostka numbers\end{bf} $\bm{K_{\mu,\lambda}}$
+	\vspace{-5pt}
+	\begin{equation}K_{\mu,\lambda}:=\#\{\text{ Semi-standard tableaux of shape }\mu\text{ fillings of }\lambda\}\end{equation}
+	\begin{minipage}[t]{4.75cm}
+		\begin{equation} s_\mu=\sum_{\lambda\vdash n} K_{\mu,\lambda}m_\lambda,
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{4.75cm}
+		\begin{equation} h_\mu=\sum_{\lambda\vdash n} K_{\lambda,\mu}s_\lambda,
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{4.75cm}
+		\begin{equation} e_\mu=\sum_{\lambda\vdash n} K_{\lambda,\mu}s_{\lambda'}.
+		\end{equation}
+	\end{minipage}
+
+	\fcolorbox{black}{green!10}{\hyperref[exemple kostka]{Example 9 clic here}\label{retour kostka}}
+\end{mdframed}
+
+\vspace{-10pt}
+\begin{mdframed}[linecolor=cyan!20,linewidth=3pt,innertopmargin=8pt]
+	\begin{bf}domino tabloid\end{bf}, $\bm{d_{\lambda,\mu}}$ 
+	\begin{equation}d_{\lambda,\mu}=\#\{\text{ domino tableaux of shape }\lambda\text{ and type }\mu\}
+	\end{equation}
+	\begin{minipage}[t]{7cm}
+		\begin{equation} e_\lambda=\sum_{\mu\vdash n} (-1)^{|\mu|-\ell(\mu)}d_{\lambda,\mu}h_\mu,
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{7cm}
+		\begin{equation} h_\lambda=\sum_{\mu\vdash n} (-1)^{|\mu|-\ell(\mu)}d_{\lambda,\mu}e_\mu,
+		\end{equation}
+	\end{minipage}
+
+\end{mdframed}
+
+\begin{mdframed}[linecolor=red!20,linewidth=3pt,innertopmargin=8pt]
+	$\bm{\chi^{\mu}(\lambda)}$
+	\begin{minipage}[t]{19.25cm}
+		\begin{equation}\chi^{\mu}(\lambda):=\sum_T(-1)^{ht(T)},\text{ summed over all border-strip tableaux, $T$, of shape $\mu$ and type $\lambda$},
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{7cm}
+		\begin{equation} ht(T)=\prod ht(T_{\lambda_i})
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{6cm}
+		\begin{bf}\end{bf}
+		\begin{equation}s_\mu=\sum_{\lambda\vdash n} \frac{1}{z_\mu}\chi^\mu(\lambda)p_\lambda
+		\end{equation}
+	\end{minipage}
+
+ \end{mdframed}
+\vspace{-10pt}
+
+\begin{mdframed}[linecolor=cyan!20,linewidth=3pt,innertopmargin=8pt]
+	 $\bm{w_{\lambda,\mu}}$ and $\bm{v_{\lambda,\mu}}$
+	 \begin{equation}w_{\lambda,\mu}=\#\{\text{ Matrices of zeros and ones, with row sums $\lambda$ and column sums $\mu$ }\}
+	  \end{equation}
+	  \begin{minipage}[t]{19.25cm}
+		  \begin{equation}v_{\lambda,\mu} =\#\{ \text{ Matrices of non negative integers, with row sums $\lambda$ and column sums $\mu$ }\}
+		  \end{equation}
+	  \end{minipage}
+	\begin{minipage}[t]{7cm}
+		\begin{equation} e_\lambda=\sum_{\mu\vdash n}w_{\lambda,\mu}m_\mu,
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{7cm}
+		\begin{equation} h_\lambda=\sum_{\mu\vdash n}v_{\lambda,\mu}m_\mu,
+		\end{equation}
+	\end{minipage}
+
+	\fcolorbox{black}{green!10}{\hyperref[exemple matrice]{Example 10 clic here}\label{retour matrice}}
+\end{mdframed}
+\vspace{-10pt}
+
+
+\begin{mdframed}[linecolor=red!20,linewidth=3pt,innertopmargin=8pt]
+	\section{$q$-analogs (see [Ber2009] for more on this)}
+	\begin{minipage}[t]{8.5cm}
+		\begin{equation} [n]_q:=1+q+q^2+q^3+\cdots+q^{n-1}
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{8.4cm}
+		\begin{equation}	[n]!_q:=[n]_q[n-1]_q\cdots[2]_q[1]_q
+		\end{equation}
+	\end{minipage}
+	\begin{equation}
+		\begin{bmatrix} n\\k \end{bmatrix}_q:=\frac{[n]!_q}{[k]!_q[n-k]!_q}
+	\end{equation}
+	\begin{equation}
+		C_n(q):=\frac{1}{[n+1]_q}\begin{bmatrix} 2n\\n \end{bmatrix}_q=\frac{[2n]_q[2n-1]_q\cdots[n+3]_q[n+2]_q}{[n]_q[n-1]_q\cdots[2]_q[1]_q}
+	\end{equation}
+	\begin{minipage}[t]{8.5cm}
+		\begin{equation} e_k(1,q,q^2,\cdots,q^{n-1})=q^{k(k-1)/2}\begin{bmatrix}n\\k \end{bmatrix}_q
+		\end{equation}
+	\end{minipage}
+	\begin{minipage}[t]{8.4cm}
+		\begin{equation}h_k(1,q,q^2,\cdots,q^{n-1})=\begin{bmatrix}n+k-1\\k \end{bmatrix}_q
+		\end{equation}
+	\end{minipage}
+
+	\fcolorbox{black}{green!10}{\hyperref[exemple q-analogue]{Example 11 clic here}\label{retour q-analogue}}
+ \end{mdframed}
+
+
+\newpage
+ 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%          Exemples        %%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+
+\begin{mdframed}[backgroundcolor=green!10]
+	\phantomsection{} \label{exemple diagramme}%%%%%%  label
+	\begin{it}Example 1: $\mu=77443\vdash 25$, ~$|77443|=25$, ~$\ell(77443)=5$, \hspace{35pt}$\mu'=5554222$~ \text{ and }~ $	\lambda=43321$ :\end{it}
+	\\
+
+	\begin{center}\hspace{-20pt}\begin{tikzpicture}[scale=.75]
+		\draw[very thin, cyan!50, xshift=0.5cm,yshift=0.5cm] (-.5,-.5) grid (3.5,3.5);
+		\draw[very thin, cyan!50] (0,0) grid (4,4);
+		\filldraw[cyan] (1,.5)--(1.5,.5)--(1.5,1)--(1,1)--(1,.5);
+		\filldraw[orange] (1.5,.5)--(3.5,.5)--(3.5,1)--(1.5,1)--(1.5,.5);
+		\filldraw[red] (1,1)--(1.5,1)--(1.5,2.5)--(1,2.5)--(1,1);
+		\node(mu) at (-1,3.5){$\mu:$};
+		\node[circle,fill,inner sep=2pt](point) at (1,.5){};
+		\node(c) at (1.40,0.75){};
+		\node(d) at (1.40,1.65){};
+		\node(e) at (2.40,0.85){};
+		\node(p) at  (-3.5,.35) {cell, $c=(2,1)$};
+		\node(l) at (-4,2){leg, $l(c)={\mu'}_{i+1}-(j+1)=3$};
+		\node(a) at (0,-1){arm, $a(c)=\mu_{j+1}-(i+1)=4$};
+		\node(h1) at (0,-1.75){$h_{77443}(c)=a_{77443}(c)+l_{77443}(c)+1=8$};
+		\node(v) at (10,-1.75){};
+		\draw[->] (p)--(c);
+		\draw[-> ] (l)--(d);
+		\draw[->] (a)--(e);
+		\draw (2,0)--(0,0)--(0,2.5)--(1.5,2.5)--(1.5,2)--(2,2)--(2,0);
+		\draw (1,0)--(1,2.5);
+		\draw (2,0)--(3,0)--(3,1)--(0,1);
+		\draw (.5,0)--(.5,2.5);
+		\draw (1.5,0)--(1.5,2);
+		\draw (2.5,0)--(2.5,1);
+		\draw (0,0.5)--(3.5,.5);
+		\draw (0,1.5)--(2,1.5);
+		\draw (0,2)--(1.5,2);
+		\draw (3,0)--(3.5,0)--(3.5,1)--(3,1);
+		\draw[very thick] (0,0)--(3.5,0)--(3.5,1)--(2,1)--(2,2)--(1.5,2)--(1.5,2.5)--(0,2.5)--(0,0);
+	\end{tikzpicture}
+	\hspace{-90pt}\begin{tikzpicture}[scale=.75] 
+		\filldraw[red] (1,.5)--(2.5,.5)--(2.5,1)--(1.5,1)--(1.5,2)--(1,2)--(1,.5);
+		\node(d) at (1.2,1.){};
+		\node(h) at (1.4,-1){hook, $h_{5554222}(2,1)=5$};
+		\node(v) at (1,-2.1){};
+		\draw[-> ] (h)--(d);
+		\draw[very thin, cyan!50, xshift=0.5cm,yshift=0.5cm] (-.5,-.5) grid (3.5,3.5);
+		\draw[very thin, cyan!50] (0,0) grid (4,4);
+		\node(muprime) at (-1,3.5){$\mu':$};
+		\draw (0,2)--(0,0)--(2.5,0)--(2.5,1.5)--(2,1.5)--(2,2)--(0,2);
+		\draw (0,1)--(2.5,1);
+		\draw (0,2)--(0,3)--(1,3)--(1,0);
+		\draw (0,.5)--(2.5,.5);
+		\draw (0,1.5)--(2,1.5);
+		\draw (0,2.5)--(1,2.5);
+		\draw (0.5,0)--(.5,3.5);
+		\draw (1.5,0)--(1.5,2);
+		\draw (2,0)--(2,1.5);
+		\draw (0,3)--(0,3.5)--(1,3.5)--(1,3);
+		\draw[very thick] (0,0)--(2.5,0)--(2.5,1.5)--(2,1.5)--(2,2)--(1,2)--(1,3.5)--(0,3.5)--(0,0);
+	\end{tikzpicture}
+	\begin{tikzpicture}[scale=.75] 
+		\draw[very thin, cyan!50, xshift=0.5cm,yshift=0.5cm] (-.5,-.5) grid (3.5,3.5);
+		\draw[very thin, cyan!50] (0,0) grid (4,4);
+		\node(muprime) at (-1,3.5){$\mu/\lambda:$};
+		\node(h) at (1.4,-1){};
+		\node(v) at (1,-2.1){};
+		\draw (1.5,1)--(2.5,1);
+		\draw (0,3)--(1,3);
+		\draw (2,.5)--(2.5,.5);
+		\draw (1,1.5)--(2,1.5);
+		\draw (0,2.5)--(1,2.5);
+		\draw (0.5,2)--(.5,3.5);
+		\draw (1.5,0.5)--(1.5,2);
+		\draw (2,0.5)--(2,1.5);
+		\draw (0,3)--(0,3.5)--(1,3.5)--(1,3);
+		\draw[very thick] (0,2.5)--(.5,2.5)--(.5,2)--(1,2)--(1,1.5)--(1.5,1.5)--(1.5,.5)--(2,.5)--(2,0)--(2.5,0)--(2.5,1.5)--(2,1.5)--(2,2)--(1,2)--(1,3.5)--(0,3.5)--(0,2.5);
+	\end{tikzpicture}	\end{center}
+	\[ z_\mu=z_{77443}=7^2\cdot4^2\cdot3\cdot2!2!1!=9408 ;\hspace{40pt}n(\mu)=n(77443)=39; \hspace{40pt}n(\mu')=n(5554222)=57.\]
+	\hyperref[retour diagramme]{\text{go back}}
+\end{mdframed}
+
+%%%%%%%%  Exemples tableau
+
+\begin{mdframed}[backgroundcolor=green!10]
+	\phantomsection{}\label{exemple tableau}%%%%%%    label
+	\begin{it}Example 2: \end{it}
+
+	    \begin{minipage}[t]{5cm}
+		   \begin{center}
+			   \begin{center}Tableau\end{center}
+			 \vspace{20pt}  
+			\begin{tikzpicture}[scale=.75]
+				\draw (0,3)--(0,0)--(2,0)--(2,2);
+				\draw (0,1)--(2,1);
+				\draw (0,2)--(2,2);
+				\draw (0,3)--(1,3)--(1,0);
+				\draw (0.5,0.5) node{111};
+				\draw (0.5,1.5) node{3};
+				\draw (0.5,2.5) node{5};
+				\draw (1.5,0.5) node{9};
+				\draw (1.5,1.5) node{63};
+			\end{tikzpicture}
+			\begin{center}\end{center}
+			\begin{center}shape 221 \end{center}
+			\begin{center}No order\end{center}
+		\end{center}
+	\end{minipage}
+	  \begin{minipage}[t]{7cm} \begin{center}
+		   \begin{center}Semi-Standard Tableau\end{center}
+		   \vspace{20pt}   
+		\begin{tikzpicture}[scale=.75]
+			\draw (0,3)--(0,0)--(2,0)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,0);
+			\draw (0.5,0.5) node{1};
+			\draw (0.5,1.5) node{2};
+			\draw (0.5,2.5) node{3};
+			\draw (1.5,0.5) node{1};
+			\draw (1.5,1.5) node{3};
+		\end{tikzpicture}
+		\begin{center}\end{center}
+		\begin{center}shape $221$ and filling $212$ \end{center}
+		\begin{center}(i.e. filled by $\{ 1^2,2,3^2\}$) \end{center}
+	\end{center}\end{minipage}
+ 	 \begin{minipage}[t]{7cm}
+ 		  \begin{center}
+ 		  \begin{center}Semi-Standard Tableau\end{center}
+		 \vspace{20pt}     
+		\begin{tikzpicture}[scale=.75]
+			\draw (0,3)--(0,0)--(2,0)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,0);
+			\draw (0.5,0.5) node{1};
+			\draw (0.5,1.5) node{2};
+			\draw (0.5,2.5) node{3};
+			\draw (1.5,0.5) node{1};
+			\draw (1.5,1.5) node{2};
+		\end{tikzpicture}
+		\begin{center}\end{center}
+		\begin{center}shape $221$ and filling $221$ \end{center}
+		\begin{center}(i.e. filled by $\{ 1,1,2,2,3\}$) \end{center}
+		\end{center}
+	\end{minipage}
+	\\
+
+	\begin{center}All standard tableaux of shape $221$:\end{center}
+	\begin{minipage}[t]{4cm}
+		\begin{tikzpicture}[scale=.75]
+			\draw (0,3)--(0,0)--(2,0)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,0);
+			\draw (0.5,0.5) node{1};
+			\draw (0.5,1.5) node{2};
+			\draw (0.5,2.5) node{3};
+			\draw (1.5,0.5) node{4};
+			\draw (1.5,1.5) node{5};
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}[t]{4cm}
+		\begin{tikzpicture}[scale=.75]
+			\draw (0,3)--(0,0)--(2,0)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,0);
+			\draw (0.5,0.5) node{1};
+			\draw (0.5,1.5) node{2};
+			\draw (0.5,2.5) node{5};
+			\draw (1.5,0.5) node{3};
+			\draw (1.5,1.5) node{4};
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}[t]{4cm}
+		\begin{tikzpicture}[scale=.75]
+			\draw (0,3)--(0,0)--(2,0)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,0);
+			\draw (0.5,0.5) node{1};
+			\draw (0.5,1.5) node{3};
+			\draw (0.5,2.5) node{5};
+			\draw (1.5,0.5) node{2};
+			\draw (1.5,1.5) node{4};
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}[t]{4cm}
+		\begin{tikzpicture}[scale=.75]
+			\draw (0,3)--(0,0)--(2,0)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,0);
+			\draw (0.5,0.5) node{1};
+			\draw (0.5,1.5) node{2};
+			\draw (0.5,2.5) node{4};
+			\draw (1.5,0.5) node{3};
+			\draw (1.5,1.5) node{5};
+		\end{tikzpicture}
+	\end{minipage}
+	\begin{minipage}[t]{4cm}
+		\begin{tikzpicture}[scale=.75]
+			\draw (0,3)--(0,0)--(2,0)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,0);
+			\draw (0.5,0.5) node{1};
+			\draw (0.5,1.5) node{3};
+			\draw (0.5,2.5) node{4};
+			\draw (1.5,0.5) node{2};
+			\draw (1.5,1.5) node{5};
+		\end{tikzpicture}
+	\end{minipage}
+		\begin{center} $f^{221}=\frac{5!}{\prod_{c\in 221}h(c)}=\frac{5\cdot4\cdot3\cdot2\cdot1}{4\cdot2\cdot3\cdot1\cdot1}=5$; 	\hspace{20pt} $5!=\sum_{\mu\vdash 5}(f^\mu)^2=1^2+4^2+5^2+6^2+5^2+4^2+1^2=120$
+		\end{center}
+
+	\hyperref[retour tableau]{\text{go back}}
+\end{mdframed}
+
+
+%%%%%%  Exemple bases 
+\newpage
+
+\begin{mdframed}[backgroundcolor=green!10]
+	\phantomsection{}\label{exemple bases} %%%%%%%%%%  label
+	\begin{it}Example 3: \end{it}
+		\begin{align*}
+			m_{21}(x,y,z)&=x^2y+x^2z+xy^2+xz^2+y^2z+yz^2
+			  \\  h_{21}(x,y,z)&=h_2h_1=(m_2+m_{11})m_1=(x^2+y^2+z^2+xy+xz+yz)(x+y+z)
+			\\ e_{21}(x,y,z)&=(xy+xz+yz)(x+y+z)
+			\\ p_{21}(x,y,z)&=(x^2+y^2+z^2)(x+y+z)
+ 			 \\s_{21}(x,y,z)&=x^2y+x^2z+xy^2+xz^2+y^2z+yz^2+2xyz 
+ 		 \end{align*}  
+
+		For $n=4$:
+		  \begin{align*}
+			h_{4}(x,y,z)&=m_{1111} + m_{211} + m_{22} + m_{31} + m_{4}
+ 			 \\  h_{31}(x,y,z)&=4m_{1111} + 3m_{211} + 2m_{22} + 2m_{31} + m_{4}
+			\\ h_{22}(x,y,z)&=6m_{1111} + 4m_{211} + 3m_{22} + 2m_{31} + m_{4}
+			\\ h_{211}(x,y,z)&=12m_{1111} + 7m_{211} + 4m_{22} + 3m_{31} + m_{4}
+ 			 \\h_{1111}(x,y,z)&=24m_{1111} + 12m_{211} + 6m_{22} + 4m_{31} + m_{4}
+ 		 \end{align*}  
+ 		 \begin{minipage}[t]{10cm}
+ 			 \begin{align*}
+				s_{4}(x,y,z)&=h_{4} 
+ 				 \\  s_{31}(x,y,z)&=h_{31} - h_{4}
+				\\ s_{22}(x,y,z)&=h_{22} - h_{31}
+				\\ s_{211}(x,y,z)&=h_{211} - h_{22} - h_{31} + h_{4}
+ 				 \\s_{1111}(x,y,z)&=h_{1111} - 3h_{211} + h_{22} + 2h_{31} - h_{4}
+ 			 \end{align*} 
+ 		 \end{minipage}
+ 		 \begin{minipage}[t]{9cm}
+ 			   \begin{align*}
+				s_{4}(x,y,z)&=e_{1111} - 3e_{211} + e_{22} + 2e_{31} - e_{4}
+ 				 \\  s_{31}(x,y,z)&=e_{211} - e_{22} - e_{31} + e_{4}
+				\\ s_{22}(x,y,z)&=e_{22} - e_{31}
+				\\ s_{211}(x,y,z)&=e_{31} - e_{4}
+ 				 \\s_{1111}(x,y,z)&=e_{4}
+ 			 \end{align*} 
+ 		  \end{minipage}
+   
+	\hyperref[retour bases]{\text{go back}}
+\end{mdframed}
+\vspace{-10pt}
+\begin{mdframed}[backgroundcolor=green!10]
+	\phantomsection{}\label{exemple plethysme} %%%%%%%%%%  label
+	\begin{it}Example 4: \end{it}
+
+	$a)$\hspace{10pt}Let  $f=(q+t)p_k, $\hspace{20pt}then: \hspace{20pt} $f\left[\frac{5q\bm{x}}{1-t}\right]=(q+t)p_k\left[\frac{5q\bm{x}}{1-t}\right]=(q+t)\frac{5q^n}{1-t^n}p_{k}(\bm{x}).$
+
+
+	$b)$\hspace{10pt}$p_n[p_1(\bm{x})]=p_n[x_1+x_2+\cdots]=p_n(\bm{x})=\sum_{i\in\mathbb{N}} p_n[x_i]=\sum_{i\in\mathbb{N}} x_i^n$
+
+
+	$c)$\hspace{10pt}$p_n[p_k(\bm{x})]=p_n\left[\sum_{i\in\mathbb{N}} x_i^k\right]=\sum_{i\in\mathbb{N}} p_n[x_i^k]=\sum_{i\in\mathbb{N}} x_i^{kn}=p_{nk}(\bm{x})\hspace{20pt} \Rightarrow\hspace{20pt} p_n[f(\bm{x})]=f[p_n(\bm{x})] \forall f\in\Lambda$
+
+	$d)$\hspace{10pt}Let $g=p_3(\bm{x})+p_{111}(\bm{x})$ and $f=p_{11}(\bm{x})+p_2(\bm{x}),$ then:
+	\begin{align*} g[f(\bm{x})]&=(p_3+p_{111})[f(\bm{x})]
+		\\				&=p_3[p_{11}(\bm{x})+p_2(\bm{x})]+p_{111}[p_{11}(\bm{x})+p_2(\bm{x})]
+		\\				&=p_3[p_{11}(\bm{x})]+p_3[p_2(\bm{x})]+(p_{1}[p_{11}(\bm{x})+p_2(\bm{x})])^3
+		\\				&=p_3[p_1(\bm{x})]p_3[p_1(\bm{x})]+p_{6}(\bm{x})+(p_{11}(\bm{x})+p_2(\bm{x}))^3
+		\\				&=p_{6}(\bm{x})+p_{33}(\bm{x})+p_{222}(\bm{x})+3p_{2211}(\bm{x})+3p_{21111}(\bm{x})+p_{1^6}(\bm{x})
+	\end{align*}
+	and
+	\begin{align*} f[g(\bm{x})]&=(p_{11}+p_2)[g(\bm{x})]
+		\\				&=(p_1[p_3(\bm{x})+p_{111}(\bm{x})])^2+p_2[p_3(\bm{x})+p_{111}(\bm{x})]
+		\\				&=p_6(\bm{x})+p_{33}(\bm{x})+2p_{3111}(\bm{x})+p_{222}(\bm{x})+p_{1^6}(\bm{x})
+	\end{align*}
+	Therefor $g[f(\bm{x})]\not=f[g(\bm{x})]$.
+
+	\hyperref[retour plethysme]{\text{go back}}
+\end{mdframed}
+
+\begin{mdframed}[backgroundcolor=green!10]
+	\phantomsection{}\label{exemple Mac} %%%%%%%%%%  label
+	\begin{it}Example 5: \end{it}
+	  \begin{align*}
+		H_{4}(x,y,z)&=q^{6}s_{1111} + \left(q^{5} + q^{4} + q^{3}\right)s_{211} + \left(q^{4} + q^{2}\right)s_{22} + \left(q^{3} + q^{2} + q\right)s_{31} + s_{4}
+		  \\  H_{31}(x,y,z)&=q^{3}s_{1111} + \left(q^{3} t + q^{2} + q\right)s_{211} + \left(q^{2} t + q\right)s_{22} + \left(q^{2} t + q t + 1\right)s_{31} + ts_{4}
+		\\ H_{22}(x,y,z)&=q^{2}s_{1111} + \left(q^{2} t + q t + q\right)s_{211} + \left(q^{2} t^{2} + 1\right)s_{22} + \left(q t^{2} + q t + t\right)s_{31} + t^{2}s_{4}
+		\\ H_{211}(x,y,z)&=qs_{1111} + \left(q t^{2} + q t + 1\right)s_{211} + \left(q t^{2} + t\right)s_{22} + \left(q t^{3} + t^{2} + t\right)s_{31} + t^{3}s_{4}
+		  \\H_{1111}(x,y,z)&=s_{1111} + \left(t^{3} + t^{2} + t\right)s_{211} + \left(t^{4} + t^{2}\right)s_{22} + \left(t^{5} + t^{4} + t^{3}\right)s_{31} + t^{6}s_{4}
+	  \end{align*} 
+	\hyperref[retour Mac]{\text{go back}}
+\end{mdframed}
+
+\begin{figure}[h!]  
+ \begin{minipage}[t]{6cm}
+	  \begin{center}
+		\begin{tikzpicture}[scale=.5]
+			\draw[gray!20,very thin] (0,0) grid (5,5);
+			\draw[cyan,very thick] (0,0)--(5,5);
+			\draw[very thick,pink](0,0)--(0,1)--(0,2);
+			\draw[very thick] (0,2)--(1,2);
+			\draw[very thick, pink](1,2)--(1,3)--(1,4);
+			\draw[very thick] (1,4)--(2,4)--(3,4)--(4,4);
+			\draw[very thick,pink] (4,4)--(4,5);
+			\draw[very thick] (4,5)--(5,5);
+		\end{tikzpicture}
+		\caption{}\label{contre}
+		\begin{center}Dyck path, $\gamma\in \mathcal{D}_5$\end{center}
+		\begin{center}with riser $\rho(\gamma)=221$\end{center}
+	\end{center}
+\end{minipage}
+\hspace{50pt}
+\begin{minipage}[t]{7cm}
+   	\begin{center}
+		\begin{tikzpicture}[scale=.5]
+			 \filldraw[pink] (0,1)--(1,1)--(1,2)--(0,2)--(0,1);
+			\filldraw[pink] (1,2)--(2,2)--(2,3)--(3,3)--(3,4)--(1,4)--(1,2);
+			\draw[gray!20,very thin] (0,0) grid (5,5);
+			\draw[cyan, very thick] (0,0)--(5,5);
+			\draw[very thick](0,0)--(0,1)--(0,2)--(1,2)--(1,3)--(1,4)--(2,4)--(3,4)--(4,4)--(4,5)--(5,5);
+		\end{tikzpicture}
+		\caption{}\label{aire dans un chemin}
+		\begin{center}Dyck path of area $4$\end{center}
+		\begin{center}$C_n:=\#D_n$\end{center}
+	\end{center}
+\end{minipage}
+\end{figure}
+
+\begin{mdframed}[backgroundcolor=green!10]
+	\phantomsection{}\label{exemple nabla} %%%%%%%%%%  label
+	\begin{it}Example 6: \end{it}
+
+	\hspace{75pt}
+	 \begin{minipage}[t]{3.5cm}
+		\begin{tikzpicture}[scale=.5]
+			\filldraw[pink!50] (0,1)--(1,1)--(1,2)--(2,2)--(2,3)--(0,3)--(0,1);
+			\draw[gray!40,very thin] (0,0) grid (3,3);
+			\draw[cyan,very thick] (0,0)--(3,3);
+			\draw[very thick,pink](0,0)--(0,3);
+			\draw[very thick] (0,3)--(3,3);
+		\end{tikzpicture} 
+	\end{minipage}
+	 \begin{minipage}[t]{3.5cm}
+		\begin{tikzpicture}[scale=.5]
+			\filldraw[pink!50] (0,1)--(1,1)--(1,2)--(2,2)--(2,3)--(1,3)--(1,2)--(0,2)--(0,1);
+			\draw[gray!40,very thin] (0,0) grid (3,3);
+			\draw[cyan,very thick] (0,0)--(3,3);
+			\draw[very thick,pink](0,0)--(0,2);
+			\draw[very thick,pink](1,2)--(1,3);
+			\draw[very thick] (0,2)--(1,2);
+			\draw[very thick] (1,3)--(3,3);
+		\end{tikzpicture} 
+	\end{minipage}
+	 \begin{minipage}[t]{3.5cm}
+		\begin{tikzpicture}[scale=.5]
+			\filldraw[pink!50] (0,1)--(1,1)--(1,2)--(0,2)--(0,1);
+			\draw[gray!40,very thin] (0,0) grid (3,3);
+			\draw[cyan,very thick] (0,0)--(3,3);
+			\draw[very thick,pink](0,0)--(0,2);
+			\draw[very thick,pink](2,2)--(2,3);
+			\draw[very thick] (0,2)--(2,2);
+			\draw[very thick] (2,3)--(3,3);
+		\end{tikzpicture} 
+	\end{minipage}
+	 \begin{minipage}[t]{3.5cm}
+		\begin{tikzpicture}[scale=.5]
+			\filldraw[pink!50](1,2)--(2,2)--(2,3)--(1,3)--(1,2);
+			\draw[gray!40,very thin] (0,0) grid (3,3);
+			\draw[cyan,very thick] (0,0)--(3,3);
+			\draw[very thick,pink](0,0)--(0,1);
+			\draw[very thick,pink](1,1)--(1,3);
+			\draw[very thick] (0,1)--(1,1);
+			\draw[very thick] (1,3)--(3,3);
+		\end{tikzpicture} 
+	\end{minipage}
+	 \begin{minipage}[t]{3.5cm}
+		\begin{tikzpicture}[scale=.5]
+			\draw[gray!40,very thin] (0,0) grid (3,3);
+			\draw[cyan,very thick] (0,0)--(3,3);
+			\draw[very thick,pink](0,0)--(0,1);
+			\draw[very thick,pink](1,1)--(1,2);
+			\draw[very thick,pink](2,2)--(2,3);
+			\draw[very thick] (0,1)--(1,1);
+			\draw[very thick] (1,2)--(2,2);
+			\draw[very thick] (2,3)--(3,3);
+		\end{tikzpicture} 
+	\end{minipage}
+
+	$\nabla|_{t=1}(e_3)=\hspace{25pt}q^3e_3\hspace{35pt}+\hspace{35pt}q^2e_{21}\hspace{31pt}+\hspace{31pt}qe_{21}\hspace{35pt}+	\hspace{35pt}qe_{21}\hspace{35pt}+\hspace{30pt}e_{111}$
+
+	\hyperref[retour nabla]{\text{go back}}
+\end{mdframed}
+
+\begin{mdframed}[backgroundcolor=green!10]
+	\phantomsection{}\label{exemple schur} %%%%%%%%%%  label
+	\begin{it}Example 7: \end{it}
+	 \begin{align*} s_{21}(x,y,z)&=\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every 	node/.style={scale=0.7},scale=.4]
+			\draw (0,3)--(0,1)--(2,1)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,1);
+			\draw (0.5,1.5) node{x};
+			\draw (0.5,2.5) node{y};
+			\draw (1.5,1.5) node{x};
+		\end{tikzpicture}+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\draw (0,3)--(0,1)--(2,1)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,1);
+			\draw (0.5,1.5) node{x};
+			\draw (0.5,2.5) node{z};
+			\draw (1.5,1.5) node{x};
+		\end{tikzpicture}+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\draw (0,3)--(0,1)--(2,1)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,1);
+			\draw (0.5,1.5) node{x};
+			\draw (0.5,2.5) node{y};
+			\draw (1.5,1.5) node{y};
+		\end{tikzpicture}+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\draw (0,3)--(0,1)--(2,1)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,1);
+			\draw (0.5,1.5) node{x};
+			\draw (0.5,2.5) node{z};
+			\draw (1.5,1.5) node{z};
+		\end{tikzpicture}+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\draw (0,3)--(0,1)--(2,1)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,1);
+			\draw (0.5,1.5) node{y};
+			\draw (0.5,2.5) node{z};
+			\draw (1.5,1.5) node{y};
+		\end{tikzpicture}+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\draw (0,3)--(0,1)--(2,1)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,1);
+			\draw (0.5,1.5) node{y};
+			\draw (0.5,2.5) node{z};
+			\draw (1.5,1.5) node{z};
+		\end{tikzpicture}+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\draw (0,3)--(0,1)--(2,1)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,1);
+			\draw (0.5,1.5) node{x};
+			\draw (0.5,2.5) node{z};
+			\draw (1.5,1.5) node{y};
+		\end{tikzpicture}+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\draw (0,3)--(0,1)--(2,1)--(2,2);
+			\draw (0,1)--(2,1);
+			\draw (0,2)--(2,2);
+			\draw (0,3)--(1,3)--(1,1);
+			\draw (0.5,1.5) node{x};
+			\draw (0.5,2.5) node{y};
+			\draw (1.5,1.5) node{z};
+		\end{tikzpicture}
+		\\ &=x^2y+x^2z+xy^2+xz^2+y^2z+yz^2+2xyz
+	\end{align*}
+
+	\hyperref[retour schur]{\text{go back}}
+\end{mdframed}
+
+\begin{mdframed}[backgroundcolor=green!10]
+	\phantomsection{}\label{exemple pieri} %%%%%%%%%%  label
+	\begin{it}Example 8: \end{it}
+	\begin{align*}h_3s_{21}&=
+		\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\filldraw [cyan] (-4,1)--(-1,1)--(-1,2)--(-4,2);
+			\draw (-4,1)--(-1,1)--(-1,2)--(-4,2)--(-4,1);
+			\draw (-3,1)--(-3,2);
+			\draw (-2,1)--(-2,2);
+		\end{tikzpicture}
+		\times
+		\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\filldraw[pink] (0,3)--(0,1)--(2,1)--(2,2)--(1,2)--(1,3);
+			\draw (0,1)--(2,1)--(2,2);
+			\draw (0,2)--(2,2);
+			\draw (0,1)--(0,3)--(1,3)--(1,1);
+		\end{tikzpicture}
+		\\&=
+		\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\filldraw[pink] (0,3)--(0,1)--(2,1)--(2,2)--(1,2)--(1,3);
+			\draw (0,1)--(2,1)--(2,2);
+			\draw (0,2)--(2,2);
+			\draw (0,1)--(0,3)--(1,3)--(1,1);
+			\filldraw[cyan](2,1)--(5,1)--(5,2)--(2,2);
+			\draw (2,1)--(5,1)--(5,2)--(2,2)--(2,1);
+			\draw (3,1)--(3,2);
+			\draw (4,1)--(4,2);
+		\end{tikzpicture}+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\filldraw[pink] (0,3)--(0,1)--(2,1)--(2,2)--(1,2)--(1,3);
+			\draw (0,1)--(2,1)--(2,2);
+			\draw (0,2)--(2,2);
+			\draw (0,1)--(0,3)--(1,3)--(1,1);
+			\filldraw[cyan](2,1)--(4,1)--(4,2)--(2,2);
+			\draw (2,1)--(4,1)--(4,2)--(2,2)--(2,1);
+			\draw (3,1)--(3,2);
+			\filldraw[cyan] (0,3)--(0,4)--(1,4)--(1,3)--(0,3);
+			\draw (0,3)--(0,4)--(1,4)--(1,3)--(0,3);
+		\end{tikzpicture}+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\filldraw[pink] (0,3)--(0,1)--(2,1)--(2,2)--(1,2)--(1,3);
+			\draw (0,1)--(2,1)--(2,2);
+			\draw (0,2)--(2,2);
+			\draw (0,1)--(0,3)--(1,3)--(1,1);
+			\filldraw[cyan](2,1)--(4,1)--(4,2)--(2,2);
+			\draw (2,1)--(4,1)--(4,2)--(2,2)--(2,1);
+			\draw (3,1)--(3,2);
+			\filldraw[cyan] (1,2)--(1,3)--(2,3)--(2,2)--(1,2);
+			\draw (1,2)--(1,3)--(2,3)--(2,2)--(1,2);
+		\end{tikzpicture}+\begin{tikzpicture}[line cap=round,line join=round,>=triangle 45,x=1cm,y=1cm, thick, every node/.style={scale=0.7},scale=.4]
+			\filldraw[pink] (0,3)--(0,1)--(2,1)--(2,2)--(1,2)--(1,3);
+			\draw (0,1)--(2,1)--(2,2);
+			\draw (0,2)--(2,2);
+			\draw (0,1)--(0,3)--(1,3)--(1,1);
+			\filldraw[cyan](2,1)--(3,1)--(3,2)--(2,2);
+			\draw (2,1)--(3,1)--(3,2)--(2,2)--(2,1);
+			\draw (3,1)--(3,2);
+			\filldraw[cyan] (1,2)--(1,3)--(2,3)--(2,2)--(1,2);
+			\draw (1,2)--(1,3)--(2,3)--(2,2)--(1,2);
+			\filldraw[cyan] (0,3)--(0,4)--(1,4)--(1,3)--(0,3);
+			\draw (0,3)--(0,4)--(1,4)--(1,3)--(0,3);
+		\end{tikzpicture}
+		\\&=s_{51}+s_{411}+s_{42}+s_{321}
+	\end{align*}
+	\hyperref[retour pieri]{\text{go back}}
+\end{mdframed}
+
+\begin{mdframed}[backgroundcolor=green!10]
+	\phantomsection{}\label{exemple kostka} %%%%%%%%%%  label
+	\begin{it}Example 9: \end{it}
+	\begin{equation*}
+		K_{221,5}=0, ~K_{221,41}=0,~ K_{221,32}=0,~ K_{221,311}=0,~ K_{221,221}=1, ~K_{221,2111}=2, ~K_{221,11111}=5
+	\end{equation*}
+	\begin{equation*} s_{221}=m_{221}+2m_{2111}+5m_{11111}
+	\end{equation*}
+	\begin{equation*}
+		K_{5,221}=1, ~K_{41,221}=2,~ K_{32,221}=2,~ K_{311,221}=1,~K_{221,221}=1, ~K_{2111,221}=0, ~K_{11111,221}=0
+	\end{equation*}
+	\begin{equation*} h_{221}=s_5+2s_{41}+2s_{32}+s_{311}+s_{221}
+	\end{equation*}
+	\begin{equation*} e_{221}=s_{11111}+2s_{2111}+2s_{221}+s_{311}+s_{32}
+	\end{equation*}
+
+	\hyperref[retour kostka]{\text{go back}}
+\end{mdframed}
+
+
+\begin{mdframed}[backgroundcolor=green!10]
+	\phantomsection{}\label{exemple matrice} %%%%%%%%%%  label
+	\begin{it}Example 10: \end{it}
+
+	 \begin{equation*}w_{21,3}=\#\{\}=0,~ w_{21,21}=\#\left\{\begin{bmatrix}1&1 \\ 1&0\end{bmatrix}\right\}=1,~w_{21,111}=\#\left\{\begin{bmatrix}1&1&0\\0&0&1\\0&0&0\end{bmatrix},~\begin{bmatrix}1&0&1\\0&1&0\\0&0&0\end{bmatrix},~\begin{bmatrix}0&1&1\\1&0&0\\0&0&0\end{bmatrix}\right\}=3
+ 	\end{equation*}
+ 
+	\begin{equation*} e_{21}=m_{21}+3m_{111}
+	\end{equation*}
+
+	  \begin{equation*}v_{21,3}=\#\left\{\begin{bmatrix}2&0 \\ 1&0\end{bmatrix}\right\}=1,~v_{21,21}=\#\left\{\begin{bmatrix}1&1 \\ 			1&0\end{bmatrix},~\begin{bmatrix}2&0 \\ 0&1\end{bmatrix}\right\}=2,~v_{21,111}=w_{21,111}=3
+	  \end{equation*}
+  
+	\begin{equation*} h_{21}=m_3+2m_{21}+3m_{111},
+	\end{equation*}
+
+	\hyperref[retour matrice]{\text{go back}}
+\end{mdframed}
+
+
+\begin{mdframed}[backgroundcolor=green!10]
+	\phantomsection{}\label{exemple q-analogue} %%%%%%%%%%  label
+	\begin{it}Example 11: \end{it}
+
+	\[[5]_q=q^4+q^3+q^2+q+1\]
+
+	\[[4]!_q=(q^3+q^2+q+1)(q^2+q+1)(q+1)(1)\]
+
+	\[\begin{bmatrix} 8\\4 \end{bmatrix}_q=\frac{[8]_q[7]_q[6]_q[5]_q[4]_q[2]_q[2]_q[1]_q}{[4]_q[2]_q[2]_q[1]_q[4]_q[2]_q[2]_q[1]_q}\]
+
+	\begin{align*}C_4(q):&=\frac{1}{[5]_q}\begin{bmatrix} 8\\4 \end{bmatrix}_q=\frac{[8]_q[7]_q[6]_q}{[4]_q[2]_q[2]_q[1]_q}
+		\\
+		\\				&=1+q^2+q^3+2q^4+q^5+2q^6+q^7+2q^8+q^9+q^{10}+q^{12}
+	\end{align*}
+	\hyperref[retour q-analogue]{\text{go back}}
+\end{mdframed}
+
+\end{document}
+
+
+
