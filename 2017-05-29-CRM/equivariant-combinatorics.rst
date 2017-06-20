@@ -24,6 +24,8 @@ Documents and references
   (prepared by Pauline Hubert and Mélodie Lapointe)
 - A `compendium of symmetric function formulas <compendium-symmetric-function-formulas.pdf>`_
   (prepared by Nancy Wallace)
+- A `compendium of rectangular combinatorics formulas <compendium-rectangular-combinatorics-formulas.pdf>`_
+  (prepared by Étienne Tétreault)
 - A brief :ref:`demo-ideals`
 
 - `Chow, a SageMath library for computations in intersection theory
