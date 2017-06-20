@@ -15,6 +15,8 @@ Documents and references
 
 - The `official SageMath thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_.
 - `More SageMath thematic tutorials <../>`_.
+- The book `Calcul Mathématique avec Sage <http://sagebook.gforge.inria.fr/>`_,
+  and its ongoing translations into English and German.
 
 - Sage's tutorials on :class:`Symmetric functions <sage.combinat.sf.sf.SymmetricFunctions>`
   and :class:`Quasi symmetric functions <sage.combinat.ncsf_qsym.qsym.QuasiSymmetricFunctions>`
