@@ -1,13 +1,11 @@
 .. -*- coding: utf-8 -*-
 .. _crm.2017.equivariant-combinatorics:
 
-===================================================================================================
-Exercise and computational sessions at the 2017 CRM «Equivariant combinatorics» school and workshop
-===================================================================================================
+=================================================================================================
+Material and activities linked to the CRM-2017 school and workshop on “Equivariant Combinatorics”
+=================================================================================================
 
 .. MODULEAUTHOR:: Nicolas M. Thiéry <nthiery at users.sf.net>
-
-This is part of a series of :ref:`crm.2017`.
 
 Documents and references
 ========================
@@ -36,6 +34,11 @@ Documents and references
   a SageMath library for computing with various bases of multivariate
   polynomials: Schubert polynomials, Grothendieck polynomials,
   Demazure characters, by Viviane Pons
+
+- Other :ref:`crm.2017`.
+
+Exercises and computational sessions (week: June 12-16)
+=======================================================
 
 Monday 4-5:30pm
 ===============
