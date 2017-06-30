@@ -39,7 +39,7 @@ Documents and references
   polynomials: Schubert polynomials, Grothendieck polynomials,
   Demazure characters, by Viviane Pons
 
-- `https://github.com/nthiery/harmonic-modules/blob/master/DiagonalCharacter.ipynb code and comments`_
+- `code and comments <https://github.com/nthiery/harmonic-modules/blob/master/DiagonalCharacter.ipynb>`_
   on how to compute the bicharacter of diagonal harmonics up to 5 rows
   of 6 variables, by Bergeron and Thiéry
 
