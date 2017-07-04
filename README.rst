@@ -1,8 +1,8 @@
 About More SageMath thematic tutorials
 ======================================
 
-.. image:: https://readthedocs.org/projects/more-sagemath-thematic-tutorials/badge/?version=latest
-    :target: http://more-sagemath-thematic-tutorials.readthedocs.io/en/latest/?badge=latest
+.. image:: https://readthedocs.org/projects/more-sagemath-tutorials/badge/?version=latest
+    :target: http://more-sagemath-tutorials.readthedocs.io/en/latest/?badge=latest
     :alt: Documentation Status
 
 This repository is meant as a place to collectively share and evolve
@@ -36,7 +36,7 @@ Contributing
 
 Contributions of all kinds are most welcome! If you spot a typo
 while reading the
-`documents on ReadTheDocs <http://more-sagemath-thematic-tutorials.readthedocs.io/en/latest/>`_
+`documents on ReadTheDocs <http://more-sagemath-tutorials.readthedocs.io/en/latest/>`_
 please follow "Edit on GitHub" -> "Edit this file" and submit your
 change (this requires a GitHub account).
 
