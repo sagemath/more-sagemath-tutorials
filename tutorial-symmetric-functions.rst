@@ -17,7 +17,7 @@ are not made explicit. Indeed for most practical calculations
 variables need not appear. Moreover, one may show that this does not
 cause any trouble in the calculations.
 
-$\def\QQ{\mathbb{QQ}}$
+`\def\QQ{\mathbb{QQ}}`
 
 Display customization
 ---------------------
