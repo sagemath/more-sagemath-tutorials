@@ -279,14 +279,14 @@ Conversely, a "concrete" symmetric polynomial, i.e.: explicitly expressed in the
 
     sage: pol1 = (p([2])+e([2,1])).expand(2)
     sage: print pol1
+    x0^2*x1 + x0*x1^2 + x0^2 + x1^2
 
-.. end of output
 
 ::
 
     sage: m.from_polynomial(pol1)
+    m2 + m21
 
-.. end of output
 
 A more interesting use of this function is to convert a symmetric polynomial, written with a finite number of variables, into a symmetric function.
 
@@ -300,8 +300,8 @@ We declare our polynomial and convert it into a symmetric function, for example 
     sage: n = 3
     sage: R = PolynomialRing(QQ,'y',n)
     sage: R.inject_variables()
+    Defining y0, y1, y2
 
-.. end of output
 
 Here, we will work with three variables (:math:`y_0, y_1` and :math:`y_2`).
 Finally, we can declare our polynomial and convert it into a symmetric function in the monomial basis for example.
@@ -311,8 +311,8 @@ Finally, we can declare our polynomial and convert it into a symmetric function 
 
     sage: pol2 = y0^2*y1 + y0*y1^2 + y0^2*y2 + 2*y0*y1*y2 + y1^2*y2 + y0*y2^2 + y1*y2^2
     sage: m.from_polynomial(pol2)
+    2*m111 + m21
 
-.. end of output
 
 In the preceeding example, the base ring of polynomials is the same as the base ring of symmetric polynomials considered, as checked by the following.
 
@@ -320,8 +320,9 @@ In the preceeding example, the base ring of polynomials is the same as the base 
 
     sage: print s.base_ring()
     sage: print pol2.base_ring()
+    Rational Field
+    Rational Field
 
-.. end of output
 
 
 Thus a concrete symmetric polynomial over :math:`\mathbb{Q}(q,t)` may be transformed into an abstract symmetric function in any basis.
@@ -333,8 +334,10 @@ Thus a concrete symmetric polynomial over :math:`\mathbb{Q}(q,t)` may be transfo
     sage: R.inject_variables()
     sage: pol2 = 1+(y0*y1+y0*y2+y1*y2)*(q+t)+(y0*y1*y2)*(q*t)
     sage: s.from_polynomial(pol2)
+    Defining y0, y1, y2
 
-.. end of output
+    s + (q+t)*s11 + q*t*s111)
+
 
 
 Changes of bases
@@ -348,8 +351,8 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 ::
 
     sage: e(p([2,2])+m([1,1])*s([2,1]))
+    e1111 - 4*e211 + 4*e22 + e221 - e32
 
-.. end of output
 
 ***Exercise:***
 
@@ -361,9 +364,22 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
     sage: for mu in Partitions(5) :
     sage:     show(s(mu))
     sage:     show(e(s(mu)))
+    s5
+    e11111 - 4*e2111 + 3*e221 + 3*e311 - 2*e32 - 2*e41 + e5
+    s41
+    e2111 - 2*e221 - e311 + 2*e32 + e41 - e5
+    s32
+    e221 - e311 - e32 + e41
+    s311
+    e311 - e32 - e41 + e5
+    s221
+    e32 - e41
+    s2111
+    e41 - e5
+    s11111
+    e5
 
 
-.. end of output
 
 ***Exercise:***
 
@@ -373,8 +389,8 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 ::
 
     sage: p(sum(h(mu) for mu in Partitions(4)))
+    47/24*p1111 + 7/4*p211 + 3/8*p22 + 2/3*p31 + 1/4*p4
 
-.. end of output
 
 ***Exercise:***
 
@@ -387,14 +403,22 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 
     sage: from sage.combinat.sf.sfa import *
     sage: zee([4,4,2,1])
+    64
 
-.. end of output
 
 ::
 
     sage: for n in range (1,5) :
     sage:     show(p(h([n])))
     sage:     show(sum(p(mu)/zee(mu) for mu in Partitions(n)))
+    p1
+    p1
+    1/2*p11 + 1/2*p2
+    1/2*p11 + 1/2*p2
+    1/6*p111 + 1/2*p21 + 1/3*p3
+    1/6*p111 + 1/2*p21 + 1/3*p3
+    1/24*p1111 + 1/4*p211 + 1/8*p22 + 1/3*p31 + 1/4*p4
+    1/24*p1111 + 1/4*p211 + 1/8*p22 + 1/3*p31 + 1/4*p4
 
 
  *Note that there also exists a function ``aut()`` which is the same as ``zee()`` but doesn't have to be imported.*
@@ -411,35 +435,35 @@ First, the function  ``get_print_style()``  applied to a basis gives us the orde
 ::
 
     sage: s.get_print_style()
+    'lex'
 
-.. end of output
 
 ::
 
     sage: s.set_print_style('lex')
     sage: s(p[4,1,1])
+    -s111111 - s21111 + s2211 + s222 - s33 - s42 + s51 + s6
 
-.. end of output
 
 ::
 
     sage: s.set_print_style('length')
     sage: s(p[4,1,1])
+    s6 - s33 - s42 + s51 + s222 + s2211 - s21111 - s111111
 
-.. end of output
 
 ::
 
     sage: s.get_print_style()
+    'length'
 
-.. end of output
 
 ::
 
     sage: s.set_print_style('maximal_part')
     sage: s(p[4,1,1])
+    -s111111 + s222 - s21111 + s2211 - s33 - s42 + s51 + s6
 
-.. end of output
 
 More basic commands on symmetric functions
 ------------------------------------------
@@ -450,36 +474,36 @@ The function ``coefficient()`` returns the coefficient associated to a given par
 
     sage: f = s[5,2,2,1]
     sage: e(f)
+    e43111 - 2*e4321 + e433 - e4411 + e442 - e52111 + 2*e5221 - e532 + e541 + e6211 - e622 - e64 - e721 + e82
 
-.. end of output
 
 ::
 
     sage: e(f).coefficient([4,3,2,1])
+    -2
 
-.. end of output
 
 The function ``degree()`` gives the degree of a symmetric function.
 
 ::
 
     sage: f.degree()
+    10
 
-.. end of output
 
 Finally, the function ``support()`` returns the list of partitions that appear in a given symmetric function. The result will depend on the basis of the function. In the following example, we also use the function ``sorted()`` to get an ordered list.
 
 ::
 
     sage: print f.support()
+    [5221]
 
-.. end of output
 
 ::
 
     sage: print sorted(h(f).support())
+    [5221, 5311, 532, 541, 6211, 631, 64, 7111, 721, 811, 82]
 
-.. end of output
 
 
 
@@ -508,25 +532,24 @@ Here are some examples involving the "combinatorial" Macdonald symmetric functio
     sage: H = Symqt.macdonald().Ht()
     sage: H.print_options(prefix="H")
 
-.. end of output
 
 ::
 
     sage: s(H([2,1]))
+    q*t*s111 + (q+t)*s21 + s3)
 
-.. end of output
 
 ::
 
     sage: H(s[2,1])
+    ((-q)/(-q*t^2+t^3+q^2-q*t))*McdHt111 + ((q^2+q*t+t^2)/(-q^2*t^2+q^3+t^3-q*t))*McdHt21 + (t/(-q^3+q^2*t+q*t-t^2))*McdHt3
 
-.. end of output
 
 ::
 
     sage: [H(mu).nabla() for mu in Partitions(4)]
+    [q^6*McdHt4, q^3*t*McdHt31, q^2*t^2*McdHt22, q*t^3*McdHt211, t^6*McdHt1111]
 
-.. end of output
 
 
 Scalar Products
@@ -539,8 +562,8 @@ Thus, we get
 ::
 
         sage: p([2,2,1]).scalar(p([2,2,1]))
+        8
 
-.. end of output
 
 One may specify an optional argument which is a function on partitions giving the value for the scalar product between :math:`p_{\mu}` and :math:`p_{\mu}`. Power sums remain orthogonal for the resulting scalar product. By default, this value is :math:`z_{\mu}`, but other interesting cases include:
 
@@ -551,8 +574,8 @@ This is already refined as ``scalar_qt()``.
 ::
 
     sage: factor(p([2,2,1]).scalar_qt(p[2,2,1]))
+    (8) * (t - 1)^-3 * (t + 1)^-2 * (q + 1)^2 * (q - 1)^3
 
-.. end of output
 
 
 Some interesting operators on symmetric functions
@@ -570,30 +593,30 @@ It has been shown by Haiman that :math:`\nabla(e_n)` is the Frobenius transform 
 ::
 
     sage: s(e[3].nabla())
+    (q^3+q^2*t+q*t^2+t^3+q*t)*s111 + (q^2+q*t+t^2+q+t)*s21 + s3)
 
-.. end of output
 
 The global dimension of this module is :math:`(n+1)^{n-1}`, and the dimension of its alternating component (see exercise below) is the Catalan number :math:`C_n=\frac{1}{n+1}\binom{2n}{n}`. And there are many other interesting properties of the bigraded version.
 
 ::
 
     sage: Hilb_qt=s(e[3].nabla()).scalar(p[1]^3); Hilb_qt
+    q^3 + q^2*t + q*t^2 + t^3 + 2*q^2 + 3*q*t + 2*t^2 + 2*q + 2*t + 1
 
-.. end of output
 
 ::
 
     sage: Hilb_qt.substitute({q:1,t:1})
+    16
 
-.. end of output
 
 There are also interesting conjectures on the effect of :math:`\nabla` on Schur functions.
 
 ::
 
     sage: (-s([2,2,1])).nabla()
+    (q^6*t^3+q^5*t^4+q^4*t^5+q^3*t^6)*s11111 + (q^5*t^2+2*q^4*t^3+2*q^3*t^4+q^2*t^5)*s221 + (q^6*t^2+2*q^5*t^3+2*q^4*t^4+2*q^3*t^5+q^2*t^6+q^4*t^3+q^3*t^4)*s2111 + (q^4*t^2+q^3*t^3+q^2*t^4)*s32 + (q^5*t^2+q^4*t^3+q^3*t^4+q^2*t^5+q^4*t^2+2*q^3*t^3+q^2*t^4)*s311 + (q^3*t^2+q^2*t^3)*s41
 
-.. end of output
 
 
 ***Exercise:***
@@ -611,15 +634,19 @@ There are also interesting conjectures on the effect of :math:`\nabla` on Schur 
     sage: from sage.combinat.q_analogues import *
     sage: n=5
     sage: qt_catalan_number(n)
+    q^10 + q^9*t + q^8*t^2 + q^7*t^3 + q^6*t^4 + q^5*t^5 + q^4*t^6 + q^3*t^7 + q^2*t^8 + q*t^9 + t^10 + q^8*t + q^7*t^2 + q^6*t^3 + q^5*t^4 + q^4*t^5 + q^3*t^6 + q^2*t^7 + q*t^8 + q^7*t + 2*q^6*t^2 + 2*q^5*t^3 + 2*q^4*t^4 + 2*q^3*t^5 + 2*q^2*t^6 + q*t^7 + q^6*t + q^5*t^2 + 2*q^4*t^3 + 2*q^3*t^4 + q^2*t^5 + q*t^6 + q^4*t^2 + q^3*t^3 + q^2*t^4
 
-.. end of output
 
 ::
 
     sage: for n in range (1,6) :
     sage:     print e([n]).nabla().scalar(e([n])) == qt_catalan_number(n)
+    True
+    True
+    True
+    True
+    True
 
-.. end of output
 
 Plethysm
 --------
@@ -639,24 +666,25 @@ One may specify a list of SAGE-variables to be treated as **variables** in a ple
 ::
 
     sage: p([3,2]).plethysm(h([3,1]))
+    1/36*p33332222 + 1/12*p4333322 + 1/12*p6332222 + 1/18*p633332 + 1/4*p643322 + 1/6*p66332 + 1/18*p932222 + 1/6*p94322 + 1/9*p9632
 
-.. end of output
 
 ::
 
     sage: g = p([1]) + t*s([2,1])
     sage: show(p([2]).plethysm(g,include=[t]))
     sage: show(p([2]).plethysm(g,exclude=[t]))
+    p2 + 1/3*t^2*p222 + (-1/3*t^2)*p6
+    p2 + 1/3*t*p222 + (-1/3*t)*p6
 
-.. end of output
 
 It is costumary to also write :math:`f[g]` for :math:`f\circ g` in mathematical texts, but SAGE uses the shorthand notation :math:`f(g)` for better compatibility with python. For instance, the plethysm :math:`s_4\circ s_2`, may also be computed as
 
 ::
 
     sage: s[4](s[2])
+    s2222 + s422 + s44 + s62 + s8
 
-.. end of output
 
 To have nice expressions for plethystic substitutions, one may set aliases for the  symmetric function on the empty partition (i.e. :math:`s_0, m_0, \dots`, all equal to the constant 1), and the symmetric function (unique up to a scalar) of degree 1.
 
@@ -664,48 +692,47 @@ To have nice expressions for plethystic substitutions, one may set aliases for t
 
     sage: One = s([])
     sage: X = s[1]
-
-.. end of output
+    
 
 ::
 
     sage: s[3](s[4](One*(1+q)))
+    (q^12+q^11+2*q^10+3*q^9+4*q^8+4*q^7+5*q^6+4*q^5+4*q^4+3*q^3+2*q^2+q+1)*s
 
-.. end of output
 
 One should compare this with
 
 ::
 
     sage: q_binomial(7,3)
+    q^12 + q^11 + 2*q^10 + 3*q^9 + 4*q^8 + 4*q^7 + 5*q^6 + 4*q^5 + 4*q^4 + 3*q^3 + 2*q^2 + q + 1
 
-.. end of output
 
 ::
 
     sage: s[4](X*(1+q))
+    q^2*s22 + (q^3+q^2+q)*s31 + (q^4+q^3+q^2+q+1)*s4
 
-.. end of output
 
 ::
 
     sage: s[4](X/(1-q)).map_coefficients(factor)
+    -((-1)*(q-1)^-4*(q+1)^-2*q^6*(q^2+1)^-1*(q^2+q+1)^-1)*s1111 - ((-1)*(q-1)^-4*(q+1)^-2*q^2*(q^2+q+1)^-1)*s22 - ((-1)*(q-1)^-4*(q+1)^-2*q^3*(q^2+1)^-1)*s211 - ((-1)*(q-1)^-4*(q+1)^-2*q*(q^2+1)^-1)*s31 - ((-1)*(q-1)^-4*(q+1)^-2*(q^2+1)^-1*(q^2+q+1)^-1)*s4
 
-.. end of output
 
 ::
 
     sage: s[3](s[4])-s[2](s[6])
+    s444 + s642 + s741 + s822 + s93
 
-.. end of output
 
 Suggests that we have the following positive coefficient polynomial
 
 ::
 
     sage: q_binomial(7,3)-q_binomial(8,2)
+    q^9 + q^8 + q^7 + q^6 + q^5 + q^4 + q^3
 
-.. end of output
 
 Schur Positivity
 ----------------
@@ -718,8 +745,9 @@ When computing with symmetric functions, one often wants to check a given symmet
     sage: print(f.is_schur_positive())
     sage: g = s([4,1])-s([3,2])
     sage: print(g.is_schur_positive())
+    True
+    False
 
-.. end of output
 
 For example, we can verify the well-known Schur positivity of product of Schur functions.
 
@@ -731,8 +759,13 @@ For example, we can verify the well-known Schur positivity of product of Schur f
     sage:             show(s(mu),s(nu),' is Schur positive.')
     sage:         else :
     sage:             show(s(mu),s(nu),'is not Schur positive.')
+    (s2, s3, ' is Schur positive.')
+    (s2, s21, ' is Schur positive.')
+    (s2, s111, ' is Schur positive.')
+    (s11, s3, ' is Schur positive.')
+    (s11, s21, ' is Schur positive.')
+    (s11, s111, ' is Schur positive.')
 
-.. end of output
 
 
 ***Exercise:***
@@ -744,8 +777,13 @@ For example, we can verify the well-known Schur positivity of product of Schur f
     sage: e = Symqt.e()
     sage: for n in range(1,7) :
     sage:     print e([n]).nabla().is_schur_positive()
+    True
+    True
+    True
+    True
+    True
+    True
 
-.. end of output
 
 Schur positivity is a rare phenomena in general, but symmetric functions that come from representation theory are Schur positive. One can show that the probability that a degree :math:`n` monomial positive is Schur positive is equal to
 
@@ -760,8 +798,8 @@ For instance, we have
 ::
 
     sage: m(s[3,2])
+    5*m11111 + 3*m2111 + 2*m221 + m311 + m32
 
-.. end of output
 
 hence defining
 
@@ -770,15 +808,15 @@ hence defining
     sage: def K(mu,nu):
     sage:     return s(mu).scalar(h(nu))
 
-.. end of output
+
 
 so that the above expression is indeed seen to be
 
 ::
 
     sage: add(K([3,2],nu)*m(nu) for nu in Partitions(5))
+    5*m11111 + 3*m2111 + 2*m221 + m311 + m32
 
-.. end of output
 
 Now, we set
 
@@ -788,7 +826,6 @@ Now, we set
     sage:     n=add(j for j in mu)
     sage:     return add(K(mu,nu) for nu in Partitions(n))
 
-.. end of output
 
 so that the above probability is calculated by the function
 
@@ -797,15 +834,14 @@ so that the above probability is calculated by the function
     sage: def prob_Schur_positive(n):
     sage:     return 1/mul(k(mu) for mu in Partitions(n))
 
-.. end of output
 
 One can then illustrate how very rare Schur-positivity is, as a function of the degree:
 
 ::
 
     sage: [prob_Schur_positive(n) for n in range(1,8)]
+    [1, 1/2, 1/9, 1/560, 1/480480, 1/1027458432000, 1/2465474364698304960000]
 
-.. end of output
 
 
 Hopf structure and important identities
@@ -825,8 +861,8 @@ For instance, we have
 ::
 
     sage: s[3,2,1].coproduct()
+    s # s321 + s1 # s221 + s1 # s311 + s1 # s32 + s11 # s211 + s11 # s22 + s11 # s31 + s111 # s21 + s2 # s211 + s2 # s22 + s2 # s31 + s21 # s111 + 2*s21 # s21 + s21 # s3 + s211 # s11 + s211 # s2 + s22 # s11 + s22 # s2 + s221 # s1 + s3 # s21 + s31 # s11 + s31 # s2 + s311 # s1 + s32 # s1 + s321 # s
 
-.. end of output
 
 **Skew Schur fonctions** arise when one considers the effect of coproduct on Schur functions themselves
 
@@ -837,16 +873,16 @@ Skew Schur functions are also implemented in SAGE. For instance, we have the ske
 ::
 
     sage: s[3,2,1].skew_by(s[2])
+    s211 + s22 + s31
 
-.. end of output
 
 Thus we get the same result as above.
 
 ::
 
     sage: add(tensor([s[3,2,1].skew_by(s(mu)),s(mu)]) for k in range(7) for mu in Partitions(k))
+    s # s321 + s1 # s221 + s1 # s311 + s1 # s32 + s11 # s211 + s11 # s22 + s11 # s31 + s111 # s21 + s2 # s211 + s2 # s22 + s2 # s31 + s21 # s111 + 2*s21 # s21 + s21 # s3 + s211 # s11 + s211 # s2 + s22 # s11 + s22 # s2 + s221 # s1 + s3 # s21 + s31 # s11 + s31 # s2 + s311 # s1 + s32 # s1 + s321 # s
 
-.. end of output
 
 In particular, we get
 
@@ -855,8 +891,8 @@ In particular, we get
 ::
 
     sage: h[4].coproduct()
+    h # h4 + h1 # h3 + h2 # h2 + h3 # h1 + h4 # h
 
-.. end of output
 
 Cauchy kernel formula
 ---------------------
@@ -876,24 +912,24 @@ where one "thinks" :math:`\mathbf{x}=s_1\otimes \mathbb{1}` and :math:`\mathbf{y
 ::
 
     sage: h4xy=add(tensor([s(mu),s(mu)]) for mu in Partitions(4)); h4xy
+    s1111 # s1111 + s211 # s211 + s22 # s22 + s31 # s31 + s4 # s4 
 
-.. end of output
 
 ::
 
     sage: tensor([h,m])(h4xy)
+    h1111 # m1111 + h211 # m211 + h22 # m22 + h31 # m31 + h4 # m4
 
-.. end of output
 
 ::
 
     sage: f = Symqt.f()
     sage: tensor([e,f])(h4xy)
+    e1111 # f1111 + e211 # f211 + e22 # f22 + e31 # f31 + e4 # f4
 
-.. end of output
 
 ::
 
     sage: tensor([p,p])(h4xy)
+    1/24*p1111 # p1111 + 1/4*p211 # p211 + 1/8*p22 # p22 + 1/3*p31 # p31 + 1/4*p4 # p4
 
-.. end of output
