@@ -3,7 +3,7 @@
 Symmetric Functions (polynomials) Tutorial
 ==========================================
 
-.. MODULEAUTHOR:: Pauline Hubert (hubert.pauline@courrier.uqam.ca) and Mélodie Lapointe (lapointe.melodie@courrier.uqam.ca)
+.. MODULEAUTHOR:: 2017 François Bergeron <bergeron.francois@uqam.ca>, Pauline Hubert <hubert.pauline@courrier.uqam.ca> and Mélodie Lapointe <lapointe.melodie@courrier.uqam.ca>; 2012 Mike Zabrocki <mike.zabrocki@gmail.com>; 2009-2012 Nicolas M. Thiery <nthiery at users.sf.net>; 2012 Anne Schilling <anne at math.ucdavis.edu>; 2009-2012 Jason Bandlow <jbandlow@gmail.com>; 2007 Mike Hansen <mhansen@gmail.com>
 
 .. linkall
 
@@ -17,7 +17,7 @@ are not made explicit. Indeed for most practical calculations
 variables need not appear. Moreover, one may show that this does not
 cause any trouble in the calculations.
 
-$\def\QQ{\mathbb{QQ}}$
+`\def\QQ{\mathbb{QQ}}`
 
 Display customization
 ---------------------
@@ -90,7 +90,7 @@ Another often used coefficient ring is the fraction field :math:`\mathbb{Q}(q,t)
 
 We can also declare each basis one by one. They can all be called by their full name (e.g. ``monomial()`` for the monomial basis) or by the letter we usually use for them (e.g. ``m()`` for the monomial basis).
 
-Usual classical bases are available::
+Usual classical bases are available:
 
 - The **power sum** symmetric functions :math:`p(\mu)`: ``power()`` or ``p()``
 - The **(complete)homogeneous** symmetric functions :math:`h(\mu)`: ``homogeneous()`` or ``complete()`` or ``h()``
@@ -279,14 +279,14 @@ Conversely, a "concrete" symmetric polynomial, i.e.: explicitly expressed in the
 
     sage: pol1 = (p([2])+e([2,1])).expand(2)
     sage: print pol1
+    x0^2*x1 + x0*x1^2 + x0^2 + x1^2
 
-.. end of output
 
 ::
 
     sage: m.from_polynomial(pol1)
+    m2 + m21
 
-.. end of output
 
 A more interesting use of this function is to convert a symmetric polynomial, written with a finite number of variables, into a symmetric function.
 
@@ -300,8 +300,8 @@ We declare our polynomial and convert it into a symmetric function, for example 
     sage: n = 3
     sage: R = PolynomialRing(QQ,'y',n)
     sage: R.inject_variables()
+    Defining y0, y1, y2
 
-.. end of output
 
 Here, we will work with three variables (:math:`y_0, y_1` and :math:`y_2`).
 Finally, we can declare our polynomial and convert it into a symmetric function in the monomial basis for example.
@@ -311,8 +311,8 @@ Finally, we can declare our polynomial and convert it into a symmetric function 
 
     sage: pol2 = y0^2*y1 + y0*y1^2 + y0^2*y2 + 2*y0*y1*y2 + y1^2*y2 + y0*y2^2 + y1*y2^2
     sage: m.from_polynomial(pol2)
+    2*m111 + m21
 
-.. end of output
 
 In the preceeding example, the base ring of polynomials is the same as the base ring of symmetric polynomials considered, as checked by the following.
 
@@ -320,8 +320,9 @@ In the preceeding example, the base ring of polynomials is the same as the base 
 
     sage: print s.base_ring()
     sage: print pol2.base_ring()
+    Rational Field
+    Rational Field
 
-.. end of output
 
 
 Thus a concrete symmetric polynomial over :math:`\mathbb{Q}(q,t)` may be transformed into an abstract symmetric function in any basis.
@@ -333,8 +334,10 @@ Thus a concrete symmetric polynomial over :math:`\mathbb{Q}(q,t)` may be transfo
     sage: R.inject_variables()
     sage: pol2 = 1+(y0*y1+y0*y2+y1*y2)*(q+t)+(y0*y1*y2)*(q*t)
     sage: s.from_polynomial(pol2)
+    Defining y0, y1, y2
 
-.. end of output
+    s + (q+t)*s11 + q*t*s111)
+
 
 
 Changes of bases
@@ -348,35 +351,50 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 ::
 
     sage: e(p([2,2])+m([1,1])*s([2,1]))
+    e1111 - 4*e211 + 4*e22 + e221 - e32
 
-.. end of output
 
-***Exercise:***
+.. TOPIC:: Exercise
 
  *Print all the Schur functions on partitions of size 5 and convert them into the elementary basis.*
 
+.. TOPIC:: Solution
 
 ::
 
     sage: for mu in Partitions(5) :
     sage:     show(s(mu))
     sage:     show(e(s(mu)))
+    s5
+    e11111 - 4*e2111 + 3*e221 + 3*e311 - 2*e32 - 2*e41 + e5
+    s41
+    e2111 - 2*e221 - e311 + 2*e32 + e41 - e5
+    s32
+    e221 - e311 - e32 + e41
+    s311
+    e311 - e32 - e41 + e5
+    s221
+    e32 - e41
+    s2111
+    e41 - e5
+    s11111
+    e5
 
 
-.. end of output
 
-***Exercise:***
+.. TOPIC:: Exercise
 
  *Compute the sum of the homogeneous functions on partitions of size 4 in the power sum basis.*
 
+.. TOPIC:: Solution
 
 ::
 
     sage: p(sum(h(mu) for mu in Partitions(4)))
+    47/24*p1111 + 7/4*p211 + 3/8*p22 + 2/3*p31 + 1/4*p4
 
-.. end of output
 
-***Exercise:***
+.. TOPIC:: Exercise
 
  *It is well konwn that  :math:`h_n(X) = \sum \limits_{\mu \vdash n} \dfrac{p_{\mu}(x)}{z_{\mu}}`. Verify this result for  :math:`n \in \{1,2,3,4\}`*
 
@@ -387,14 +405,23 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 
     sage: from sage.combinat.sf.sfa import *
     sage: zee([4,4,2,1])
+    64
 
-.. end of output
+.. TOPIC:: Solution
 
 ::
 
     sage: for n in range (1,5) :
     sage:     show(p(h([n])))
     sage:     show(sum(p(mu)/zee(mu) for mu in Partitions(n)))
+    p1
+    p1
+    1/2*p11 + 1/2*p2
+    1/2*p11 + 1/2*p2
+    1/6*p111 + 1/2*p21 + 1/3*p3
+    1/6*p111 + 1/2*p21 + 1/3*p3
+    1/24*p1111 + 1/4*p211 + 1/8*p22 + 1/3*p31 + 1/4*p4
+    1/24*p1111 + 1/4*p211 + 1/8*p22 + 1/3*p31 + 1/4*p4
 
 
  *Note that there also exists a function ``aut()`` which is the same as ``zee()`` but doesn't have to be imported.*
@@ -411,35 +438,35 @@ First, the function  ``get_print_style()``  applied to a basis gives us the orde
 ::
 
     sage: s.get_print_style()
+    'lex'
 
-.. end of output
 
 ::
 
     sage: s.set_print_style('lex')
     sage: s(p[4,1,1])
+    -s111111 - s21111 + s2211 + s222 - s33 - s42 + s51 + s6
 
-.. end of output
 
 ::
 
     sage: s.set_print_style('length')
     sage: s(p[4,1,1])
+    s6 - s33 - s42 + s51 + s222 + s2211 - s21111 - s111111
 
-.. end of output
 
 ::
 
     sage: s.get_print_style()
+    'length'
 
-.. end of output
 
 ::
 
     sage: s.set_print_style('maximal_part')
     sage: s(p[4,1,1])
+    -s111111 + s222 - s21111 + s2211 - s33 - s42 + s51 + s6
 
-.. end of output
 
 More basic commands on symmetric functions
 ------------------------------------------
@@ -450,36 +477,36 @@ The function ``coefficient()`` returns the coefficient associated to a given par
 
     sage: f = s[5,2,2,1]
     sage: e(f)
+    e43111 - 2*e4321 + e433 - e4411 + e442 - e52111 + 2*e5221 - e532 + e541 + e6211 - e622 - e64 - e721 + e82
 
-.. end of output
 
 ::
 
     sage: e(f).coefficient([4,3,2,1])
+    -2
 
-.. end of output
 
 The function ``degree()`` gives the degree of a symmetric function.
 
 ::
 
     sage: f.degree()
+    10
 
-.. end of output
 
 Finally, the function ``support()`` returns the list of partitions that appear in a given symmetric function. The result will depend on the basis of the function. In the following example, we also use the function ``sorted()`` to get an ordered list.
 
 ::
 
     sage: print f.support()
+    [5221]
 
-.. end of output
 
 ::
 
     sage: print sorted(h(f).support())
+    [5221, 5311, 532, 541, 6211, 631, 64, 7111, 721, 811, 82]
 
-.. end of output
 
 
 
@@ -508,25 +535,24 @@ Here are some examples involving the "combinatorial" Macdonald symmetric functio
     sage: H = Symqt.macdonald().Ht()
     sage: H.print_options(prefix="H")
 
-.. end of output
 
 ::
 
     sage: s(H([2,1]))
+    q*t*s111 + (q+t)*s21 + s3)
 
-.. end of output
 
 ::
 
     sage: H(s[2,1])
+    ((-q)/(-q*t^2+t^3+q^2-q*t))*McdHt111 + ((q^2+q*t+t^2)/(-q^2*t^2+q^3+t^3-q*t))*McdHt21 + (t/(-q^3+q^2*t+q*t-t^2))*McdHt3
 
-.. end of output
 
 ::
 
     sage: [H(mu).nabla() for mu in Partitions(4)]
+    [q^6*McdHt4, q^3*t*McdHt31, q^2*t^2*McdHt22, q*t^3*McdHt211, t^6*McdHt1111]
 
-.. end of output
 
 
 Scalar Products
@@ -539,8 +565,8 @@ Thus, we get
 ::
 
         sage: p([2,2,1]).scalar(p([2,2,1]))
+        8
 
-.. end of output
 
 One may specify an optional argument which is a function on partitions giving the value for the scalar product between :math:`p_{\mu}` and :math:`p_{\mu}`. Power sums remain orthogonal for the resulting scalar product. By default, this value is :math:`z_{\mu}`, but other interesting cases include:
 
@@ -551,8 +577,8 @@ This is already refined as ``scalar_qt()``.
 ::
 
     sage: factor(p([2,2,1]).scalar_qt(p[2,2,1]))
+    (8) * (t - 1)^-3 * (t + 1)^-2 * (q + 1)^2 * (q - 1)^3
 
-.. end of output
 
 
 Some interesting operators on symmetric functions
@@ -570,33 +596,33 @@ It has been shown by Haiman that :math:`\nabla(e_n)` is the Frobenius transform 
 ::
 
     sage: s(e[3].nabla())
+    (q^3+q^2*t+q*t^2+t^3+q*t)*s111 + (q^2+q*t+t^2+q+t)*s21 + s3)
 
-.. end of output
 
 The global dimension of this module is :math:`(n+1)^{n-1}`, and the dimension of its alternating component (see exercise below) is the Catalan number :math:`C_n=\frac{1}{n+1}\binom{2n}{n}`. And there are many other interesting properties of the bigraded version.
 
 ::
 
     sage: Hilb_qt=s(e[3].nabla()).scalar(p[1]^3); Hilb_qt
+    q^3 + q^2*t + q*t^2 + t^3 + 2*q^2 + 3*q*t + 2*t^2 + 2*q + 2*t + 1
 
-.. end of output
 
 ::
 
     sage: Hilb_qt.substitute({q:1,t:1})
+    16
 
-.. end of output
 
 There are also interesting conjectures on the effect of :math:`\nabla` on Schur functions.
 
 ::
 
     sage: (-s([2,2,1])).nabla()
+    (q^6*t^3+q^5*t^4+q^4*t^5+q^3*t^6)*s11111 + (q^5*t^2+2*q^4*t^3+2*q^3*t^4+q^2*t^5)*s221 + (q^6*t^2+2*q^5*t^3+2*q^4*t^4+2*q^3*t^5+q^2*t^6+q^4*t^3+q^3*t^4)*s2111 + (q^4*t^2+q^3*t^3+q^2*t^4)*s32 + (q^5*t^2+q^4*t^3+q^3*t^4+q^2*t^5+q^4*t^2+2*q^3*t^3+q^2*t^4)*s311 + (q^3*t^2+q^2*t^3)*s41
 
-.. end of output
 
 
-***Exercise:***
+.. TOPIC:: Exercise
 
  We have the following relation between :math:`\nabla (e_n)` and the q,t-Catalan numbers :
 
@@ -611,15 +637,20 @@ There are also interesting conjectures on the effect of :math:`\nabla` on Schur 
     sage: from sage.combinat.q_analogues import *
     sage: n=5
     sage: qt_catalan_number(n)
+    q^10 + q^9*t + q^8*t^2 + q^7*t^3 + q^6*t^4 + q^5*t^5 + q^4*t^6 + q^3*t^7 + q^2*t^8 + q*t^9 + t^10 + q^8*t + q^7*t^2 + q^6*t^3 + q^5*t^4 + q^4*t^5 + q^3*t^6 + q^2*t^7 + q*t^8 + q^7*t + 2*q^6*t^2 + 2*q^5*t^3 + 2*q^4*t^4 + 2*q^3*t^5 + 2*q^2*t^6 + q*t^7 + q^6*t + q^5*t^2 + 2*q^4*t^3 + 2*q^3*t^4 + q^2*t^5 + q*t^6 + q^4*t^2 + q^3*t^3 + q^2*t^4
 
-.. end of output
+.. TOPIC:: Solution
 
 ::
 
     sage: for n in range (1,6) :
     sage:     print e([n]).nabla().scalar(e([n])) == qt_catalan_number(n)
+    True
+    True
+    True
+    True
+    True
 
-.. end of output
 
 Plethysm
 --------
@@ -639,24 +670,25 @@ One may specify a list of SAGE-variables to be treated as **variables** in a ple
 ::
 
     sage: p([3,2]).plethysm(h([3,1]))
+    1/36*p33332222 + 1/12*p4333322 + 1/12*p6332222 + 1/18*p633332 + 1/4*p643322 + 1/6*p66332 + 1/18*p932222 + 1/6*p94322 + 1/9*p9632
 
-.. end of output
 
 ::
 
     sage: g = p([1]) + t*s([2,1])
     sage: show(p([2]).plethysm(g,include=[t]))
     sage: show(p([2]).plethysm(g,exclude=[t]))
+    p2 + 1/3*t^2*p222 + (-1/3*t^2)*p6
+    p2 + 1/3*t*p222 + (-1/3*t)*p6
 
-.. end of output
 
 It is costumary to also write :math:`f[g]` for :math:`f\circ g` in mathematical texts, but SAGE uses the shorthand notation :math:`f(g)` for better compatibility with python. For instance, the plethysm :math:`s_4\circ s_2`, may also be computed as
 
 ::
 
     sage: s[4](s[2])
+    s2222 + s422 + s44 + s62 + s8
 
-.. end of output
 
 To have nice expressions for plethystic substitutions, one may set aliases for the  symmetric function on the empty partition (i.e. :math:`s_0, m_0, \dots`, all equal to the constant 1), and the symmetric function (unique up to a scalar) of degree 1.
 
@@ -664,48 +696,47 @@ To have nice expressions for plethystic substitutions, one may set aliases for t
 
     sage: One = s([])
     sage: X = s[1]
-
-.. end of output
+    
 
 ::
 
     sage: s[3](s[4](One*(1+q)))
+    (q^12+q^11+2*q^10+3*q^9+4*q^8+4*q^7+5*q^6+4*q^5+4*q^4+3*q^3+2*q^2+q+1)*s
 
-.. end of output
 
 One should compare this with
 
 ::
 
     sage: q_binomial(7,3)
+    q^12 + q^11 + 2*q^10 + 3*q^9 + 4*q^8 + 4*q^7 + 5*q^6 + 4*q^5 + 4*q^4 + 3*q^3 + 2*q^2 + q + 1
 
-.. end of output
 
 ::
 
     sage: s[4](X*(1+q))
+    q^2*s22 + (q^3+q^2+q)*s31 + (q^4+q^3+q^2+q+1)*s4
 
-.. end of output
 
 ::
 
     sage: s[4](X/(1-q)).map_coefficients(factor)
+    -((-1)*(q-1)^-4*(q+1)^-2*q^6*(q^2+1)^-1*(q^2+q+1)^-1)*s1111 - ((-1)*(q-1)^-4*(q+1)^-2*q^2*(q^2+q+1)^-1)*s22 - ((-1)*(q-1)^-4*(q+1)^-2*q^3*(q^2+1)^-1)*s211 - ((-1)*(q-1)^-4*(q+1)^-2*q*(q^2+1)^-1)*s31 - ((-1)*(q-1)^-4*(q+1)^-2*(q^2+1)^-1*(q^2+q+1)^-1)*s4
 
-.. end of output
 
 ::
 
     sage: s[3](s[4])-s[2](s[6])
+    s444 + s642 + s741 + s822 + s93
 
-.. end of output
 
 Suggests that we have the following positive coefficient polynomial
 
 ::
 
     sage: q_binomial(7,3)-q_binomial(8,2)
+    q^9 + q^8 + q^7 + q^6 + q^5 + q^4 + q^3
 
-.. end of output
 
 Schur Positivity
 ----------------
@@ -718,8 +749,9 @@ When computing with symmetric functions, one often wants to check a given symmet
     sage: print(f.is_schur_positive())
     sage: g = s([4,1])-s([3,2])
     sage: print(g.is_schur_positive())
+    True
+    False
 
-.. end of output
 
 For example, we can verify the well-known Schur positivity of product of Schur functions.
 
@@ -731,21 +763,33 @@ For example, we can verify the well-known Schur positivity of product of Schur f
     sage:             show(s(mu),s(nu),' is Schur positive.')
     sage:         else :
     sage:             show(s(mu),s(nu),'is not Schur positive.')
+    (s2, s3, ' is Schur positive.')
+    (s2, s21, ' is Schur positive.')
+    (s2, s111, ' is Schur positive.')
+    (s11, s3, ' is Schur positive.')
+    (s11, s21, ' is Schur positive.')
+    (s11, s111, ' is Schur positive.')
 
-.. end of output
 
 
-***Exercise:***
+.. TOPIC:: Exercise
 
  *Its representation theoretic signification implies that :math:`\nabla (e_n)` is Schur positive. Verify this for :math:`1 \leq n \leq 6`.*
+
+.. TOPIC:: Solution
 
 ::
 
     sage: e = Symqt.e()
     sage: for n in range(1,7) :
     sage:     print e([n]).nabla().is_schur_positive()
+    True
+    True
+    True
+    True
+    True
+    True
 
-.. end of output
 
 Schur positivity is a rare phenomena in general, but symmetric functions that come from representation theory are Schur positive. One can show that the probability that a degree :math:`n` monomial positive is Schur positive is equal to
 
@@ -760,8 +804,8 @@ For instance, we have
 ::
 
     sage: m(s[3,2])
+    5*m11111 + 3*m2111 + 2*m221 + m311 + m32
 
-.. end of output
 
 hence defining
 
@@ -770,15 +814,15 @@ hence defining
     sage: def K(mu,nu):
     sage:     return s(mu).scalar(h(nu))
 
-.. end of output
+
 
 so that the above expression is indeed seen to be
 
 ::
 
     sage: add(K([3,2],nu)*m(nu) for nu in Partitions(5))
+    5*m11111 + 3*m2111 + 2*m221 + m311 + m32
 
-.. end of output
 
 Now, we set
 
@@ -788,7 +832,6 @@ Now, we set
     sage:     n=add(j for j in mu)
     sage:     return add(K(mu,nu) for nu in Partitions(n))
 
-.. end of output
 
 so that the above probability is calculated by the function
 
@@ -797,16 +840,59 @@ so that the above probability is calculated by the function
     sage: def prob_Schur_positive(n):
     sage:     return 1/mul(k(mu) for mu in Partitions(n))
 
-.. end of output
 
 One can then illustrate how very rare Schur-positivity is, as a function of the degree:
 
 ::
 
     sage: [prob_Schur_positive(n) for n in range(1,8)]
+    [1, 1/2, 1/9, 1/560, 1/480480, 1/1027458432000, 1/2465474364698304960000]
+
+
+
+The first part of this tutorial was meant to present general use of symmetric functions in Sage. 
+Here are now more specific applications. 
+
+
+Sage knows certain categorical information about this algebra.
+
+::
+
+	sage: Sym.category()
+	Join of Category of hopf algebras over Rational Field
+		and Category of graded algebras over Rational Field
+		and Category of monoids with realizations
+		and Category of coalgebras over Rational Field with realizations
+
+
+Let us explore the other operations of :math:`p`. We can ask for the mathematical properties of :math:`p`.
+
+::
+
+    sage: p.categories()
+    [Category of graded bases of Symmetric Functions over Rational Field,
+     Category of filtered bases of Symmetric Functions over Rational Field,
+     Category of bases of Symmetric Functions over Rational Field,
+     Category of graded hopf algebras with basis over Rational Field,
+     ...]
 
 .. end of output
 
+To start with, :math:`p` is a graded algebra, the grading being induced by the size of the partitions. Due to this, the one is the basis element indexed by the empty partition::
+
+    sage: p.one()
+    p[]
+
+
+Note also that it is a good idea to use::
+
+    sage: s.one()
+    s[]
+    sage: s.zero()
+    0
+
+
+instead of :math:`s(1)` and :math:`s(0)` within programs where speed is important, in order to prevent unnecessary coercions.
 
 Hopf structure and important identities
 ---------------------------------------
@@ -825,8 +911,8 @@ For instance, we have
 ::
 
     sage: s[3,2,1].coproduct()
+    s # s321 + s1 # s221 + s1 # s311 + s1 # s32 + s11 # s211 + s11 # s22 + s11 # s31 + s111 # s21 + s2 # s211 + s2 # s22 + s2 # s31 + s21 # s111 + 2*s21 # s21 + s21 # s3 + s211 # s11 + s211 # s2 + s22 # s11 + s22 # s2 + s221 # s1 + s3 # s21 + s31 # s11 + s31 # s2 + s311 # s1 + s32 # s1 + s321 # s
 
-.. end of output
 
 **Skew Schur fonctions** arise when one considers the effect of coproduct on Schur functions themselves
 
@@ -837,16 +923,16 @@ Skew Schur functions are also implemented in SAGE. For instance, we have the ske
 ::
 
     sage: s[3,2,1].skew_by(s[2])
+    s211 + s22 + s31
 
-.. end of output
 
 Thus we get the same result as above.
 
 ::
 
     sage: add(tensor([s[3,2,1].skew_by(s(mu)),s(mu)]) for k in range(7) for mu in Partitions(k))
+    s # s321 + s1 # s221 + s1 # s311 + s1 # s32 + s11 # s211 + s11 # s22 + s11 # s31 + s111 # s21 + s2 # s211 + s2 # s22 + s2 # s31 + s21 # s111 + 2*s21 # s21 + s21 # s3 + s211 # s11 + s211 # s2 + s22 # s11 + s22 # s2 + s221 # s1 + s3 # s21 + s31 # s11 + s31 # s2 + s311 # s1 + s32 # s1 + s321 # s
 
-.. end of output
 
 In particular, we get
 
@@ -855,8 +941,8 @@ In particular, we get
 ::
 
     sage: h[4].coproduct()
+    h # h4 + h1 # h3 + h2 # h2 + h3 # h1 + h4 # h
 
-.. end of output
 
 Cauchy kernel formula
 ---------------------
@@ -876,24 +962,361 @@ where one "thinks" :math:`\mathbf{x}=s_1\otimes \mathbb{1}` and :math:`\mathbf{y
 ::
 
     sage: h4xy=add(tensor([s(mu),s(mu)]) for mu in Partitions(4)); h4xy
+    s1111 # s1111 + s211 # s211 + s22 # s22 + s31 # s31 + s4 # s4 
 
-.. end of output
 
 ::
 
     sage: tensor([h,m])(h4xy)
+    h1111 # m1111 + h211 # m211 + h22 # m22 + h31 # m31 + h4 # m4
 
-.. end of output
 
 ::
 
     sage: f = Symqt.f()
     sage: tensor([e,f])(h4xy)
+    e1111 # f1111 + e211 # f211 + e22 # f22 + e31 # f31 + e4 # f4
 
-.. end of output
 
 ::
 
     sage: tensor([p,p])(h4xy)
+    1/24*p1111 # p1111 + 1/4*p211 # p211 + 1/8*p22 # p22 + 1/3*p31 # p31 + 1/4*p4 # p4
+
+
+The coproduct, being cocommutative on the generators, is cocommutative everywhere::
+
+    sage: p[2, 1].coproduct()
+    p[] # p[2, 1] + p[1] # p[2] + p[2] # p[1] + p[2, 1] # p[]
+
+This coproduct, along with the counit which sends every symmetric function
+to its 0-th homogeneous component, makes the ring of symmetric functions
+into a graded connected bialgebra. It is known that every graded connected
+bialgebra has an antipode. For the ring of symmetric functions, the antipode
+can be characterized explicitly: The antipode is an anti-algebra morphism
+(thus an algebra morphism, since our algebra is commutative) which sends
+:math:`p_{\lambda}` to :math:`(-1)^{\mathrm{length}(\lambda)} p_{\lambda}` for every
+partition :math:`\lambda`. Thus, in particular, it sends the generators on the
+:math:`p` basis to their opposites::
+
+    sage: p[3].antipode()
+    -p[3]
+    sage: p[3,2,1].antipode()
+    -p[3, 2, 1]
+
+The graded connected bialgebra of symmetric functions over a :math:`\mathbb{Q}`-algebra
+has a rather simply-understood structure: It is (isomorphic to) the
+symmetric algebra of its space of primitives (which is spanned by the
+power-sum symmetric functions).
+
+Here are further examples::
+
+    sage: f = s[2]^2
+    sage: f.antipode()
+    s[1, 1, 1, 1] + s[2, 1, 1] + s[2, 2]
+    sage: f.coproduct()
+    s[] # s[2, 2] + s[] # s[3, 1] + s[] # s[4] + 2*s[1] # s[2, 1] + 2*s[1] # s[3] + s[1, 1] # s[1, 1]
+    + s[1, 1] # s[2] + s[2] # s[1, 1] + 3*s[2] # s[2] + 2*s[2, 1] # s[1] + s[2, 2] # s[] + 2*s[3] # s[1]
+    + s[3, 1] # s[] + s[4] # s[]
+    sage: f.coproduct().apply_multilinear_morphism( lambda x,y: x*y.antipode() )
+    0
+
+Representation theory of the symmetric group
+--------------------------------------------
+
+The Schur functions `s_\lambda` can also be interpreted as irreducible characters of the symmetric group :math:`S_n`, where :math:`n` is the size of the partition :math:`\lambda`. Since the Schur functions of degree :math:`n` form a basis of the symmetric functions of degree `n`, it follows that an arbitrary symmetric function (homogeneous of degree `n`) may be interpreted as a function on the symmetric group. In this interpretation the power sum symmetric function :math:`p_\lambda` is the characteristic function of the conjugacy class with shape :math:`\lambda`, multiplied by the order of the centralizer of an element. Hence the irreducible characters can be computed as follows.
+
+::
+
+    sage: Sym = SymmetricFunctions(QQ)
+    sage: s = Sym.schur()
+    sage: p = Sym.power()
+    sage: P = Partitions(5).list()
+    sage: P = [P[i] for i in range(len(P)-1,-1,-1)]
+    sage: M = matrix([[s[P[i]].scalar(p[P[j]]) for j in range(len(P))] for i in range(len(P))])
+    sage: M
+    [ 1 -1  1  1 -1 -1  1]
+    [ 4 -2  0  1  1  0 -1]
+    [ 5 -1  1 -1 -1  1  0]
+    [ 6  0 -2  0  0  0  1]
+    [ 5  1  1 -1  1 -1  0]
+    [ 4  2  0  1 -1  0 -1]
+    [ 1  1  1  1  1  1  1]
 
 .. end of output
+
+We can indeed check that this agrees with the character table of :math:`S_5`.
+
+::
+
+    sage: SymmetricGroup(5).character_table() == M
+    True
+
+.. end of output
+
+In this interpretation of symmetric functions as characters on the symmetric group, the multiplication and comultiplication are interpreted as induction (from :math:`S_n\times S_m` to :math:`S_{n+m}`) and restriction, respectively. The Schur functions can also be interpreted as characters of :math:`GL_n`.
+
+The omega involution
+--------------------
+
+The :math:`\omega` involution is the linear extension of the map which sends :math:`e_\lambda` to :math:`h_{\lambda}`.
+
+:: 
+
+	sage: f = s[2]^2; f
+	s[2, 2] + s[3, 1] + s[4]
+    sage: h(f)
+    h[2, 2]
+    sage: e(f.omega())
+    e[2, 2]
+
+.. end of output
+
+
+The Kronecker product
+---------------------
+
+As in the section on the **Representation theory of the symmetric group**, a symmetric function may be considered as a class function on the symmetric group where the elements :math:`p_\mu/z_\mu` are the indicators of a permutation having cycle structure :math:`\mu`.  The Kronecker product of two symmetric functions corresponds to the pointwise product of these class functions.
+
+Since the Schur functions are the irreducible characters
+of the symmetric group under this identification, the Kronecker
+product of two Schur functions corresponds to the internal
+tensor product of two irreducible symmetric group representations.
+
+Under this identification, the Kronecker
+product of :math:`p_\mu/z_\mu` and :math:`p_\nu/z_\nu` is :math:`p_\mu/z_\mu`
+if :math:`\mu=\nu`, and the result is equal to :math:`0` otherwise.
+
+``internal_product``, ``kronecker_product``, ``inner_tensor`` and
+``itensor`` are different names for the same function.
+
+::
+
+    sage: f.kronecker_product(f)
+    s[1, 1, 1, 1] + 3*s[2, 1, 1] + 4*s[2, 2] + 5*s[3, 1] + 3*s[4]
+
+.. end of output
+
+
+Inner plethysm
+--------------
+
+The operation of inner plethysm ``f.inner_plethysm(g)`` models the
+composition of the `S_n` representation represented by :math:`g` with the
+:math:`GL_m` representation whose character is :math:`f`.  See the documentation of
+``inner_plethysm``, for more information.
+
+::
+
+    sage: s = SymmetricFunctions(QQ).schur()
+    sage: f = s[2]^2
+    sage: f.inner_plethysm(s[2])
+    s[2]
+
+.. end of output
+
+:math:`k`-Schur functions
+-------------------------
+
+The :math:`k`-Schur functions live in the :math:`k`-bounded subspace of the ring of
+symmetric functions. It is possible to compute in the :math:`k`-bounded subspace
+directly::
+
+    sage: Sym = SymmetricFunctions(QQ)
+    sage: ks = Sym.kschur(3,1)
+    sage: f = ks[2,1]*ks[2,1]; f
+    ks3[2, 2, 1, 1] + ks3[2, 2, 2] + ks3[3, 1, 1, 1]
+
+or to lift to the ring of symmetric functions::
+
+    sage: f.lift()
+    s[2, 2, 1, 1] + s[2, 2, 2] + s[3, 1, 1, 1] + 2*s[3, 2, 1] + s[3, 3] + s[4, 1, 1] + s[4, 2]
+
+However, it is not always possible to convert a symmetric function to the :math:`k`-bounded subspace::
+
+    sage: s = Sym.schur()
+    sage: ks(s[2,1,1])
+    Traceback (most recent call last):
+    ...
+    ValueError: s[2, 1, 1] is not in the image
+
+The :math:`k`-Schur functions are more generally defined with a parameter :math:`t` and they are
+a basis of the subspace spanned by the Hall-Littlewood :math:`Qp` symmetric functions
+indexed by partitions whose first part is less than or equal to :math:`k`::
+
+    sage: Sym = SymmetricFunctions(QQ['t'].fraction_field())
+    sage: SymS3 = Sym.kBoundedSubspace(3) # default t='t'
+    sage: ks = SymS3.kschur()
+    sage: Qp = Sym.hall_littlewood().Qp()
+    sage: ks(Qp[2,1,1,1])
+    ks3[2, 1, 1, 1] + (t^2+t)*ks3[2, 2, 1] + (t^3+t^2)*ks3[3, 1, 1] + t^4*ks3[3, 2]
+
+The subspace spanned by the `k`-Schur functions with a parameter :math:`t` are not known
+to form a natural algebra.  However it is known that the product of a :math:`k`-Schur
+function and an :math:`\ell`-Schur function is in the linear span of the :math:`k+\ell`-Schur
+functions::
+
+    sage: ks(ks[2,1]*ks[1,1])
+    Traceback (most recent call last):
+    ...
+    ValueError: s[2, 1, 1, 1] + s[2, 2, 1] + s[3, 1, 1] + s[3, 2] is not in the image
+    sage: ks[2,1]*ks[1,1]
+    s[2, 1, 1, 1] + s[2, 2, 1] + s[3, 1, 1] + s[3, 2]
+    sage: ks6 = Sym.kBoundedSubspace(6).kschur()
+    sage: ks6(ks[3,1,1]*ks[3])
+    ks6[3, 3, 1, 1] + ks6[4, 2, 1, 1] + (t+1)*ks6[4, 3, 1] + t*ks6[4, 4]
+    + ks6[5, 1, 1, 1] + ks6[5, 2, 1] + t*ks6[5, 3] + ks6[6, 1, 1]
+
+The :math:`k`-split basis is a second basis of the ring spanned by the :math:`k`-Schur
+functions with a parameter :math:`t`.  The :math:`k`-split basis has the property that
+:math:`Q'_\lambda[X;t]` expands positively in the :math:`k`-split basis and the
+:math:`k`-split basis conjecturally expands positively in the :math:`k`-Schur functions.::
+
+    sage: ksp3 = SymS3.ksplit()
+    sage: ksp3(Qp[2,1,1,1])
+    ksp3[2, 1, 1, 1] + t^2*ksp3[2, 2, 1] + (t^3+t^2)*ksp3[3, 1, 1] + t^4*ksp3[3, 2]
+    sage: [ks(ksp3(la)) for la in ksp3(Qp[2,1,1,1]).support()]
+    [ks3[2, 2, 1], ks3[2, 1, 1, 1] + t*ks3[2, 2, 1], ks3[3, 2], ks3[3, 1, 1]]
+
+
+Dual :math:`k`-Schur functions
+------------------------------
+
+The dual space to the subspace spanned by the :math:`k`-Schur functions is most naturally
+realized as a quotient of the ring of symmetric functions by an ideal.  When :math:`t=1`
+the ideal is generated by the monomial symmetric functions indexed by partitions
+whose first part is greater than :math:`k`::
+
+    sage: Sym = SymmetricFunctions(QQ)
+    sage: SymQ3 = Sym.kBoundedQuotient(3,t=1)
+    sage: km = SymQ3.kmonomial()
+    sage: km[2,1]*km[2,1]
+    4*m3[2, 2, 1, 1] + 6*m3[2, 2, 2] + 2*m3[3, 2, 1] + 2*m3[3, 3]
+    sage: F = SymQ3.affineSchur()
+    sage: F[2,1]*F[2,1]
+    2*F3[1, 1, 1, 1, 1, 1] + 4*F3[2, 1, 1, 1, 1] + 4*F3[2, 2, 1, 1] + 4*F3[2, 2, 2]
+    + 2*F3[3, 1, 1, 1] + 4*F3[3, 2, 1] + 2*F3[3, 3]
+
+When :math:`t` is not equal to :math:`1`, the subspace spanned by the :math:`k`-Schur functions is
+realized as a quotient of the ring of symmetric functions by the ideal generated by
+the Hall-Littlewood symmetric functions in the P basis indexed by partitions with
+first part greater than :math:`k`.
+
+::
+
+    sage: Sym = SymmetricFunctions(FractionField(QQ['t']))
+    sage: SymQ3 = Sym.kBoundedQuotient(3)
+    sage: kHLP = SymQ3.kHallLittlewoodP()
+    sage: kHLP[2,1]*kHLP[2,1]
+    (t^2+2*t+1)*HLP3[2, 2, 1, 1] + (t^3+2*t^2+2*t+1)*HLP3[2, 2, 2]
+    + (-t^4-t^3+t+1)*HLP3[3, 1, 1, 1] + (-t^2+t+2)*HLP3[3, 2, 1] + (t+1)*HLP3[3, 3]
+    sage: HLP = Sym.hall_littlewood().P()
+    sage: kHLP(HLP[3,1])
+    HLP3[3, 1]
+    sage: kHLP(HLP[4])
+    0
+
+In this space, the basis which is dual to the :math:`k`-Schur functions conjecturally
+expands positively in the :math:`k`-bounded Hall-Littlewood functions and has positive
+structure coefficients.
+
+::
+
+    sage: dks = SymQ3.dual_k_Schur()
+    sage: kHLP(dks[2,2])
+    (t^4+t^2)*HLP3[1, 1, 1, 1] + t*HLP3[2, 1, 1] + HLP3[2, 2]
+    sage: dks[2,1]*dks[1,1]
+    (t^2+t)*dks3[1, 1, 1, 1, 1] + (t+1)*dks3[2, 1, 1, 1] + (t+1)*dks3[2, 2, 1]
+    + dks3[3, 1, 1] + dks3[3, 2]
+
+At :math:`t=1` the :math:`k`-bounded Hall-Littlewood basis is equal to the :math:`k`-bounded monomial
+basis and the dual :math:`k`-Schur elements are equal to the affine Schur basis.  The
+:math:`k`-bounded monomial basis and affine Schur functions are faster and should be used
+instead of the :math:`k`-bounded Hall-Littlewood P basis and dual :math:`k`-Schur functions when
+:math:`t=1`.
+
+::
+
+    sage: SymQ3 = Sym.kBoundedQuotient(3,t=1)
+    sage: dks = SymQ3.dual_k_Schur()
+    sage: F = SymQ3.affineSchur()
+    sage: F[3,1]==dks[3,1]
+    True
+
+Implementing new bases
+----------------------
+
+In order to implement a new symmetric function basis, Sage will need
+to know at a minimum how to change back and forth between at least one
+other basis (although they do not necessarily have to be the same basis).
+All of the standard functions associated with the basis will have a
+default implementation (although a more specific implementation may
+be more efficient).
+
+To present an idea of how this is done, we will create
+here the example of how to implement the basis :math:`s_\mu[X(1-t)]`.
+
+To begin, we import the class
+:class:`sage.combinat.sf.sfa.SymmetricFunctionAlgebra_generic()`.  Our
+new basis will inherit all of the default methods from this class::
+
+    sage: from sage.combinat.sf.sfa import SymmetricFunctionAlgebra_generic as SFA_generic
+
+Now the basis we are creating has a parameter :math:`t` which is possible
+to specialize. In this example we will convert to and from the Schur
+basis.  For this we implement methods ``_self_to_s`` and ``_s_to_self``.
+By registering these two functions as coercions, Sage then knows
+automatically how it possible to change between any two bases for
+which there is a path of changes of bases. 
+
+::
+
+    sage: from sage.categories.morphism import SetMorphism
+    sage: class SFA_st(SFA_generic):
+    sage:     def __init__(self, Sym, t):
+    sage:         SFA_generic.__init__(self, Sym, basis_name=
+    sage:           "Schur functions with a plethystic substitution of X -> X(1-t)",
+    sage:           prefix='st')
+    sage:         self._s = Sym.s()
+    sage:         self.t = Sym.base_ring()(t)
+    sage:         cat = HopfAlgebras(Sym.base_ring()).WithBasis()
+    sage:         self.register_coercion(
+    sage:           SetMorphism(Hom(self._s, self, cat), self._s_to_self))
+    sage:         self._s.register_coercion(
+    sage:           SetMorphism(Hom(self, self._s, cat), self._self_to_s))
+    sage:     def _s_to_self(self, f):
+    sage:         # f is a Schur function and the output is in the st basis
+    sage:         return self._from_dict(f.theta_qt(0,self.t)._monomial_coefficients)
+    sage:     def _self_to_s(self, f):
+    sage:         # f is in the st basis and the output is in the Schur basis
+    sage:         return self._s.sum(cmu*self._s(mu).theta_qt(self.t,0) for mu,cmu in f)
+    sage:     class Element(SFA_generic.Element):
+    sage:         pass
+
+An instance of this basis is created by calling it with a symmetric
+function ring ``Sym`` and a parameter ``t`` which is in the base ring
+of ``Sym``.  The ``Element`` class inherits all of the methods from
+:class:`sage.combinat.sf.sfa.SymmetricFunctionAlgebra_generic_Element`.
+
+In Macdonald's work, this basis is denoted
+:math:`S_\lambda(x;t)` and the change of basis coefficients of the
+Macdonald ``J`` basis are the coefficients :math:`K_{\lambda\mu}(q,t)`.
+Here is an example of its use::
+
+    sage: QQqt = QQ['q','t'].fraction_field()
+    sage: (q,t) = QQqt.gens()
+    sage: st = SFA_st(SymmetricFunctions(QQqt),t)
+    sage: st
+    Symmetric Functions over Fraction Field of Multivariate Polynomial
+     Ring in q, t over Rational Field in the Schur functions with a
+     plethystic substitution of X -> X(1-t) basis
+    sage: st[2,1] * st[1]
+    st[2, 1, 1] + st[2, 2] + st[3, 1]
+    sage: st([2]).coproduct()
+    st[] # st[2] + st[1] # st[1] + st[2] # st[]
+    sage: J = st.symmetric_function_ring().macdonald().J()
+    sage: st(J[2,1])
+    q*st[1, 1, 1] + (q*t+1)*st[2, 1] + t*st[3]
+
+
+
