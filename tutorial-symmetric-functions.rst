@@ -1,4 +1,5 @@
 .. -*- coding: utf-8 -*-
+.. _tutorial-symmetric-functions:
 
 Symmetric Functions (polynomials) Tutorial
 ==========================================

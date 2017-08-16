@@ -129,6 +129,7 @@ Algebraic Combinatorics
 * :ref:`sage.combinat.demo_algebraic_combinatorics`
 * :ref:`demo-symmetric-functions`
 * :class:`Tutorial Symmetric Functions <sage.combinat.sf.sf.SymmetricFunctions>`
+  (:ref:`Updated version under development <tutorial-symmetric-functions>`)
 * :ref:`lie`
 * :ref:`abelian_sandpile_model`
 
