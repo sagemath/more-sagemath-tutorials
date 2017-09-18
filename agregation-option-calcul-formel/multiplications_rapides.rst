@@ -7,14 +7,21 @@
 
 .. MODULEAUTHOR:: `Nicolas M. Thiéry <http://Nicolas.Thiery.name/>`_ <Nicolas.Thiery at u-psud.fr>
 
-.. linkall
+Ce document dans d'autres formats:
+`feuille de travail <multiplications_rapides.ipynb>`_,
+`source RST <multiplications_rapides.rst>`_.
+
+.. TODO::
+
+    - Correction formatage exercice
+    - Cohérence inverse par Taylor
 
 *****************************************
-Motivation: «Tout» se ramène aux produits
+Motivation: «Tout se ramène aux produits»
 *****************************************
 
-Inversion de matrices, pivot de Gauß
-====================================
+Inversion de matrices
+=====================
 
 .. TOPIC:: Exercice: matrices `2\times 2` génériques
 
@@ -24,10 +31,11 @@ Inversion de matrices, pivot de Gauß
 
     #. Calculer `M^{-1}` par pivot de Gauß.
 
-    #. Généralisation à une matrice par blocs `M=\begin{pmatrix}A&B\\C&D\end{pmatrix}`?
+.. TOPIC:: Correction
 
-    Correction avec Sage::
+    La matrice inverse::
 
+        sage: %display latex
         sage: a,b,c,d = QQ['a,b,c,d'].fraction_field().gens()
         sage: M = matrix([[a,b],[c,d]]); M
         [a b]
@@ -35,6 +43,8 @@ Inversion de matrices, pivot de Gauß
         sage: M^-1
         [   d/(-b*c + a*d) (-b)/(-b*c + a*d)]
         [(-c)/(-b*c + a*d)    a/(-b*c + a*d)]
+
+    Par pivot de Gauß::
 
         sage: I2 = matrix(2,2,1); I2
         [1 0]
@@ -55,33 +65,81 @@ Inversion de matrices, pivot de Gauß
         [                1                 0|   d/(-b*c + a*d) (-b)/(-b*c + a*d)]
         [                0                 1|(-c)/(-b*c + a*d)    a/(-b*c + a*d)]
 
-    ..
-       - Peut-être trop long de faire le pivot de Gauss en exercice?
-       - Donner la formule précise de l'inverse par blocs, et la prouver
-	 en multipliant par M?
-       - Rédiger l'argument pour la complexité; si possible le faire
-	 fonctionner pour w petit?
+
+.. TOPIC:: Théorème: formule d'inversion de matrice par blocs
+
+    Soit `M=\begin{pmatrix}A&B\\C&D\end{pmatrix}` une matrice par
+    blocs, où `A` et `D` sont carrées. On suppose de plus que `A`
+    et `\Delta=(D-CA^-1)` sont inversibles. Alors,
+
+    .. MATH::
+
+        M^{-1} =
+        \begin{pmatrix}
+           A^{-1}+A^{-1}B\Delta^{-1}CA^{-1} & - A^{-1}B \Delta^{-1}\\
+          -\Delta^{-1}CA^{-1}               & \Delta^{-1}\\
+        \end{pmatrix}\,.
+
+    Voir: https://en.wikipedia.org/wiki/Block_matrix#Block_matrix_inversion
+
+.. TOPIC:: Exercice
+
+    #. Vérifier que l'on retrouve bien la formule d'inversion des
+       matrices `2\times 2` à partir de la formule d'inversion par
+       blocs.
+
+    #. Vérifier que l'on obtient bien l'inverse de `M`.
+
+.. TOPIC:: Théorème: «pour les matrices, l'inversion ne coûte pas plus que la multiplication»
+
+    Soient respectivement `c_n` et `d_n` les complexités de la
+    multiplication et de l'inversion de matrices de taille `n`.
+
+    Si `c_n=O(n^\omega)` avec `\omega>1`, alors `d_n=O(n^\omega)`.
+
+.. TOPIC:: Démonstration (simplifiée)
+
+    Soit `a` tel que `c_n\leq a n^\omega`, pour tout `n`. On va
+    chercher `b` tel que `d_n \leq ba n^\omega`, pour tout `n`.
+
+    Supposons que `n` et `b` sont tels que `d_n \leq ba n^\omega`.
+
+    Alors, en utilisant la formule par blocs ci-dessus,
+
+    .. MATH::
+
+        d_{2n}
+        \,\leq\,  2d_n + 8c_n
+        \,\leq\,  2ban^\omega + 8an^\omega
+        \,\leq\,  \frac{2+\frac 8b}{2^\omega} \,ba(2n)^\omega
+
+    Donc, à condition de prendre `b` suffisamment grand, `d_{2n} \leq
+    ba(2n)^\omega`, comme voulu.
+
+    Cela donne par récurrence la complexité voulue pour `n` une
+    puissance de `2`. Quitte à gérer proprement les parties entières,
+    le même argument marche pour tout `n`.
 
 Méthode de Newton
 =================
 
-Approximation numérique de solution de `f(x) = 0`
--------------------------------------------------
+Approximation numérique de solutions de `f(a) = 0`
+--------------------------------------------------
 
 .. TOPIC:: Exercice
 
     Soit `f` une fonction suffisamment gentille dont on recherche une
     racine `a`.
 
-    On suppose que l'on ait une approximation `x` de `a`, et on pose:
+    On suppose que l'on dispose d'une approximation `a_0` de `a`, et on pose:
 
     .. MATH::
 
-         N(x) = x - \frac{f(x)}{f'(x)}
+         a_1 = a_0 - \frac{f(a_0)}{f'(a_0)}
 
-    #. Calculer `f(a)` par développement de Taylor de `f` en `x`
+    #. Calculer `f(a)` par développement de Taylor de `f` en `a_0`.
 
-    #. Qu'en déduire sur `N(x)-a` par rapport à `x-a`?
+    #. Qu'en déduire sur `a_1-a` par rapport à `a_0-a`?
 
     #. Quelle conclusion peut-on en tirer? Sous quelles hypothèses?
 
@@ -93,44 +151,69 @@ Inversion de séries
 
 .. TOPIC:: Exercice
 
-    On suppose que `A(z)` est une approximation de l'inverse de `B(z)`:
+    On suppose que l'on dispose d'une approximation `A_0(z)` de
+    l'inverse `A(z)` de `B(z)`:
 
-    #. Que vaut la nouvelle approximation `A(z)(2-A(z)B(z))`?
+    .. MATH:: A_0(z)B(z)=1+O(z^k)
 
-    #. Conclusion?
+    et on pose:
 
-Approximation en série d'une équation implicite `F(G(z)) = 0`
+    .. MATH:: A_1(z)=A_0(z)(2-A_0(z)B(z))
+
+    #. Que peut on dire de cette nouvelle approximation ?
+
+    #. Proposer un analogue pour l'inversion des séries du théorème
+       sur l'inversion de matrices ci-dessus
+
+On verra en TP que l'expression ci-dessus pour `A_1(z)` peut être
+obtenue par itération de Newton.
+
+.. TODO:: Rédiger la correction; préciser l'ordre auquel sont calculés
+          les produits dans A_1(z); vérifier la cohérence sur la
+          qualité de l'approximation mesurée sur A(z) et sur A(z)B(z)
+
+Approximation en série d'une équation implicite `F(A(z)) = 0`
 -------------------------------------------------------------
+
+.. TODO:: prendre le calcul de racine comme exemple
 
 .. TOPIC:: Exercice
 
     Soit `F(X)` un polynôme à coefficients dans `\QQ[z]`. On cherche
     une série `A(z)` telle que `F(A(z))=0`.
 
-    On suppose que l'on ait une approximation `H(z)` de `A(z)`.
+    On suppose que l'on dispose d'une approximation `A_0(z)` de `A(z)`.
 
     #. En vous inspirant de la méthode de Newton usuelle, proposer une
-       meilleure approximation de `A(z)`.
+       meilleure approximation `A_1(z)` de `A(z)`.
 
     #. Quelle est la vitesse de convergence?
 
     #. Quelles opérations sont nécessaires lors d'une itération?
 
-    #. Quel en est le coût?
-
-    #. Quelle est la complexité de cet algorithme?
+    #. Proposer un analogue pour la résolution des équations
+       implicites du théorème sur l'inversion de matrices ci-dessus.
 
 .. TOPIC:: Exercice
 
-    #. En déduire un algorithme pour calculer la racine carrée d'une série.
+    #. En déduire un algorithme pour calculer la racine carrée d'une
+       série `B(z)`. Que faut-il comme hypothèse sur `B(z)`?
 
     #. Que se passe-t'il si l'on essaye de calculer l'inverse d'une
        série de cette manière?
 
+.. TOPIC:: Remarque
+
+    On peut en fait traiter de manière similaire des équations
+    différentielles linéaires `F(A(Z))=0`.
+
+    Application: connaissant `B(z)`, calculer `A(z)=\exp(B(z))`
+    (prendre `F(A(z)) = A(z)'-B(z)'A(z)`).
+
 Division Euclidienne de polynômes
 =================================
 
-.. TODO:: voir Modern Computer Algebra
+TODO:: voir Modern Computer Algebra
 
 
 ****************
@@ -190,7 +273,7 @@ Nous allons maintenant appliquer les deux principes suivants:
 
     .. MATH:: B = B_0 + B_1 z^l
 
-    où `A_0=A_0(z)` `A_1=A_1(z)`, `B_0=B_0(z)`, `B_1=B_1(z)` sont de degré `\leq l`.
+    où `A_0=A_0(z)`, `A_1=A_1(z)`, `B_0=B_0(z)` et `B_1=B_1(z)` sont de degré `\leq l`.
 
     On peut calculer `AB` en calculant récursivement quatre produits
     de polynômes de degré `l`:
@@ -281,11 +364,7 @@ Produit par évaluation
 
     .. MATH::
 
-        \Phi:
-	\begin{cases}
-	  K[z] &\mapsto (K^n,+,.)\\
-	  P(z)  &\mapsto ( P(x_1), \ldots, P(x_n) )
-	\end{cases}
+        \Phi: \begin{cases} K[z] &\mapsto (K^n,+,.)\\ P(z)  &\mapsto ( P(x_1), \ldots, P(x_n) ) \end{cases}
 
     est un morphisme d'algèbre.
 
@@ -321,11 +400,7 @@ Transformée de Fourier Discrète
 
     .. MATH::
 
-        DFT_\omega:
-	\begin{cases}
-	  K[z] &\mapsto (K^n,+,.)\\
-	  P(z)  &\mapsto ( P(1), P(w), \ldots, P(w^{n-1}) )
-	\end{cases}
+        DFT_\omega: \begin{cases}         K[z] &\mapsto (K^n,+,.)\\       P(z)  &\mapsto ( P(1), P(w), \ldots, P(w^{n-1}) ) \end{cases}
 
     induit un isomorphisme d'algèbre de `K[z] / (z^n-1)`.
 
@@ -346,7 +421,7 @@ Transformée de Fourier Discrète
     #. Donner la matrice inverse.
 
 
-    Indication: `\sum_{k=0}^{n-1} \omega^{ik} = \begin{cases}n&\text{si $j\equiv 0[n]$}\\0&\text{sinon}\end{cases}`
+    Indication: `\sum_{k=0}^{n-1} \omega^{ik} = \begin{cases}n&\text{si $i\equiv 0[n]$}\\0&\text{sinon}\end{cases}`
 
 .. TOPIC:: Proposition
 
@@ -361,10 +436,10 @@ Transformée de Fourier Discrète
 .. TOPIC:: Remarque: lien avec la théorie des représentations
 
     La matrice de `DFT_\omega` est aussi la table des caractères du
-    groupe cyclique `C_n`. Le fait qu'elle soit hermitienne à un
+    groupe cyclique `C_n`. Le fait qu'elle soit unitaire à un
     scalaire près est un cas particulier d'une proposition générale
     sur les tables de caractères. L'espace `K[z]/(z^n-1)` se
-    décompose en `n` modules simples de dimension `1`, et la
+    décompose en `n` modules simples de dimension `1` et la
     transformation `DFT_\omega` correspond à la décomposition d'un
     polynôme dans ces modules simples.
 
@@ -421,9 +496,9 @@ Transformée de Fourier rapide (FFT: Fast Fourier Transform)
     Exemple: les corps cyclotomiques obtenus par extension algébrique
     de `\QQ` par un polynôme cyclotomique::
 
-        sage: K = CyclotomicFields(6)
-	sage: omega = K.gen()
-	sage: omega^6
+        sage: K = CyclotomicField(6)
+        sage: omega = K.gen()
+        sage: omega^6
 
     Souci: ces corps cyclotomiques nécessitent de calculer dans des
     extensions de corps de haut degré; donc un bon produit; cela
@@ -455,15 +530,19 @@ Produits rapides de matrices
     - Pour multiplier deux matrices `2\times 2`, il existe des formules
       n'utilisant que 7 produits au lieu de 8.
 
-    - On découpe les matrices de taille `2^k` en 4 blocs de taille
+    - On découpe les matrices de taille `2^k` en `4` blocs de taille
       `2^{k-1}` et on utilise les formules ci-dessus récursivement.
 
 
     Complexité: `O(n^{\log_2 7}) \approx O(n^{2,8})`
 
-.. TOPIC:: Algorithme de Coppersmith-Winograd, ...
+    Améliorations: pour un `k` donné (ci-dessus `k=2`), chercher
+    systématiquement l'algorithme optimal. Puis l'appliquer
+    récursivement en découpant les matrices en `k\times k` blocs.
 
-    Complexité: `O(n^{2,3755\cdots})`, `O(n^{2,3736\cdots})`, `O(n^{2,3727\cdots})`
+.. TOPIC:: Algorithmes de Coppersmith-Winograd et suivants
+
+    Complexité: `O(n^{2.3755\cdots})` (1990), `O(n^{2.374})` (2010), `O(n^{2,3728\cdots})` (2014), ...
 
     Inutilisable en pratique ...
 
@@ -484,22 +563,22 @@ présentera sa démonstration aux autres.
     #.  Implanter l'algorithme naïf pour multiplier deux polynômes
 
     #.  Implanter l'algorithme de Karatsuba pour multiplier deux
-	polynômes
+        polynômes
 
     #.  Faire un banc d'essai pour ces deux algorithmes, et tracer un
-	graphe permettant de comparer simultanément leur complexité
-	pratique entre elles et avec leur complexité théorique.
+        graphe permettant de comparer simultanément leur complexité
+        pratique entre elles et avec leur complexité théorique.
 
     #.  Avec votre implantation, à partir de quel seuil est-il
-	préférable d'utiliser l'algorithme de Karatsuba?
+        préférable d'utiliser l'algorithme de Karatsuba?
 
     Prolongements possibles:
 
     #.  Implanter un algorithme mixte Karatsuba/naïf qui tienne compte
-	du seuil obtenu. Comparer.
+        du seuil obtenu. Comparer.
 
     #.  Comparer la complexité pratique de votre implantation du
-	produit avec celle de la bibliothèque de Sage.
+        produit avec celle de la bibliothèque de Sage.
 
     #.  Deviner, d'après sa complexité pratique, le ou les algorithmes
         utilisés par Sage.
@@ -562,29 +641,28 @@ présentera sa démonstration aux autres.
 
     #.  Par itération de Newton, calculer successivement `C_1(z)`,
         `C_2(z)`, ... et indiquer le nombre de termes de `C(z)`
-        obtenus à chaque étape.
+        obtenus à chaque étape.  
+        **Indication**: on pourra au choix représenter les `C_i(z)` par:
 
-	Indication: on pourra au choix représenter les `C_i(z)` par:
+        - Des fractions rationnelles, en utilisant la commande
+          :func:`taylor` pour les développer en série entière.
 
-	- Des fractions rationnelles, en utilisant la commande
-	  :func:`taylor` pour les développer en série entière.
-
-	- Des séries tronquées à l'ordre approprié (éventuellement
+        - Des séries tronquées à l'ordre approprié (éventuellement
           représentée par un simple polynôme), en utilisant l'exercice
           précédent pour les calculs d'inverse.
 
 
        ..
-	  sage: F = X - x*X^2
-	  sage: F = 1 + x*X^2 - X
-	  sage: A = 1
-	  sage: def N(A): return A - F.subs(X=A) / Fp.subs(X=A)
-	  sage: taylor(N(A), x, 0, 10)
-	  512*x^10 + 256*x^9 + 128*x^8 + 64*x^7 + 32*x^6 + 16*x^5 + 8*x^4 + 4*x^3 + 2*x^2 + x + 1
-	  sage: taylor(N(N(A)), x, 0, 20)
-	  3392317952*x^20 + 993641216*x^19 + 291057920*x^18 + 85262464*x^17 + 24979584*x^16 + 7319744*x^15 + 2145600*x^14 + 629280*x^13 + 184736*x^12 + 54320*x^11 + 16016*x^10 + 4744*x^9 + 1416*x^8 + 428*x^7 + 132*x^6 + 42*x^5 + 14*x^4 + 5*x^3 + 2*x^2 + x + 1
-	  sage: taylor(N(N(N(A))), x, 0, 20)
-	  6563635312*x^20 + 1767205544*x^19 + 477632784*x^18 + 129644296*x^17 + 35357640*x^16 + 9694844*x^15 + 2674440*x^14 + 742900*x^13 + 208012*x^12 + 58786*x^11 + 16796*x^10 + 4862*x^9 + 1430*x^8 + 429*x^7 + 132*x^6 + 42*x^5 + 14*x^4 + 5*x^3 + 2*x^2 + x + 1
+          sage: F = X - x*X^2
+          sage: F = 1 + x*X^2 - X
+          sage: A = 1
+          sage: def N(A): return A - F.subs(X=A) / Fp.subs(X=A)
+          sage: taylor(N(A), x, 0, 10)
+          512*x^10 + 256*x^9 + 128*x^8 + 64*x^7 + 32*x^6 + 16*x^5 + 8*x^4 + 4*x^3 + 2*x^2 + x + 1
+          sage: taylor(N(N(A)), x, 0, 20)
+          3392317952*x^20 + 993641216*x^19 + 291057920*x^18 + 85262464*x^17 + 24979584*x^16 + 7319744*x^15 + 2145600*x^14 + 629280*x^13 + 184736*x^12 + 54320*x^11 + 16016*x^10 + 4744*x^9 + 1416*x^8 + 428*x^7 + 132*x^6 + 42*x^5 + 14*x^4 + 5*x^3 + 2*x^2 + x + 1
+          sage: taylor(N(N(N(A))), x, 0, 20)
+          6563635312*x^20 + 1767205544*x^19 + 477632784*x^18 + 129644296*x^17 + 35357640*x^16 + 9694844*x^15 + 2674440*x^14 + 742900*x^13 + 208012*x^12 + 58786*x^11 + 16796*x^10 + 4862*x^9 + 1430*x^8 + 429*x^7 + 132*x^6 + 42*x^5 + 14*x^4 + 5*x^3 + 2*x^2 + x + 1
 
 
 Quelques références

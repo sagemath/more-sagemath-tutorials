@@ -9,6 +9,11 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Codes corre
 
 Référence: `Wikipedia: Codes correcteurs <http://fr.wikipedia.org/wiki/Code_correcteur>`_
 
+Ce document dans d'autres formats:
+`feuille de travail <codes_correcteurs.ipynb>`_,
+`source RST <codes_correcteurs.rst>`_.
+
+.. TODO:: utiliser des fonctionnalités de Sage sur les codes linéaires
 
 ************
 Introduction
@@ -46,17 +51,20 @@ Quelles sont les contraintes spécifiques à chacune de ces applications?
 Premiers exemples de codes
 ==========================
 
-#. Langages humains!
-    Syntaxe: orthographe, grammaire
+Langages humains!
+-----------------
 
-    Anglais: 500000 mots de longueur moyenne 10 sur en gros
-    26^10, soit une proportion de 1e-9.
+Syntaxe: orthographe, grammaire
 
-    Exemple: pomme, abrucot, poime (pomme, poire, prime, poème)
+Anglais: `500000` mots de longueur moyenne `10` sur en gros
+`26^{10}`, soit une proportion de `10^{-9}`.
 
-    Sémantique: sens, contexte, ...
+Exemple: pomme, abrucot, poime (pomme, poire, prime, poème)
 
-#. Codage de parité sur 7 bits.
+Sémantique: sens, contexte, ...
+
+Codage de parité sur 7 bits
+---------------------------
 
 *****************
 Premiers concepts
@@ -67,6 +75,7 @@ Premiers concepts
     Un *code* `C` est un sous-ensemble de *mots* dans `M:=A^{n}`, où
 
     - `A` est un *alphabet*, comme `A:=\mathbb{Z}/q\mathbb{Z}`.
+
        Typiquement `q=2` (codes binaires).
 
     - `n` est un entier, la *dimension* du code
@@ -79,7 +88,10 @@ Premiers concepts
 
     *Correction d'erreur*: on essaye de retrouver `c` à partir de `c'`.
 
-    *Décodage*: on retrouve le message `m` à partir de `c`
+    *Décodage*: on retrouve le message `m` à partir de `c`.
+
+
+.. TODO:: Illustration sur un exemple en utilisant les codes de Sage
 
 .. TOPIC:: Définition
 
@@ -89,9 +101,11 @@ Premiers concepts
 
     #.  Détection d'erreur: est-ce que `c'` est dans `C`?
 
-    #.  Décodage par distance minimale: on renvoie le mot de `C` le plus proche de `c'`
+    #.  Décodage par distance minimale: on renvoie le mot de `C` le plus proche de `c'`.
 
 Est-ce raisonnable?
+
+.. TODO:: Calculer / mesurer la probabilité qu'un mot soit mal transmis
 
 .. TOPIC:: Définitions
 
@@ -114,38 +128,74 @@ Est-ce raisonnable?
 
        .. MATH::
 
-	  d(C) := \min_{x\ne y\in C} d(x,y)
+          d(C) := \min_{x\ne y\in C} d(x,y)
 
+    Variante: borner ces quantités par la longueur `n`.
 
 .. TOPIC:: Exercice: En petite dimension:
 
-    #. Trouver tous les codes de `(\mathbb{Z}/2\mathbb{Z})^{n}` pour
-       `n=0,\dots,2`.
+    #.  Trouver tous les codes de `(\mathbb{Z}/2\mathbb{Z})^{n}` pour
+        `n=0,\dots,2`.
 
-    #. Donner leur distance et leur *capacité de détection*.
+    #.  Donner leur distance et leur *capacité de détection*.
 
-    #. Permettent-t’ils de corriger une erreur?
+    #.  Permettent-t’ils de corriger une erreur?
 
-    #. Donner un code de `(\mathbb{Z}/2\mathbb{Z})^{3}` permettant
-       de corriger une erreur.
+    #.  Donner un code de `(\mathbb{Z}/2\mathbb{Z})^{3}` permettant
+        de corriger une erreur.
 
-    #. Peut-on faire mieux?
+    #.  Peut-on faire mieux?
 
 
 .. TOPIC:: Proposition
 
-    Capacité de détection: `D(C) = d(C) -1`
+    Capacité de détection: `D(C) = d(C) - 1`.
 
-    Capacité de correction: `e(C) = \llcorner\frac{d(C)-1}2\lrcorner`
+    Capacité de correction: `e(C) = \llcorner\frac{d(C)-1}2\lrcorner`.
 
 Borne de Hamming, codes parfaits
 ================================
 
-.. TOPIC:: Problème: Redondance minimale pour une capacité de correction donnée?
+.. TOPIC:: Problème
+
+    Redondance minimale pour une capacité de correction donnée?
 
     Étant donnés un alphabet `A` avec `q=|A|`, une longueur `n` et une
     capacité de correction `e`, trouver un code `C` ayant le plus
     grand nombre possible de mots.
+
+.. TODO:: mettre un exemple où on rajoute les boules progressivement;
+          par exemple avec un interact
+
+.. TOPIC:: Exemples: visualisation des boules de rayon `e` autour de quelques codes binaires
+
+    Chargement de `quelques fonctions <codes_correcteurs.py>`_, et
+    configuration des plots 3D::
+
+        sage: %run "codes_correcteurs.py"
+        sage: from sage.plot.plot3d.base import SHOW_DEFAULTS
+        sage: SHOW_DEFAULTS['frame'] = False
+        sage: SHOW_DEFAULTS['aspect_ratio'] = [1,1,1]
+
+    Le code de triple répétition sur `\ZZ/2\ZZ`::
+
+        sage: K = GF(2)
+        ....: V = K^3
+        ....: C = V.subspace([[1,1,1]])
+        ....: dessin_boules(C,1)
+
+    mais pas sur `\ZZ/3\ZZ`::
+
+        sage: K = GF(3)
+        ....: V = K^3
+        ....: C = V.subspace([[1,1,1]])
+        ....: dessin_boules(C,1)
+
+    Le code de Hamming::
+
+        sage: V = K^7
+        ....: C = codes.HammingCode(3, GF(2))
+        ....: dessin_boules(C, 1, projection=projection_7_3)
 
 .. TOPIC:: Exercice: Borne de Hamming sur `|C|`.
 
@@ -164,9 +214,14 @@ Borne de Hamming, codes parfaits
 
     .. math:: |C| \sum_{k=0}^e \binom n k (q-1)^k = q^n
 
-.. TOPIC: Problème
+.. TOPIC:: Exemple
 
-   Codage? Décodage?
+    Le premier et le troisième code ci-dessus sont parfaits, mais pas
+    le deuxième.
+
+.. TOPIC:: Problème
+
+    Codage? Décodage?
 
 ***************
 Codes linéaires
@@ -179,6 +234,8 @@ efficaces.
 
     Un *code linéaire* est un sous-espace vectoriel de `A^n`, où `A`
     est un corps fini.
+
+Commençons par un petit échauffement.
 
 .. TOPIC:: Exercice: algèbre linéaire sur `\mathbb{Z}/2\mathbb{Z}`, à la main
 
@@ -327,7 +384,7 @@ avec `A[X]/(X^n-1)`.
 
 .. TOPIC:: Définition
 
-    Un code est *cyclique* s'il est stable par rotation des mots
+    Un code est *cyclique* s'il est stable par rotation des mots.
 
 .. TOPIC:: Remarque
 
@@ -343,13 +400,13 @@ Codage: `m\mapsto mg`
 
 Détection d'erreur: `c*h=0`
 
-Décodage: «division par `g`»
+Décodage: division par `g` modulo `X^n-1` (par ex. par Euclide étendu)
 
 .. TOPIC:: Codes BCH
 
     On peut construire des codes cycliques de capacité de correction
     déterminée à l'avance. Pour en savoir plus, voir `Wikipedia, Codes
-    BCH <http://en.wikipedia.org/wiki/BCH_code>`_
+    BCH <http://en.wikipedia.org/wiki/BCH_code>`_.
 
 ***************************************
 Codage par interpolation (Reed-Solomon)
@@ -364,42 +421,124 @@ Codage par interpolation (Reed-Solomon)
     indispensable: la distance entre le Grand Cocotier et le
     Trésor. Connaissant bien ses lieutenants, et dans un étonnant
     dernier sursaut de justice, il ne voudrait pas qu'une conjuration
-    de quelques uns d'entre eux assassines les autres pour empocher
+    de quelques uns d'entre eux assassine les autres pour empocher
     seuls le trésor. En tenant cependant compte de la mortalité
     habituelle du milieu, il souhaite donner une information secrète à
     chacun de ses lieutenants pour que huit quelconques d'entre eux
     puissent retrouver ensemble le trésor, mais pas moins. Comment
     peut-il s'y prendre?
 
-Application au codage?
+.. TOPIC:: Application au codage: CIRC
 
-.. CIRC, ...
+    .. TODO:: Faire la figure
+
+    Découpage de l'information en blocs, interprétés comme des
+    polynômes `P_1,\dots,P_k` dans `\GF(q)[X]`.
+
+    Points d'évaluation `x_1,\ldots,x_l`.
+
+    Premier étage: évaluation et entrelacement.
+
+    .. MATH::
+
+       \underbrace{P_1(x_1),P_2(x_1),\ldots,P_k(x_1)},
+       \underbrace{P_1(x_2),P_2(x_2),\ldots,P_k(x_2)},\ldots
+       \underbrace{P_1(x_l),P_2(x_l),\ldots,P_k(x_l)}
+
+    Deuxième étage: codage de chacun des `l` blocs avec un code
+    permettant de détecter les erreurs.
 
 **********************
 TP: Codage et décodage
 **********************
 
-Un petit tour de magie::
+Comme d'habitude, choisir à la carte parmi les exercices suivants.
 
-    sage: %hide
-    sage: @interact
-    sage: def magie(step=slider([1..5])):
-    ....:     return matrix(4,4,[i for i in srange(0,32) if i.digits(base=2,padto=6)[5-step]])
 
-Lire le texte `Codes Correcteurs d'Erreurs, Agreg 2005 <http://nicolas.thiery.name/Enseignement/Agregation/Textes/527-CodesCorrecteursShannon.pdf>`_ qui
-explique comment rendre le tour de magie immune à un mensonge.
+..  TOPIC:: Exercice: théorie des codes et Sage
 
-Réfléchir au plan d'une leçon sur ce thème.
+    Explorer les fonctionalités de Sage autour du codage. Un point
+    d'entrée est ``codes?`` ainsi que le tutoriel thématique
+    `Coding Theory in Sage <http://doc.sagemath.org/html/en/thematic_tutorials/coding_theory.html#coding-theory>`_.
 
-En particulier, mettre au point une démonstration sur ordinateur pour
-illustrer des développements sur le codage. On pourra par exemple
-implanter le tour de prestidigitation, ou faire du codage, décodage,
-calcul de distance, tests de perfection, pour des codes:
+..  TOPIC:: Exercice: illustrer un cours sur le codage
 
-#. décrits par un ensemble de mots
+    Mettre au point une illustration sur ordinateur de quelques points
+    du cours. On pourra par exemple:
 
-#. linéaires
+    #.  Illustrer visuellement les liens entre distance, capacité de
+        correction et de détection, ainsi que les notions de distance
+        de Hamming, boules, ...
 
-#. cycliques
+    #.  Déterminer en quelle dimension on peut espérer l'existence de
+        codes parfaits non triviaux?
 
-#. par interpolation
+    #.  Implanter toute la chaîne: codage, transmission, détection,
+        correction, décodage
+
+    #.  Implanter des fonctions de calcul de distance et test de
+        perfection
+
+    Pour ces deux derniers points, on pourra considérer des codes:
+
+    #.  décrits par une liste exhaustive de mots
+
+    #.  linéaires
+
+    #.  cycliques (voir ci-dessous)
+
+    #.  par interpolation
+
+    #.  code à deux étages avec entrelacement, comme le code CIRC
+        utilisé dans les CDs.
+
+.. TOPIC:: Exercice: codes cycliques
+
+    On oubliera ici que les codes cycliques sont naturellement
+    représentés par des idéaux dans `\ZZ_2[X] / X^n-1`, et on ne fera
+    que de l'algèbre linéaire.
+
+    Soit `E` un espace vectoriel sur un corps fini; typiquement::
+
+        sage: F2 = GF(2)
+        sage: E = F2^7; E
+        Vector space of dimension 7 over Finite Field of size 2
+
+    On considère l'opération ``cycle(v)`` qui prend un vecteur et
+    décale ses coordonnées d'un cran vers la droite (modulo `n`).  On
+    rappelle qu'un code cyclique est un sous-espace vectoriel de `E`
+    qui est stable par l'opération ``cycle``.
+
+    #.  Implanter l'opération ``cycle``.
+
+    #.  Implanter une fonction ``code_cyclique(v)`` qui renvoie une
+        base du plus petit code cyclique `C` contenant `v`.
+
+    #.  Implanter une fonction qui renvoie la matrice de contrôle du
+        code `C`, c'est à dire une matrice `M` telle que `Mv=0` si et
+        seulement si `v` est dans `C`.
+
+    #.  Implanter le décodage par syndrome pour le code cyclique
+        engendré par `v`.
+
+.. TOPIC:: Exercice: Le tour de magie
+
+    Implanter le tour de prestidigitation du texte
+    `Codes Correcteurs d'Erreurs, Agreg 2005
+    <http://nicolas.thiery.name/Enseignement/Agregation/Textes/527-CodesCorrecteursShannon.pdf>`_
+
+    Un petit exemple d'utilisation des composants visuels interactifs
+    de Sage. Ils ne fonctionne pas encore dans les feuilles de travail
+    Jupyter::
+
+        sage: @interact
+        sage: def magie(step=slider([1..5])):
+        ....:     return matrix(4,4,[i for i in srange(0,32) if i.digits(base=2,padto=6)[5-step]])
+
+Textes connexes
+===============
+
+- `Code de Goppa <http://nicolas.thiery.name/Enseignement/Agregation/Textes/goppa.pdf>`_
+
+- `Codes Correcteurs d'Erreurs, Agreg 2005
+    <http://nicolas.thiery.name/Enseignement/Agregation/Textes/527-CodesCorrecteursShannon.pdf>`_

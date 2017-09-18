@@ -9,6 +9,10 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Introductio
 
 .. LINKALL
 
+Ce document dans d'autres formats:
+`feuille de travail <introduction.ipynb>`_,
+`source RST <introduction.rst>`_.
+
 ************
 Introduction
 ************
@@ -274,7 +278,7 @@ Applications
 - Cryptographie
 - Codage
 - Solveurs exacts (linéaire, ...) pour les sciences de l'ingénieur
-  Robotique
+- Robotique
 
 
 Idées centrales
@@ -563,9 +567,9 @@ Outre la simplicité de notation, cela permet d’écrire des programmes
 *génériques* comme::
 
       sage: def puissance_quatre(a):
-      ....:      a = a * a
-      ....:      a = a * a
-      ....:      return a
+      ...        a = a * a
+      ...        a = a * a
+      ...        return a
 
 qui s’appliquent à tout objet admettant les opérations utilisées (ici la
 multiplication)::
@@ -593,7 +597,7 @@ peut ainsi accéder à l’aide en ligne spécifique à la factorisation des
 nombres entiers avec::
 
       sage: o = 720
-      sage: x.factor
+      sage: x.factor?
       ...
       Definition:   o.factor(self, algorithm='pari', proof=None, ...)
       Docstring:
@@ -603,7 +607,7 @@ nombres entiers avec::
 
 voire à l’implantation de cette fonction, précédée de son aide en ligne::
 
-      sage: o.factor
+      sage: o.factor?
       ...
       def factor(self, algorithm='pari', proof=None, ...)
             ...
@@ -808,12 +812,14 @@ numériques seront abordés plus en détail dans l'exposé suivant. Notons
 au passage que, même en calcul exact, il est possible de manipuler de
 relativement grosses matrices::
 
-    sage: M = random_matrix(K, 10000, sparse=True, density=3/10000)
+    sage: n = 500
+    sage: M = random_matrix(K, n, sparse=True, density=3/n)
+    sage: M.visualize_structure()                                      # not tested
+
+    sage: n = 10000
+    sage: M = random_matrix(K, n, sparse=True, density=3/n)
     sage: M.rank()                                                     # random
     9278
-
-    sage: M.visualize_structure('/tmp/structure.png')      # not tested
-    sage: os.system(sage.misc.viewer.png_viewer()+' '+'/tmp/structure.png') # not tested
 
 Définissons donc une matrice à coefficients dans `\ZZ/7\ZZ`::
 
@@ -1309,12 +1315,12 @@ Pour résumer, la souplesse est l’avantage principal des expressions:
 
 Les avantages de la déclaration explicite du domaine de calcul sont:
 
--  vertus pégagogiques{:...};
+-  vertus pégagogiques: réfléchir au préalable à l'univers où vivent les objets;
 
-- rigueur: les résultats obtenus sont garantis corrects (``Sage``
-  n’est pas un système de calcul *certifié*; il peut donc toujours y
-  avoir un bogue informatique; mais il n’y aura pas d’utilisation
-  d’hypothèse implicite).
+-  rigueur: les résultats obtenus sont garantis corrects (``Sage``
+   n’est pas un système de calcul *certifié*; il peut donc toujours y
+   avoir un bogue informatique; mais il n’y aura pas d’utilisation
+   d’hypothèse implicite);
 
 -  mise sous forme normale automatique (le plus souvent) — cela peut
    aussi être un inconvénient ! — ;
@@ -1329,7 +1335,7 @@ Travaux pratiques
 
 L'objectif de la séance est de prendre en main le logiciel ``Sage``.
 À vous d'explorer ses fonctionnalités selon vos goûts et connaissances
-préalables, et de préparer une mini-démonstration de trois minutes que
+préalables, et de préparer une mini-illustration de trois minutes que
 vous présenterez en fin de séance.
 
 Voici quelques pistes:
@@ -1341,6 +1347,15 @@ Voici quelques pistes:
 * Parcourir le `Tutorial: Programming in Python and Sage <http://combinat.sagemath.org/doc/thematic_tutorials/tutorial-programming-python.html>`_
 
 * Faire le maximum de problèmes du `Projet Euler <http://projecteuler.net>`_
+  (`Version en Français <http://submoon.freeshell.org/fr/sphinx/euler.html>`_)
+
+Instructions pour les mini-illustrations:
+
+- Préparer une feuille de travail Jupyter, nommée <Prenom>-<Nom>
+  (pour moi, cela donnerait Nicolas-Thiéry)
+- La sauvegarder; cela donne un fichier comme Nicolas-Thiéry.ipynb
+- Envoyer ce fichier à Nicolas.Thiery@u-psud.fr dans un mail ayant
+  comme sujet «Illustration agrégation».
 
 
 .. Premiers calculs (à faire sous Maple, MuPAD ou autre!):
