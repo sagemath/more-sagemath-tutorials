@@ -9,10 +9,6 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Introductio
 
 .. LINKALL
 
-Ce document dans d'autres formats:
-`feuille de travail <introduction.ipynb>`_,
-`source RST <introduction.rst>`_.
-
 *********************
 Objectifs de l'option
 *********************
@@ -38,6 +34,9 @@ Moyens:
 
 - Étude de textes
 
+*************
+Plan du cours
+*************
 
 * :ref:`agregation.introduction.calcul_formel`
 * :ref:`agregation.introduction.systemes`
