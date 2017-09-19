@@ -540,5 +540,4 @@ Textes connexes
 
 - `Code de Goppa <http://nicolas.thiery.name/Enseignement/Agregation/Textes/goppa.pdf>`_
 
-- `Codes Correcteurs d'Erreurs, Agreg 2005
-    <http://nicolas.thiery.name/Enseignement/Agregation/Textes/527-CodesCorrecteursShannon.pdf>`_
+- `Codes Correcteurs d'Erreurs, Agreg 2005 <http://nicolas.thiery.name/Enseignement/Agregation/Textes/527-CodesCorrecteursShannon.pdf>`_

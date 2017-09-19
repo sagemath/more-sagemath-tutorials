@@ -172,22 +172,22 @@ Existence de solutions optimales ?
     On considère les quatre programmes linéaires standard suivants, écrits
     avec la syntaxe du système de calcul formel ``MuPAD``:
 
-    .. literalinclude:: ../media/programmation_lineaire.py
+    .. literalinclude:: media/programmation_lineaire.py
         :language: python
         :start-after: ## Chvatal7a
         :end-before: ####
 
-    .. literalinclude:: ../media/programmation_lineaire.py
+    .. literalinclude:: media/programmation_lineaire.py
         :language: python
         :start-after: ## Chvatal7b
         :end-before: ####
 
-    .. literalinclude:: ../media/programmation_lineaire.py
+    .. literalinclude:: media/programmation_lineaire.py
         :language: python
         :start-after: ## Chvatal7c
         :end-before: ####
 
-    .. literalinclude:: ../media/programmation_lineaire.py
+    .. literalinclude:: media/programmation_lineaire.py
         :language: python
         :start-after: ## extra
         :end-before: ####
@@ -337,12 +337,12 @@ Pour cela, nous chargeons un petit `fichier annexe <../_images/programmation_lin
 
     sage: load("~/Enseignement/Agregation/media/programmation_lineaire.py")
 
-.. image:: ../media/programmation_lineaire.py
+.. image:: media/programmation_lineaire.py
    :alt:
 
 qui contient quelques utilitaires comme:
 
-.. literalinclude:: ../media/programmation_lineaire.py
+.. literalinclude:: media/programmation_lineaire.py
     :language: python
     :pyobject: matrice_systeme
 
@@ -395,7 +395,7 @@ Séquence complète de pivots matriciels
 
 On automatise l'opération de pivot avec:
 
-.. literalinclude:: ../media/programmation_lineaire.py
+.. literalinclude:: media/programmation_lineaire.py
     :language: python
     :pyobject: pivot
     :end-before: ####
@@ -468,7 +468,7 @@ Tableaux
 
     Mettre sous forme matricielle le problème suivant:
 
-    .. literalinclude:: ../media/programmation_lineaire.py
+    .. literalinclude:: media/programmation_lineaire.py
         :language: python
         :start-after: ## Chvatal19
         :end-before: ####
@@ -552,7 +552,7 @@ Point de vue géométrique
     Calculer directement le tableau correspondant aux variables
     non-basiques `x_1,s_2,s_3` du programme linéaire suivant:
 
-    .. literalinclude:: ../media/programmation_lineaire.py
+    .. literalinclude:: media/programmation_lineaire.py
         :language: python
         :start-after: ## Chvatal13
         :end-before: ####
@@ -653,12 +653,12 @@ Point de vue géométrique
     Utilisez l'algorithme du simplexe pour résoudre les programmes
     linéaires suivants:
 
-    .. literalinclude:: ../media/programmation_lineaire.py
+    .. literalinclude:: media/programmation_lineaire.py
         :language: python
         :start-after: ## Chvatal26_21a
         :end-before: ####
 
-    .. literalinclude:: ../media/programmation_lineaire.py
+    .. literalinclude:: media/programmation_lineaire.py
         :language: python
         :start-after: ## Chvatal26_21c
         :end-before: ####
@@ -1208,7 +1208,7 @@ tableau faisable.
     Résoudre à l'aide de l'algorithme du simplexe en deux phase le
     programme linéaire suivant:
 
-    .. literalinclude:: ../media/programmation_lineaire.py
+    .. literalinclude:: media/programmation_lineaire.py
         :language: python
         :start-after: ## Chvatal44_39a
         :end-before: ####
@@ -2081,7 +2081,7 @@ Application aux graphes
     dans les noeuds intermédiaires. Quel débit d'eau maximal peut on
     faire passer entre `a` et `i`?
 
-    .. figure:: ../media/flot.svg
+    .. figure:: media/flot.svg
        :align: center
        :alt: image
 
@@ -2093,7 +2093,7 @@ Application aux graphes
     deux à deux disjointes. On recherche un couplage de taille
     maximale du graphe biparti suivant:
 
-    .. figure:: ../media/biparti2.svg
+    .. figure:: media/biparti2.svg
        :align: center
        :alt: image
 
@@ -2108,7 +2108,7 @@ Application aux graphes
     On recherche maintenant un couplage dans un graphe quelconque,
     comme:
 
-    .. figure:: ../media/graphe.svg
+    .. figure:: media/graphe.svg
        :align: center
        :alt: image
 

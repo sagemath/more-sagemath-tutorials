@@ -461,7 +461,7 @@ TP
 ==
 
 Exercice 1: Du calcul matriciel au calcul sur les sous espaces vectoriels
------------------------------------------------------------------------
+-------------------------------------------------------------------------
 
 Calcul d'une base d'un sous espace vectoriel donné par des générateurs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -569,9 +569,8 @@ Textes connexes
 
 - `Pseudo inverses de matrices <http://nicolas.thiery.name/Enseignement/Agregation/Textes/PseudoInverseMatrice.pdf>`_
 
-*******************
 Quelques références
-*******************
+===================
 
 .. [Storjohan.2004] `Algorithms for Matrix Canonical Forms <https://cs.uwaterloo.ca/~astorjoh/diss2up.pdf>`_,
    Arne Storjohan, PhD Thesis,

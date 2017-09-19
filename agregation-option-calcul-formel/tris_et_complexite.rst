@@ -127,9 +127,7 @@ pour les problèmes suivants:
         sage: plus_grand_element([7,3,1,10,4,10,2,9])
         10
 
-    .. TOPIC:: Note
-
-        Digression: invariants, preuve et test
+    Digression: invariants, preuve et test
 
     .. the code is voluntarily broken, to be analyzed and fixed in class
 
