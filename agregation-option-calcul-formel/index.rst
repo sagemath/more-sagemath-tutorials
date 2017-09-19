@@ -18,3 +18,10 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques
 * :ref:`agregation.algebre_lineaire_anneaux`
 * :ref:`agregation.algebre_lineaire_rapide`
 * :ref:`agregation.programmation_lineaire`
+
+.. toctree::
+   :glob:
+   :hidden:
+   :reversed:
+
+   *
