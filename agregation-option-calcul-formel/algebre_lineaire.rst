@@ -447,7 +447,7 @@ Algorithme de Gauß sans fraction
 
 Explorons un exemple::
 
-    sage: pretty_print_default()
+    sage: %display latex
 
     sage: A = QQ['a']
     sage: a = A.gen()
