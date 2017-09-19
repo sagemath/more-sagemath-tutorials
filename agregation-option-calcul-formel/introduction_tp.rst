@@ -14,9 +14,9 @@ Voici quelques pistes:
 
 * Parcourir le premier chapitre de `Calcul Mathématique avec Sage <http://sagebook.gforge.inria.fr/>`_
 
-* Parcourir le `Tutorial: Comprehensions, Iterators, and Iterables <http://combinat.sagemath.org/doc/thematic_tutorials/tutorial-comprehensions.html>`_
+* Parcourir le :ref:`tutorial-comprehensions`
 
-* Parcourir le `Tutorial: Programming in Python and Sage <http://combinat.sagemath.org/doc/thematic_tutorials/tutorial-programming-python.html>`_
+* Parcourir le :ref:`tutorial-programming-python`
 
 * Faire le maximum de problèmes du `Projet Euler <http://projecteuler.net>`_
   (`Version en Français <http://submoon.freeshell.org/fr/sphinx/euler.html>`_)
