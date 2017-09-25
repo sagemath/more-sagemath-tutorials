@@ -7,10 +7,6 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Tris et com
 
 .. MODULEAUTHOR:: `Nicolas M. Thiéry <http://Nicolas.Thiery.name/>`_ <Nicolas.Thiery at u-psud.fr>
 
-Ce document dans d'autres formats:
-`feuille de travail <tris_et_complexite.ipynb>`_,
-`source RST <tris_et_complexite.rst>`_.
-
 ****************************
 Introduction à la complexité
 ****************************
