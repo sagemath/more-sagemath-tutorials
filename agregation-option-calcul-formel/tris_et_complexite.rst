@@ -554,9 +554,16 @@ que la feuille de travail soit dans ce même répertoire.
 
 Essayer la fonction ``tri``.
 
-Dans un terminal, aller dans le dossier, et lancer:
+Dans un terminal, aller dans le dossier, et lancer les tests du
+fichier tris.py avec::
 
     sage -t tris.py
+
+.. WARNING::
+
+    Dans les salles de TP, SageMath est installé via ses paquets
+    Debian/Ubuntu; ceux-ci ont actuellement (01/2017) un bogue qui ne
+    leur permet pas de lancer les tests comme ci-dessus.
 
 Ouvrir le fichier avec votre éditeur de texte favori (par exemple
 ``gedit``), et compléter les tests de la fonction tri.
