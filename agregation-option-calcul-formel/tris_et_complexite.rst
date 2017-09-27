@@ -549,8 +549,14 @@ Charger ce fichier dans ``Sage`` avec::
 
     sage: %run tris.py
 
-Cela suppose que ``sagemath`` a été lancé dans le même répertoire, ou
-que la feuille de travail soit dans ce même répertoire.
+Cela suppose que `SageMath` a été lancé dans le même répertoire, ou
+que la feuille de travail soit dans ce même répertoire. Si vous
+utilisez des variables globales pour compter les opérations, utilisez
+à la place::
+
+    sage: %run -i tris.py
+
+(voir la documentation de `%run` pour les détails).
 
 Essayer la fonction ``tri``.
 
