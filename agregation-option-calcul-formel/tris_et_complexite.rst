@@ -462,7 +462,7 @@ retour. En l'état, il n'est pas clair s'il sera possible d'avoir cette
 bibliothèque le jour du concours.
 
 Si vous êtes partant pour essayer cette bibliothèque, télécharger le
-fichier `bleachermark.py <bleachermark.py>`_ et le mettre dans le même
+fichier `bleachermark.py <media/bleachermark.py>`_ et le mettre dans le même
 répertoire que votre feuille de travail.
 
 Voici un exemple d'utilisation dans lequel on fait un banc d'essai
@@ -538,6 +538,8 @@ Implantation de quelques algorithmes de tri
 
 Fichiers, documentation, tests
 ------------------------------
+
+.. TODO:: étendre le squelette
 
 Télécharger le `fichier annexe <media/tris.py>`_ et le mettre dans un
 dossier de votre choix, comme par exemple
