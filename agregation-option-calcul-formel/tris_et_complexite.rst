@@ -562,8 +562,8 @@ fichier tris.py avec::
 .. WARNING::
 
     Dans les salles de TP, SageMath est installé via ses paquets
-    Debian/Ubuntu; ceux-ci ont actuellement (01/2017) un bogue qui ne
-    leur permet pas de lancer les tests comme ci-dessus.
+    Debian/Ubuntu; ceux-ci ont actuellement (Sage 7.5, 01/2017) un
+    bogue qui ne leur permet pas de lancer les tests comme ci-dessus.
 
 Ouvrir le fichier avec votre éditeur de texte favori (par exemple
 ``gedit``), et compléter les tests de la fonction tri.
