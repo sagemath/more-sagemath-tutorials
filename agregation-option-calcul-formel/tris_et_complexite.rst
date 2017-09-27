@@ -114,7 +114,8 @@ pour les problèmes suivants:
         ....:     """
         ....:     resultat = liste[0]
         ....:     for i in range(1, len(liste)-1):
-        ....:         # Invariant: resultat est le plus grand element de liste[:i]
+        ....:         # Invariant:
+        ....:         # resultat est le plus grand element de liste[:i]
         ....:         assert resultat in liste[:i]
         ....:         assert all(resultat >= x for x in liste[:i])
         ....:         if liste[i] > resultat:
@@ -166,6 +167,12 @@ Quelques courbes de complexité
     ....:           color=color) + legend(f, color=color)
     ....:      for f,color in zip(funs, colors)) + time_labels
     sage: p
+
+.. TODO:: changer la formulation en chercher la plus grande taille de problème traitable en 1s, 1an
+
+.. TOPIC:: Exercice
+
+    On dispose d'un ordinateur pouvant exécuter `10^{9}` opérations élémentaires par seconde (1GHz). On a un problème (par exemple, chercher un mot dans une liste, calculer le déterminant d'une matrice), et des instances de taille `1,10,100,1000` de ce problème. Enfin, on a plusieurs algorithmes pour résoudre ce problème, dont on connaît les complexités respectives: `O(\log n)`, `O(n)`, `O(n\log n)`, `O(n^{2})`, `O(n^{3})`, `O(n^{10})`, `O(2^{n})`, `O(n!)`, `O(n^{n})`. Évaluer dans chacun des cas le temps nécessaire.
 
 Synthèse
 --------
@@ -248,8 +255,6 @@ Complexité d'un problème
     #. Les algorithmes vus précédemment sont-ils optimaux?
 
     #. Démontrer que la recherche d'un élément dans une liste triée de taille `n` est un problème de complexité `O(\log n)`.
-
-    #. On dispose d'un ordinateur pouvant exécuter `10^{9}` opérations élémentaires par seconde (1GHz). On a un problème (par exemple, chercher un mot dans une liste, calculer le déterminant d'une matrice), et des instances de taille `1,10,100,1000` de ce problème. Enfin, on a plusieurs algorithmes pour résoudre ce problème, dont on connaît les complexités respectives: `O(\log n)`, `O(n)`, `O(n\log n)`, `O(n^{2})`, `O(n^{3})`, `O(n^{10})`, `O(2^{n})`, `O(n!)`, `O(n^{n})`. Évaluer dans chacun des cas le temps nécessaire.
 
 ***********************************************************
 Comparaison de la complexité de quelques algorithmes de tri
@@ -534,7 +539,7 @@ Implantation de quelques algorithmes de tri
 Fichiers, documentation, tests
 ------------------------------
 
-Télécharger le `fichier annexe <tris.py>`_ et le mettre dans un
+Télécharger le `fichier annexe <media/tris.py>`_ et le mettre dans un
 dossier de votre choix, comme par exemple
 ``~/Agregation/OptionC/TP2/tris.py``.
 

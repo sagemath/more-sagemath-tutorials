@@ -226,9 +226,10 @@ RST=$(wildcard *.rst $(wildcard $(DIRS:%=%/*.rst))) $(PYRST)
 IPYNB=$(wildcard *.ipynb $(DIRS:%=%/*.ipynb))
 PDF=$(wildcard *.pdf $(DIRS:%=%/*.pdf))
 TEX=$(wildcard *.tex $(DIRS:%=%/*.tex))
+AGREGMEDIA=$(wildcard agregation-option-calcul-formel/media/*)
 
 RSTIPYNB=$(RST:%.rst=$(BUILDDIR)/html/%.ipynb)
-MEDIA= $(IPYNB:%=$(BUILDDIR)/html/%) $(PDF:%=$(BUILDDIR)/html/%) $(TEX:%.tex=$(BUILDDIR)/html/%.pdf)
+MEDIA= $(IPYNB:%=$(BUILDDIR)/html/%) $(PDF:%=$(BUILDDIR)/html/%) $(TEX:%.tex=$(BUILDDIR)/html/%.pdf) $(AGREGMEDIA:%=$(BUILDDIR)/html/%)
 
 ipynb: $(RSTIPYNB)
 
@@ -238,7 +239,7 @@ $(BUILDDIR)/html/%.ipynb: %.rst
 	rst2ipynb -k "SageMath" $< -o  $@
 
 $(BUILDDIR)/html/%: %
-	cp $<  $@
+	cp --parents $< $(BUILDDIR)/html/
 
 $(BUILDDIR)/html/%.pdf: %.tex
 	cp $< `dirname $@`
