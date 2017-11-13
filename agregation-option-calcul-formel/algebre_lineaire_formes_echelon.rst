@@ -11,10 +11,6 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Algèbre li
 
 .. TODO:: Formaliser un peu plus la forme LU
 
-Ce document dans d'autres formats:
-`feuille de travail <algebre_lineaire_formes_echelon.ipynb>`_,
-`source RST <algebre_lineaire_formes_echelon.rst>`_.
-
 Formes normales
 ===============
 
@@ -36,6 +32,8 @@ forme normale des éléments de `C`.
     d'équivalence et donc de calculer dans le quotient.
 
 
+.. TOPIC:: Formes normales pour les matrices?
+
 Échauffement
 ============
 
@@ -55,16 +53,34 @@ forme normale des éléments de `C`.
     On donnera une paramétrisation et une base de l'ensemble des
     solutions.
 
-Note le système ci-dessus a été fabriqué avec::
 
-        sage: M = random_matrix(GF(5),3,5,  algorithm='echelonizable', rank=2); M
+    Solution partielle::
+
+        sage: M = matrix(GF(5), [[0,0,3,1,4], [3,1,4,2,1], [4,3,2,1,3]]); M
         [0 0 3 1 4]
         [3 1 4 2 1]
         [4 3 2 1 3]
+
+        sage: v = vector(SR.var('x1,x2,x3,x4,x5'))
+        sage: [(eq == 0) for eq in M*v]
+
         sage: M.echelon_form()
         [1 2 0 3 3]
         [0 0 1 2 3]
         [0 0 0 0 0]
+        sage: M.right_kernel()
+        Vector space of degree 5 and dimension 3 over Finite Field of size 5
+        Basis matrix:
+        [1 0 0 4 4]
+        [0 1 0 3 3]
+        [0 0 1 1 4]
+
+Note le système ci-dessus a été fabriqué avec::
+
+        sage: random_matrix(GF(5),3,5,  algorithm='echelonizable', rank=2); M  # random
+        [0 0 3 1 4]
+        [3 1 4 2 1]
+        [4 3 2 1 3]
 
 L'algorithme de Gauß revisité
 =============================
@@ -137,14 +153,18 @@ Forme échelon et matrices équivalentes
     première étape du pivot de Gauß::
 
        sage: var('a1,b1,c1,a2,b2,c2')
-       sage: M1 = matrix([[a1,b1,c1],[0,b2,c2]]); M
-       sage: M2 = matrix([[0,b1,c1],[1,b2,c2]]); M
-       sage: M3 = matrix([[a1,b1,c1],[a2,b2,c2]]); M
+       sage: M1 = matrix([[a1,b1,c1],[0,b2,c2]]); M1
 
-    ::
+       sage: M2 = matrix([[0,b1,c1],[1,b2,c2]]); M2
+
+       sage: M3 = matrix([[a1,b1,c1],[a2,b2,c2]]); M3
+
+    Solutions::
 
        sage: P = matrix([[1/a1,0],[0,1]]);   P, P*M1
+
        sage: P = matrix([[0,1],[1,0]]);      P, P*M2
+
        sage: P = matrix([[1,0],[-a2/a1,1]]); P, P*M3
 
 
@@ -161,12 +181,15 @@ Forme échelon et matrices équivalentes
       `N` sous la forme `N=LU`, où `U=N` et triangulaire supérieure
       (upper triangular), et `L` est triangulaire inférieure (lower
       triangular): le produit des inverses des matrices ci-dessus.
-
-      On appelle cela la décomposition `LU`.
+      On appelle cela la *décomposition `LU`*.
 
 .. TOPIC:: Exercice
 
     Déterminer la décomposition `M=LU` de notre matrice favorite.
+
+    Solution::
+
+        sage: M = M.LU()
 
 Disons ici que deux matrices `M` et `M'` de `M_{n,m}(K)` sont
 *équivalentes* (modulo l'action de `GL_n(K)` à gauche) s'il existe une
@@ -187,9 +210,9 @@ matrice inversible `P` telle que `M=PM'`.
 .. TOPIC:: Démonstration de la réciproque
 
     Soient `M` et `M'` deux matrices équivalentes, et `N` et `N'`
-    leurs formes échelons réduites. On veut montrer que `N=N'`
+    leurs formes échelons réduites. On veut montrer que `N=N'`.
 
-    On note que `N` et `N'` sont équivalente: on peut prendre `P`
+    On note que `N` et `N'` sont équivalentes: on peut prendre `P`
     telle que `N=PN'`.
 
     Remarque: notons `N_k` la sous-matrice composée des `k` premières
@@ -226,8 +249,10 @@ calcul: l'application du pivot de Gauß. C'est *opératoire*, mais pas
 très *conceptuel*. Par exemple, il n'est pas évident que le résultat
 ne dépende pas de l'ordre du calcul.
 
-
 Peut-on faire mieux?
+
+Sous espaces vectoriels et formes échelon
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. TOPIC:: Exercice
 
@@ -246,6 +271,19 @@ Peut-on faire mieux?
     dans `K^m`. Cet ensemble est naturellement muni d'une structure de
     variété appelée variété Grassmanienne.
 
+.. TOPIC:: Corollaire
+
+    La forme échelon réduite donne une forme normale pour les
+    sous-espaces vectoriels!
+
+.. TOPIC:: Exercice
+
+    Compter le nombre de sous espaces vectoriels de rang `2` d'un
+    espace de dimension `4` sur `GL(5)`.
+
+Drapeaux
+^^^^^^^^
+
 .. TOPIC:: Exercice
 
     Soit `(e_1,\dots, e_5)` la base canonique de `K^5`, et soit `E` le
@@ -258,10 +296,12 @@ Peut-on faire mieux?
 
     .. MATH::
 
-        E_i = E \cap \langle e_i,\dots,e_5\rangle
+        E_i = E \cap \langle e_i,\ldots,e_5\rangle
+
+    Puis décrire les quotients successifs `E_i / E_{i+1}`.
 
 
-.. TOPIC:: Lien avec les groupes de permutations
+.. TOPIC:: Digression: lien avec les groupes de permutations
 
     Pour manipuler un sous-groupe `G` du groupe symétrique `S_n`, on
     avait considéré le sous-groupe `G_{n-1}` des éléments fixant `n`,
@@ -302,7 +342,7 @@ Appliquons le même programme.
 
     .. MATH::
 
-        V_i:=\langle e_{m-i+1} \cdots e_m \rangle
+        V_i:=\langle e_{m-i+1}, \ldots, e_m \rangle
 
     Note: on prend les éléments dans cet ordre pour que cela colle
     avec nos petites habitudes de calcul du pivot de Gauß. Et pour
@@ -310,7 +350,7 @@ Appliquons le même programme.
 
     .. MATH::
 
-        \overline V_i:=\langle e_i \cdots e_m \rangle=V_{n-i+1}
+        \overline V_i:=\langle e_i, \ldots, e_m \rangle=V_{n-i+1}
 
 .. TOPIC:: Formes échelon et bases adaptées
 
@@ -438,8 +478,8 @@ Applications des formes échelon
 
 .. TODO:: Décomposition LU, exercice en TD ou TP
 
-Conclusion
-==========
+Résumé
+======
 
 La forme échelon d'une matrice joue un rôle central en algèbre
 linéaire car:
@@ -448,14 +488,18 @@ linéaire car:
   (par exemple Gauß: `O(n^3)`).
 
 - La plupart des problèmes en algèbre linéaire sur un corps se
-  traitent aisément sur cette forme échelon
+  traitent aisément sur cette forme échelon.
 
 - La forme échelon a un sens algébrique: c'est une forme normale pour
   la relation d'équivalence induite par l'action à gauche du groupe
   linéaire.
 
-- La forme échelon a un sens géométrique: la position du sous-espace
-  vectoriel par rapport au drapeau canonique.
+- La forme échelon a un sens géométrique: c'est une forme normale pour
+  un sous-espace vectoriel; elle décrit sa position par rapport au
+  drapeau canonique.
+
+Nous verrons d'autres formes normales pour d'autres classes
+d'équivalences de matrices.
 
 TP
 ==
