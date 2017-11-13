@@ -236,7 +236,7 @@ ipynb: $(RSTIPYNB)
 media: $(MEDIA)
 
 $(BUILDDIR)/html/%.ipynb: %.rst
-	rst2ipynb -k "SageMath" $< -o  $@
+	rst2ipynb -k "sagemath" $< -o  $@
 
 $(BUILDDIR)/html/%: %
 	cp --parents $< $(BUILDDIR)/html/
