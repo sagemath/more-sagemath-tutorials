@@ -281,7 +281,21 @@ Sous espaces vectoriels et formes échelon
     et seulement si les vecteurs engendrent le même sous-espace
     vectoriel de `K^m`.
 
-    .. TODO:: Rédiger la démonstration
+.. TOPIC:: Solution
+
+   Si les matrices sont équivalentes, la multiplication à gauche par
+   la matrice inversible permet d'exprimer les vecteurs de l'une en
+   fonction de l'autre, et réciproquement. Ils engendrent donc le même
+   sous-espace vectoriel.
+
+   Réciproquement, supposons que les vecteurs engendrent le même
+   espace vectoriel `F`. S'ils forment une base, il suffit de prendre
+   la matrice `P` qui exprime la première base en fonction de la
+   deuxième (`P` est inversible!), de sorte que `M=PM'`. Sinon on
+   remplace `M` et `M'` par leurs formes échelon (qui leurs sont
+   équivalentes); et on prend la matrice `P` pour les lignes non
+   nulles (qui forment une base), et on la complète par l'identité
+   pour les lignes nulles.
 
 .. TOPIC:: Corollaire
 
