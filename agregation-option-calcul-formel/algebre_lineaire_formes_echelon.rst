@@ -9,7 +9,13 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Algèbre li
 
 ``Mathematics is the art of reducing any problem to linear algebra`` - William Stein.
 
-.. TODO:: Formaliser un peu plus la forme LU
+.. TODO::
+
+    - Formaliser un peu plus la forme LU
+
+    - Formaliser la division d'un vecteur par une matrice sous forme
+      échelon; lien avec la division Euclidienne.
+
 
 Formes normales
 ===============
@@ -75,7 +81,15 @@ forme normale des éléments de `C`.
         [0 1 0 3 3]
         [0 0 1 1 4]
 
-Note le système ci-dessus a été fabriqué avec::
+
+.. TODO::
+
+    - Changer le système pour que L2 et L3 ne soient pas colinéaires
+    - Donner la solution par manipulation de lignes avec Sage
+
+.. TOPIC:: Remarque Sage
+
+    Le système ci-dessus a été fabriqué avec::
 
         sage: random_matrix(GF(5),3,5,  algorithm='echelonizable', rank=2); M  # random
         [0 0 3 1 4]
@@ -159,6 +173,9 @@ Forme échelon et matrices équivalentes
 
        sage: M3 = matrix([[a1,b1,c1],[a2,b2,c2]]); M3
 
+
+    .. TODO:: Préciser dans le texte l'opération sur les lignes voulue pour chacun des cas
+
     Solutions::
 
        sage: P = matrix([[1/a1,0],[0,1]]);   P, P*M1
@@ -235,6 +252,8 @@ matrice inversible `P` telle que `M=PM'`.
 
 Interprétation géométrique
 --------------------------
+
+.. TODO:: Commencer par les espaces vectoriels; puis interprétation de la forme échelon
 
 Reprenons notre matrice::
 
