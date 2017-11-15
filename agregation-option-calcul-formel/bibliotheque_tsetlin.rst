@@ -148,6 +148,11 @@ pourra avantageusement utiliser la fonction
     sage: r(x)
     2
 
+Indication: selon les paramètres, on voudra construire une matrice à
+coefficients entiers, rationnels, symboliques. On pourra supposer que
+tous les paramètres vivent dans le même anneau, donné par
+`x[0].parent()`, et construire la matrice en conséquence.
+
 Tester votre fonction pour `n=3` en prenant comme liste de
 paramètres::
 
