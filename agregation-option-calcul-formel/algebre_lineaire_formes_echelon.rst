@@ -370,6 +370,15 @@ Appliquons le même programme.
 
         \overline V_i:=\langle e_i, \ldots, e_m \rangle=V_{n-i+1}
 
+
+.. TOPIC:: Exercice
+
+    Dans `GF(5)^3`, classifier les plans selon leur position par
+    rapport au drapeau canonique.
+
+    Même chose dans `\RR^3`.
+
+
 .. TOPIC:: Formes échelon et bases adaptées
 
     Dans ce formalisme, qu'est-ce qu'une matrice sous forme échelon?
