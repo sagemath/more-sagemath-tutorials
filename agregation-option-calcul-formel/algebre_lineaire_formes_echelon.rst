@@ -246,14 +246,18 @@ matrice inversible `P` telle que `M=PM'`.
 
 .. TOPIC:: Théorème
 
-   On considère les matrices `n\times m` à coefficients dans un corps
-   `K`. La forme échelon réduite donne une *forme normale* pour les
-   matrices modulo l'action de `GL_n(K)` à gauche.
+    On considère les matrices `n\times m` à coefficients dans un corps
+    `K`. La forme échelon réduite donne une *forme normale* pour les
+    matrices modulo l'action de `GL_n(K)` à gauche.
+
+.. TOPIC:: Corollaire
+
+    Il y a une certaine liberté dans l'ordre d'exécution des
+    opérations du pivot de Gauß. Le théorème précédent garanti que le
+    résultat final ne dépend pas de l'ordre des calculs.
 
 Interprétation géométrique
 --------------------------
-
-.. TODO:: Commencer par les espaces vectoriels; puis interprétation de la forme échelon
 
 Reprenons notre matrice::
 
@@ -265,8 +269,7 @@ et sa forme échelon::
 
 Pour le moment, cette forme échelon est décrite comme le résultat d'un
 calcul: l'application du pivot de Gauß. C'est *opératoire*, mais pas
-très *conceptuel*. Par exemple, il n'est pas évident que le résultat
-ne dépende pas de l'ordre du calcul.
+très *conceptuel*.
 
 Peut-on faire mieux?
 
@@ -313,6 +316,17 @@ Sous espaces vectoriels et formes échelon
 
     Compter le nombre de sous espaces vectoriels de rang `2` d'un
     espace de dimension `4` sur `GL(5)`.
+
+.. TOPIC:: Exercice
+
+    - Compter le nombre de points, droites, plans et hyperplans dans
+      `GF(q)^3` en fonction de leur rang.
+
+    - On se place maintenant dans `\RR^3`. Décrire géométriquement, en
+      fonction de leur forme échelon, comment ces sous espaces
+      vectoriels se positionnent dans l'espace.
+
+.. TODO:: Solutions
 
 Drapeaux
 ^^^^^^^^
@@ -383,14 +397,6 @@ Appliquons le même programme.
     .. MATH::
 
         \overline V_i:=\langle e_i, \ldots, e_m \rangle=V_{n-i+1}
-
-
-.. TOPIC:: Exercice
-
-    Dans `GF(5)^3`, classifier les plans selon leur position par
-    rapport au drapeau canonique.
-
-    Même chose dans `\RR^3`.
 
 
 .. TOPIC:: Formes échelon et bases adaptées
