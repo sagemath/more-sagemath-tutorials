@@ -319,7 +319,6 @@ Drapeaux
 
     Puis décrire les quotients successifs `E_i / E_{i+1}`.
 
-
 .. TOPIC:: Digression: lien avec les groupes de permutations
 
     Pour manipuler un sous-groupe `G` du groupe symétrique `S_n`, on
@@ -559,14 +558,13 @@ Indications:
 -   Vous pouvez au choix réutiliser la méthode ``echelon_form`` des
     matrices ou la réimplanter.
 
--   Essayez les commandes suivantes:
+-   Essayez les commandes suivantes::
 
-    sage: M = matrix(V)
-    sage: list(M)
-    sage: M[1].is_zero()
-    sage: l = [ 1, 5, 3, 2, 9 ]
-    sage: [ x^2 for x in l ]
-
+        sage: M = matrix(V)
+        sage: list(M)
+        sage: M[1].is_zero()
+        sage: l = [ 1, 5, 3, 2, 9 ]
+        sage: [ x^2 for x in l ]
 
 Test d'appartenance d'un vecteur à un sous-espace vectoriel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
