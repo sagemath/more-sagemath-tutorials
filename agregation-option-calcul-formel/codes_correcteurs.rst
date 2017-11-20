@@ -113,19 +113,17 @@ Premiers concepts
         sage: n = 7; p = 0.1
         sage: (1-p)^7
         0.478296900000000
-        sage: (1-p)^7 + 7 * p * (1-p)^6
+        sage: (1-p)^n + n*p*(1-p)^(n-1)
         0.850305600000000
-        sage: (1-p)^n + n * p * (1-p)^(n-1)
-        0.850305600000000
-        sage: (1-p)^n + n * p * (1-p)^(n-1) + binomial(n,2) * p^2*(1-p)^(n-2)
+        sage: (1-p)^n + n*p*(1-p)^(n-1) + binomial(n,2) * p^2*(1-p)^(n-2)
         0.974308500000000
 
         sage: n = 7; p = 0.01
         sage: (1-p)^7
         0.932065347906990
-        sage: (1-p)^n + n * p * (1-p)^(n-1)
+        sage: (1-p)^n + n*p*(1-p)^(n-1)
         0.997968958365060
-        sage: (1-p)^n + n * p * (1-p)^(n-1) + binomial(n,2) * p^2*(1-p)^(n-2)
+        sage: (1-p)^n + n*p*(1-p)^(n-1) + binomial(n,2) * p^2*(1-p)^(n-2)
         0.999966037469850
 
 .. TOPIC:: Définitions
