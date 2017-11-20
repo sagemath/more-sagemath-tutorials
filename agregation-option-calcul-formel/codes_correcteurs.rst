@@ -75,7 +75,6 @@ Premiers concepts
     Un *code* `C` est un sous-ensemble de *mots* dans `M:=A^{n}`, où
 
     - `A` est un *alphabet*, comme `A:=\mathbb{Z}/q\mathbb{Z}`.
-
        Typiquement `q=2` (codes binaires).
 
     - `n` est un entier, la *dimension* du code
@@ -103,9 +102,31 @@ Premiers concepts
 
     #.  Décodage par distance minimale: on renvoie le mot de `C` le plus proche de `c'`.
 
-Est-ce raisonnable?
+.. TOPIC:: Exercice: Est-ce raisonnable?
 
-.. TODO:: Calculer / mesurer la probabilité qu'un mot soit mal transmis
+    Calculer la probabilité qu'un mot de longueur `n` soit corrompu,
+    sachant que chacune de ses lettres a une probabilité `p` d'être
+    corrompue, indépendemment des autres.
+
+    Application numérique::
+
+        sage: n = 7; p = 0.1
+        sage: (1-p)^7
+        0.478296900000000
+        sage: (1-p)^7 + 7 * p * (1-p)^6
+        0.850305600000000
+        sage: (1-p)^n + n * p * (1-p)^(n-1)
+        0.850305600000000
+        sage: (1-p)^n + n * p * (1-p)^(n-1) + binomial(n,2) * p^2*(1-p)^(n-2)
+        0.974308500000000
+
+        sage: n = 7; p = 0.01
+        sage: (1-p)^7
+        0.932065347906990
+        sage: (1-p)^n + n * p * (1-p)^(n-1)
+        0.997968958365060
+        sage: (1-p)^n + n * p * (1-p)^(n-1) + binomial(n,2) * p^2*(1-p)^(n-2)
+        0.999966037469850
 
 .. TOPIC:: Définitions
 
@@ -164,29 +185,35 @@ Borne de Hamming, codes parfaits
     capacité de correction `e`, trouver un code `C` ayant le plus
     grand nombre possible de mots.
 
-.. TODO:: mettre un exemple où on rajoute les boules progressivement;
-          par exemple avec un interact
-
 .. TOPIC:: Exemples: visualisation des boules de rayon `e` autour de quelques codes binaires
 
     Chargement de `quelques fonctions <codes_correcteurs.py>`_, et
     configuration des plots 3D::
 
-        sage: %run "codes_correcteurs.py"
+        sage: %run "media/codes_correcteurs.py"
         sage: from sage.plot.plot3d.base import SHOW_DEFAULTS
         sage: SHOW_DEFAULTS['frame'] = False
         sage: SHOW_DEFAULTS['aspect_ratio'] = [1,1,1]
+        sage: SHOW_DEFAULTS['viewer'] = 'threejs'
 
-    Le code de triple répétition sur `\ZZ/2\ZZ`::
-
-        sage: K = GF(2)
-        ....: V = K^3
-        ....: C = V.subspace([[1,1,1]])
-        ....: dessin_boules(C,1)
-
-    mais pas sur `\ZZ/3\ZZ`::
+    Les boules dans `\ZZ/3\ZZ`::
 
         sage: K = GF(3)
+        sage: V = K^3
+        sage: @interact
+        ....: def boule(r=slider([0,1,2,3])):
+        ....:     return dessin_boules([V.zero()], r)
+
+    Le code de triple répétition sur `\ZZ/3\ZZ`::
+
+        sage: K = GF(3)
+        sage: V = K^3
+        sage: C = V.subspace([[1,1,1]])
+        sage: dessin_boules(C,1)
+
+    et sur `\ZZ/2\ZZ`::
+
+        sage: K = GF(2)
         ....: V = K^3
         ....: C = V.subspace([[1,1,1]])
         ....: dessin_boules(C,1)
@@ -194,19 +221,19 @@ Borne de Hamming, codes parfaits
     Le code de Hamming::
 
         sage: V = K^7
-        ....: C = codes.HammingCode(3, GF(2))
+        ....: C = codes.HammingCode(GF(2),3)
         ....: dessin_boules(C, 1, projection=projection_7_3)
 
 .. TOPIC:: Exercice: Borne de Hamming sur `|C|`.
 
-    Nombre de points dans une boule `B(x,e):=\{y,d(x,y)\leq e\}` de
-    `A^{n}` de centre `x` et de rayon `e`?
+    #. Nombre de points dans une boule `B(x,e):=\{y,d(x,y)\leq e\}` de
+      `A^{n}` de centre `x` et de rayon `e`?
 
-    Taille de `A^n`?
+    #. Taille de `A^n`?
 
-    Conclusion?
+    #. Conclusion?
 
-    Application numérique: `n=6,q=2,d=3`: `|C|\leq?`.
+    #. Application numérique: `n=6,q=2,d=3`: `|C|\leq?`.
 
 .. TOPIC:: Définition: code parfait
 
@@ -216,7 +243,7 @@ Borne de Hamming, codes parfaits
 
 .. TOPIC:: Exemple
 
-    Le premier et le troisième code ci-dessus sont parfaits, mais pas
+    Le deuxième et le troisième code ci-dessus sont parfaits, mais pas
     le deuxième.
 
 .. TOPIC:: Problème
@@ -247,12 +274,12 @@ Commençons par un petit échauffement.
         ....:                [1,0,1,1, 0,1,0],
         ....:                [1,1,0,1, 0,0,1]]); H
 
-    Calculer le noyau de `H`.
+    #. Calculer le noyau de `H`.
 
-    Est-ce que les vecteurs `(1,1,0,0,1,1,0)` et `(1,0,1,1,1,0,1)`
-    sont dans le sous-espace vectoriel engendré par les lignes de `H`?
+    #. Est-ce que les vecteurs `(1,1,0,0,1,1,0)` et `(1,0,1,1,1,0,1)`
+       sont dans le sous-espace vectoriel engendré par les lignes de `H`?
 
-    Conclusion?
+    #. Conclusion?
 
 .. TOPIC:: Exemple: bit de parité
 
@@ -332,7 +359,7 @@ Commençons par un petit échauffement.
 
     Quelle est sa capacité de detection? de correction? Est-il parfait?
 
-    Correction::
+    Solution::
 
         sage: sage: C.cardinality()
         16
@@ -363,14 +390,17 @@ Commençons par un petit échauffement.
 Décodage par syndrome
 =====================
 
-    Partir du mot zéro, le coder, et faire alternativement une erreur
-    sur chacun des bits. Noter le résultat après multiplication par la
-    matrice de contrôle.
+.. TOPIC:: Exercice
 
-    Prendre un mot à 4 bits de votre choix, le coder, faire une erreur
-    sur un des 7 bits, corriger et décoder. Vérifier le résultat.
+    #. Partir du mot zéro, le coder, et faire alternativement une
+       erreur sur chacun des bits. Noter le résultat après
+       multiplication par la matrice de contrôle.
 
-    Que se passe-t’il s’il y a deux erreurs?
+    #. Prendre un mot à 4 bits de votre choix, le coder, faire une
+       erreur sur un des 7 bits, corriger et décoder. Vérifier le
+       résultat.
+
+    #. Que se passe-t’il s’il y a deux erreurs?
 
 ***************
 Codes cycliques
@@ -378,29 +408,43 @@ Codes cycliques
 
 Principe: encore plus de structure pour être encore plus efficace.
 
+.. TOPIC:: Définition
+
+    Un code `C` est *cyclique* s'il est stable par rotation des mots:
+
+    .. MATH::
+
+        1010010\in C \Longleftrightarrow 0101001\in C \Longleftrightarrow 1010100\in C \Longleftrightarrow \cdots
+
+Les praticiens ont noté que les codes cycliques avaient de bonnes
+propriétés.
+
 
 Donnons une structure d'*anneau quotient* à `A^n` en l'identifiant
 avec `A[X]/(X^n-1)`.
 
-.. TOPIC:: Définition
-
-    Un code est *cyclique* s'il est stable par rotation des mots.
-
 .. TOPIC:: Remarque
 
-    Dans `A[X]/(X^n-1)`, décalage = multiplication par `x`.
+    Dans `A[X]/(X^n-1)`, décalage = multiplication par `X`.
 
-    Code cyclique = idéal dans `A[X]/(X^n-1)`.
+    Par exemple, pour `A[X]/(X^7-1)`:
+
+    .. MATH::
+
+        X(1+X^2+X^5) = X + X^3 + X^6\\
+        X(X + X^3 + X^6) = X^2+X^4+X^7 = 1+X^2+X^4
+
+    Codes cycliques `\longleftrightarrow` idéaux dans `A[X]/(X^n-1)`.
 
 Soit `g` un diviseur de `X^n-1`, et `h` tel que `gh=X^n-1`.
 
-Code: idéal engendré par `g`
+- Code: idéal engendré par `g`
 
-Codage: `m\mapsto mg`
+- Codage: `m\mapsto mg`
 
-Détection d'erreur: `c*h=0`
+- Détection d'erreur: `c*h=0`
 
-Décodage: division par `g` modulo `X^n-1` (par ex. par Euclide étendu)
+- Décodage: division par `g` modulo `X^n-1` (par ex. par Euclide étendu)
 
 .. TOPIC:: Codes BCH
 
@@ -433,7 +477,7 @@ Codage par interpolation (Reed-Solomon)
     .. TODO:: Faire la figure
 
     Découpage de l'information en blocs, interprétés comme des
-    polynômes `P_1,\dots,P_k` dans `\GF(q)[X]`.
+    polynômes `P_1,\dots,P_k` dans `GF(q)[X]`.
 
     Points d'évaluation `x_1,\ldots,x_l`.
 
