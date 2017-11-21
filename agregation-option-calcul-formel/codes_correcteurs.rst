@@ -111,7 +111,7 @@ Premiers concepts
     Application numérique::
 
         sage: n = 7; p = 0.1
-        sage: (1-p)^7
+        sage: (1-p)^(n-1)
         0.478296900000000
         sage: (1-p)^n + n*p*(1-p)^(n-1)
         0.850305600000000
@@ -119,7 +119,7 @@ Premiers concepts
         0.974308500000000
 
         sage: n = 7; p = 0.01
-        sage: (1-p)^7
+        sage: (1-p)^(n-1)
         0.932065347906990
         sage: (1-p)^n + n*p*(1-p)^(n-1)
         0.997968958365060
@@ -139,7 +139,7 @@ Premiers concepts
 
        .. MATH::
 
-          D(C) := \max_{k\in \NN} \quad \forall x\in C \quad \forall y \quad d(x,y)\leq k \Longrightarrow y\not\in C
+          D(C) := \max_{k\in \NN} \quad \forall x\in C \quad \forall y\ne x \quad d(x,y)\leq k \Longrightarrow y\not\in C
 
        .. MATH::
 
@@ -175,7 +175,7 @@ Premiers concepts
 Borne de Hamming, codes parfaits
 ================================
 
-.. TOPIC:: Problème
+.. TOPIC:: Problème: Kepler discret
 
     Redondance minimale pour une capacité de correction donnée?
 
@@ -224,8 +224,11 @@ Borne de Hamming, codes parfaits
 
 .. TOPIC:: Exercice: Borne de Hamming sur `|C|`.
 
-    #. Nombre de points dans une boule `B(x,e):=\{y,d(x,y)\leq e\}` de
-      `A^{n}` de centre `x` et de rayon `e`?
+    Soit `A=\ZZ/q\ZZ`.
+
+    #. Taille de la boule `B(x,e):=\{y,d(x,y)\leq e\}` de `A^n` de
+       centre `x` et de rayon `e`?
+       Indication: commencer par `q=2` et `x=0\cdots0`.
 
     #. Taille de `A^n`?
 
@@ -242,7 +245,7 @@ Borne de Hamming, codes parfaits
 .. TOPIC:: Exemple
 
     Le deuxième et le troisième code ci-dessus sont parfaits, mais pas
-    le deuxième.
+    le premier.
 
 .. TOPIC:: Problème
 
@@ -501,27 +504,42 @@ Comme d'habitude, choisir à la carte parmi les exercices suivants.
 
     Explorer les fonctionalités de Sage autour du codage. Un point
     d'entrée est ``codes?`` ainsi que le tutoriel thématique
-    `Coding Theory in Sage <http://doc.sagemath.org/html/en/thematic_tutorials/coding_theory.html#coding-theory>`_.
+    :ref:`coding_theory`.
 
 ..  TOPIC:: Exercice: illustrer un cours sur le codage
 
-    Mettre au point une illustration sur ordinateur de quelques points
-    du cours. On pourra par exemple:
+    Mettre au point une illustration sur ordinateur d'un point d'un
+    cours sur le codage. On pourra par exemple:
 
     #.  Illustrer visuellement les liens entre distance, capacité de
         correction et de détection, ainsi que les notions de distance
         de Hamming, boules, ...
 
-    #.  Déterminer en quelle dimension on peut espérer l'existence de
-        codes parfaits non triviaux?
+    #.  Déterminer en quelles (petites) dimensions on peut espérer
+        l'existence de codes parfaits non triviaux?
+
+    #.  Déterminer empiriquement quels paramètres de code (dimension,
+        distance, ...) seraient souhaitables pour différentes
+        applications (par ex. transmission satellite depuis Voyager).
+        On pourra par exemple calculer, en fonction de la dimension,
+        de la capacité de correction, et du taux d'erreur, calculer la
+        probabilité qu'un message erroné ne soit pas détecté ou pas
+        corrigé. Puis jouer avec les paramètres (avec un composant visuel
+        interactif comme ci-dessus? voir @interact) et la borne de
+        Hamming jusqu'à trouver des paramètres potentiels plausibles.
+
+    #.  Simuler, avec les outils existant dans Sage une chaîne
+        complète: codage, transmission, détection. Estimer
+        empiriquement la probabilité qu'un message soit transmis
+        incorrectement et non détecté. Comparer avec la théorie.
 
     #.  Implanter toute la chaîne: codage, transmission, détection,
-        correction, décodage
+        correction, décodage.
 
     #.  Implanter des fonctions de calcul de distance et test de
-        perfection
+        perfection.
 
-    Pour ces deux derniers points, on pourra considérer des codes:
+    Pour ces derniers points, on pourra considérer des codes:
 
     #.  décrits par une liste exhaustive de mots
 
@@ -567,11 +585,10 @@ Comme d'habitude, choisir à la carte parmi les exercices suivants.
 
     Implanter le tour de prestidigitation du texte
     `Codes Correcteurs d'Erreurs, Agreg 2005
-    <http://nicolas.thiery.name/Enseignement/Agregation/Textes/527-CodesCorrecteursShannon.pdf>`_
+    <http://nicolas.thiery.name/Enseignement/Agregation/Textes/527-CodesCorrecteursShannon.pdf>`_.
 
     Un petit exemple d'utilisation des composants visuels interactifs
-    de Sage. Ils ne fonctionne pas encore dans les feuilles de travail
-    Jupyter::
+    de Sage::
 
         sage: @interact
         sage: def magie(step=slider([1..5])):
