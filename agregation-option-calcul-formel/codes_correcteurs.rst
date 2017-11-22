@@ -185,7 +185,7 @@ Borne de Hamming, codes parfaits
 
 .. TOPIC:: Exemples: visualisation des boules de rayon `e` autour de quelques codes binaires
 
-    Chargement de `quelques fonctions <codes_correcteurs.py>`_, et
+    Chargement de `quelques fonctions <media/codes_correcteurs.py>`_, et
     configuration des plots 3D::
 
         sage: %run "media/codes_correcteurs.py"
