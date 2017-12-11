@@ -250,13 +250,13 @@ To handle lots variables, one may proceed as follows::
         ....:     f2 = e([k]).expand(n-1,l[:n-1])+xn*(e([k-1]).expand(n-1,l[:n-1]))
         ....:     g2 = h([k]).expand(n-1,l[:n-1])+xn*(h([k-1]).expand(n,l[:n]))
         ....:     if f1 == f2:
-        ....:         print 'n =', n,'ok for e'
+        ....:         print('n =', n,'ok for e')
         ....:     else :
-        ....:         print 'n =', n,'no for e'
+        ....:         print('n =', n,'no for e')
         ....:     if g1 == g2 :
-        ....:         print 'n =', n,'ok for h'
+        ....:         print('n =', n,'ok for h')
         ....:     else :
-        ....:         print 'n =', n,'no for h'
+        ....:         print('n =', n,'no for h')
         n = 2 ok for e
         n = 2 ok for h
         n = 3 ok for e
@@ -279,7 +279,7 @@ Conversely, a "concrete" symmetric polynomial, i.e.: explicitly expressed in the
 ::
 
     sage: pol1 = (p([2])+e([2,1])).expand(2)
-    sage: print pol1
+    sage: print(pol1)
     x0^2*x1 + x0*x1^2 + x0^2 + x1^2
 
 
@@ -319,9 +319,9 @@ In the preceeding example, the base ring of polynomials is the same as the base 
 
 ::
 
-    sage: print s.base_ring()
-    sage: print pol2.base_ring()
+    sage: print(s.base_ring())
     Rational Field
+    sage: print(pol2.base_ring())
     Rational Field
 
 
@@ -331,13 +331,18 @@ Thus a concrete symmetric polynomial over :math:`\mathbb{Q}(q,t)` may be transfo
 ::
 
     sage: Symqt.inject_shorthands()
+    Defining e as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the elementary basis
+    Defining f as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the forgotten basis
+    Defining h as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the homogeneous basis
+    Defining m as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the monomial basis
+    Defining p as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the powersum basis
+    Defining s as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the Schur basis
     sage: R = PolynomialRing(QQ['q','t'],'y',3)
     sage: R.inject_variables()
+    Defining y0, y1, y2
     sage: pol2 = 1+(y0*y1+y0*y2+y1*y2)*(q+t)+(y0*y1*y2)*(q*t)
     sage: s.from_polynomial(pol2)
-    Defining y0, y1, y2
-
-    s + (q+t)*s11 + q*t*s111)
+    s + (q+t)*s11 + q*t*s111
 
 
 
@@ -363,9 +368,9 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 
 ::
 
-    sage: for mu in Partitions(5) :
-    sage:     show(s(mu))
-    sage:     show(e(s(mu)))
+    sage: for mu in Partitions(5):
+    ....:     print(s(mu))
+    ....:     print(e(s(mu)))
     s5
     e11111 - 4*e2111 + 3*e221 + 3*e311 - 2*e32 - 2*e41 + e5
     s41
@@ -413,8 +418,8 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 ::
 
     sage: for n in range (1,5) :
-    sage:     show(p(h([n])))
-    sage:     show(sum(p(mu)/zee(mu) for mu in Partitions(n)))
+    ....:     print(p(h([n])))
+    ....:     print(sum(p(mu)/zee(mu) for mu in Partitions(n)))
     p1
     p1
     1/2*p11 + 1/2*p2
@@ -499,13 +504,13 @@ Finally, the function ``support()`` returns the list of partitions that appear i
 
 ::
 
-    sage: print f.support()
+    sage: print(f.support())
     [5221]
 
 
 ::
 
-    sage: print sorted(h(f).support())
+    sage: print(sorted(h(f).support()))
     [5221, 5311, 532, 541, 6211, 631, 64, 7111, 721, 811, 82]
 
 
@@ -533,6 +538,12 @@ Here are some examples involving the "combinatorial" Macdonald symmetric functio
 
     sage: Symqt = SymmetricFunctions(FractionField(QQ['q','t']))
     sage: Symqt.inject_shorthands()
+    Defining e as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the elementary basis
+    Defining f as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the forgotten basis
+    Defining h as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the homogeneous basis
+    Defining m as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the monomial basis
+    Defining p as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the powersum basis
+    Defining s as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the Schur basis
     sage: H = Symqt.macdonald().Ht()
     sage: H.print_options(prefix="H")
 
@@ -540,7 +551,7 @@ Here are some examples involving the "combinatorial" Macdonald symmetric functio
 ::
 
     sage: s(H([2,1]))
-    q*t*s111 + (q+t)*s21 + s3)
+    q*t*s111 + (q+t)*s21 + s3
 
 
 ::
@@ -597,7 +608,7 @@ It has been shown by Haiman that :math:`\nabla(e_n)` is the Frobenius transform 
 ::
 
     sage: s(e[3].nabla())
-    (q^3+q^2*t+q*t^2+t^3+q*t)*s111 + (q^2+q*t+t^2+q+t)*s21 + s3)
+    (q^3+q^2*t+q*t^2+t^3+q*t)*s111 + (q^2+q*t+t^2+q+t)*s21 + s3
 
 
 The global dimension of this module is :math:`(n+1)^{n-1}`, and the dimension of its alternating component (see exercise below) is the Catalan number :math:`C_n=\frac{1}{n+1}\binom{2n}{n}`. And there are many other interesting properties of the bigraded version.
@@ -622,7 +633,6 @@ There are also interesting conjectures on the effect of :math:`\nabla` on Schur 
     (q^6*t^3+q^5*t^4+q^4*t^5+q^3*t^6)*s11111 + (q^5*t^2+2*q^4*t^3+2*q^3*t^4+q^2*t^5)*s221 + (q^6*t^2+2*q^5*t^3+2*q^4*t^4+2*q^3*t^5+q^2*t^6+q^4*t^3+q^3*t^4)*s2111 + (q^4*t^2+q^3*t^3+q^2*t^4)*s32 + (q^5*t^2+q^4*t^3+q^3*t^4+q^2*t^5+q^4*t^2+2*q^3*t^3+q^2*t^4)*s311 + (q^3*t^2+q^2*t^3)*s41
 
 
-
 .. TOPIC:: Exercise
 
  We have the following relation between :math:`\nabla (e_n)` and the q,t-Catalan numbers :
@@ -645,7 +655,7 @@ There are also interesting conjectures on the effect of :math:`\nabla` on Schur 
 ::
 
     sage: for n in range (1,6) :
-    sage:     print e([n]).nabla().scalar(e([n])) == qt_catalan_number(n)
+    ....:     print(e([n]).nabla().scalar(e([n])) == qt_catalan_number(n))
     True
     True
     True
@@ -657,7 +667,6 @@ Plethysm
 --------
 
 As its name strongly suggests, the ``plethysm()`` function computes the **plethysm** :math:`f\circ g`, of two symmetric functions :math:`f` and :math:`g`. Recall that this is the operation characterized by the properties
-
 - :math:`(f_1+f_2)\circ g =(f_1\circ g)+(f_2\circ g)`,
 - :math:`(f_1\cdot f_2)\circ g =(f_1\circ g)\cdot (f_2\circ g)`,
 - :math:`p_k\circ(g_1+g_2) =(p_k\circ g_1)+(p_k\circ g_2)`,
@@ -677,9 +686,9 @@ One may specify a list of SAGE-variables to be treated as **variables** in a ple
 ::
 
     sage: g = p([1]) + t*s([2,1])
-    sage: show(p([2]).plethysm(g,include=[t]))
-    sage: show(p([2]).plethysm(g,exclude=[t]))
+    sage: print(p([2]).plethysm(g,include=[t]))
     p2 + 1/3*t^2*p222 + (-1/3*t^2)*p6
+    sage: print(p([2]).plethysm(g,exclude=[t]))
     p2 + 1/3*t*p222 + (-1/3*t)*p6
 
 
@@ -722,8 +731,7 @@ One should compare this with
 ::
 
     sage: s[4](X/(1-q)).map_coefficients(factor)
-    -((-1)*(q-1)^-4*(q+1)^-2*q^6*(q^2+1)^-1*(q^2+q+1)^-1)*s1111 - ((-1)*(q-1)^-4*(q+1)^-2*q^2*(q^2+q+1)^-1)*s22 - ((-1)*(q-1)^-4*(q+1)^-2*q^3*(q^2+1)^-1)*s211 - ((-1)*(q-1)^-4*(q+1)^-2*q*(q^2+1)^-1)*s31 - ((-1)*(q-1)^-4*(q+1)^-2*(q^2+1)^-1*(q^2+q+1)^-1)*s4
-
+    ((q-1)^-4*(q+1)^-2*q^6*(q^2+1)^-1*(q^2+q+1)^-1)*s1111 + ((q-1)^-4*(q+1)^-2*q^2*(q^2+q+1)^-1)*s22 + ((q-1)^-4*(q+1)^-2*q^3*(q^2+1)^-1)*s211 + ((q-1)^-4*(q+1)^-2*q*(q^2+1)^-1)*s31 + ((q-1)^-4*(q+1)^-2*(q^2+1)^-1*(q^2+q+1)^-1)*s4
 
 ::
 
@@ -748,9 +756,9 @@ When computing with symmetric functions, one often wants to check a given symmet
 
     sage: f = s([4,1])+s([3,2])
     sage: print(f.is_schur_positive())
+    True
     sage: g = s([4,1])-s([3,2])
     sage: print(g.is_schur_positive())
-    True
     False
 
 
@@ -759,17 +767,17 @@ For example, we can verify the well-known Schur positivity of product of Schur f
 ::
 
     sage: for mu in Partitions(2) :
-    sage:     for nu in Partitions(3) :
-    sage:         if (s(mu)*s(nu)).is_schur_positive() :
-    sage:             show(s(mu),s(nu),' is Schur positive.')
-    sage:         else :
-    sage:             show(s(mu),s(nu),'is not Schur positive.')
-    (s2, s3, ' is Schur positive.')
-    (s2, s21, ' is Schur positive.')
-    (s2, s111, ' is Schur positive.')
-    (s11, s3, ' is Schur positive.')
-    (s11, s21, ' is Schur positive.')
-    (s11, s111, ' is Schur positive.')
+    ....:     for nu in Partitions(3) :
+    ....:         if (s(mu)*s(nu)).is_schur_positive() :
+    ....:             print('The product of ', s(mu),' and ',s(nu),' is Schur positive.')
+    ....:         else :
+    ....:             print('The product of ', s(mu),' and ',s(nu),'is not Schur positive.')
+    The product of s2 and s3 is Schur positive.
+    The product of s2 and s21 is Schur positive.
+    The product of s2 and s111 is Schur positive.
+    The product of s11 and s3 is Schur positive.
+    The product of s11 and s21 is Schur positive.
+    The product of s11 and s111 is Schur positive.
 
 
 
@@ -783,7 +791,7 @@ For example, we can verify the well-known Schur positivity of product of Schur f
 
     sage: e = Symqt.e()
     sage: for n in range(1,7) :
-    sage:     print e([n]).nabla().is_schur_positive()
+    ....:     print(e([n]).nabla().is_schur_positive())
     True
     True
     True
@@ -813,7 +821,7 @@ hence defining
 ::
 
     sage: def K(mu,nu):
-    sage:     return s(mu).scalar(h(nu))
+    ....:     return s(mu).scalar(h(nu))
 
 
 
@@ -830,16 +838,15 @@ Now, we set
 ::
 
     sage: def k(mu):
-    sage:     n=add(j for j in mu)
-    sage:     return add(K(mu,nu) for nu in Partitions(n))
+    ....:     n=add(j for j in mu)
+    ....:     return add(K(mu,nu) for nu in Partitions(n))
 
 
 so that the above probability is calculated by the function
 
 ::
 
-    sage: def prob_Schur_positive(n):
-    sage:     return 1/mul(k(mu) for mu in Partitions(n))
+    sage: def prob_Schur_positive(n): return 1/mul(k(mu) for mu in Partitions(n))
 
 
 One can then illustrate how very rare Schur-positivity is, as a function of the degree:
@@ -871,24 +878,85 @@ Let us explore the other operations of :math:`p`. We can ask for the mathematica
 ::
 
     sage: p.categories()
-    [Category of graded bases of Symmetric Functions over Rational Field,
-     Category of filtered bases of Symmetric Functions over Rational Field,
-     Category of bases of Symmetric Functions over Rational Field,
-     Category of graded hopf algebras with basis over Rational Field,
-     ...]
-
-.. end of output
+    [Category of graded bases of Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of filtered bases of Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of bases of Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of graded hopf algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of hopf algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of realizations of hopf algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of hopf algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of graded algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of filtered algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of bialgebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of graded algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of commutative algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of filtered algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of bialgebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of commutative rings,
+    Category of rings,
+    Category of associative algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of rngs,
+    Category of semirings,
+    Category of associative additive commutative additive associative additive unital distributive magmas and additive magmas,
+    Category of unital algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of magmatic algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of unital algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of magmatic algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of additive commutative additive associative additive unital distributive magmas and additive magmas,
+    Category of additive commutative additive associative distributive magmas and additive magmas,
+    Category of additive associative distributive magmas and additive magmas,
+    Category of distributive magmas and additive magmas,
+    Category of magmas and additive magmas,
+    Category of commutative monoids,
+    Category of monoids,
+    Category of semigroups,
+    Category of realizations of unital magmas,
+    Category of realizations of magmas,
+    Category of commutative magmas,
+    Category of unital magmas,
+    Category of magmas,
+    Category of graded modules with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of filtered modules with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of coalgebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of vector spaces with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of modules with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of graded modules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of realizations of coalgebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of filtered modules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of coalgebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of vector spaces over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of modules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of bimodules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field on the left and Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field on the right,
+    Category of right modules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of left modules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of commutative additive groups,
+    Category of additive groups,
+    Category of additive inverse additive unital additive magmas,
+    Category of commutative additive monoids,
+    Category of additive monoids,
+    Category of additive unital additive magmas,
+    Category of commutative additive semigroups,
+    Category of additive commutative additive magmas,
+    Category of additive semigroups,
+    Category of additive magmas,
+    Category of realizations of Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+    Category of realizations of sets,
+    Category of sets,
+    Category of sets with partial maps,
+    Category of objects]
 
 To start with, :math:`p` is a graded algebra, the grading being induced by the size of the partitions. Due to this, the one is the basis element indexed by the empty partition::
 
     sage: p.one()
-    p[]
+    p
 
 
 Note also that it is a good idea to use::
 
     sage: s.one()
-    s[]
+    s
     sage: s.zero()
     0
 
@@ -988,7 +1056,7 @@ where one "thinks" :math:`\mathbf{x}=s_1\otimes \mathbb{1}` and :math:`\mathbf{y
 The coproduct, being cocommutative on the generators, is cocommutative everywhere::
 
     sage: p[2, 1].coproduct()
-    p[] # p[2, 1] + p[1] # p[2] + p[2] # p[1] + p[2, 1] # p[]
+    p # p21 + p1 # p2 + p2 # p1 + p21 # p
 
 This coproduct, along with the counit which sends every symmetric function
 to its 0-th homogeneous component, makes the ring of symmetric functions
@@ -1001,9 +1069,9 @@ partition :math:`\lambda`. Thus, in particular, it sends the generators on the
 :math:`p` basis to their opposites::
 
     sage: p[3].antipode()
-    -p[3]
+    -p3
     sage: p[3,2,1].antipode()
-    -p[3, 2, 1]
+    -p321
 
 The graded connected bialgebra of symmetric functions over a :math:`\mathbb{Q}`-algebra
 has a rather simply-understood structure: It is (isomorphic to) the
@@ -1014,11 +1082,9 @@ Here are further examples::
 
     sage: f = s[2]^2
     sage: f.antipode()
-    s[1, 1, 1, 1] + s[2, 1, 1] + s[2, 2]
+    s1111 + s211 + s22
     sage: f.coproduct()
-    s[] # s[2, 2] + s[] # s[3, 1] + s[] # s[4] + 2*s[1] # s[2, 1] + 2*s[1] # s[3] + s[1, 1] # s[1, 1]
-    + s[1, 1] # s[2] + s[2] # s[1, 1] + 3*s[2] # s[2] + 2*s[2, 1] # s[1] + s[2, 2] # s[] + 2*s[3] # s[1]
-    + s[3, 1] # s[] + s[4] # s[]
+    s # s22 + s # s31 + s # s4 + 2*s1 # s21 + 2*s1 # s3 + s11 # s11 + s11 # s2 + s2 # s11 + 3*s2 # s2 + 2*s21 # s1 + s22 # s + 2*s3 # s1 + s31 # s + s4 # s
     sage: f.coproduct().apply_multilinear_morphism( lambda x,y: x*y.antipode() )
     0
 
@@ -1067,9 +1133,9 @@ The :math:`\omega` involution is the linear extension of the map which sends :ma
 	sage: f = s[2]^2; f
 	s[2, 2] + s[3, 1] + s[4]
     sage: h(f)
-    h[2, 2]
+    h22
     sage: e(f.omega())
-    e[2, 2]
+    e22
 
 .. end of output
 
@@ -1094,7 +1160,7 @@ if :math:`\mu=\nu`, and the result is equal to :math:`0` otherwise.
 ::
 
     sage: f.kronecker_product(f)
-    s[1, 1, 1, 1] + 3*s[2, 1, 1] + 4*s[2, 2] + 5*s[3, 1] + 3*s[4]
+    s1111 + 4*s22 + 3*s211 + 5*s31 + 3*s4
 
 .. end of output
 
@@ -1112,7 +1178,7 @@ composition of the `S_n` representation represented by :math:`g` with the
     sage: s = SymmetricFunctions(QQ).schur()
     sage: f = s[2]^2
     sage: f.inner_plethysm(s[2])
-    s[2]
+    s2
 
 .. end of output
 
@@ -1131,15 +1197,12 @@ directly::
 or to lift to the ring of symmetric functions::
 
     sage: f.lift()
-    s[2, 2, 1, 1] + s[2, 2, 2] + s[3, 1, 1, 1] + 2*s[3, 2, 1] + s[3, 3] + s[4, 1, 1] + s[4, 2]
+    s2211 + s222 + s3111 + 2*s321 + s33 + s411 + s42
 
 However, it is not always possible to convert a symmetric function to the :math:`k`-bounded subspace::
 
     sage: s = Sym.schur()
-    sage: ks(s[2,1,1])
-    Traceback (most recent call last):
-    ...
-    ValueError: s[2, 1, 1] is not in the image
+    sage: ks(s[2,1,1])  # not tested
 
 The :math:`k`-Schur functions are more generally defined with a parameter :math:`t` and they are
 a basis of the subspace spanned by the Hall-Littlewood :math:`Qp` symmetric functions
@@ -1157,12 +1220,9 @@ to form a natural algebra.  However it is known that the product of a :math:`k`-
 function and an :math:`\ell`-Schur function is in the linear span of the :math:`k+\ell`-Schur
 functions::
 
-    sage: ks(ks[2,1]*ks[1,1])
-    Traceback (most recent call last):
-    ...
-    ValueError: s[2, 1, 1, 1] + s[2, 2, 1] + s[3, 1, 1] + s[3, 2] is not in the image
+    sage: ks(ks[2,1]*ks[1,1]) # not tested
     sage: ks[2,1]*ks[1,1]
-    s[2, 1, 1, 1] + s[2, 2, 1] + s[3, 1, 1] + s[3, 2]
+    s2111 + s221 + s311 + s32
     sage: ks6 = Sym.kBoundedSubspace(6).kschur()
     sage: ks6(ks[3,1,1]*ks[3])
     ks6[3, 3, 1, 1] + ks6[4, 2, 1, 1] + (t+1)*ks6[4, 3, 1] + t*ks6[4, 4]
@@ -1274,25 +1334,25 @@ which there is a path of changes of bases.
 
     sage: from sage.categories.morphism import SetMorphism
     sage: class SFA_st(SFA_generic):
-    sage:     def __init__(self, Sym, t):
-    sage:         SFA_generic.__init__(self, Sym, basis_name=
-    sage:           "Schur functions with a plethystic substitution of X -> X(1-t)",
-    sage:           prefix='st')
-    sage:         self._s = Sym.s()
-    sage:         self.t = Sym.base_ring()(t)
-    sage:         cat = HopfAlgebras(Sym.base_ring()).WithBasis()
-    sage:         self.register_coercion(
-    sage:           SetMorphism(Hom(self._s, self, cat), self._s_to_self))
-    sage:         self._s.register_coercion(
-    sage:           SetMorphism(Hom(self, self._s, cat), self._self_to_s))
-    sage:     def _s_to_self(self, f):
-    sage:         # f is a Schur function and the output is in the st basis
-    sage:         return self._from_dict(f.theta_qt(0,self.t)._monomial_coefficients)
-    sage:     def _self_to_s(self, f):
-    sage:         # f is in the st basis and the output is in the Schur basis
-    sage:         return self._s.sum(cmu*self._s(mu).theta_qt(self.t,0) for mu,cmu in f)
-    sage:     class Element(SFA_generic.Element):
-    sage:         pass
+    ....:     def __init__(self, Sym, t):
+    ....:         SFA_generic.__init__(self, Sym, basis_name=
+    ....:           "Schur functions with a plethystic substitution of X -> X(1-t)",
+    ....:           prefix='st')
+    ....:         self._s = Sym.s()
+    ....:         self.t = Sym.base_ring()(t)
+    ....:         cat = HopfAlgebras(Sym.base_ring()).WithBasis()
+    ....:         self.register_coercion(
+    ....:           SetMorphism(Hom(self._s, self, cat), self._s_to_self))
+    ....:         self._s.register_coercion(
+    ....:           SetMorphism(Hom(self, self._s, cat), self._self_to_s))
+    ....:     def _s_to_self(self, f):
+    ....:         # f is a Schur function and the output is in the st basis
+    ....:         return self._from_dict(f.theta_qt(0,self.t)._monomial_coefficients)
+    ....:     def _self_to_s(self, f):
+    ....:         # f is in the st basis and the output is in the Schur basis
+    ....:         return self._s.sum(cmu*self._s(mu).theta_qt(self.t,0) for mu,cmu in f)
+    ....:     class Element(SFA_generic.Element):
+    ....:         pass
 
 An instance of this basis is created by calling it with a symmetric
 function ring ``Sym`` and a parameter ``t`` which is in the base ring
@@ -1312,12 +1372,11 @@ Here is an example of its use::
      Ring in q, t over Rational Field in the Schur functions with a
      plethystic substitution of X -> X(1-t) basis
     sage: st[2,1] * st[1]
-    st[2, 1, 1] + st[2, 2] + st[3, 1]
+    st211 + st22 + st31
     sage: st([2]).coproduct()
-    st[] # st[2] + st[1] # st[1] + st[2] # st[]
+    st # st2 + st1 # st1 + st2 # st
     sage: J = st.symmetric_function_ring().macdonald().J()
     sage: st(J[2,1])
-    q*st[1, 1, 1] + (q*t+1)*st[2, 1] + t*st[3]
-
+    q*st111 + (q*t+1)*st21 + t*st3
 
 
