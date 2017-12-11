@@ -7,6 +7,10 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Groupe Sym�
 
 .. MODULEAUTHOR:: `Nicolas M. Thiéry <http://Nicolas.Thiery.name/>`_ <Nicolas.Thiery at u-psud.fr>
 
+Ce document dans d'autres formats:
+`feuille de travail <groupe_symmetrique.ipynb>`_,
+`source RST <groupe_symmetrique.rst>`_.
+
 *****************
 Groupe symétrique
 *****************
@@ -49,15 +53,16 @@ Exemple::
 
     sage: S3 = SymmetricGroup(3)
 
+.. TODO:: définir le domaine
+
 Maintenant, si `E` est un ensemble à `n` éléments, alors on sait que
 `S_E` est isomorphe à `S_n`::
 
     sage: G.is_isomorphic(S3)
     True
 
-En conséquence, il suffit de connaître les propriétés du groupe
-`S_n` pour en déduire celles du groupe
-`S_E`.
+En conséquence, il suffit de connaître les propriétés du groupe `S_n`
+pour en déduire celles du groupe `S_E`.
 
 .. TOPIC:: Proposition
 
@@ -97,7 +102,8 @@ Représentation des permutations
 
     sage: [sigma(i) for i in range(1,9)]
     [7, 8, 3, 2, 5, 4, 1, 6]
-    sage: sigma.domain()
+
+    sage: sigma.domain()                            # raccourci mal nommé!
     [7, 8, 3, 2, 5, 4, 1, 6]
 
 - Bimot::
@@ -107,8 +113,9 @@ Représentation des permutations
 
 - Graphe::
 
-    sage: DiGraph([(i,sigma(i)) for i in range(1,9)]).plot()
-    sage: DiGraph([(i,sigma(i)) for i in range(1,9)]).plot(talk=True)
+    sage: DiGraph([(i,sigma(i)) for i in range(1,9)], loops=True).plot()
+
+    sage: DiGraph([(i,sigma(i)) for i in range(1,9)], loops=True).plot(talk=True)
 
 - Matrice::
 
@@ -143,27 +150,32 @@ l'ordre inverse et on définit: `\sigma \tau = \tau \circ \sigma`.
         sage: sigma = G([2,3,1])
         sage: tau   = G([2,1,3])
 
-.. warning:: Dans Sage, le produit ``sigma * tau`` désigne la composée
-    `\tau \circ \sigma`. Sage suit en cela la convention utilisée
-    par le logiciel GAP, inclus dans Sage et à qui Sage délègue
-    de nombreux calculs sur les groupes.
-
-    ::
+    Correction::
 
         sage: (sigma * tau).domain()
         [1, 3, 2]
         sage: (tau * sigma).domain()
         [3, 2, 1]
 
+.. TOPIC:: Note
+
+    Dans Sage, le produit ``sigma * tau`` désigne la composée `\tau
+    \circ \sigma`. Sage suit en cela la convention utilisée par le
+    logiciel GAP, inclus dans Sage et à qui Sage délègue de nombreux
+    calculs sur les groupes.
+
+
 .. TOPIC:: Propositions
 
-    #. Dans un produit `\sigma\tau`, on peut considérer que `\tau`
-       permute les positions de `\sigma`, et que `\sigma` permute les
-       valeurs de `\tau`::
+    #. Dans le produit `\sigma\tau`, on peut considérer que `\tau`
+       permute les positions de `\sigma`, tandis que dans le produit
+       `\tau\sigma`, `\tau` permute les valeurs de `\sigma`::
 
         sage: G = SymmetricGroup(8)
-        sage: sigma = G([1,5,4,6,8,2,7,3])
         sage: tau   = G([(3,5)])
+        sage: sigma = G([1,5,4,6,8,2,7,3])
+        sage: sigma
+        [1, 5, 4, 6, 8, 2, 7, 3]
         sage: (sigma * tau).domain()
         [1, 3, 4, 6, 8, 2, 7, 5]
         sage: (tau * sigma).domain()
@@ -188,15 +200,28 @@ Type cyclique
 Le *type cyclique* d’une permutation est la partition de `n`
 donnée par les longueurs de ses cycles.
 
+.. TOPIC:: Exemple
+
+    ::
+
+        sage: sigma = G.random_element(); sigma
+        sage: sigma.cycle_type()
+
 .. TOPIC:: Exercices
 
-    #. Que se passe-t-il lorsque l’on conjugue une permutation `\tau`
-       donnée sous forme de décomposition en cycles par une permutation
-       `\sigma` (avec pour résultat `\sigma\tau\sigma^{-1}`)?
+    #.  Que se passe-t-il lorsque l’on conjugue une permutation `\tau`
+        donnée sous forme de décomposition en cycles par une
+        permutation `\sigma` (avec pour résultat
+        `\sigma\tau\sigma^{-1}`)?
+        Exemple: prendre `\sigma = (1,2,3,4,5,6,7,8,9)` et `\tau=(2,5,3)`.
 
-       Exemple: prendre `\sigma = (1,2,3,4,5,6,7,8,9)` et `\tau=(2,5,3)`.
+        ::
 
-    #. Quelles sont les classes de conjugaisons du groupe symétriques?
+            sage: sigma = G([(1,2,3,4,5,6,7,8,9)])
+            sage: tau   = G([(2,5,3)])
+            sage: ~sigma * tau * sigma
+
+    #.  Quelles sont les classes de conjugaisons du groupe symétrique?
 
         Conséquence: les représentations du groupe symétrique sont
         indexées par les partitions.
@@ -245,7 +270,7 @@ Exemple de lien combinatoire/algèbre: comptage des permutations par niveau et `
 
 ::
 
-    sage: var('q')
+    sage: q = QQ['q'].gen()
     sage: 1 * (1+q) * (1+q+q^2)
     sage: expand( 1 * (1+q) * (1+q+q^2) )
     q^3 + 2*q^2 + 2*q + 1
@@ -291,14 +316,15 @@ Exemples
         Alternating group of order 5!/2 as a permutation group
         sage: A5.group_generators()
         Family ((3,4,5), (1,2,3,4,5))
+        sage: A5.is_simple()
 
-- Tout groupe fini (théorème de Cayley)!
+- Tout groupe fini! (théorème de Cayley)
 
 .. TOPIC:: Exercice
 
     Construire le groupe des symétries du cube::
 
-        sage: G = PermutationGroup([])
+        sage: G = PermutationGroup([...])
 
 
 Applications:
@@ -311,12 +337,14 @@ Applications:
 -  Étude des groupes finis.
 
 -  Étude du groupe des permutations des racines d’un polynôme.
-   C’est l’origine du concept de groupe par Évariste Galois.
+   C'est l’origine du concept de groupe par Évariste Galois.
 
 Systèmes générateurs forts
 ==========================
 
-Problème: Un groupe de permutation est typiquement très gros.
+.. TODO:: Définir, ici ou ailleurs, la notation `G.n` pour une orbite
+
+Problème: Soit `G\subset S_n` un groupe de permutation; `G` est typiquement très gros.
 
 #.  Comment le représenter? Le manipuler?
 
@@ -330,6 +358,9 @@ Problème: Un groupe de permutation est typiquement très gros.
 
 #.  Est-il abélien, simple, résoluble, ... ?
 
+.. TODO:: Introduire tout cela sur le groupe des symétries du cube
+
+
 .. TOPIC:: Exercice
 
     Soit `H` le sous groupe des éléments de `G` qui fixent `n`.
@@ -341,22 +372,33 @@ Problème: Un groupe de permutation est typiquement très gros.
     #. Supposons que l'on sache tester si une permutation est dans
        `H`. Comment tester si une permutation est dans `G`?
 
+
+.. TODO:: Correction
+
+
 .. TOPIC:: Définition
 
-    - On considère la tour de groupes
+    On considère la tour de groupes
 
-      .. math:: \{ id\}=G_{0}\subset G_{1}\subset\cdots\subset G_n=G,
+    .. math:: \{ id\}=G_{0}\subset G_{1}\subset\cdots\subset G_n=G,
 
-      où `G_{i}` est le sous-groupe des éléments de `G` qui fixent
-      `\left\{i+1,\dots,n\right\}`.
+    où `G_{i}` est le sous-groupe des éléments de `G` qui fixent
+    `\left\{i+1,\dots,n\right\}`.
 
-    - Pour décrire `G`, il suffit de décrire chacune des inclusions.
+    Pour décrire `G`, il suffit de décrire chacune des inclusions.
 
-    - Un *système générateur fort* est composé des représentants des
-      cosets (classes) de `G_{i}/G_{i-1}` pour chaque `i`.
+    Un *système générateur fort* est composé des représentants des
+    cosets (classes) de `G_{i}/G_{i-1}` pour chaque `i`.
 
-      On abrège système générateur fort en SGS
-      (pour *strong generating system*).
+    On abrège système générateur fort en SGS
+    (pour *strong generating system*).
+
+.. TODO::
+
+    Introduire le point de vue *système de générateur adapté* comme dans
+    la wikipedia: `\langle S\cap G_i\rangle = G_i` pour tout `i` et en
+    lien avec les bases adaptées.
+
 
 .. TOPIC:: Exemple
 
@@ -388,6 +430,22 @@ Problème: Un groupe de permutation est typiquement très gros.
         Comparer avec la taille du groupe.
 
 
+.. TOPIC:: Correction
+
+    ::
+
+       sage: PermutationGroup([], domain=[1,2,3,4]).strong_generating_system(base_of_group=[4,3,2,1])
+       [[()], [()], [()], [()]]
+       sage: CyclicPermutationGroup(4).strong_generating_system(base_of_group=[4,3,2,1])
+       [[(1,2,3,4), (1,4,3,2), (), (1,3)(2,4)], [()], [()], [()]]
+       sage: AlternatingGroup(4).strong_generating_system(base_of_group=[4,3,2,1])
+       [[(), (1,4,2), (1,4,3), (1,2,4)], [(), (1,2,3), (1,3,2)], [()], [()]]
+       sage: DihedralGroup(4).strong_generating_system(base_of_group=[4,3,2,1])
+       [[(1,2,3,4), (1,4,3,2), (), (1,3)(2,4)], [(), (1,3)], [()], [()]]
+       sage: SymmetricGroup(4).strong_generating_system(base_of_group=[4,3,2,1])
+       [[(), (1,4), (2,4), (3,4)], [(), (1,2,3), (1,3,2)], [(), (1,2)], [()]]
+
+
 .. TOPIC:: Définition
 
     Un sous-ensemble `B` est une base de `G` si tout élément `g` dans
@@ -408,13 +466,17 @@ Algorithme de Schreier-Sims
 
 Comment calculer un système générateur fort?
 
-#. Calculer l'orbite `G.1` de `1` (comment on fait?)
+#.  Calculer l'orbite `G.n` de `n` (comment on fait?)
 
-#. Les permutations qui envoient `1` sur `i`, `i` dans `G.1` donnent
-   des représentants des cosets de `G/G_{1}`
+#.  Les permutations qui envoient `n` sur `i`, `i` dans `G.n` donnent
+    des représentants des cosets de `G/G_n`
 
-#. Calculer les générateurs de `G_1` (avec le `lemme de Schreier
-   <http://en.wikipedia.org/wiki/Schreier%27s_subgroup_lemma>`_)
+#.  Calculer les générateurs de `G_n` (avec le `lemme de Schreier
+    <http://en.wikipedia.org/wiki/Schreier%27s_subgroup_lemma>`_)
+
+    .. TODO::
+
+        Détailler; cf. les slides de James au Sage Days 86 , donner la complexité
 
 #. Réitérer
 
@@ -430,9 +492,9 @@ Comment calculer un système générateur fort?
     On peut calculer incrémentalement et efficacement un système
     générateur fort à partir d’un système générateur quelconque.
 
-    Algorithmes dérivés de complexité quasi-linéaire. On peut
-    manipuler des groupes de permutations d’ordre plusieurs centaines
-    de milliers.
+    Algorithmes dérivés de petite complexité (typiquement
+    `O(n\log(|G|))`). On peut manipuler des groupes de permutations
+    d'ordre plusieurs centaines de milliers.
 
 Exemple::
 
@@ -463,8 +525,9 @@ sous-espaces vectoriels, groupes de permutations):
 Pour cela, on se donne:
 
 #. Un ordre,
+#. Un drapeau de sous-structures .. TODO:: développer
 #. Un procédé de division: Euclide, ...
-#. Une notion de système générateur fort: PGCD, bases de Gröbner,
+#. Une notion de système générateur fort: PGCD, base de Gröbner,
    forme échelon, système fort de générateurs,
 #. Un algorithme de calcul d'un tel système: algorithme d'Euclide,
    de Buchberger, de Gauss, de Schreier-Sims, ...
@@ -473,11 +536,11 @@ Pour cela, on se donne:
 TP: Énumération de Pólya
 ************************
 
-Le fichier `GroupeSymetrique.py <../_images/GroupeSymetrique.py>`_
+Le fichier `GroupeSymetrique.py <media/GroupeSymetrique.py>`_
 vous donne un point de départ pour les différentes fonctions que vous
 aurez à implanter dans ce TP.
 Le fichier `GroupeSymetrique-correction.py
-<../_images/GroupeSymetrique-correction.py>`_
+<media/GroupeSymetrique-correction.py>`_
 contient une correction partielle.
 
 .. image:: media/GroupeSymetrique.py
@@ -498,6 +561,15 @@ simplifier).
 .. figure:: media/Colliers.svg
    :align: center
    :alt: image
+
+.. NOTE::
+
+    Pour refabriquer un de ces dessins, on peut utiliser::
+
+        sage: G = graphs.CycleGraph(8)
+        sage: G.plot(vertex_colors={"red": [0,2,3,4,5], "blue": [1,6,7]})
+
+.. TODO:: Rajouter un exercice pour générer toutes les colorations avec IntegerVectorsModPermutationGroup
 
 Nous allons énoncer cette formule dans le cas général, en l’illustrant
 au fur et à mesure sur cet exemple.
@@ -549,7 +621,7 @@ deux ou trois perles rouges, et un collier avec respectivement une,
 deux, quatre, ou cinq perles rouges. On notera que le rôle joué par les
 éléments de `F` (ici les couleurs rouges et bleues) sont
 parfaitement symétriques; cela rend relativement naturelle
-l’introduction des polynômes symétriques suivantes:
+l'introduction des polynômes symétriques suivantes:
 
 .. math:: p_{k} := \sum_{c\in F} w(c)^{k}
 
@@ -573,22 +645,24 @@ les groupes de permutations (voir :meth:`PermutationGroup`), dont la
 formule de Pólya; à vous de choisir ce que vous réimplantez ou pas
 selon ce que vous avez le plus besoin de comprendre.
 
-.. TOPIC:: Exercice: comptage de colliers
+Exercice: comptage de colliers
+==============================
 
-    #.  Écrire une fonction ``p(k,poids)`` qui calcule `p_{k}`
-        à partir de la liste des poids des éléments de `F`.
+#.  Écrire une fonction ``p(k,poids)`` qui calcule `p_{k}`
+    à partir de la liste des poids des éléments de `F`.
 
-    #.  Écrire une fonction ``type_cyclique(sigma)`` qui calcule le type
-        cyclique d’une permutation ``sigma``.
+#.  La formule de Pólya requiers de calculer le type cyclique d'une
+    permutation.
 
-        Option 1: utiliser la méthode :meth:`cycle_tuples` des permutations.
+    -   Option 1: (Sage >= 7.5) utilisez directement la méthode
+        ``sigma.cycle_type()`` et passer directement à la suite.
 
-        Option 2 (plus formatrice): réimplanter l'algorithme de
-        recherche des cycles, mais en stockant uniquement leur taille.
+    -   Option 2: Implanter une fonction ``type_cyclique(sigma)`` qui
+        calcule le type cyclique d’une permutation ``sigma`` à partir
+        de la méthode :meth:`cycle_tuples` des permutations.
 
-        Indications:
-
-        - ::
+    -   Option 3: Implanter l'algorithme de recherche des cycles,
+        mais en stockant uniquement leur taille. Indications::
 
             sage: G = DihedralGroup(10)
             sage: g = G.an_element(); g
@@ -596,105 +670,111 @@ selon ce que vous avez le plus besoin de comprendre.
             sage: g.parent().domain()
             {1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
 
-        - On pourra utiliser un ensemble (:class:`set`) pour
-          noter les éléments du domaine déjà croisés.
-
-    #.  Lister les permutations de `C_{5}`.
-
-    #.  Écrire la formule ci-dessus pour `poids=[1,1]`.
-
-    #.  Écrire une fonction ``Polya(G, poids)`` implantant la formule
-        ci-dessus pour un groupe `G` et des poids quelconques.
-
-    #.  Compter le nombre de colliers bicolores à dix perles selon
-        leur nombre de perles rouges.
-
-    #.  Compter le nombre de colliers à dix perles de trois couleurs.
-
-.. TOPIC:: Exercice: comptage de colliers (suite)
-
-    Variante sur l’exercice précédent: on veut maintenant aussi
-    considérer comme identiques deux colliers qui ne diffèrent que
-    d’un retournement. Compter le nombre de tels colliers à trois
-    perles bleues et deux perles rouges.
-
-    Indication: considérer le groupe diédral `D_{5}` des symétries du
-    pentagone.
-
-.. TOPIC:: Exercice: colorations du cube
-
-    Compter le nombre de cubes que l’on peut obtenir en peignant leurs
-    faces en au plus trois couleurs.
-
-    Indications:
-
-    #.  Numéroter les faces, considérer le groupe des isométries
-        positives du cube, comme groupe de permutations de ses faces.
-
-    #.  Déterminer les générateurs de ce groupe (par exemple sous
-        forme de produit de cycles).
-
-    #.  Construire le groupe dans Sage en utilisant :func:`PermutationGroup`.
-
-    #.  Poursuivre comme ci-dessus.
+        et utiliser un ensemble (:class:`set`) pour noter les éléments
+        du domaine déjà croisés.
 
 
-.. TOPIC:: Exercice: énumération des graphes (plus avancé)
+#.  Lister les permutations de `C_{5}`.
 
-    Construire à la main les `11` graphes simples non orientés sur `4`
-    sommets non étiquetés. Puis recalculer leur nombre grâce à la
-    formule de Pólya. Compter le nombre de graphes simples à
-    `5,6,7,8,9,10,\ldots` sommets.
+#.  Écrire la formule ci-dessus pour `poids=[1,1]`.
 
-    Indications:
+#.  Écrire une fonction ``Polya(G, poids)`` implantant la formule
+    ci-dessus pour un groupe `G` et des poids quelconques.
 
-    #.  Un graphe simple non orienté sur `n` sommets peut être
-        considéré comme une fonction allant de l’ensemble des paires
-        `\{i,j\}` de `\{1,\dots,n\}` dans `\{0,1\}` (`1` s’il y a une
-        arête entre `i` et `j`, et `0` sinon).
+#.  Compter le nombre de colliers bicolores à dix perles selon
+    leur nombre de perles rouges.
 
-    #.  On numérote les paires `\{i,j\}` de `1` à `\binom{n}{2}`. Le
-        groupe `G` est le groupe des permutation des paires induites
-        par les `n!` permutations des sommets dans `S_n`. On peut donc
-        rechercher quelles permutations des paires sont induites par
-        l’échange des sommets `1` et `2` et par la permutation
-        cyclique `(1,2,3,\dots,n)` des sommets; le groupe `G` est
-        alors engendré par ces deux permutations, et l’on peut
-        poursuivre comme dans l’exercice précédent.
+#.  Compter le nombre de colliers à dix perles de trois couleurs.
 
-    #.  Au delà de `n=7` le calcul devient long à cause de la somme
-        sur le groupe. Pour aller plus loin, on peut regrouper dans la
-        formule de Pólya les permutations ayant le même type
-        cyclique. Pour cela, il faut pouvoir compter le nombre de
-        permutations dans `S_n` ayant un type cyclique donné, et
-        pouvoir calculer le type cyclique d’une permutation des arêtes
-        dans `G`, connaissant le type cyclique de la permutation des
-        sommets correspondant dans `S_n`.
+Exercice: comptage de colliers (suite)
+======================================
+
+Variante sur l’exercice précédent: on veut maintenant aussi
+considérer comme identiques deux colliers qui ne diffèrent que
+d’un retournement. Compter le nombre de tels colliers à trois
+perles bleues et deux perles rouges.
+
+Indication: considérer le groupe diédral `D_{5}` des symétries du
+pentagone.
+
+Exercice: colorations du cube
+=============================
+
+Compter le nombre de cubes que l’on peut obtenir en peignant leurs
+faces en au plus trois couleurs.
+
+Indications:
+
+#.  Numéroter les faces, considérer le groupe des isométries
+    positives du cube, comme groupe de permutations de ses faces.
+
+#.  Déterminer les générateurs de ce groupe (par exemple sous
+    forme de produit de cycles).
+
+#.  Construire le groupe dans Sage en utilisant :func:`PermutationGroup`.
+
+#.  Poursuivre comme ci-dessus.
 
 
-.. TOPIC:: Exercice: énumération des multigraphes (plus avancé)
+Exercice: énumération des graphes (plus avancé)
+===============================================
 
-    Un multigraphe est un graphe dans lequel il peut y avoir un nombre
-    quelconque d’arêtes entre deux sommets. Calculer la série
-    génératrice par nombre d’arêtes des graphes sur 4,5,6 sommets.
-    Indication: ici, `F` est composé des entiers
-    `\left\{0,1,2,\dots\right\}` auxquels on peut attribuer les poids
-    `\left\{ 1,q,q^{2},\dots\right\}`; on peut alors mettre
-    `p_{k}:=1^{k}+q^{k}+q^{2k}+\cdots` sous la forme
-    `p_{k}=\frac{1}{1-q^{k}}`.
+Construire à la main les `11` graphes simples non orientés sur `4`
+sommets non étiquetés. Puis recalculer leur nombre grâce à la
+formule de Pólya. Compter le nombre de graphes simples à
+`5,6,7,8,9,10,\ldots` sommets.
 
-.. TOPIC:: Exercice (plus avancé)
+Indications:
 
-    #.  Consulter la documentation et le code de la méthode
-        :meth:`cycle_index` des groupes de permutations
+#.  Un graphe simple non orienté sur `n` sommets peut être
+    considéré comme une fonction allant de l’ensemble des paires
+    `\{i,j\}` de `\{1,\dots,n\}` dans `\{0,1\}` (`1` s’il y a une
+    arête entre `i` et `j`, et `0` sinon).
 
-        C'est l'un de vos prédécesseurs qui l'a implantée!
+#.  On numérote les paires `\{i,j\}` de `1` à `\binom{n}{2}`. Le
+    groupe `G` est le groupe des permutation des paires induites
+    par les `n!` permutations des sommets dans `S_n`. On peut donc
+    rechercher quelles permutations des paires sont induites par
+    l’échange des sommets `1` et `2` et par la permutation
+    cyclique `(1,2,3,\dots,n)` des sommets; le groupe `G` est
+    alors engendré par ces deux permutations, et l’on peut
+    poursuivre comme dans l’exercice précédent.
 
-    #.  Utilisez-la pour recalculer les exemples précédents.
+#.  Au delà de `n=7` le calcul devient long à cause de la somme
+    sur le groupe. Pour aller plus loin, on peut regrouper dans la
+    formule de Pólya les permutations ayant le même type
+    cyclique. Pour cela, il faut pouvoir compter le nombre de
+    permutations dans `S_n` ayant un type cyclique donné, et
+    pouvoir calculer le type cyclique d’une permutation des arêtes
+    dans `G`, connaissant le type cyclique de la permutation des
+    sommets correspondant dans `S_n`.
 
-    #.  Est-elle plus ou moins performante que votre implantation?
 
-    #.  Comment fonctionne-t-elle?
+Exercice: énumération des multigraphes (plus avancé)
+====================================================
+
+Un multigraphe est un graphe dans lequel il peut y avoir un nombre
+quelconque d’arêtes entre deux sommets. Calculer la série
+génératrice par nombre d’arêtes des graphes sur 4,5,6 sommets.
+Indication: ici, `F` est composé des entiers
+`\left\{0,1,2,\dots\right\}` auxquels on peut attribuer les poids
+`\left\{ 1,q,q^{2},\dots\right\}`; on peut alors mettre
+`p_{k}:=1^{k}+q^{k}+q^{2k}+\cdots` sous la forme
+`p_{k}=\frac{1}{1-q^{k}}`.
+
+Exercice (plus avancé)
+======================
+
+#.  Consulter la documentation et le code de la méthode
+    :meth:`cycle_index` des groupes de permutations
+
+    C'est l'un de vos prédécesseurs qui l'a implantée!
+
+#.  Utilisez-la pour recalculer les exemples précédents.
+
+#.  Est-elle plus ou moins performante que votre implantation?
+
+#.  Comment fonctionne-t-elle?
 
 ******************************
 TP: Systèmes générateurs forts
@@ -706,12 +786,11 @@ On supposera pour simplifier que l'on travaille avec un groupe de
 permutations `G` de `\{1,\dots,n\}` et que la base est
 `n,n-1,\dots,1`.
 
-On représentera un système générateur fort de `G` sous la forme
-d'une liste `l` telle que `l[i-1]` contient des représentants des
-cosets de `G_i/G_{i-1}`.  Ces représentants seront représenté sous la
-forme d'un dictionnaire associant à chaque élément `y` de l'orbite de
-`i` sous `G_{i-1}` une permutation `\sigma` de `G_{i-1}` telle que
-`\sigma(y)=i`.
+On représentera un système générateur fort de `G` sous la forme d'une
+liste `l` telle que `l[i-1]` contient des représentants des cosets de
+`G_i/G_{i-1}`.  Ces représentants seront représenté sous la forme d'un
+dictionnaire associant à chaque élément `y` de l'orbite de `i` sous
+`G_i` une permutation `\sigma_{i,y}` de `G_i` telle que `\sigma_{i,y}(i)=y`.
 
 Pour le groupe symétrique `S_3`, cela donnerait::
 
@@ -724,6 +803,8 @@ Pour le groupe symétrique `S_3`, cela donnerait::
 
     Construisez dans Sage les systèmes générateurs forts des groupes
     `C_4`, `D_4`, `A_4`, et du groupe des symétries du cube.
+
+    Comparez avec le système générateur fort calculé par Sage (en fait GAP).
 
 .. TOPIC:: Exercice: Utilisation des systèmes générateurs forts
 
@@ -750,8 +831,8 @@ Pour le groupe symétrique `S_3`, cela donnerait::
 
     Indication: Implanter d'abord une méthode
     ``transversal(generateurs, i)`` qui calcule l'orbite de `i` sous
-    l'action des générateurs, avec pour chaque élément `x` de l'orbite
-    une permutation envoyant `x` sur `i`.
+    l'action des générateurs avec, pour chaque élément `i` de l'orbite,
+    une permutation envoyant `i` sur `y`.
 
 
 *******************

@@ -84,48 +84,53 @@ Autres variations:
 Exercices
 ---------
 
-.. TOPIC:: Exercice
+Donner des algorithmes et leur complexité au pire et en moyenne
+pour les problèmes suivants:
 
-    Donner des algorithmes et leur complexité au pire et en moyenne
-    pour les problèmes suivants:
+#.  Calculer la somme de deux matrices carrées
 
-    #. Calculer la somme de deux matrices carrées
+#.  Calculer le produit de deux matrices carrées
 
-    #. Calculer le produit de deux matrices carrées
+#.  Calculer la somme de deux entiers
 
-    #. Rechercher un élément dans une liste
+#.  Calculer le produit de deux entiers
 
-    #. Calculer le plus grand élément d'une liste
+#.  Calculer l'inverse d'une matrice
 
-        ::
+#.  Rechercher un élément dans une liste
 
-            sage: %hide
-            sage: def plus_grand_element(liste):
-            ....:     """
-            ....:     Renvoie le plus grand élément de la liste
-            ....:     EXAMPLES::
-            ....:         sage: plus_grand_element([7,3,1,10,4,10,2,9])
-            ....:         10
-            ....:         sage: plus_grand_element([7])
-            ....:         7
-            ....:     """
-            ....:     resultat = liste[0]
-            ....:     for i in range(1, len(liste)-1):
-            ....:         # Invariant: resultat est le plus grand element de liste[:i]
-            ....:         assert resultat in liste[:i]
-            ....:         assert all(resultat >= x for x in liste[:i])
-            ....:         if liste[i] > resultat:
-            ....:             resultat = liste[i]
-            ....:     return resultat
-	    ...
-	    sage: plus_grand_element([7,3,1,10,4,10,2,9])
-	    10
+#.  Calculer le plus grand élément d'une liste
 
-        .. NOTE:: Digression: invariants, preuve et test
+    ::
 
-    #. Rechercher un élément dans une liste triée
+        sage: def plus_grand_element(liste):
+        ....:     """
+        ....:     Renvoie le plus grand élément de la liste
+        ....:     EXAMPLES::
+        ....:         sage: plus_grand_element([7,3,1,10,4,10,2,9])
+        ....:         10
+        ....:         sage: plus_grand_element([7])
+        ....:         7
+        ....:     """
+        ....:     resultat = liste[0]
+        ....:     for i in range(1, len(liste)-1):
+        ....:         # Invariant:
+        ....:         # resultat est le plus grand element de liste[:i]
+        ....:         assert resultat in liste[:i]
+        ....:         assert all(resultat >= x for x in liste[:i])
+        ....:         if liste[i] > resultat:
+        ....:             resultat = liste[i]
+        ....:     return resultat
+        sage: plus_grand_element([7,3,1,10,4,10,2,9])
+        10
 
-    #. Insérer un élément dans une liste triée
+    Digression: invariants, preuve et test
+
+    .. the code is voluntarily broken, to be analyzed and fixed in class
+
+#. Rechercher un élément dans une liste triée
+
+#. Insérer un élément dans une liste triée
 
 Ordres de grandeur
 ==================
@@ -138,7 +143,6 @@ Quelques courbes de complexité
 
 ::
 
-    sage: %hide
     sage: var('n')
     sage: xmax=10^9
     sage: ymax=10^19
@@ -164,7 +168,11 @@ Quelques courbes de complexité
     ....:      for f,color in zip(funs, colors)) + time_labels
     sage: p
 
-    sage: %hide
+.. TODO:: changer la formulation en chercher la plus grande taille de problème traitable en 1s, 1an
+
+.. TOPIC:: Exercice
+
+    On dispose d'un ordinateur pouvant exécuter `10^{9}` opérations élémentaires par seconde (1GHz). On a un problème (par exemple, chercher un mot dans une liste, calculer le déterminant d'une matrice), et des instances de taille `1,10,100,1000` de ce problème. Enfin, on a plusieurs algorithmes pour résoudre ce problème, dont on connaît les complexités respectives: `O(\log n)`, `O(n)`, `O(n\log n)`, `O(n^{2})`, `O(n^{3})`, `O(n^{10})`, `O(2^{n})`, `O(n!)`, `O(n^{n})`. Évaluer dans chacun des cas le temps nécessaire.
 
 Synthèse
 --------
@@ -175,7 +183,9 @@ algorithme en :math:`1000\log_{2}n+50` sera meilleur qu'un algorithme en
 `\frac{n}{1000}` dès que l'on s'intéressera à des instances
 suffisamment grandes.
 
-Mais voir aussi [CTFM1993]_
+Mais voir aussi l'article `Constant Time Factors do Matter
+<http://scholar.google.fr/scholar?hl=fr&q=constant+time+factor+do+matter>`_
+
 
 .. TOPIC:: Définition
 
@@ -215,24 +225,22 @@ Exercices
 
 .. TOPIC:: Exercice
 
-    Donner des algorithmes et leur complexité au pire et en moyenne
-    pour les problèmes suivants:
+    Donner quelques algorithmes et leur complexité pour le calcul du
+    déterminant d'une matrice
 
-    #. Effectuer un pivot de Gauss sur une matrice
+.. TOPIC:: Note
 
-        .. NOTE:: Digression: Complexité arithmétique versus complexité binaire
-
-    #. Calculer le déterminant d'une matrice
+    Digression: Complexité arithmétique versus complexité binaire
 
 
 Complexité d'un problème
 ========================
 
-.. TOPIC:: Exercice
+.. TOPIC:: Exemple
 
-    #. Donner un algorithme pour rechercher le plus grand élément d'une liste de nombres.
-    #. Évaluer la complexité de cet algorithme.
-    #. Existe-t-il un meilleur algorithme?
+    On a vu un algorithme en `O(n)` pour rechercher le plus grand élément d'une liste de nombres.
+
+    Existe-t-il un meilleur algorithme?
 
 .. TOPIC:: Définition
 
@@ -247,8 +255,6 @@ Complexité d'un problème
     #. Les algorithmes vus précédemment sont-ils optimaux?
 
     #. Démontrer que la recherche d'un élément dans une liste triée de taille `n` est un problème de complexité `O(\log n)`.
-
-    #. On dispose d'un ordinateur pouvant exécuter `10^{9}` opérations élémentaires par seconde (1GHz). On a un problème (par exemple, chercher un mot dans une liste, calculer le déterminant d'une matrice), et des instances de taille `1,10,100,1000` de ce problème. Enfin, on a plusieurs algorithmes pour résoudre ce problème, dont on connaît les complexités respectives: `O(\log n)`, `O(n)`, `O(n\log n)`, `O(n^{2})`, `O(n^{3})`, `O(n^{10})`, `O(2^{n})`, `O(n!)`, `O(n^{n})`. Évaluer dans chacun des cas le temps nécessaire.
 
 ***********************************************************
 Comparaison de la complexité de quelques algorithmes de tri
@@ -359,192 +365,266 @@ Travaux pratiques
 
 Les exercices suivant forment un menu à la carte. En choisir quelques
 uns. Pour l'un d'entre eux préparer une démonstration de deux minutes
-illustrant un point spécifique. Au fur et à mesure du TP, chacun
-présentera sa démonstration au reste du groupe.
+illustrant un point spécifique, pour la présenter au reste du groupe.
+(Cf. TP de la semaine dernière pour les instructions pour m'envoyer
+votre feuille de travail).
 
 Première étude pratique de complexité
 =====================================
 
-.. TOPIC:: Exercice
+Exercice: complexité de la recherche brutale
+--------------------------------------------
 
-    #.  Implanter une fonction ``recherche(liste, valeur)`` renvoyant
-        la première position de ``valeur`` dans la ``liste``, ou
-        ``None`` si valeur n'est pas dans la liste. Par exemple::
+1. Implanter une fonction ``recherche(liste, valeur)`` renvoyant la
+première position de ``valeur`` dans la ``liste``, ou ``None`` si
+valeur n'est pas dans la liste. Par exemple::
 
-            sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 21)
-            9
-            sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 69)
-            7
-            sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 5)
+    sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 21)
+    9
+    sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 69)
+    7
+    sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 5)
 
-	.. NOTE::
+Note: on remarquera que, comme ci-dessus, l'objet ``None``
+n'est pas affiché par Python::
 
-	    On remarquera que, comme ci-dessus, que l'objet ``None``
-	    n'est pas affiché par Python::
+    sage: None
 
-	        sage: None
+On peut vérifier que c'est bien ``None`` qui est renvoyé
+avec::
 
-	    On peut vérifier que c'est bien ``None`` qui est renvoyé
-	    avec::
+    sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 5) == None
+    True
 
-                sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 5) == None
-                True
+Ou, plus rapide::
 
-            Ou, plus rapide::
+    sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 5) is None
+    True
 
-                sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 5) is None
-                True
+Indication: utiliser les tests suivants::
 
+    sage: recherche([],1)
+    sage: recherche([2],1)
+    sage: recherche([2],2)
+    1
+    sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 21)
+    9
+    sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 69)
+    7
+    sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 5)
+    sage: recherche([1,3,9,20,21,37,40,42,50,65,66,69,74], 21)
+    5
+    sage: recherche([1,3,9,20,21,37,40,42,50,65,66,69,74], 69)
+    12
+    sage: recherche([1,3,9,20,21,37,40,42,50,65,66,69,74], 5)
 
-        Indication: utiliser les tests suivants::
+2. Instrumenter la fonction ``recherche`` en insérant un compteur pour
+le nombre de comparaisons effectuées lors d'un appel.
 
-            sage: recherche([],1)
-            sage: recherche([2],1)
-            sage: recherche([2],2)
-            1
-            sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 21)
-            9
-            sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 69)
-            7
-            sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 5)
-            sage: recherche([1,3,9,20,21,37,40,42,50,65,66,69,74], 21)
-            5
-            sage: recherche([1,3,9,20,21,37,40,42,50,65,66,69,74], 69)
-            12
-            sage: recherche([1,3,9,20,21,37,40,42,50,65,66,69,74], 5)
+Indication: essayer l'exemple suivant::
 
-    #.  Instrumenter la fonction ``recherche`` en insérant un compteur
-        pour le nombre de comparaisons effectuées lors d'un appel.
+    sage: def f():
+    ....:     global compteur
+    ....:     compteur = 0
+    ....:     for i in range(10):
+    ....:         compteur += 1
+    ....:     return 42
+    sage: f()
+    42
+    sage: compteur
+    10
 
-        Indication: essayer l'exemple suivant::
+3. Complexité pratique: faire quelques statistiques sur le nombre de
+comparaisons en moyenne et au pire utilisées par ``recherche`` en
+fonction de la taille de la liste, et représenter graphiquement le
+résultat.
 
-	    sage: def f():
-	    ....:     global compteur
-	    ....:     compteur = 0
-	    ....:     for i in range(10):
-	    ....:         compteur += 1
-	    ....:     return 42
-	    sage: f()
-	    42
-	    sage: compteur
-	    10
+Indications:
 
-    #.  Complexité pratique: faire quelques statistiques sur le nombre
-        de comparaisons en moyenne et au pire utilisées par
-        ``recherche`` en fonction de la taille de la liste, et
-        représenter graphiquement le résultat.
+#.  Voir :func:`randint` pour créer une liste aléatoire.
 
-        Indications:
+#.  Définir une fonction ``complexite_recherche(n)`` qui lance
+    ``recherche`` sur un échantillon de listes de longueur `n`,
+    et renvoie le nombre de comparaisons en moyenne et au pire.
 
-        #.  Voir :func:`randint` pour créer une liste aléatoire.
+#.  Voir :func:`point` pour afficher un nuage de points.
+    Que fait l'exemple suivant? ::
 
-	#.  Définir une fonction ``complexite_recherche(n)`` qui lance
-            ``recherche`` sur un échantillon de listes de longueur `n`,
-            et renvoie le nombre de comparaisons en moyenne et au pire.
+        sage: point( [ [i, i^2] for i in range(10) ] )
 
-        #.  Voir :func:`point` pour afficher un nuage de points.
+Exercice: bancs d'essais au chronomètre
+---------------------------------------
 
-            Que fait l'exemple suivant?::
+Des collègues sont en train d'implanter une bibliothèque pour faire
+très facilement des bancs d'essais, en particulier pour
+l'enseignement. C'est encore expérimental, mais ils sont preneurs de
+retour. En l'état, il n'est pas clair s'il sera possible d'avoir cette
+bibliothèque le jour du concours.
 
-    	        sage: point( [ [i, i^2] for i in range(10) ] )
+Si vous êtes partant pour essayer cette bibliothèque, télécharger le
+fichier `bleachermark.py <media/bleachermark.py>`_ et le mettre dans le même
+répertoire que votre feuille de travail.
 
+Voici un exemple d'utilisation dans lequel on fait un banc d'essai
+pour la fonction `sorted` de Python pour différentes tailles de
+listes. On commence par écrire un générateur de listes aléatoires de
+taille donnée::
 
-.. TOPIC:: Exercice:
+    sage: from random import randint
+    sage: def random_list(n):
+    ....:     return [randint(0, n) for i in range(n)]
 
-    Même exercice précédement, mais en supposant que les listes sont
-    triées et en utilisant une recherche dichotomique.
+On construit le banc d'essai::
 
-    Indications:
+    sage: from bleachermark import *
+    sage: BB = SimpleBleachermark(random_list, sorted, sizes=[2^k for k in range(10)])
 
-    - Pour trier une liste::
+On le lance::
 
-          sage: sorted(['c', 'b', 'a'])
-	  ['a', 'b', 'c']
+    sage: BB.run()
 
-    - Utiliser deux bornes ``inf`` et ``sup``, vérifiant à chaque
-      étape l'invariant ``inf <= i < sup``, où ``i`` est la première
-      position (éventuelle) de ``valeur`` dans la ``liste``.
+On peut l'interrompre à tout moment et le relancer ultérieurement.
 
-    Comparer la courbe de complexité en moyenne pour cet exercice et
-    l'exercice précédent. Évaluer la taille maximale d'une liste dans
-    laquelle on peut faire une recherche en moins d'une heure et d'une
-    semaine.
+Ensuite on peut accéder à la moyenne du temps de calcul pour `sorted`
+pour chaque taille::
+
+    sage: BB.averages()                              # random
+    {1: 4.870000000005703e-06,
+     2: 5.19999999995413e-06,
+     4: 6.820000000002935e-06,
+     8: 7.3599999999807154e-06,
+     16: 1.0719999999997399e-05,
+     32: 1.774000000003717e-05,
+     64: 3.4700000000000843e-05,
+     128: 7.322999999999524e-05,
+     256: 0.00015710000000003,
+     512: 0.00034635999999997223}
+
+Voici comment en faire un graphique::
+
+    sage: points( BB.averages().items() )            # not tested
+
+De même, on peut accéder au min, max, ainsi qu'à l'intégralité des
+temps de calculs avec::
+
+    sage: BB.mins()                                  # not tested
+    sage: BB.maxes()                                 # not tested
+    sage: BB.timings()                               # not tested
+
+Exercice: complexité de la recherche dichotomique
+-------------------------------------------------
+
+Même exercice précédement, mais en supposant que les listes sont
+triées et en utilisant une recherche dichotomique.
+
+Indications:
+
+- Pour trier une liste::
+
+      sage: sorted(['c', 'b', 'a'])
+      ['a', 'b', 'c']
+
+- Utiliser deux bornes ``inf`` et ``sup``, vérifiant à chaque
+  étape l'invariant ``inf <= i < sup``, où ``i`` est la première
+  position (éventuelle) de ``valeur`` dans la ``liste``.
+
+Comparer la courbe de complexité en moyenne pour cet exercice et
+l'exercice précédent. Évaluer la taille maximale d'une liste dans
+laquelle on peut faire une recherche en moins d'une heure et d'une
+semaine.
 
 Implantation de quelques algorithmes de tri
 ===========================================
 
-.. TOPIC:: Exercice
+Fichiers, documentation, tests
+------------------------------
 
-    #.  Télécharger le `fichier annexe <../_images/tris.py>`_ et le
-	mettre dans un dossier de votre choix, comme par exemple
-	``~/Agregation/OptionC/TP2/tris.py``.
+.. TODO:: étendre le squelette
 
-    #.  Charger ce fichier dans ``Sage`` avec::
+Télécharger le `fichier annexe <media/tris.py>`_ et le mettre dans un
+dossier de votre choix, comme par exemple
+``~/Agregation/OptionC/TP2/tris.py``.
 
-            sage: %runfile <...dossier...>/tris.py
+Charger ce fichier dans ``Sage`` avec::
 
-        Ou (dans le bloc note)::
+    sage: %run tris.py
 
-            sage: load("<...dossier...>/tris.py")
+Cela suppose que `SageMath` a été lancé dans le même répertoire, ou
+que la feuille de travail soit dans ce même répertoire. Si vous
+utilisez des variables globales pour compter les opérations, utilisez
+à la place::
 
-	et essayer la fonction ``tri``.
+    sage: %run -i tris.py
 
-    #.  Dans un terminal, aller dans le dossier, et lancer:
+(voir la documentation de `%run` pour les détails).
 
-	    sage -t tris.py
+Essayer la fonction ``tri``.
 
-    #.  Ouvrir le fichier avec votre éditeur de texte favori (par
-	exemple ``gedit``), et compléter les tests de la fonction tri.
+Dans un terminal, aller dans le dossier, et lancer les tests du
+fichier tris.py avec::
 
-.. TOPIC:: Exercice
+    sage -t tris.py
 
-    En partant du squelette précédent, implanter des fonctions de tri
-    utilisant chacun des algorithmes suivants. *Commencer
-    systématiquement par spécifier l'invariant*. Pour chaque
-    implantation, tracer des courbes statistiques de complexité au
-    pire et en moyenne. Comparer avec les courbes théoriques.
+.. WARNING::
 
-    #. Tri à bulle en place.
+    Dans les salles de TP, SageMath est installé via ses paquets
+    Debian/Ubuntu; ceux-ci ont actuellement (Sage 7.5, 01/2017) un
+    bogue qui ne leur permet pas de lancer les tests comme ci-dessus.
 
-    #. Tri fusion.
+Ouvrir le fichier avec votre éditeur de texte favori (par exemple
+``gedit``), et compléter les tests de la fonction tri.
 
-       Indication: utiliser une fonction récursive; si nécessaire,
-       s'entraîner en implantant au préalable une fonction récursive
-       pour calculer `n!`
+Implantation
+------------
 
-    #. Tri rapide en place.
+En partant du squelette précédent, implanter des fonctions de tri
+utilisant chacun des algorithmes suivants. *Commencer systématiquement
+par spécifier l'invariant*. Pour chaque implantation, tracer des
+courbes statistiques de complexité au pire et en moyenne. Comparer
+avec les courbes théoriques.
 
-    #. Tri par tas.
+Tri à bulle en place
+^^^^^^^^^^^^^^^^^^^^
 
-       Indication: utiliser le module `heapq <http://docs.python.org/library/heapq.html>`_
+Tri fusion
+^^^^^^^^^^
 
-    #. Tri insertion dans un arbre binaire de recherche (équilibré ou non).
+Indication: utiliser une fonction récursive; si nécessaire,
+s'entraîner en implantant au préalable une fonction récursive pour
+calculer `n!`
 
-       Indications:
+Tri rapide en place
+^^^^^^^^^^^^^^^^^^^
 
-       #.  Consulter la documentation de :class:`LabelledBinaryTree` pour
-	   trouver comment construire des arbres binaires étiquetés.
+Tri par tas
+^^^^^^^^^^^
 
-       #.  Définir une fonction récursive ``insere(arbre, i)`` qui insère
-	   un nombre ``i`` dans un arbre binaire de recherche.
+Indication: utiliser le module `heapq <http://docs.python.org/library/heapq.html>`_
+
+Tri insertion dans un arbre binaire de recherche (équilibré ou non)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Indications:
+
+#.  Consulter la documentation de :class:`LabelledBinaryTree` pour
+    trouver comment construire des arbres binaires étiquetés.
+
+#.  Définir une fonction récursive ``insere(arbre, i)`` qui insère
+    un nombre ``i`` dans un arbre binaire de recherche.
 
 Complexité de l'algorithme de tri de Python
 ===========================================
 
-.. TOPIC:: Exercice
+Estimer la complexité de la fonction suivante::
 
-    #. Estimer la complexité de l'algorithme de tri de Python (:func:`sort`)
+    sage: def fusion(l1, l2):
+    ....:     sort(l1+l2)
 
-    #. Estimer la complexité de la fonction suivante::
+lorsque elle est appliquée à des listes aléatoires, respectivement triées.
 
-	   sage: def fusion(l1, l2):
-	   ....:     sort(l1+l2)
+Que peut-on en déduire?
 
-       lorsque elle est appliquée à des listes aléatoires, respectivement triées.
-
-       Que peut-on en déduire?
-
-       Pour en savoir plus: [TimSort]_
+Pour en savoir plus, voir l'article sur `Tim sort <http://en.wikipedia.org/wiki/Timsort>`_
 
 *******************
 Quelques références
@@ -558,5 +638,3 @@ Quelques références
 
 .. -  `Démonstration de bubble sort et quicksort <http://jade.lim.univ-mrs.fr/~vancan/mait/demo/SortDemo/example1.html>`_
 
-.. [TimSort] `Tim sort <http://en.wikipedia.org/wiki/Timsort>`_
-.. [CTFM1993] `Constant Time Factors do Matter <http://scholar.google.fr/scholar?hl=fr&q=constant+time+factor+do+matter>`_

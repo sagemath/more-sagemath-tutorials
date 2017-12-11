@@ -14,13 +14,14 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques
 * :ref:`agregation.codes_correcteurs`
 * :ref:`agregation.multiplications_rapides`
 * :ref:`agregation.groupes_de_permutations`
-* :ref:`agregation.algebre_lineaire`
+* :ref:`agregation.algebre_lineaire_formes_echelon`
+* :ref:`agregation.algebre_lineaire_anneaux`
 * :ref:`agregation.algebre_lineaire_rapide`
 * :ref:`agregation.programmation_lineaire`
-
 
 .. toctree::
    :glob:
    :hidden:
+   :reversed:
 
    *

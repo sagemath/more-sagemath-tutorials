@@ -17,7 +17,9 @@ Une expression::
     sage: f = cos(x)^6 + sin(x)^6 + 3 * sin(x)^2 * cos(x)^2; f
     sin(x)^6 + cos(x)^6 + 3*sin(x)^2*cos(x)^2
 
-    sage: pretty_print_default()
+La même après avoir configuré les affichages en latex::
+
+    sage: %display latex
     sage: f
 
 Simplifions-la::
@@ -38,9 +40,6 @@ Une sommation définie::
 
     sage: sum(binomial(n, k) * factorial(k) / factorial(n+1+k), k, 0, n)
     1/2*sqrt(pi)/factorial(n + 1/2)
-
-    sage: pretty_print(_)
-    <html><span class="math">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{\sqrt{\pi}}{2 \, \left(n + \frac{1}{2}\right)!}</span></html>
 
 Calcul de `\lim\limits_{x\rightarrow \frac{\pi}{4} }\dfrac{\cos\left(\frac{\pi}{4}-x \right)-\tan x }{1-\sin\left(\frac{\pi}{4}+x \right)}`::
 

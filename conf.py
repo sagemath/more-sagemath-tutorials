@@ -215,7 +215,15 @@ latex_elements = {
 #'pointsize': '10pt',
 
 # Additional stuff for the LaTeX preamble.
-#'preamble': '',
+  'preamble': r'''
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\ZZ}{\mathbb{Z}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\CC}{\mathbb{C}}
+\newcommand{\NN}{\mathbb{N}}
+''',
 
 # Latex figure (float) alignment
 #'figure_align': 'htbp',

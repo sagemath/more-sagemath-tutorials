@@ -36,7 +36,7 @@ Polynomials::
 
 ::
 
-    sage: pretty_print_default()
+    sage: %display latex
     sage: factor(x^100 - 1)
     (x - 1)*(x + 1)*(x^2 + 1)*(x^4 - x^3 + x^2 - x + 1)*(x^4 + x^3 + x^2 + x + 1)*(x^8 - x^6 + x^4 - x^2 + 1)*(x^20 - x^15 + x^10 - x^5 + 1)*(x^20 + x^15 + x^10 + x^5 + 1)*(x^40 - x^30 + x^20 - x^10 + 1)
 

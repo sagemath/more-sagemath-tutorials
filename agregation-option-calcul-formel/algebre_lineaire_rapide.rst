@@ -7,9 +7,19 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Algèbre li
 
 .. MODULEAUTHOR:: `Nicolas M. Thiéry <http://Nicolas.Thiery.name/>`_ <Nicolas.Thiery at u-psud.fr>
 
+.. linkall
+
+Ce document dans d'autres formats:
+`feuille de travail <algebre_lineaire_rapide.ipynb>`_,
+`source RST <algebre_lineaire_rapide.rst>`_.
+
 Dans ce cours, nous explorons quelques limites de l'algorithme de Gauß
 en terme de performances, et donnons des approches pour les
 contourner.
+
+.. TODO:: ajouter des #random où utile; mettre les %display latex juste là où c'est utile
+
+.. TODO:: ajouter des exercices pour les faire manipuler
 
 **************************************
 Méthodes modulaires et généralisations
@@ -22,64 +32,84 @@ On a vu que l'algorithme de Gauß était de complexité `O(n^3)`, au
 moins dans son implantation naïve. Vérifions cela expérimentalement
 avec les petits outils suivants:
 
-.. include:: media/gauss.py
-    :literal:
+::
+
+    sage: load("media/gauss.py")
+
+.. TODO:: faire afficher le contenu du fichier
 
 ::
 
-    sage: load ~/Enseignement/Agregation/Notes-rst/media/gauss.py
-    sage: pretty_print_default(False)
-
-::
-
-    sage: m = matrice_inversible(3, GF(7)); m
+    sage: m = matrice_inversible(3, GF(7)); m   # random
     [1 0 0]
     [0 6 2]
     [2 5 0]
 
-    sage: gauss(m)
+    sage: gauss(m)                              # random
+    [3 1 6]
+    [0 2 6]
+    [0 0 2]
 
 Commençons par un corps fini::
 
     sage: import functools
     sage: construit_donnee = functools.partial(matrice_inversible, corps=GF(7))
 
-    sage: construit_donnee(3)
+    sage: construit_donnee(3)                   # random
+    [5 4 5]
+    [6 2 2]
+    [1 2 5]
 
     sage: temps(gauss, 10, construit_donnee)
-    0.006472110748291016
+    0.00010991096496582031
     sage: temps(gauss, 20, construit_donnee)
-    0.021173954010009766
+    0.0004279613494873047
 
-    sage: [temps(gauss, 2^k, construit_donnee) for k in range(9)]
-    [0.0006530284881591797, 0.0002830028533935547, 0.00041413307189941406,
-     0.001219034194946289, 0.0043790340423583984, 0.01766800880432129,
-     0.07697796821594238, 0.3689899444580078, 1.9787850379943848]
-
-    sage: t = [5.1975250244140625e-05, 6.008148193359375e-05, 6.818771362304688e-05, 0.00014901161193847656, 0.00047707557678222656, 0.002396106719970703, 0.0066339969635009766, 0.03583502769470215, 0.26586079597473145, 2.0630128383636475, 15.69841194152832, 127.40424704551697, 1255.349585056305]
+    sage: t = [temps(gauss, 2^k, construit_donnee) for k in range(9)]; t
+    [1.2874603271484375e-05,
+     2.193450927734375e-05,
+     3.0994415283203125e-05,
+     7.295608520507812e-05,
+     0.00026416778564453125,
+     0.0012059211730957031,
+     0.007287025451660156,
+     0.04861617088317871,
+     0.3510730266571045]
     sage: [ t[i+1]/t[i] for i in range(len(t)-1) ]
-    [1.606126914660832, 2.18801089918256, 3.18617683686177, 3.67774086378738,
-     3.97056166640098, 4.30993549423195, 4.77863479554227, 5.39547677142458,
-     6.153986671872602, 6.81029142919141]
+    [1.7037037037037037,
+     1.4130434782608696,
+     2.353846153846154,
+     3.6209150326797386,
+     4.564981949458484,
+     6.04270462633452,
+     6.671607119486978,
+     7.221322047363801]
 
+Un peu plus de valeurs supplémentaires calculées au préalable::
+
+    sage: t = [2.8848648071289062e-05, 2.9087066650390625e-05, 4.1961669921875e-05, 9.298324584960938e-05, 0.0003731250762939453, 0.0017020702362060547, 0.010125160217285156, 0.04890704154968262, 0.3750150203704834, 2.7238361835479736, 20.545907974243164, 182.26634407043457, 1334.3144991397858]
+
+    sage: [ t[i+1]/t[i] for i in range(len(t)-1) ]
+    [1.0082644628099173, 1.4426229508196722, 2.215909090909091, 4.012820512820513, 4.561661341853035, 5.948732315450343, 4.830248657812941, 7.667914649662898, 7.263272230688392, 7.543004274023845, 8.871174946316705, 7.320685044432319]
     sage: points(enumerate(_))
 
-C'est raisonnablement plausible.
+C'est plausible.
 
 Prenons maintenant le corps des rationnels::
 
     sage: construit_donnee = functools.partial(matrice_inversible, corps=QQ)
     sage: t = [temps(gauss, 2^k, construit_donnee) for k in range(8)]; t   # random
-    [0.002805948257446289, 0.02091503143310547, 0.17576098442077637,
-     1.7260560989379883, 20.39414095878601, 296.17037892341614]
+    [2.7179718017578125e-05, 3.910064697265625e-05, 0.00010395050048828125, 0.0005209445953369141, 0.003559112548828125, 0.028071880340576172, 0.25052881240844727, 2.8525619506835938]
+
+::
 
     sage: t = [6.389617919921875e-05, 0.00010395050048828125, 0.000308990478515625, 0.001764059066772461, 0.012479066848754883, 0.09727597236633301, 0.8789999485015869, 9.599533081054688, 127.58634281158447, 2059.1530270576477]
     sage: [ t[i+1]/t[i] for i in range(len(t)-1) ]
     [1.62686567164179, 2.97247706422018, 5.70910493827161, 7.07406406271118, 7.79513192334881, 9.03614661585030, 10.9209711529777, 13.2908904770988, 16.13929031650778]
 
-Oups!!!
+Bof ...
 
-::
+Avec la matrice de Hilbert::
 
     sage: def hilbert(n):
     ....:     return matrix(QQ, n, n, lambda i,j: 1/(1+i+j))
@@ -88,24 +118,36 @@ Oups!!!
     [1/2 1/3 1/4]
     [1/3 1/4 1/5]
 
-    sage: t = [temps(gauss, 2^k, hilbert) for k in range(9)]; t
-    [7.553905434695352, 8.077981700124337, 8.68987278491837,
-     9.991872599419295, 11.684664369567903]
+    sage: [temps(gauss, 2^k, hilbert) for k in range(8)]              # random
+    [9.393692016601562e-05, 4.887580871582031e-05, 0.000102996826171875, 0.0005269050598144531, 0.003654003143310547, 0.028528928756713867, 0.23932909965515137, 2.2389848232269287]
+    sage: t = [2.193450927734375e-05, 3.4809112548828125e-05, 9.202957153320312e-05, 0.0004980564117431641, 0.003587961196899414, 0.029154062271118164, 0.2275228500366211, 2.2509679794311523, 25.5708429813385, 328.3195171356201]
 
-Oups!
+    sage: [ t[i+1]/t[i] for i in range(len(t)-1) ]
+    [1.58695652173913, 2.64383561643836, 5.41191709844560, 7.20392532312111, 8.12552329058409, 7.80415600134117, 9.89337105731950, 11.3599319115150, 12.8396047551200]
+
+Bof!
 
 Prenons un corps de fractions rationnelles::
 
     sage: K = QQ['x'].fraction_field()
-    sage: construit_donnee = functools.partial(matrice_inversible, corps=K)
+    sage: construit_donnee = functools.partial(random_matrix, K)
 
     sage: construit_donnee(2)
     [ (-3/8*x + 3/25)/(-1/13*x^2 + 1/3*x)                       (-1/3*x - 1)/(-2*x^2 + x + 1)]
     [ (4/169*x^2 + 1/9*x)/(x^2 + 9*x - 1/5)  (-1/2*x^2 + 1/2*x + 207)/(2/7*x^2 + 3/2*x + 1/2)]
 
-    sage: t = [temps(gauss, n, construit_donnee) for n in range(6)]; t
+    sage: t = [temps(gauss, n, construit_donnee) for n in range(10)]; t
+    [1.3113021850585938e-05, 2.193450927734375e-05, 0.00019097328186035156, 0.0006430149078369141, 0.0026559829711914062, 0.0067059993743896484, 0.01826310157775879, 0.04449200630187988, 0.11454296112060547, 0.6179559230804443]
 
-    sage: temps(gauss, 7, construit_donnee)
+    sage: t = [1.1920928955078125e-05, 1.9073486328125e-05, 0.00018310546875, 0.0007388591766357422, 0.002237081527709961, 0.007543087005615234, 0.021083831787109375, 0.08204507827758789, 0.15540504455566406, 0.9841179847717285, 22.702343940734863]
+    sage: [ t[i+1]/t[i] for i in range(len(t)-1) ]
+
+.. TODO::
+
+    Ces bancs d'essais suggèrent que la complexité n'est pas pire que
+    O(n^4), ce qui n'est guère mieux que ce que l'on obtient en
+    modulaire ou multimodulaire. Trouver quelque chose de plus
+    frappant.
 
 Analyse: Complexité arithmétique versus complexité en bits
 ==========================================================
@@ -121,7 +163,8 @@ la métrique étant donnée par le nombre d'opérations arithmétiques.
 Or, comme l'a constaté toute personne ayant calculé un pivot de Gauß à
 la main, les coefficients ont tendance à grossir::
 
-    sage: gauss(matrice_inversible(10))
+    sage: %display latex                                              # not tested
+    sage: gauss(matrice_inversible(10))                               # random
     [       1        0       -2     -1/2        1        2        1        0       -1       -1]
     [       0        1        0     -5/2        5        0        3        2        0       -3]
     [       0        0        1     -5/4     11/2       -1        2      3/2      3/2     -5/2]
@@ -140,8 +183,6 @@ la main, les coefficients ont tendance à grossir::
     sage: t
     [1, 1, 1, 19, 4238342698, 99340450694580511972871852, 49519664469784658153819267407199333624664412533859761535203139]
 
-    sage: 
-
 Considérer que le temps nécessaire à une opération arithmétique est
 constant est donc abusif!
 
@@ -153,16 +194,14 @@ fait en gros `n\log n`) où `n` est le nombre de bits::
     sage: [float(tt[i+1]/tt[i]) for i in range(len(t)-1)]
     [1.0, 1.0, 2.0, 5.0, 2.6, 2.3846153846153846]
 
-::
-
-    sage: 
-
 Cela suggère expérimentalement que, pour les rationnels, le nombre de
 bits est borné par un petit polynôme en `n`.
 
 
 Méthodes modulaires et multimodulaires
 ======================================
+
+.. TODO:: Donner les complexités explicites, quitte à ne pas les démontrer
 
 Exemple: le calcul du déterminant
 ---------------------------------
@@ -179,15 +218,13 @@ gros coefficients.
 
 .. TOPIC:: Algorithme modulaire
 
-    #.  Déterminer une borne `b` sur le déterminant
-
-	(par exemple la borne de Hadamard)
+    #.  Déterminer une borne `b` sur le déterminant (par ex: borne de Hadamard)
 
     #.  Choisir un grand nombre premier `p>2b`
 
     #.  Calculer `\det(M)` modulo `p`:
 
-	.. MATH::
+    .. MATH::
 
            \require{AMScd}
            \begin{CD}
@@ -203,9 +240,7 @@ gros coefficients.
 
     #.  Comme ci-dessus
 
-    #.  Choisir plusieurs petits nombres premiers tels que `p_1\cdots p_k>2b`
-
-        (Combien en faut-il?)
+    #.  Choisir plusieurs (combien?) petits nombres premiers tels que `p_1\cdots p_k>2b`
 
     #.  Calculer `\det(M)` modulo `p_i` pour chaque `i`
 
@@ -214,12 +249,12 @@ gros coefficients.
 .. TOPIC:: Intérêt du multimodulaire?
 
     #.  Calculer avec des corps finis dont les éléments tiennent dans
-	un entier machine. Chaque opération arithmétique sur `GF(p_i)`
-	correspond à un petit nombre d'opérations du processeurs.
+        un entier machine. Chaque opération arithmétique sur `GF(p_i)`
+        correspond à un petit nombre d'opérations du processeurs.
 
-	Voire dans un *flottant* machine (seul intérêt: les
-	processeurs actuels sont plus optimisés pour manipuler des
-	flottants ...).
+    #.  Voire dans un *flottant* machine (seul intérêt: les
+        processeurs actuels sont plus optimisés pour manipuler des
+        flottants ...).
 
     #.  Parallélisation
 
@@ -229,7 +264,7 @@ Exemple: bornes sur le rang
 
 .. TOPIC:: Remarque
 
-    rang (M\mod p) \leq rang (M)
+    .. MATH:: \operatorname{rang} (M\mod p) \leq \operatorname{rang}(M)
 
 Généralisations
 ---------------
@@ -240,8 +275,8 @@ efficace, avec la possibilité d'inverser localement ce morphisme à la
 fin.
 
 La même technique s'adapte à chaque fois que l'on a une explosion des
-coefficients intermédiaires, et un morphisme dans un (plusieurs) corps
-où l'on maîtrise la croissance des coefficients intermédiaires.
+coefficients intermédiaires, et un morphisme dans un (ou plusieurs)
+corps où l'on maîtrise la croissance des coefficients intermédiaires.
 
 .. TOPIC:: Exemple de problème
 
@@ -257,7 +292,7 @@ où l'on maîtrise la croissance des coefficients intermédiaires.
 
     #.  Prendre le morphisme d'évaluation en ces points:
 
-        .. MATH::
+    .. MATH::
 
             \phi: \begin{cases}
             K[x] & \rightarrow K^k\\
@@ -268,7 +303,7 @@ où l'on maîtrise la croissance des coefficients intermédiaires.
         déterminants de matrices à coefficients dans le corps de base.
 
     #.  Reconstruire `\det(M)`, par exemple par interpolation de
-        Lagrange.
+        Lagrange, FFT inverse, ...
 
 .. TOPIC:: Exercice
 
@@ -284,41 +319,40 @@ Variante: méthodes p-adiques
 
     Sortie: l'inverse de `M`
 
+    .. TODO:: Plutôt prendre à coefficients rationnels
+
 On considère le morphisme partiel `\phi` de `\QQ` dans `GF(p^k)`:
 
-- Ce morphisme n'est définit que pour les rationnels `x` dont le
-  dénominateur n'est pas divisible par `p`
+-   Ce morphisme n'est définit que pour les rationnels `x` dont le
+    dénominateur n'est pas divisible par `p`
 
-- Si on connaît `\phi(x)` pour `k` suffisamment grand, on peut
-  retrouver `x` par *reconstruction rationnelle*.
+-   Si on connaît `\phi(x)` pour `k` suffisamment grand, on peut
+    retrouver `x` par *reconstruction rationnelle*.
+    Rappel: encore une conséquence d'Euclide étendu!
 
-  Rappel: encore une conséquence d'Euclide étendu!
+.. TODO:: Rajouter un exercice sur l'expansion `p`-adique des entiers puis des rationnels
 
 .. TOPIC:: Algorithme
 
     #.  Prendre un nombre premier `p` qui ne divise pas le déterminant
         de `M`.
 
-        Une bonne stratégie est de choisir `p` au hasard!
+    #.  Une bonne stratégie est de choisir `p` au hasard!
         Statistiquement il sera bon, et sinon on s'en rendra compte et
         on recommencera.
 
     #.  Calculer l'inverse `N` de `M` modulo `p`.
 
     #.  Raffiner itérativement cette solution:
+        - Supposons que l'on ait `N` tel que `MN=1` modulo `p^k`
+        - Prendre `R` tel que `MN = 1+p^k R`
+        - Poser `N':=N(1-p^kR)`
+        - Alors `MN'=1-p^{2k} R`
 
-	- Supposons que l'on ait `N` tel que `MN=1` modulo `p^k`
-
-	- Prendre `R` tel que `MN = 1+p^k R`
-
-	- Poser `N':=N(1-p^kR)`
-
-	- Alors `MN'=1-p^{2k} R`
-
-        `k` double à chaque itération!!!
+    #.  `k` double à chaque itération!!!
 
     #.  Lorsque `k` est suffisamment grand, on retrouve `M^{-1}` par
-	reconstruction rationnelle de chacun de ses coefficients.
+        reconstruction rationnelle de chacun de ses coefficients.
 
 Mise en contexte: on a écrit notre matrice `M` comme une série:
 
@@ -403,7 +437,7 @@ Regardons à plus grande échelle::
 
     - Matrices très creuses
 
-    L'algorithme de Gauß ne préserve pas ces structure!
+    L'algorithme de Gauß ne préserve pas ces structures!
 
 Et pourtant::
 
@@ -411,18 +445,16 @@ Et pourtant::
     sage: M.rank()
     9263
 
-::
-
-    sage: 
-
 Comment cela marche-t-il???
+
+.. TODO:: introduire le nombre de coeffs non nuls comme taille de la matrice
 
 
 Algorithmes de type «boîtes noire»
 ==================================
 
 Algorithme de Wiedemann
-=======================
+-----------------------
 
 .. TOPIC:: Problème
 
@@ -432,11 +464,13 @@ Algorithme de Wiedemann
 
     Soit `P` le polynôme minimal d'une matrice carrée `M`.
 
-    Soient U et V deux vecteurs.
+    Soient `U` et `V` deux vecteurs.
 
     Alors la suite de nombre `u_k = U M^k V` satisfait une relation de
     récurence donnée par les coefficients de `P`.
 
+
+.. TODO:: Mettre cette remarque sous forme d'exercice et rédiger la correction
 
 .. TOPIC:: Rappel: Algorithme de Berlekamp-Massey
 
@@ -445,6 +479,7 @@ Algorithme de Wiedemann
     petite relation de récurrence satisfaite par cette suite. Les
     coefficients de cette relation de récurrence sont
     traditionnellement encodés sous la forme d'un polynôme.
+    Encore une conséquence d'Euclide étendu ...
 
     Voir TP pour les détails.
 
@@ -456,23 +491,23 @@ Algorithme de Wiedemann
     #.  Déterminer les premiers termes de la suite `u_k` en calculant
         itérativement `V, MV, M^2V, \ldots`
 
-    #.  En déduire par BM la relation de récurence minimale qu'elle
-        satisfait.
+    #.  En déduire par Berlekamp-Massey la relation de récurence
+        minimale qu'elle satisfait
 
-    #.  Cette relation divise le polynôme minimal `P` de `M`.
+    #.  Cette relation divise le polynôme minimal `P` de `M`
 
-    #.  Réitérer «suffisamment de fois».
+    #.  Réitérer «suffisamment de fois»
 
 .. TOPIC:: Remarques
 
     #.  On n'a eu besoin de calculer que des produits `MV`
 
-        On voit `M` comme un endomorphisme
+    #.  On voit `M` comme un endomorphisme
 
     #.  Complexité mémoire bornée par `n`
 
 Application: calcul d'inverses
-==============================
+------------------------------
 
 .. TOPIC:: Exercice
 
@@ -481,7 +516,7 @@ Application: calcul d'inverses
     Déterminer l'inverse de `M`.
 
 Application: calcul du rang
-===========================
+---------------------------
 
 Voir TP.
 
@@ -490,6 +525,18 @@ Algorithme de Faddeev-Leverrier
 *******************************
 
 http://en.wikipedia.org/wiki/Newton%27s_identities
+
+.. TODO::
+
+    Rédiger:
+
+        - Étape 1: matrice triangulaire
+        - Étape 2: sur un corps algébriquement clos, on triangularise
+        - Étape 3: généralisation à un corps quelconque, avec extension implicite du corps is besoin
+
+    Question: à quel point rappeller les identités de Newton?
+
+    On pourrait se donner 1/2h de plus
 
 ********************************
 TP: Berlekamp Massé et Wiedemann
@@ -506,16 +553,21 @@ Berlekamp Massé
     coefficients de cette relation de récurrence sont
     traditionnellement encodés sous la forme d'un polynôme.
 
+    Cette algorithme est implanté dans Sage par la fonction
+    :func:`berlekamp_masse`. Vous pouvez au choix faire quelques
+    essais avec cette fonction et passer à l'exercice suivant ou ...
+
     Implanter l'algorithme de Berlekamp-Massey, soit en vous servant
-    de [Massey.1969]_ ou via l'algorithme d'Euclide étendu décrit dans
-    `le texte sur Wiedemann
+    de [Massey.1969]: `Shift-register synthesis and BCH Decoding
+    <http://nicolas.thiery.name/Enseignement/Agregation/Textes/Massey.1969.pdf>`_
+    James L. Massey, IEEE transactions on information theory, 1969, ou
+    via l'algorithme d'Euclide étendu décrit dans `le texte sur
+    Wiedemann
     <http://nicolas.thiery.name/Enseignement/Agregation/Textes/wiedemann.pdf>`_
-    ou, avec plus de détails dans
-    `le texte sur le code de Goppa
+    ou, avec plus de détails dans `le texte sur le code de Goppa
     <http://nicolas.thiery.name/Enseignement/Agregation/Textes/goppa.pdf>`_.
 
-    `Proposition de correction
-    <http://nicolas.thiery.name/Enseignement/Agregation/Notes-rst/wiedemann.py>`_.
+    `Proposition de correction <media/wiedemann.py>`_.
 
 Wiedemann
 =========
@@ -528,7 +580,6 @@ Wiedemann
         la main, soit utiliser :func:`random_matrix` avec l'algorithme
         ``diagonalizable``; on pourra tirer les multiplicités au
         hasard avec :class:`IntegerVectors`.
-
 
     #.  Calculer son polynôme minimal avec la méthode
         ``minimal_polynomial``.
@@ -548,32 +599,37 @@ Wiedemann
 
 .. TOPIC:: Exercice: Implantation de l'algorithme de Wiedemann
 
-    Écrire une procédure ``endomorphisme`` qui prend une matrice `M`
-    en argument, et renvoie l'endomorphisme correspondant,
-    c'est-à-dire la fonction qui à un vecteur `v` associe le vecteur
-    `M\times v`.
+    #.  Écrire une procédure ``endomorphisme`` qui prend une matrice
+        `M` en argument, et renvoie l'endomorphisme correspondant,
+        c'est-à-dire la fonction qui à un vecteur `v` associe le
+        vecteur `M\times v`.
 
-    Finir d'implanter une procédure ``wiedemann(f, V)`` qui prend un
-    endomorphisme `f` et l'espace sur lequel il agit, et calcule son
-    polynôme minimal en utilisant l'algorithme de Wiedemann.
+    #.  Finir d'implanter une procédure ``wiedemann(f, V)`` qui prend
+        un endomorphisme `f` et l'espace sur lequel il agit, et
+        calcule son polynôme minimal en utilisant l'algorithme de
+        Wiedemann.
 
-    Vérifier le résultat sur la matrice précédente.
+    #.  Vérifier le résultat sur la matrice précédente.
 
-    Écrire la fonction de multiplication par une matrice diagonale, la
-    fonction de multiplication par une matrice tridiagonale. Utiliser
-    Wiedemann pour calculer le polynôme minimal de quelques matrices
-    de ce type.
+    #.  Écrire la fonction de multiplication par une matrice
+        diagonale, la fonction de multiplication par une matrice
+        tridiagonale. Utiliser Wiedemann pour calculer le polynôme
+        minimal de quelques matrices de ce type.
 
-    Évaluer la complexité expérimentale de ces calculs. Comparer avec
-    la méthode `minpoly` du système.
+    #.  Évaluer la complexité expérimentale de ces calculs. Comparer
+        avec la méthode `minpoly` du système.
 
 .. TOPIC:: Exercice: Calcul du rang par préconditionnement par produit de matrices diagonales.
 
-    Fabriquer des matrices carrées raisonablement aléatoires de rang
-    environ `\frac{n}{2}`, dont les valeurs propres sont dans
-    `\{0,1,2\}`.
+    #.  Fabriquer des matrices carrées raisonablement aléatoires de
+        rang environ `\frac{n}{2}`, dont les valeurs propres sont dans
+        `\{0,1,2\}` (cf. l'exercice sur Wiedemann pour des indications).
 
-    Tester expérimentalement le théorème 2 page 7 de [Dumas_Villard.2002]_.
+    #.  Tester expérimentalement le théorème 2 page 7 de `Computing
+        the rank of large sparse matrices over finite fields
+        <http://www-lmc.imag.fr/lmc-mosaic/Jean-Guillaume.Dumas/Publications/goliath.ps.gz>`_
+        Jean-Guillaume Dumas et Gilles Villard, Computer Algebra in
+        Scientific Computing, 2002.
 
 Une conjecture sur les matrices d'incidence arbres / forêts
 ===========================================================
@@ -586,12 +642,12 @@ un graphe acyclique; un *arbre* est une forêt connexe.
 
 .. TOPIC:: Exercice
 
-    Fabriquer la liste de toutes les forêts à `5` sommets et `4`
+    Fabriquer la liste de toutes les forêts à `6` sommets et `4`
     arêtes, à isomorphie près. Que constatez-vous?
 
     Indication: essayer::
 
-       sage: show(list(graphs(5)))
+       sage: for g in graphs(5): show(g)
 
     puis utiliser les options ``property`` et ``size`` et la méthode
     ``is_forest``.
@@ -626,20 +682,15 @@ Fixons un entier `n`. On va considérer la matrice `T_n` dont
             sage: G = Graph([[1,2]])
             sage: {G: 1}
             Traceback (most recent call last)
-	    ...
-	    TypeError: graphs are mutable, and thus not hashable
+            ...
+            TypeError: graphs are mutable, and thus not hashable
 
-        Pour corriger cela, il faut rendre le graphe immutable. À
-        partir de Sage 6.0, on peut utiliser::
+    #.  Pour corriger cela, il faut rendre le graphe immutable::
 
             sage: G = G.copy(immutable=True)
-	    Graph on 2 vertices
+            Graph on 2 vertices
             sage: {G: 1}
-	    {Graph on 2 vertices: 1}
-
-        Et en attendant on peut faire::
-
-            sage: G._immutable = True
+            {Graph on 2 vertices: 1}
 
     #.  Numéroter les graphes dans les deux listes en utilisant
         :func:`sage.combinat.ranker.from_list`.
@@ -659,12 +710,4 @@ Fixons un entier `n`. On va considérer la matrice `T_n` dont
 .. Cf. ../OldNotes/Euclide.pdf
 .. Plus TP de Bill algebre-lineaire-rapide-BillAllombert.pdf pour des tests
 
-.. [Dumas_Villard.2002] `Computing the rank of large sparse matrices over finite fields
-    <http://www-lmc.imag.fr/lmc-mosaic/Jean-Guillaume.Dumas/Publications/goliath.ps.gz>`_
-    Jean-Guillaume Dumas et Gilles Villard,
-    Computer Algebra in Scientific Computing, 2002
-
-.. [Massey.1969] `Shift-register synthesis and BCH Decoding
-    <http://nicolas.thiery.name/Enseignement/Agregation/Textes/Massey.1969.pdf>`_
-    James L. Massey, IEEE transactions on information theory, 1969
 

@@ -277,13 +277,15 @@ Mini rappel d'algèbre affine
 Première résolution d'un programe linéaire
 ------------------------------------------
 
+.. TODO:: Switch to ....: as soon as using new enough Sage version
+
 Considérons le système suivant::
 
     sage: x1,x2,x3 = var('x1,x2,x3')
     sage: Chvatal13 = [[2*x1 + 3*x2 +   x3 <=  5,
-    ....:               4*x1 +   x2 + 2*x3 <= 11,
-    ....:               3*x1 + 4*x2 + 2*x3 <=  8],
-    ....:               5*x1 + 4*x2 + 3*x3]
+    ...                 4*x1 +   x2 + 2*x3 <= 11,
+    ...                 3*x1 + 4*x2 + 2*x3 <=  8],
+    ...                 5*x1 + 4*x2 + 3*x3]
 
 .. TOPIC:: Questions
 
@@ -2343,7 +2345,7 @@ Quelques références
 
 .. [LPFAQ] `Linear Programming FAQ <http://rutcor.rutgers.edu/~mnk/lp-faq.html>`_
 
-.. [Wikipedia_LP] `Linear Programming <http://en.wikipedia.org/wiki/Linear_programming>`_
+.. [Wikipedia] `Linear Programming <http://en.wikipedia.org/wiki/Linear_programming>`_
 
 .. [CMS_LP] Le chapitre Programmation Linéaire de `Calcul Mathématique avec Sage <http://sagebook.gforge.inria.fr/>`_
       (version anglaise: Sage's :ref:`Mixed Integer Linear Programming thematic tutorial <linear_programming>`)
