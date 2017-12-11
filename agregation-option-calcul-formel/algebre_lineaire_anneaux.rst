@@ -23,8 +23,9 @@ procéder comme sur un corps?
 
     #. Donner des exemples de `\ZZ`-modules (ensemble satisfaisant les
        même axiomes qu'un espace vectoriel, où `\ZZ` joue le rôle du
-       corps de base); dans chacun des cas, essayer de déterminer une
-       base.
+       corps de base)
+
+    #. Dans chacun des cas, essayer de déterminer une base.
 
     .. TODO:: Déplacer ici la résolution d'une équation et la mise
               sous forme échelon?
@@ -57,8 +58,7 @@ Matrices à deux lignes
 
     #.  Comment mettre `M` sous forme échelon? 
         *Indication*: on veut que les lignes de la forme échelon
-        engendrent le même sous-module `F` de `E` engendré par les
-        deux lignes de `M`.
+        engendrent le même sous-module `F` de `E` que celles de `M`.
 
     #.  Interprétation en terme de multiplication par une matrice?
 
@@ -75,14 +75,14 @@ Matrices à deux lignes
         [10]
 
     Dans ce cas, le sous-module engendré par les deux lignes est juste
-    un *idéal* de `\ZZ`, nommément `14\ZZ + 10\ZZ = 2\ZZ`::
+    un *idéal* de `\ZZ`, en l'occurrence `14\ZZ + 10\ZZ = 2\ZZ`::
 
         sage: a = 14; b = 10
         sage: gcd(a,b)
         2
 
     On veut donc renvoyer la forme échelon
-    `\begin{matrix}2\\0\end{matrix}`, et en obtenir les coefficients
+    `\begin{pmatrix}2\\0\end{pmatrix}`, et en obtenir les coefficients
     par combinaisons linéaires de `a` et de `b`. Calculons les
     coefficients de Bezout::
 
@@ -92,14 +92,15 @@ Matrices à deux lignes
 
     On a alors::
 
-        sage: a*u+b*v
+        sage: a*u + b*v
         2
         sage: a*(-b/r) + b*(a/r)
         0
 
     Posons::
 
-        sage: T = matrix([[u,v], [-b/r,a/r]]); T
+        sage: T = matrix([[    u,  v ],
+        ....:             [ -b/r,a/r ]]); T
 
     On peut mettre `M` sous forme échelon en la multipliant par `T`::
 
@@ -107,22 +108,24 @@ Matrices à deux lignes
         [ 2  4 -1]
         [ 0  3  1]
 
-    La matrice `T` étant de déterminant `1`::
+    La matrice `T` est de déterminant `1`::
 
         sage: det(T)
         1
 
-    cette opération est inversible: les lignes de la forme échelon de
+    Donc cette opération est inversible: les lignes de la forme échelon de
     `M` engendrent bien le même sous-module que les lignes de `M`.
 
 
     Cette forme échelon n'est pas encore réduite; on peut la réduire
-    avec une étape de plus, et on obtient:
+    avec une étape de plus, et on obtient::
 
-            sage: M.echelon_form()
-            [ 2  1 -2]
-            [ 0  3  1]
+        sage: M.echelon_form()
+        [ 2  1 -2]
+        [ 0  3  1]
 
+
+Généralisons cela.
 
 .. TOPIC:: Remarque clef
 
@@ -144,9 +147,13 @@ Matrices à deux lignes
     matrice `T` inversible telle que `TM` est sous forme échelon.
 
     Comme pour un corps, il existe une forme réduite canonique, dite
-    *forme de Hermite* (les pivots y sont entiers positifs, et les
+    *forme de Hermite*. Les pivots y sont entiers positifs, et les
     coefficients dans la colonne d'un pivot `r` sont réduits modulo
     `r`.
+
+    Exemples::
+
+        sage: random_matrix(ZZ, 6, 8).echelon_form()
 
 .. TOPIC:: Moralité
 
@@ -170,7 +177,7 @@ Application: sous-modules, images de morphismes
 
     Si `F` admet un système générateur fini, le mettre sous forme
     échelon. Alors `F=\ZZ v_1 \oplus \cdots \oplus \ZZ v_k`, où
-    `v_1,\vdots,v_k` sont les lignes de la forme échelon.
+    `v_1,\ldots,v_k` sont les lignes de la forme échelon.
 
     Mais sinon?
 
@@ -178,9 +185,11 @@ Application: sous-modules, images de morphismes
 
     #.  Donner un exemple de drapeau infini; c'est-à-dire une suite
         infinie `F_0\supsetneq F_1\supsetneq \cdots` de sous-modules
-        strictement emboités. *Conclusion*: contrairement aux espaces
-        vectoriels, deux sous-modules emboîtés de même dimension ne
-        sont pas forcément égaux.
+        strictement emboîtés.
+
+        *Conclusion*: contrairement aux espaces vectoriels, deux
+        sous-modules emboîtés de même dimension ne sont pas forcément
+        égaux.
 
     #.  Existe-t'il des drapeaux croissants infinis?
 
@@ -244,7 +253,7 @@ Application: Torsion et quotients
     #.  Décrire le quotient de `\ZZ^4` par le sous-module engendré par
         les lignes de::
 
-            sage: M = sage: diagonal_matrix([2,6,12,0])
+            sage: M = diagonal_matrix([2,6,12,0])
             [ 2  0  0  0]
             [ 0  6  0  0]
             [ 0  0 12  0]
@@ -256,7 +265,7 @@ Classification des groupes abéliens de type fini et forme normale de Smith
 Groupes abéliens et classes d'équivalences doubles de matrices 
 --------------------------------------------------------------
 
-On s'intéresse aux groupes (additifs) `G` abélien engendrés par un
+On s'intéresse aux groupes (additifs) abéliens engendrés par un
 nombre fini d'éléments.
 
 .. TOPIC:: Exercice
@@ -264,19 +273,21 @@ nombre fini d'éléments.
     #.  Donner des exemples de tels groupes
 
     #.  Que peut-on dire sur l'ensemble `F` des relations entre les
-        générateurs `g_1,\cdots,g_n` d'un group abélien `G`?
+        générateurs `g_1,\ldots,g_n` d'un group abélien `G`?
 
 .. TODO:: donner un exemple avec trois générateurs `a`, `b`, `c`, avec `n=3`.
 
 .. TOPIC:: Correction
 
-    #.  `\ZZ`, `\ZZ/k\ZZ`, produits directs de ceux-ci
+    #.  `\ZZ`, `\ZZ/k\ZZ`, produits directs de ceux-ci.
+        Y'en a t'il d'autres? Par exemple:
 
-        Y'en a t'il d'autres?
+        .. MATH::
+
+            H=\langle a,b,c  \st 14a+19b-10c=0, 10a+14b-7\rangle ?
 
     #.  L'ensemble `F` des relations entre les générateurs
         `g_1,\cdots,g_n` est un sous-module (libre!) de `\ZZ^n`.
-
         `G` est isomorphe à `\ZZ^n / F`.
 
 
@@ -286,8 +297,43 @@ nombre fini d'éléments.
     d'un sous `\ZZ`-module de `\ZZ^m`. Soient `S` et `T` matrices
     inversibles de dimensions appropriées.
 
-    Montrer que le sous-module correspondant à `S M T` est isomorphe à
-    `F`.
+    #. Montrer que le sous-module correspondant à `S M T` est isomorphe à `F`.
+
+    #. Exemple: prendre le sous-module engendré par notre matrice `M`
+       préférée::
+
+            sage: M = matrix([[14,19,-10], [10,14,-7]]); M
+            [ 14  19 -10]
+            [ 10  14  -7]
+
+       À quel sous-module très simple est-il isomorphe?
+
+    #. Qu'en déduire sur notre groupe `H` ci-dessus?
+
+.. TOPIC:: Correction
+
+    #.  Multiplier par `S` change les générateurs, sans changer le
+        sous-module. Multiplier par `T` revient à changer la base dans
+        lequel on exprime les générateurs du sous-module.
+
+    #.  Faisons une forme échelon sur les lignes puis sur les colonnes::
+
+         sage: N = M.echelon_form(); N
+         [ 2  1 -2]
+         [ 0  3  1]
+         sage: N.transpose().echelon_form().transpose()
+         [1 0 0]
+         [0 1 0]
+
+        Donc `M` est isomorphe au sous-module engendré par `e_1` et `e_2`.
+
+    #.  Le groupe `H` est donc isomorphe à
+
+        .. MATH::
+
+            H=\langle a',b',c'  \st a'=0, b'=0 \rangle.
+
+        et donc à `\ZZ`.
 
 .. TOPIC:: Théorème
 
@@ -298,7 +344,7 @@ nombre fini d'éléments.
 
    - sous-modules de rang `\leq n` de `\ZZ^m` à isomorphisme près
 
-   - quotients de `\ZZ^m`  par un sous-module de rang `\leq n` à
+   - quotients de `\ZZ^m` par un sous-module de rang `\leq n` à
      isomorphisme près
 
    - groupes abéliens engendrés par `n` éléments à isomorphisme près
@@ -324,8 +370,6 @@ Forme normale de Smith
         ....:             [-11584,-30896,-145972,-447728, 1297368,-2879104, 5067330],
         ....:             [  7516, 20072, 94768,  290684, -842328, 1869292,-3289908],
         ....:             [-19264,-51392,-242776,-744644, 2157744,-4788448, 8427786]]); A
-
-
         sage: _.echelon_form()
         [    2    16     2     4  8436  1598 11904]
         [    0    24     0     0  4296   888  6108]
@@ -354,7 +398,7 @@ Forme normale de Smith
     Note: statistiquement, la procédure termine en deux voire une
     étapes. Pour trouver l'exemple ci-dessus, on a essayé plein
     d'exemples aléatoires avec les fonctions du `fichier suivant
-    <algebre_lineaire_anneaux.py>`_.
+    <media/algebre_lineaire_anneaux.py>`_.
 
 .. TOPIC:: Forme normale de Smith
 
@@ -382,7 +426,7 @@ Forme normale de Smith
 
    où les `d_1,\dots,d_k` se divisent successivement.
 
-Pour les détails et aller plus loin, voir https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_des_facteurs_invariants
+Pour les détails et aller plus loin, voir https://fr.wikipedia.org/wiki/Théorème_des_facteurs_invariants
 
 Généralisations
 ---------------
@@ -404,9 +448,9 @@ Exemple: dimension 1
 
 Un `A`-sous-module de `A^1` est juste un idéal de `A`.
 
-Exemple: `\langle x^2y, xy^2\rangle`
+Exemple: `\langle x^3y, x^2y^2, xy^3\rangle`
 
-Calcul avec les idéaux et sous-modules: bases de Gröbner
+Calcul avec les idéaux et sous-modules: `bases de Gröbner <https://fr.wikipedia.org/wiki/Base_de_Gröbner>`_
 
 Combinatoire sous-jacente: idéaux monomiaux!
 
@@ -504,7 +548,7 @@ calculer cette forme normale.
 Voir par exemple [Storjohan.2004]_ pour une présentation d'ensemble.
 
 Modulo quelques difficultés supplémentaires (gestion de la torsion,
-etc.), La plupart des algorithmes de l'algèbre linéaire sur les corps
+etc.), la plupart des algorithmes de l'algèbre linéaire sur les corps
 peuvent être adaptés aux anneaux principaux sans changement majeur de
 complexité, la forme normale de Hermite remplaçant la forme échelon.
 
