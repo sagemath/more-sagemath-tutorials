@@ -555,7 +555,7 @@ Comme d'habitude, choisir à la carte parmi les exercices suivants.
 .. TOPIC:: Exercice: codes cycliques
 
     On oubliera ici que les codes cycliques sont naturellement
-    représentés par des idéaux dans `\ZZ_2[X] / X^n-1`, et on ne fera
+    représentés par des idéaux dans `A[X] / X^n-1`, et on ne fera
     que de l'algèbre linéaire.
 
     Soit `E` un espace vectoriel sur un corps fini; typiquement::
