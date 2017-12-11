@@ -249,13 +249,13 @@ To handle lots variables, one may proceed as follows::
         ....:     f2 = e([k]).expand(n-1,l[:n-1])+xn*(e([k-1]).expand(n-1,l[:n-1]))
         ....:     g2 = h([k]).expand(n-1,l[:n-1])+xn*(h([k-1]).expand(n,l[:n]))
         ....:     if f1 == f2:
-        ....:         print 'n =', n,'ok for e'
+        ....:         print('n =', n,'ok for e')
         ....:     else :
-        ....:         print 'n =', n,'no for e'
+        ....:         print('n =', n,'no for e')
         ....:     if g1 == g2 :
-        ....:         print 'n =', n,'ok for h'
+        ....:         print('n =', n,'ok for h')
         ....:     else :
-        ....:         print 'n =', n,'no for h'
+        ....:         print('n =', n,'no for h')
         n = 2 ok for e
         n = 2 ok for h
         n = 3 ok for e
@@ -278,7 +278,7 @@ Conversely, a "concrete" symmetric polynomial, i.e.: explicitly expressed in the
 ::
 
     sage: pol1 = (p([2])+e([2,1])).expand(2)
-    sage: print pol1
+    sage: print(pol1)
     x0^2*x1 + x0*x1^2 + x0^2 + x1^2
 
 
@@ -318,9 +318,9 @@ In the preceeding example, the base ring of polynomials is the same as the base 
 
 ::
 
-    sage: print s.base_ring()
-    sage: print pol2.base_ring()
+    sage: print(s.base_ring())
     Rational Field
+    sage: print(pol2.base_ring())
     Rational Field
 
 
@@ -330,13 +330,18 @@ Thus a concrete symmetric polynomial over :math:`\mathbb{Q}(q,t)` may be transfo
 ::
 
     sage: Symqt.inject_shorthands()
+    Defining e as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the elementary basis
+    Defining f as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the forgotten basis
+    Defining h as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the homogeneous basis
+    Defining m as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the monomial basis
+    Defining p as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the powersum basis
+    Defining s as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the Schur basis
     sage: R = PolynomialRing(QQ['q','t'],'y',3)
     sage: R.inject_variables()
+    Defining y0, y1, y2
     sage: pol2 = 1+(y0*y1+y0*y2+y1*y2)*(q+t)+(y0*y1*y2)*(q*t)
     sage: s.from_polynomial(pol2)
-    Defining y0, y1, y2
-
-    s + (q+t)*s11 + q*t*s111)
+    s + (q+t)*s11 + q*t*s111
 
 
 
@@ -361,9 +366,9 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 
 ::
 
-    sage: for mu in Partitions(5) :
-    sage:     show(s(mu))
-    sage:     show(e(s(mu)))
+    sage: for mu in Partitions(5):
+    ....:     print(s(mu))
+    ....:     print(e(s(mu)))
     s5
     e11111 - 4*e2111 + 3*e221 + 3*e311 - 2*e32 - 2*e41 + e5
     s41
@@ -409,8 +414,8 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 ::
 
     sage: for n in range (1,5) :
-    sage:     show(p(h([n])))
-    sage:     show(sum(p(mu)/zee(mu) for mu in Partitions(n)))
+    ....:     print(p(h([n])))
+    ....:     print(sum(p(mu)/zee(mu) for mu in Partitions(n)))
     p1
     p1
     1/2*p11 + 1/2*p2
@@ -495,13 +500,13 @@ Finally, the function ``support()`` returns the list of partitions that appear i
 
 ::
 
-    sage: print f.support()
+    sage: print(f.support())
     [5221]
 
 
 ::
 
-    sage: print sorted(h(f).support())
+    sage: print(sorted(h(f).support()))
     [5221, 5311, 532, 541, 6211, 631, 64, 7111, 721, 811, 82]
 
 
@@ -529,6 +534,12 @@ Here are some examples involving the "combinatorial" Macdonald symmetric functio
 
     sage: Symqt = SymmetricFunctions(FractionField(QQ['q','t']))
     sage: Symqt.inject_shorthands()
+    Defining e as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the elementary basis
+    Defining f as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the forgotten basis
+    Defining h as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the homogeneous basis
+    Defining m as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the monomial basis
+    Defining p as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the powersum basis
+    Defining s as shorthand for Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the Schur basis
     sage: H = Symqt.macdonald().Ht()
     sage: H.print_options(prefix="H")
 
@@ -536,7 +547,7 @@ Here are some examples involving the "combinatorial" Macdonald symmetric functio
 ::
 
     sage: s(H([2,1]))
-    q*t*s111 + (q+t)*s21 + s3)
+    q*t*s111 + (q+t)*s21 + s3
 
 
 ::
@@ -593,7 +604,7 @@ It has been shown by Haiman that :math:`\nabla(e_n)` is the Frobenius transform 
 ::
 
     sage: s(e[3].nabla())
-    (q^3+q^2*t+q*t^2+t^3+q*t)*s111 + (q^2+q*t+t^2+q+t)*s21 + s3)
+    (q^3+q^2*t+q*t^2+t^3+q*t)*s111 + (q^2+q*t+t^2+q+t)*s21 + s3
 
 
 The global dimension of this module is :math:`(n+1)^{n-1}`, and the dimension of its alternating component (see exercise below) is the Catalan number :math:`C_n=\frac{1}{n+1}\binom{2n}{n}`. And there are many other interesting properties of the bigraded version.
@@ -616,9 +627,6 @@ There are also interesting conjectures on the effect of :math:`\nabla` on Schur 
 
     sage: (-s([2,2,1])).nabla()
     (q^6*t^3+q^5*t^4+q^4*t^5+q^3*t^6)*s11111 + (q^5*t^2+2*q^4*t^3+2*q^3*t^4+q^2*t^5)*s221 + (q^6*t^2+2*q^5*t^3+2*q^4*t^4+2*q^3*t^5+q^2*t^6+q^4*t^3+q^3*t^4)*s2111 + (q^4*t^2+q^3*t^3+q^2*t^4)*s32 + (q^5*t^2+q^4*t^3+q^3*t^4+q^2*t^5+q^4*t^2+2*q^3*t^3+q^2*t^4)*s311 + (q^3*t^2+q^2*t^3)*s41
-
-
-
 ***Exercise:***
 
  We have the following relation between :math:`\nabla (e_n)` and the q,t-Catalan numbers :
@@ -640,7 +648,7 @@ There are also interesting conjectures on the effect of :math:`\nabla` on Schur 
 ::
 
     sage: for n in range (1,6) :
-    sage:     print e([n]).nabla().scalar(e([n])) == qt_catalan_number(n)
+    ....:     print(e([n]).nabla().scalar(e([n])) == qt_catalan_number(n))
     True
     True
     True
@@ -672,9 +680,9 @@ One may specify a list of SAGE-variables to be treated as **variables** in a ple
 ::
 
     sage: g = p([1]) + t*s([2,1])
-    sage: show(p([2]).plethysm(g,include=[t]))
-    sage: show(p([2]).plethysm(g,exclude=[t]))
+    sage: print(p([2]).plethysm(g,include=[t]))
     p2 + 1/3*t^2*p222 + (-1/3*t^2)*p6
+    sage: print(p([2]).plethysm(g,exclude=[t]))
     p2 + 1/3*t*p222 + (-1/3*t)*p6
 
 
@@ -717,9 +725,7 @@ One should compare this with
 ::
 
     sage: s[4](X/(1-q)).map_coefficients(factor)
-    -((-1)*(q-1)^-4*(q+1)^-2*q^6*(q^2+1)^-1*(q^2+q+1)^-1)*s1111 - ((-1)*(q-1)^-4*(q+1)^-2*q^2*(q^2+q+1)^-1)*s22 - ((-1)*(q-1)^-4*(q+1)^-2*q^3*(q^2+1)^-1)*s211 - ((-1)*(q-1)^-4*(q+1)^-2*q*(q^2+1)^-1)*s31 - ((-1)*(q-1)^-4*(q+1)^-2*(q^2+1)^-1*(q^2+q+1)^-1)*s4
-
-
+    ((q-1)^-4*(q+1)^-2*q^6*(q^2+1)^-1*(q^2+q+1)^-1)*s1111 + ((q-1)^-4*(q+1)^-2*q^2*(q^2+q+1)^-1)*s22 + ((q-1)^-4*(q+1)^-2*q^3*(q^2+1)^-1)*s211 + ((q-1)^-4*(q+1)^-2*q*(q^2+1)^-1)*s31 + ((q-1)^-4*(q+1)^-2*(q^2+1)^-1*(q^2+q+1)^-1)*s4
 ::
 
     sage: s[3](s[4])-s[2](s[6])
@@ -743,9 +749,9 @@ When computing with symmetric functions, one often wants to check a given symmet
 
     sage: f = s([4,1])+s([3,2])
     sage: print(f.is_schur_positive())
+    True
     sage: g = s([4,1])-s([3,2])
     sage: print(g.is_schur_positive())
-    True
     False
 
 
@@ -754,17 +760,17 @@ For example, we can verify the well-known Schur positivity of product of Schur f
 ::
 
     sage: for mu in Partitions(2) :
-    sage:     for nu in Partitions(3) :
-    sage:         if (s(mu)*s(nu)).is_schur_positive() :
-    sage:             show(s(mu),s(nu),' is Schur positive.')
-    sage:         else :
-    sage:             show(s(mu),s(nu),'is not Schur positive.')
-    (s2, s3, ' is Schur positive.')
-    (s2, s21, ' is Schur positive.')
-    (s2, s111, ' is Schur positive.')
-    (s11, s3, ' is Schur positive.')
-    (s11, s21, ' is Schur positive.')
-    (s11, s111, ' is Schur positive.')
+    ....:     for nu in Partitions(3) :
+    ....:         if (s(mu)*s(nu)).is_schur_positive() :
+    ....:             print('The product of ', s(mu),' and ',s(nu),' is Schur positive.')
+    ....:         else :
+    ....:             print('The product of ', s(mu),' and ',s(nu),'is not Schur positive.')
+    The product of s2 and s3 is Schur positive.
+    The product of s2 and s21 is Schur positive.
+    The product of s2 and s111 is Schur positive.
+    The product of s11 and s3 is Schur positive.
+    The product of s11 and s21 is Schur positive.
+    The product of s11 and s111 is Schur positive.
 
 
 
@@ -776,7 +782,7 @@ For example, we can verify the well-known Schur positivity of product of Schur f
 
     sage: e = Symqt.e()
     sage: for n in range(1,7) :
-    sage:     print e([n]).nabla().is_schur_positive()
+    ....:     print(e([n]).nabla().is_schur_positive())
     True
     True
     True
@@ -806,7 +812,7 @@ hence defining
 ::
 
     sage: def K(mu,nu):
-    sage:     return s(mu).scalar(h(nu))
+    ....:     return s(mu).scalar(h(nu))
 
 
 
@@ -823,16 +829,15 @@ Now, we set
 ::
 
     sage: def k(mu):
-    sage:     n=add(j for j in mu)
-    sage:     return add(K(mu,nu) for nu in Partitions(n))
+    ....:     n=add(j for j in mu)
+    ....:     return add(K(mu,nu) for nu in Partitions(n))
 
 
 so that the above probability is calculated by the function
 
 ::
 
-    sage: def prob_Schur_positive(n):
-    sage:     return 1/mul(k(mu) for mu in Partitions(n))
+    sage: def prob_Schur_positive(n): return 1/mul(k(mu) for mu in Partitions(n))
 
 
 One can then illustrate how very rare Schur-positivity is, as a function of the degree:
