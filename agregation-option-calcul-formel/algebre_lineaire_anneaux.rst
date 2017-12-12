@@ -659,7 +659,7 @@ TP
     #.  En déduire une fonction qui calcule le polynôme
         caractéristique d'une matrice.
 
-.. TOPIC:: exercice: forme de Hermite et de Smith
+.. TOPIC:: Exercice: forme de Hermite et de Smith
 
     #.  Implanter l'algorithme de calcul de la forme de Hermite d'une matrice
 
