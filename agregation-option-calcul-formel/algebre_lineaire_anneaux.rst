@@ -5,19 +5,28 @@
 Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Algèbre linéaire sur un anneau
 ================================================================================================
 
-Ce document dans d'autres formats:
-`feuille de travail <algebre_lineaire_anneaux.ipynb>`_,
-`source RST <algebre_lineaire_anneaux.rst>`_.
-
 Références:
 - `Wikipedia: Théorème des facteurs invariants <https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_des_facteurs_invariants>`_
+
+`\def\suchthat{\ \mid\ }`
 
 Algèbre linéaire sur `\ZZ`?
 ===========================
 
-On souhaite maintenant faire de l'algèbre linéaire sur l'anneau
-`\ZZ`. On va donc travailler avec des *`\ZZ`-modules*. Peut-on
-procéder comme sur un corps?
+.. TODO:: Exercices de motivation
+
+    #.  Décrire `<u,v>` pour `u,v=...\in\Z^3`
+
+    #.  Résoudre le système d'équations ...
+
+    #.  Décrire le groupe abélien de présentation ...
+
+    Exprimer les corrections en terme de morphismes
+
+
+On souhaite faire de l'algèbre linéaire sur l'anneau `\ZZ`. On va donc
+travailler avec des *`\ZZ`-modules*, ou de manière équivalente des
+groupes abéliens. Peut-on procéder comme sur un corps?
 
 .. TOPIC:: Exercices
 
@@ -30,7 +39,7 @@ procéder comme sur un corps?
     .. TODO:: Déplacer ici la résolution d'une équation et la mise
               sous forme échelon?
 
-.. TOPIC:: Correction
+.. TOPIC:: Solution
 
     - `\ZZ`, `2\ZZ`, `p\ZZ`
     - plus généralement tout idéal de `\ZZ`
@@ -52,6 +61,8 @@ Matrices à deux lignes
 
     Considérons la matrice suivante::
 
+        sage: %display latex
+
         sage: M = matrix([[14,19,-10], [10,14,-7]]); M
         [ 14  19 -10]
         [ 10  14  -7]
@@ -66,7 +77,7 @@ Matrices à deux lignes
 
     #.  Décrire l'ensemble quotient `E/F`.
 
-.. TOPIC:: Correction
+.. TOPIC:: Solution
 
     Oublions les deux dernières colonnes pour le moment::
 
@@ -101,6 +112,8 @@ Matrices à deux lignes
 
         sage: T = matrix([[    u,  v ],
         ....:             [ -b/r,a/r ]]); T
+        [-2  3]
+        [-5  7]
 
     On peut mettre `M` sous forme échelon en la multipliant par `T`::
 
@@ -153,7 +166,14 @@ Généralisons cela.
 
     Exemples::
 
-        sage: random_matrix(ZZ, 6, 8).echelon_form()
+        sage: random_matrix(ZZ, 6, 8).echelon_form()          # random
+        [       1        0        0        1        0  2140209   401777 10460194]
+        [       0        1        0        1        0   871600   163624  4259915]
+        [       0        0        1        0        0  1534726   288111  7500917]
+        [       0        0        0        2        0  2166811   406771 10590213]
+        [       0        0        0        0        1   663131   124488  3241027]
+        [       0        0        0        0        0  3155946   592459 15424568]
+
 
 .. TOPIC:: Moralité
 
@@ -183,19 +203,36 @@ Application: sous-modules, images de morphismes
 
 .. TOPIC:: Exercice
 
-    #.  Donner un exemple de drapeau infini; c'est-à-dire une suite
+    #.  Donner un exemple de drapeau infini décroissant; c'est-à-dire une suite
         infinie `F_0\supsetneq F_1\supsetneq \cdots` de sous-modules
         strictement emboîtés.
 
-        *Conclusion*: contrairement aux espaces vectoriels, deux
-        sous-modules emboîtés de même dimension ne sont pas forcément
-        égaux.
+    #.  Existe-t'il des drapeaux croissants infinis dans `\ZZ^n`
 
-    #.  Existe-t'il des drapeaux croissants infinis?
+.. TOPIC:: Solution
 
-.. TOPIC:: Exemple
+    Un drapeau infini décroissant:
 
-   ::
+    .. MATH::
+
+        \ZZ \supsetneq 2\ZZ \supsetneq 4\ZZ \supsetneq 8\ZZ \supsetneq\cdots
+
+    *Remarque*: contrairement aux espaces vectoriels, deux
+    sous-modules emboîtés de même dimension ne sont pas forcément
+    égaux; tous les modules du drapeau ci-dessus sont de même
+    dimension!
+
+    Pour un drapeau croissant infini, il serait tentant de prendre:
+
+    .. MATH::
+
+       \ZZ \subsetneq 2\ZZ \subsetneq 4\ZZ \subsetneq 8\ZZ \subsetneq\cdots
+
+    Mais il ne vivrait pas dans `\ZZ^n`.
+
+
+    Faisons croître un sous-module de `\ZZ^6` en lui rajoutant
+    progressivement des vecteurs aléatoires::
 
         sage: V = ZZ^6
         sage: I = V.zero_submodule(); I
@@ -208,11 +245,17 @@ Application: sous-modules, images de morphismes
         Echelon basis matrix:
         [ 0 19  0  0 24  0]
 
+    À chaque étape, soit la dimension augmente, soit un des pivots
+    diminue strictement.
+
+    Il s'ensuit qu'une suite croissante infinie de sous-module se
+    stabilise forcément.
+
 
 Application: résolution de systèmes d'équations, noyaux de morphismes
 ---------------------------------------------------------------------
 
-.. TOPIC:: Exercice: Une équation
+.. TOPIC:: Exercice: Une équation affine
 
     Déterminer l'ensemble des solutions entières de chacune des
     équations suivantes:
@@ -220,6 +263,8 @@ Application: résolution de systèmes d'équations, noyaux de morphismes
     #.  `6x+4y+10z=15`
 
     #.  `6x+4y+10z=18`
+
+.. TODO:: Solution
 
 .. TOPIC:: Exercice: noyau
 
@@ -229,11 +274,17 @@ Application: résolution de systèmes d'équations, noyaux de morphismes
     #. Soit `M` une matrice quelconque de dimension `n\times
        m`. Décrire son noyau à gauche.
 
-.. TOPIC:: Correction
+.. TOPIC:: Solution
 
     Soit `T` inversible telle que `TM` est sous forme échelon. Soit
-    `k` son rang. Alors les `n-k` dernières colonnes de `T` forment
+    `k` son rang. Alors les `n-k` dernières lignes de `T` forment
     une base de `K`.
+
+.. TODO::
+
+    Considérer les lignes de `T` comme une base de l'espace. `TM` est
+    alors la matrice de `M` dans cette base. On est ramené au cas
+    précédent.
 
 .. TOPIC:: Corollaire
 
@@ -241,6 +292,13 @@ Application: résolution de systèmes d'équations, noyaux de morphismes
 
     L'ensemble des solutions entières d'un système d'équations à
     coefficients entiers est un module libre.
+
+.. TOPIC:: Note
+
+    Plus généralement, le noyau d'un `\ZZ`-morphisme d'un `\ZZ`-module
+    libre dans un `\ZZ`-module quelconque est un sous-module d'un
+    module libre, donc libre. Le corollaire précédent est surtout
+    intéressant algorithmiquement.
 
 Application: Torsion et quotients
 ---------------------------------
@@ -259,6 +317,8 @@ Application: Torsion et quotients
             [ 0  0 12  0]
             [ 0  0  0  0]
 
+.. TODO:: Solution
+
 Classification des groupes abéliens de type fini et forme normale de Smith
 ==========================================================================
 
@@ -273,22 +333,22 @@ nombre fini d'éléments.
     #.  Donner des exemples de tels groupes
 
     #.  Que peut-on dire sur l'ensemble `F` des relations entre les
-        générateurs `g_1,\ldots,g_n` d'un group abélien `G`?
+        générateurs `g_1,\ldots,g_n` d'un groupe abélien `G`?
 
-.. TODO:: donner un exemple avec trois générateurs `a`, `b`, `c`, avec `n=3`.
+.. TOPIC:: Solution
 
-.. TOPIC:: Correction
+    `\ZZ`, `\ZZ/k\ZZ`, produits directs de ceux-ci.
 
-    #.  `\ZZ`, `\ZZ/k\ZZ`, produits directs de ceux-ci.
-        Y'en a t'il d'autres? Par exemple:
+    Y'en a t'il d'autres? L'exemple suivant est-il de la forme
+    ci-dessus?
 
-        .. MATH::
+    .. MATH::
 
-            H=\langle a,b,c  \st 14a+19b-10c=0, 10a+14b-7\rangle ?
+         H=\langle a,b,c  \suchthat 14a+19b-10c=0, 10a+14b-7\rangle ?
 
-    #.  L'ensemble `F` des relations entre les générateurs
-        `g_1,\cdots,g_n` est un sous-module (libre!) de `\ZZ^n`.
-        `G` est isomorphe à `\ZZ^n / F`.
+    L'ensemble `F` des relations entre les générateurs
+    `g_1,\cdots,g_n` est un sous-module (libre!) de `\ZZ^n`. `G` est
+    isomorphe à `\ZZ^n / F`.
 
 
 .. TOPIC:: Exercice
@@ -300,40 +360,36 @@ nombre fini d'éléments.
     #. Montrer que le sous-module correspondant à `S M T` est isomorphe à `F`.
 
     #. Exemple: prendre le sous-module engendré par notre matrice `M`
-       préférée::
+       préférée; à quel sous-module très simple est-il isomorphe?::
 
             sage: M = matrix([[14,19,-10], [10,14,-7]]); M
             [ 14  19 -10]
             [ 10  14  -7]
 
-       À quel sous-module très simple est-il isomorphe?
-
     #. Qu'en déduire sur notre groupe `H` ci-dessus?
 
-.. TOPIC:: Correction
+.. TOPIC:: Solution
 
-    #.  Multiplier par `S` change les générateurs, sans changer le
-        sous-module. Multiplier par `T` revient à changer la base dans
-        lequel on exprime les générateurs du sous-module.
+    Multiplier par `S` change les générateurs, sans changer le
+    sous-module. Multiplier par `T` revient à changer la base dans
+    lequel on exprime les générateurs du sous-module.
 
-    #.  Faisons une forme échelon sur les lignes puis sur les colonnes::
+    Faisons une forme échelon sur les lignes puis sur les colonnes::
 
-         sage: N = M.echelon_form(); N
-         [ 2  1 -2]
-         [ 0  3  1]
-         sage: N.transpose().echelon_form().transpose()
-         [1 0 0]
-         [0 1 0]
+        sage: N = M.echelon_form(); N
+        [ 2  1 -2]
+        [ 0  3  1]
+        sage: N.transpose().echelon_form().transpose()
+        [1 0 0]
+        [0 1 0]
 
-        Donc `M` est isomorphe au sous-module engendré par `e_1` et `e_2`.
+    Donc `M` est isomorphe au sous-module engendré par `e_1` et `e_2`.
 
-    #.  Le groupe `H` est donc isomorphe à
+    Il s'ensuit que le groupe `H` est isomorphe à
 
-        .. MATH::
+    .. MATH::
 
-            H=\langle a',b',c'  \st a'=0, b'=0 \rangle.
-
-        et donc à `\ZZ`.
+        H=\langle a',b',c'  \suchthat a'=0, b'=0 \rangle \approx \ZZ\,.
 
 .. TOPIC:: Théorème
 
@@ -369,7 +425,8 @@ Forme normale de Smith
         ....:             [-18014,-47944,-226778,-695548, 2015364,-4472474, 7872162],
         ....:             [-11584,-30896,-145972,-447728, 1297368,-2879104, 5067330],
         ....:             [  7516, 20072, 94768,  290684, -842328, 1869292,-3289908],
-        ....:             [-19264,-51392,-242776,-744644, 2157744,-4788448, 8427786]]); A
+        ....:             [-19264,-51392,-242776,-744644, 2157744,-4788448, 8427786]]);
+        sage: A
         sage: _.echelon_form()
         [    2    16     2     4  8436  1598 11904]
         [    0    24     0     0  4296   888  6108]
@@ -426,7 +483,7 @@ Forme normale de Smith
 
    où les `d_1,\dots,d_k` se divisent successivement.
 
-Pour les détails et aller plus loin, voir https://fr.wikipedia.org/wiki/Théorème_des_facteurs_invariants
+Pour les détails et aller plus loin, voir https://fr.wikipedia.org/wiki/Théorème_des_facteurs_invariants .
 
 Généralisations
 ---------------
@@ -461,11 +518,9 @@ Algorithme de Gauß sans fraction
 
 Explorons un exemple::
 
-    sage: %display latex
-
     sage: A = QQ['a']
     sage: a = A.gen()
-    sage: M = matrix(A, random_matrix(ZZ, 3, 8)); M[0,0] = a; M
+    sage: M = matrix(A, random_matrix(ZZ, 3, 8)); M[0,0] = a; M      # random
     [ a  2  0  0  0  2  2  2]
     [ 1  2  0 -2  0  0  1  2]
     [ 1 -2  1 -2 -1 -2 -2 -2]
@@ -473,7 +528,10 @@ Explorons un exemple::
 
     sage: M[1] = M[0,0] * M[1] - M[1,0] * M[0]
     sage: M[2] = M[0,0] * M[2] - M[2,0] * M[0]
-    sage: M
+    sage: M                                                          # random
+    [        a        -2         2        -1        -1        -1       -38         0]
+    [        0  4*a + 24 -2*a - 24   -a + 12    a + 12 -2*a + 12   a + 456      -2*a]
+    [        0      11*a       6*a        -a         0     -12*a         0      -7*a]
 
     sage: M[2] = M[1,1] * M[2] - M[2,1] * M[1]
     sage: M
@@ -483,7 +541,10 @@ Algorithme de Gauß-Bareiss
 
 Revenons sur notre exemple::
 
-    sage: M
+    sage: M                                                          # random
+    [               a               -2                2               -1               -1               -1              -38                0]
+    [               0         4*a + 24        -2*a - 24          -a + 12           a + 12        -2*a + 12          a + 456             -2*a]
+    [               0                0   46*a^2 + 408*a    7*a^2 - 156*a  -11*a^2 - 132*a  -26*a^2 - 420*a -11*a^2 - 5016*a   -6*a^2 - 168*a]
 
 .. TODO:: la division ci-dessous est cassée avec Sage >= 6.10 si on utilise //
 
@@ -491,12 +552,19 @@ On constate que `a` divise la troisième ligne; on peut donc diviser de
 manière exacte par `a`::
 
     sage: M[2] = M[2] / a
-    sage: M
+    sage: M                                                          # random
+    [               a               -2                2               -1               -1               -1              -38                0]
+    [               0         4*a + 24        -2*a - 24          -a + 12           a + 12        -2*a + 12          a + 456             -2*a]
+    [               0                0   46*a^2 + 408*a    7*a^2 - 156*a  -11*a^2 - 132*a  -26*a^2 - 420*a -11*a^2 - 5016*a   -6*a^2 - 168*a]
 
 De plus, le coefficient ``M[3,3]`` est le déterminant de la matrice d'origine::
 
-    sage: N[:,:3]
-    sage: N[:,:3].det()
+    sage: N[:,:3]                                                    # random
+    [ a -2  2]
+    [12  4 -2]
+    [ 0 11  6]
+    sage: N[:,:3].det()                                              # random
+    46*a + 408
 
 Ce phénomène est général et peut être utilisé récursivement:
 
@@ -577,10 +645,9 @@ TP
         Gauß-Bareiss. Vérifier votre programme pour la matrice
         ci-dessus, puis sur une matrice aléatoire de grande taille.
 
-        Évaluer la complexité pratique en prenant des matrices
+    #.  Évaluer la complexité pratique en prenant des matrices
         aléatoire de taille `n=1,2,...`. Comparer avec ce que l'on
         obtient avec Gauß, et avec Gauß sur un corps fini.
-
         Qu'en pensez-vous?
 
     #.  En déduire une fonction qui calcule le déterminant d'une
@@ -596,7 +663,7 @@ TP
 
     #.  Implanter l'algorithme de calcul de la forme de Hermite d'une matrice
 
-    #.  Implanter l'algorithme de calcul de la forme de Hermite d'une matrice
+    #.  Implanter l'algorithme de calcul de la forme de Smith d'une matrice
 
     #.  Application: résolution d'un système
 
