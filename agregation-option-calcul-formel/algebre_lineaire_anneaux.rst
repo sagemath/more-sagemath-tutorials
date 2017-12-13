@@ -628,7 +628,7 @@ nouveaux outils comme les bases de Gröbner.
 TP
 ==
 
-.. TOPIC:: Exercice: algorithme de Gauß-Bareiss
+.. TOPIC:: Algorithme de Gauß-Bareiss
 
     Dans tout cet exercice, on pourra supposer que la matrice d'entrée
     est inversible, voire que ses `n` premiers mineurs sont non nuls
@@ -659,13 +659,44 @@ TP
     #.  En déduire une fonction qui calcule le polynôme
         caractéristique d'une matrice.
 
+.. TOPIC:: Noyau
+
+    Illustrer sur un exemple bien choisi le calcul du noyau d'une
+    matrice `M` à coefficients entiers (ou dans `\QQ[x]`!).
+
+.. TOPIC:: Groupes abéliens
+
+    Illustrer le théorème de classification des groupes abéliens de
+    type fini sur un exemple bien choisi de groupe abélien `H` défini
+    par `n` générateurs et relations.
+
+    On pourra:
+
+    #.  Réaliser les relations comme sous-module `R` de `F=\ZZ^n` donné
+        par sa base `B` sous forme échelon réduite.
+
+    #.  Réaliser le groupe comme quotient `F/R`; on pourra par exemple
+        implanter le calcul de la forme normale d'un élément du groupe
+        par réduction modulo la base `B`
+
+    #.  Calculer la forme de Smith pour obtenir les diviseurs du
+        groupe; en déduire sa structure.
+
+    #.  Tenter de construire explicitement le générateur correspondant
+        à chaque facteur dans `F/R`.
+
+    #.  Construire explicitement l'isomorphisme entre `H` et sa réalisation
+        comme quotient `F/R` en utilisant les matrices qui donnent la
+        forme de Smith.
+
+
 .. TOPIC:: Exercice: forme de Hermite et de Smith
 
     #.  Implanter l'algorithme de calcul de la forme de Hermite d'une matrice
 
     #.  Implanter l'algorithme de calcul de la forme de Smith d'une matrice
 
-    #.  Application: résolution d'un système
+    #.  Application à la résolution d'un système
 
     .. TODO:: Un exemple rigolo de système d'équations Diophantiennes
 
