@@ -5,9 +5,6 @@
 Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Algèbre linéaire sur un anneau
 ================================================================================================
 
-Références:
-- `Wikipedia: Théorème des facteurs invariants <https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_des_facteurs_invariants>`_
-
 `\def\suchthat{\ \mid\ }`
 `\def\ZZ{\bf Z}`
 `\def\QQ{\bf Q}`
@@ -485,7 +482,8 @@ Forme normale de Smith
 
    où les `d_1,\dots,d_k` se divisent successivement.
 
-Pour les détails et aller plus loin, voir https://fr.wikipedia.org/wiki/Théorème_des_facteurs_invariants .
+Pour les détails et aller plus loin, voir
+`Wikipedia: Théorème des facteurs invariants <https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_des_facteurs_invariants>`_.
 
 Généralisations
 ---------------
