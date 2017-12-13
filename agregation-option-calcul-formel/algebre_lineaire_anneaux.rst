@@ -534,7 +534,10 @@ Explorons un exemple::
     [        0      11*a       6*a        -a         0     -12*a         0      -7*a]
 
     sage: M[2] = M[1,1] * M[2] - M[2,1] * M[1]
-    sage: M
+    sage: M                                                          # random
+    [               a               -2                2               -1               -1               -1              -38                0]
+    [               0         4*a + 24        -2*a - 24          -a + 12           a + 12        -2*a + 12          a + 456             -2*a]
+    [               0                0   46*a^2 + 408*a    7*a^2 - 156*a  -11*a^2 - 132*a  -26*a^2 - 420*a -11*a^2 - 5016*a   -6*a^2 - 168*a]
 
 Algorithme de Gauß-Bareiss
 --------------------------
@@ -546,8 +549,6 @@ Revenons sur notre exemple::
     [               0         4*a + 24        -2*a - 24          -a + 12           a + 12        -2*a + 12          a + 456             -2*a]
     [               0                0   46*a^2 + 408*a    7*a^2 - 156*a  -11*a^2 - 132*a  -26*a^2 - 420*a -11*a^2 - 5016*a   -6*a^2 - 168*a]
 
-.. TODO:: la division ci-dessous est cassée avec Sage >= 6.10 si on utilise //
-
 On constate que `a` divise la troisième ligne; on peut donc diviser de
 manière exacte par `a`::
 
@@ -557,13 +558,17 @@ manière exacte par `a`::
     [               0         4*a + 24        -2*a - 24          -a + 12           a + 12        -2*a + 12          a + 456             -2*a]
     [               0                0   46*a^2 + 408*a    7*a^2 - 156*a  -11*a^2 - 132*a  -26*a^2 - 420*a -11*a^2 - 5016*a   -6*a^2 - 168*a]
 
-De plus, le coefficient ``M[3,3]`` est le déterminant de la matrice d'origine::
+.. TODO:: il serait plus naturel de faire M[2]//a, mais cela ne fonctionne plus Sage >= 6.10.
+
+De plus, le coefficient ``M[2,2]`` est le déterminant de la matrice d'origine::
 
     sage: N[:,:3]                                                    # random
     [ a -2  2]
     [12  4 -2]
     [ 0 11  6]
     sage: N[:,:3].det()                                              # random
+    46*a + 408
+    sage: M[2,2]                                                     # random
     46*a + 408
 
 Ce phénomène est général et peut être utilisé récursivement:
