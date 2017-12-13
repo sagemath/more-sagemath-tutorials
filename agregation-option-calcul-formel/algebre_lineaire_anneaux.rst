@@ -8,6 +8,7 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Algèbre li
 `\def\suchthat{\ \mid\ }`
 `\def\ZZ{\bf Z}`
 `\def\QQ{\bf Q}`
+`\def\RR{\bf R}`
 
 Algèbre linéaire sur `\ZZ`?
 ===========================
@@ -24,7 +25,7 @@ Algèbre linéaire sur `\ZZ`?
 
 
 On souhaite faire de l'algèbre linéaire sur l'anneau `\ZZ`. On va donc
-travailler avec des *`\ZZ`-modules*, ou de manière équivalente des
+travailler avec des `\ZZ`-*modules*, ou de manière équivalente des
 groupes abéliens. Peut-on procéder comme sur un corps?
 
 .. TOPIC:: Exercices
