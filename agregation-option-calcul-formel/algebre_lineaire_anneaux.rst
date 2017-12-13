@@ -9,13 +9,15 @@ Références:
 - `Wikipedia: Théorème des facteurs invariants <https://fr.wikipedia.org/wiki/Th%C3%A9or%C3%A8me_des_facteurs_invariants>`_
 
 `\def\suchthat{\ \mid\ }`
+`\def\ZZ{\bf Z}`
+`\def\QQ{\bf Q}`
 
 Algèbre linéaire sur `\ZZ`?
 ===========================
 
 .. TODO:: Exercices de motivation
 
-    #.  Décrire `<u,v>` pour `u,v=...\in\Z^3`
+    #.  Décrire `<u,v>` pour `u,v=...\in\ZZ^3`
 
     #.  Résoudre le système d'équations ...
 
