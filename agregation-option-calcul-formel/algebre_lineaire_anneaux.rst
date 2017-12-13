@@ -636,9 +636,16 @@ TP
 
 .. TOPIC:: Algorithme de Gauß-Bareiss
 
-    Dans tout cet exercice, on pourra supposer que la matrice d'entrée
-    est inversible, voire que ses `n` premiers mineurs sont non nuls
-    (pas de permutation des lignes nécessaire).
+    Dans tout cet exercice, on pourra supposer pour simplifier le code
+    que les mineurs calés en haut à gauche sont tous non nuls;
+    autrement dit, au moment de traiter la colonne `i`, le coefficient
+    `M_{i,i}` est non nul, ce qui évite d'avoir à permuter des lignes
+    ou gérer les colonnes caractéristiques.
+
+    De manière générale, pour produire des illustrations, ne pas
+    hésiter à faire des hypothèses simplificatrices pour évacuer les
+    détails techniques et se concentrer sur le phénomène ou algorithme
+    à illustrer. «As simple as possible, but no simpler».
 
     #.  (Échauffement) Écrire une fonction qui met une matrice à
         coefficients dans un corps sous forme échelon à l'aide de
