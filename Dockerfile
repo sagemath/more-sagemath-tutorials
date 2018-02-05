@@ -5,4 +5,4 @@ RUN sudo apt-get update && sudo apt-get install -y pandoc
 # Make sure the contents of our repo are in ${HOME}
 COPY . ${HOME}
 
-RUN sage -pip install . && echo make ipynb | sage -sh
+RUN sage -pip install . # && echo make ipynb | sage -sh
