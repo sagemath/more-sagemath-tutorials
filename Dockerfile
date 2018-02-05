@@ -1,3 +1,5 @@
+# Dockerfile for binder (needs work)
+
 FROM sagemath/sagemath:8.0-2
 RUN sudo apt-get update && sudo apt-get install -y pandoc
 
@@ -6,3 +8,6 @@ RUN sudo apt-get update && sudo apt-get install -y pandoc
 COPY . ${HOME}
 
 RUN sage -pip install .
+
+# Needs work: to compile the doc here we currently need python3 and
+# there are some incompatibilities with sage's sphinx, ...
