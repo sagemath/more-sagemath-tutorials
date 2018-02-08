@@ -277,15 +277,13 @@ Mini rappel d'algèbre affine
 Première résolution d'un programe linéaire
 ------------------------------------------
 
-.. TODO:: Switch to ....: as soon as using new enough Sage version
-
 Considérons le système suivant::
 
     sage: x1,x2,x3 = var('x1,x2,x3')
     sage: Chvatal13 = [[2*x1 + 3*x2 +   x3 <=  5,
-    ...                 4*x1 +   x2 + 2*x3 <= 11,
-    ...                 3*x1 + 4*x2 + 2*x3 <=  8],
-    ...                 5*x1 + 4*x2 + 3*x3]
+    ....:               4*x1 +   x2 + 2*x3 <= 11,
+    ....:               3*x1 + 4*x2 + 2*x3 <=  8],
+    ....:               5*x1 + 4*x2 + 3*x3]
 
 .. TOPIC:: Questions
 
