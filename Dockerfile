@@ -8,6 +8,8 @@ RUN sudo apt-get update && sudo apt-get install -y pandoc
 COPY . ${HOME}
 
 RUN sage -pip install .
+RUN sage -pip install --upgrade pandocfilters # workaround for https://trac.sagemath.org/ticket/23362
+# RUN echo make ipynb | sage -sh
 
 # Needs work: to compile the doc here we currently need python3 and
 # there are some incompatibilities with sage's sphinx, ...
