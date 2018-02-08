@@ -8,7 +8,4 @@ RUN sudo apt-get update && sudo apt-get install -y pandoc language-pack-fr
 COPY . ${HOME}
 
 RUN sage -pip install .
-#RUN echo "LC_CTYPE=fr_FR.UTF-8 make ipynb" | sage -sh
-#RUN sage -i rst2ipynb
-#RUN sage -pip install --upgrade pandocfilters # workaround for https://trac.sagemath.org/ticket/23362
-# ENV export LC_CTYPE=fr_FR.UTF-8
+RUN echo "LC_CTYPE=fr_FR.UTF-8 make ipynb" | sage -sh
