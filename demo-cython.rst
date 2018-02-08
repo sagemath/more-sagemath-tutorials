@@ -11,7 +11,7 @@ Here is a function that computes `\sum_{k=0}^N k` in pure Python::
     ....:     for k in range(1,N):
     ....:         s += k
     ....:     return s
-    sage: time mysum(10^7)
+    sage: %time mysum(10^7)
 
 Let us compare this with the Cython version::
 
@@ -25,7 +25,7 @@ Let us compare this with the Cython version::
 
 ::
 
-    sage: time mysum_cython(10^7)
+    sage: %time mysum_cython(10^7)
 
 
 A function to count the number of integer partitions with parts in a
@@ -53,7 +53,7 @@ given set::
 Let us see how long it takes to find the number of partitions of 500
 into odd parts::
 
-    sage: time buying([1,3..500], 500)
+    sage: %time buying([1,3..500], 500)
     732986521245024
     Time: CPU 3.05 s, Wall: 3.05 s
 
@@ -77,7 +77,7 @@ Make two changes::
 
 Surely two tiny changes in some Python code cannot make it much faster::
 
-    sage: time cybuying([1,3..500], 500)
+    sage: %time cybuying([1,3..500], 500)
     732986521245024L
     Time: CPU 0.08 s, Wall: 0.09 s
 
