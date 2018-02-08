@@ -236,7 +236,7 @@ ipynb: $(RSTIPYNB)
 media: $(MEDIA)
 
 $(BUILDDIR)/html/%.ipynb: %.rst
-	mkdir -p `basename $@`
+	mkdir -p `dirname $@`
 	rst2ipynb -k "sagemath" $< -o  $@
 
 $(BUILDDIR)/html/%: %
