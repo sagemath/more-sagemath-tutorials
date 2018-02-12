@@ -7,15 +7,6 @@
 
 .. MODULEAUTHOR:: `Nicolas M. Thiéry <http://Nicolas.Thiery.name/>`_ <Nicolas.Thiery at u-psud.fr>
 
-Ce document dans d'autres formats:
-`feuille de travail <multiplications_rapides.ipynb>`_,
-`source RST <multiplications_rapides.rst>`_.
-
-.. TODO::
-
-    - Correction formatage exercice
-    - Cohérence inverse par Taylor
-
 *****************************************
 Motivation: «Tout se ramène aux produits»
 *****************************************
@@ -95,7 +86,7 @@ Inversion de matrices
     Soient respectivement `c_n` et `d_n` les complexités de la
     multiplication et de l'inversion de matrices de taille `n`.
 
-    Si `c_n=O(n^\omega)` avec `\omega>1`, alors `d_n=O(n^\omega)`.
+    Si `c_n=O(n^\omega)` avec `\omega>2`, alors `d_n=O(n^\omega)`.
 
 .. TOPIC:: Démonstration (simplifiée)
 
@@ -128,7 +119,7 @@ Approximation numérique de solutions de `f(a) = 0`
 
 .. TOPIC:: Exercice
 
-    Soit `f` une fonction suffisamment gentille dont on recherche une
+    Soit `f(x)` une fonction suffisamment gentille dont on recherche une
     racine `a`.
 
     On suppose que l'on dispose d'une approximation `a_0` de `a`, et on pose:
@@ -151,6 +142,14 @@ Inversion de séries
 
 .. TOPIC:: Exercice
 
+    Soit `B(z)` une série avec un terme constant non nul. Elle admet
+    alors une unique série inverse `A(z)`.
+
+    Soit `C(z)` une série. Vérifier que:
+
+    .. MATH:: C(z) = A(z) + O(z^k)  \Longleftrightarrow C(z)B(z) = 1 + o(z^k)
+
+
     On suppose que l'on dispose d'une approximation `A_0(z)` de
     l'inverse `A(z)` de `B(z)`:
 
@@ -160,27 +159,68 @@ Inversion de séries
 
     .. MATH:: A_1(z)=A_0(z)(2-A_0(z)B(z))
 
-    #. Que peut on dire de cette nouvelle approximation ?
+    Que peut on dire de cette nouvelle approximation?
 
-    #. Proposer un analogue pour l'inversion des séries du théorème
-       sur l'inversion de matrices ci-dessus
+    Proposer un analogue pour l'inversion des séries du théorème
+    sur l'inversion de matrices ci-dessus.
 
 On verra en TP que l'expression ci-dessus pour `A_1(z)` peut être
 obtenue par itération de Newton.
 
-.. TODO:: Rédiger la correction; préciser l'ordre auquel sont calculés
-          les produits dans A_1(z); vérifier la cohérence sur la
-          qualité de l'approximation mesurée sur A(z) et sur A(z)B(z)
+
+.. TOPIC:: Solution
+
+    Pour `\Longrightarrow`:
+
+    .. MATH:: C(z)B(z) - 1 = (C(z)-A(z)) B(z) = O(z^k) B(z) = O(z^k)
+
+    Pour `\Longleftarrow`:
+
+    .. MATH:: C(z)- A(z) = (C(z)B(z)-1) A(z) = O(z^k) A(z) = O(z^k)
+
+
+    Posons maintenant `C(z)` tel que `A_0(z)B(z) = 1 + C(z)`, et calculons `A_1(z)B(z)`:
+
+    .. MATH:: A_1(z)B(z) = A_0(z)(2-A_0(z)B(z))B(z) = (1+C(z)) (1-C(z))
+                         = 1-C(z)^2 = 1 + O(z^{2k})
+
+    La précision double!
+
+    Notons  `c_n` la complexité de la multiplication et `d_n` la
+    complexité de la division de séries. Soit `f(n)\geq 0`
+    croissante; par exemple `f(n)=n^\omega` avec `\omega>0` ou
+    `f(n)=\log(n)`.
+
+    **Proposition**: Si `c_n=O\left(nf(n)\right)`, alors `d_n=O\left(nf(n)\right)`.
+
+    Soit `a` tel que `c_n\leq a nf(n)`, pour tout `n`. On va
+    chercher `b` tel que `d_n \leq ba nf(n)`, pour tout `n`.
+
+    .. MATH::
+
+        d_{2n}
+        \,\leq\,  d_n + 2c_{2n}
+        \,\leq\,  banf(n) + 2a(2n)f(2n)
+        \,\leq\,  (\frac12 + \frac 2b) \,ba(2n)f(2n)
+
+    On conclue comme précédemment.
 
 Approximation en série d'une équation implicite `F(A(z)) = 0`
 -------------------------------------------------------------
 
-.. TODO:: prendre le calcul de racine comme exemple
+.. TOPIC:: Problème: calcul de la racine d'une série
+
+    Soit `B(z)` une série. On souhaite calculer sa racine,
+    c'est-à-dire la série `A(z)` telle que `A(z)^2-B(z)=0`.
+
+    Comment procéder?
 
 .. TOPIC:: Exercice
 
-    Soit `F(X)` un polynôme à coefficients dans `\QQ[z]`. On cherche
-    une série `A(z)` telle que `F(A(z))=0`.
+    Soit `F(X)` un polynôme à coefficients dans `\QQ[[z]]`. Par
+    exemple: `F(X)=X^2 - B(z)`.
+
+    On cherche une série `A(z)` telle que `F(A(z))=0`.
 
     On suppose que l'on dispose d'une approximation `A_0(z)` de `A(z)`.
 
@@ -205,7 +245,7 @@ Approximation en série d'une équation implicite `F(A(z)) = 0`
 .. TOPIC:: Remarque
 
     On peut en fait traiter de manière similaire des équations
-    différentielles linéaires `F(A(Z))=0`.
+    différentielles linéaires `F(A(z))=0`.
 
     Application: connaissant `B(z)`, calculer `A(z)=\exp(B(z))`
     (prendre `F(A(z)) = A(z)'-B(z)'A(z)`).
@@ -213,8 +253,29 @@ Approximation en série d'une équation implicite `F(A(z)) = 0`
 Division Euclidienne de polynômes
 =================================
 
-TODO:: voir Modern Computer Algebra
+Soit `F=F(z)` et `G(z)` deux polynômes. On veut déterminer `Q` et `R` avec
+`\deg R < \deg G` tels que
 
+.. MATH::  F = GQ + R
+
+Récrivons ceci sous la forme:
+
+.. MATH::  \frac FG = Q + \frac RG
+
+Que se passe-t'il si `z` est «grand»?
+
+
+Idée:
+
+-   Envoyer l'infini sur zéro en prenant la *réciproque* des polynômes
+    concernés: `\overline P = z^{\deg P} P(\frac1z)`
+
+-   Obtenir `\overline Q` en calculant les premiers termes de `\frac{\overline F}{\overline G}`.
+    C'est une inversion de série: itération de Newton, ...
+
+-   Calculer `R=f-GQ`
+
+Pour les détails, voir page 83 de [AECF]_
 
 ****************
 Produits rapides
@@ -484,7 +545,7 @@ Transformée de Fourier rapide (FFT: Fast Fourier Transform)
     On considère une racine `2^k`-ème de l'unité, et on applique
     récursivement l'idée précédente.
 
-    Complexité: O(n\log n), comme pour les tris.
+    Complexité: `O(n\log n)`, comme pour les tris.
 
 
 .. TOPIC:: Problème
@@ -588,7 +649,7 @@ présentera sa démonstration aux autres.
 
 .. TOPIC:: Transformée de Fourier rapide
 
-    Voir le `sujet de TP <../Notes-Jouve/FFT/FFT.pdf>`_ de l'année dernière.
+    Voir ce `sujet de TP <http://nicolas.thiery.name/Enseignement/Agregation/Notes-Jouve/FFT/FFT.pdf>`_.
 
 .. TOPIC:: Exercice: Illustration de Newton numérique
 
@@ -598,7 +659,7 @@ présentera sa démonstration aux autres.
 .. TOPIC:: Exercice: Convergence de Newton numérique
 
     #.  Choisir une équation de la forme `f(x) = 0` et calculer des
-        approximations successives `x_0, x_1,\dots,` de l'une de ses
+        approximations successives `x_0, x_1, \dots,` de l'une de ses
         solutions à l'aide d'une itération de Newton.
 
     #.  Tracer le graphe du nombre de décimales correctes en fonction
@@ -610,8 +671,8 @@ présentera sa démonstration aux autres.
     l'inverse `A(z)=B^{-1}(z)`. En particulier, on supposera que son
     terme constant `b_0=B(0)` est inversible dans `K`.
 
-    On pose la fonction `F(X,z) = B(z) - 1/X`, de sorte que `A(z)`
-    satisfait l'équation fonctionnelle implicite `F(A(z), z)=0`.
+    On pose la fonction `F(X) = B(z) - 1/X`, de sorte que `A(z)`
+    satisfait l'équation fonctionnelle implicite `F(A(z))=0`.
 
     #.  Choisir `A_0(z)` tel que `A_0(z)\equiv A(z) [z]`
 
@@ -675,3 +736,5 @@ Quelques références
 .. [Riou] `Notes de cours de Joël Riou <http://www.math.u-psud.fr/~riou/enseignement/2012-2013/mao/cours.pdf>`_
 
 .. [Roblot 2013] `Mini-cours sur l'arithmétique algorithmique <http://math.univ-lyon1.fr/~roblot/ens.html>`_
+
+.. [AECF] `Algorithmes Efficaces pour le Calcul Formel <https://hal.archives-ouvertes.fr/AECF>`_
