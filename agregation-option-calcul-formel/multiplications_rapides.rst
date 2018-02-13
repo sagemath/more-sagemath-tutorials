@@ -22,7 +22,7 @@ Inversion de matrices
 
     #. Calculer `M^{-1}` par pivot de Gauß.
 
-.. TOPIC:: Correction
+.. TOPIC:: Solution
 
     La matrice inverse::
 
@@ -61,7 +61,7 @@ Inversion de matrices
 
     Soit `M=\begin{pmatrix}A&B\\C&D\end{pmatrix}` une matrice par
     blocs, où `A` et `D` sont carrées. On suppose de plus que `A`
-    et `\Delta=(D-CA^-1)` sont inversibles. Alors,
+    et `\Delta=(D-CA^{-1}B)` sont inversibles. Alors,
 
     .. MATH::
 
@@ -147,7 +147,7 @@ Inversion de séries
 
     Soit `C(z)` une série. Vérifier que:
 
-    .. MATH:: C(z) = A(z) + O(z^k)  \Longleftrightarrow C(z)B(z) = 1 + o(z^k)
+    .. MATH:: C(z) = A(z) + O(z^k)  \Longleftrightarrow C(z)B(z) = 1 + O(z^k)
 
 
     On suppose que l'on dispose d'une approximation `A_0(z)` de
@@ -248,7 +248,8 @@ Approximation en série d'une équation implicite `F(A(z)) = 0`
     différentielles linéaires `F(A(z))=0`.
 
     Application: connaissant `B(z)`, calculer `A(z)=\exp(B(z))`
-    (prendre `F(A(z)) = A(z)'-B(z)'A(z)`).
+
+    Indication: Prendre `F(A(z)) = A(z)'-B(z)'A(z)`
 
 Division Euclidienne de polynômes
 =================================
@@ -273,7 +274,7 @@ Idée:
 -   Obtenir `\overline Q` en calculant les premiers termes de `\frac{\overline F}{\overline G}`.
     C'est une inversion de série: itération de Newton, ...
 
--   Calculer `R=f-GQ`
+-   Calculer `R=F-GQ`
 
 Pour les détails, voir page 83 de [AECF]_
 
@@ -605,10 +606,23 @@ Produits rapides de matrices
 
     Complexité: `O(n^{2.3755\cdots})` (1990), `O(n^{2.374})` (2010), `O(n^{2,3728\cdots})` (2014), ...
 
-    Inutilisable en pratique ...
+    Inutilisables en pratique ...
 
     .. TODO: donner une intuition du principe de fonctionnement
 
+
+Résumé
+======
+
+- «Tout se ramène aux produits»
+  - calcul d'inverse
+  - division Euclidienne
+  - résolution d'équation (différentielle)
+
+- Algorithmes récursifs (diviser pour régner):
+  - Structures récursives: matrices et polynômes par blocs
+  - Itération de Newton
+  - FFT
 
 *****************
 Travaux Pratiques
@@ -616,7 +630,7 @@ Travaux Pratiques
 
 Parcourir les exercices suivants et en piocher un pour préparer une
 démonstration courte (5 minutes). Ensuite, jouer avec les exercices de
-votre choix. En fin de séance (vers 11h45), chacun d'entre vous
+votre choix. En fin de séance (vers 11h30), chacun d'entre vous
 présentera sa démonstration aux autres.
 
 .. TOPIC:: Exercice: Karatsuba
