@@ -580,9 +580,9 @@ http://en.wikipedia.org/wiki/Newton%27s_identities
 
     On pourrait se donner 1/2h de plus
 
-********************************
-TP: Berlekamp Massé et Wiedemann
-********************************
+*****************
+Travaux Pratiques
+*****************
 
 Berlekamp Massé
 ===============
