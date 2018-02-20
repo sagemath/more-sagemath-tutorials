@@ -719,11 +719,12 @@ présentera sa démonstration aux autres.
         obtenus à chaque étape.  
         **Indication**: on pourra au choix représenter les `C_i(z)` par:
 
-        - Des fractions rationnelles, en utilisant la commande
-          :func:`taylor` pour les développer en série entière.
+        - Des fractions rationnelles (représentées par des
+          expressions), en utilisant la commande :func:`taylor` pour les
+          développer en série entière.
 
         - Des séries tronquées à l'ordre approprié (éventuellement
-          représentée par un simple polynôme), en utilisant l'exercice
+          représentées par des polynômes), en utilisant l'exercice
           précédent pour les calculs d'inverse.
 
 
