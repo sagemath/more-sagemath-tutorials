@@ -30,13 +30,9 @@ Introduction
 
 On a vu que l'algorithme de Gauß était de complexité `O(n^3)`, au
 moins dans son implantation naïve. Vérifions cela expérimentalement
-avec les petits outils suivants:
+avec les petits outils du fichier `gauss.py <media/gauss.py>`_::
 
-::
-
-    sage: load("media/gauss.py")
-
-.. TODO:: faire afficher le contenu du fichier
+    sage: %runfile media/gauss.py
 
 ::
 
@@ -60,12 +56,12 @@ Commençons par un corps fini::
     [6 2 2]
     [1 2 5]
 
-    sage: temps(gauss, 10, construit_donnee)
+    sage: temps(gauss, 10, construit_donnee)    # random
     0.00010991096496582031
-    sage: temps(gauss, 20, construit_donnee)
+    sage: temps(gauss, 20, construit_donnee)    # random
     0.0004279613494873047
 
-    sage: t = [temps(gauss, 2^k, construit_donnee) for k in range(9)]; t
+    sage: t = [temps(gauss, 2^k, construit_donnee) for k in range(9)]; t     # random
     [1.2874603271484375e-05,
      2.193450927734375e-05,
      3.0994415283203125e-05,
@@ -75,7 +71,7 @@ Commençons par un corps fini::
      0.007287025451660156,
      0.04861617088317871,
      0.3510730266571045]
-    sage: [ t[i+1]/t[i] for i in range(len(t)-1) ]
+    sage: [ t[i+1]/t[i] for i in range(len(t)-1) ]    # random
     [1.7037037037037037,
      1.4130434782608696,
      2.353846153846154,
@@ -127,6 +123,13 @@ Avec la matrice de Hilbert::
 
 Bof!
 
+.. TODO::
+
+    Ces bancs d'essais suggèrent que la complexité n'est pas pire que
+    `O(n^4)`, ce qui n'est guère mieux que ce que l'on obtient en
+    modulaire ou multimodulaire. Trouver quelque chose de plus
+    frappant.
+
 Prenons un corps de fractions rationnelles::
 
     sage: K = QQ['x'].fraction_field()
@@ -141,13 +144,8 @@ Prenons un corps de fractions rationnelles::
 
     sage: t = [1.1920928955078125e-05, 1.9073486328125e-05, 0.00018310546875, 0.0007388591766357422, 0.002237081527709961, 0.007543087005615234, 0.021083831787109375, 0.08204507827758789, 0.15540504455566406, 0.9841179847717285, 22.702343940734863]
     sage: [ t[i+1]/t[i] for i in range(len(t)-1) ]
-
-.. TODO::
-
-    Ces bancs d'essais suggèrent que la complexité n'est pas pire que
-    O(n^4), ce qui n'est guère mieux que ce que l'on obtient en
-    modulaire ou multimodulaire. Trouver quelque chose de plus
-    frappant.
+    [1.60000000000000, 9.60000000000000, 4.03515625000000, 3.02775088738303, 3.37184269423425,
+    2.79511979265440, 3.89137416319884, 1.89414219375687, 6.33259999754532, 23.0687217305563]
 
 Analyse: Complexité arithmétique versus complexité en bits
 ==========================================================
@@ -177,16 +175,17 @@ la main, les coefficients ont tendance à grossir::
     [       0        0        0        0        0        0        0        0        0        1]
 
 
-    sage: def max_coeff(m): return max([c.numer() for row in m.rows() for c in row])
+    sage: def max_coeff(m):
+    ....:     return max([c.numer() for row in m.rows() for c in row])
 
-    sage: t = [ max_coeff(gauss(matrice_inversible(2^k))) for k in range(7) ]
+    sage: t = [ max_coeff(gauss(matrice_inversible(2^k))) for k in range(7) ] # random
     sage: t
     [1, 1, 1, 19, 4238342698, 99340450694580511972871852, 49519664469784658153819267407199333624664412533859761535203139]
 
 Considérer que le temps nécessaire à une opération arithmétique est
 constant est donc abusif!
 
-Une meilleure mesure est donc la complexité en bits, puisque les
+Une meilleure mesure est donc la *complexité en bits*, puisque les
 opérations arithmétiques sont de complexité polynomiale en `n` (en
 fait en gros `n\log n`) où `n` est le nombre de bits::
 
@@ -310,18 +309,62 @@ corps où l'on maîtrise la croissance des coefficients intermédiaires.
     Donner une borne de complexité pour le calcul du polynôme
     caractéristique d'une matrice dans `GF(p)`.
 
-Variante: méthodes p-adiques
-----------------------------
+Variante: méthodes `p`-adiques
+------------------------------
 
 .. TOPIC:: Exemple de problème
 
-    Entrée: une matrice `M` carrée inversible à coefficients entiers,
+    Entrée: une matrice `M` carrée inversible à coefficients rationnels
 
     Sortie: l'inverse de `M`
 
-    .. TODO:: Plutôt prendre à coefficients rationnels
+    Que se passe-t'il si on prend `M` modulo `p`? modulo `p^k`
 
-On considère le morphisme partiel `\phi` de `\QQ` dans `GF(p^k)`:
+Expansion `p`-adique
+--------------------
+
+
+
+.. TOPIC:: Exercice: Expansion `3`-adique d'entiers
+
+    Voici quelques expansions `3`-adiques d'entiers::
+
+        sage: K = Zp(3)
+        sage: %display latex
+
+        sage: K(1)
+        1 + O(3^20)
+        sage: K(3)
+        3 + O(3^21)
+        sage: K(3^2)
+        3^2 + O(3^22)
+        sage: K(3^3)
+        3^3 + O(3^23)
+        sage: K(24)
+        2*3 + 2*3^2 + O(3^21)
+        sage: K(25)
+        1 + 2*3 + 2*3^2 + O(3^20)
+
+    - Calculer l'expansion `3`-adique de `15` et de `-1`.
+
+    - Calculer le produit de `1+2\cdot3 +2\cdot3^2+\cdots` par `4`.
+
+.. TOPIC:: Solutions
+
+    ::
+
+       sage: K(15)
+       2*3 + 3^2 + O(3^21)
+       sage: K(-1)
+       2 + 2*3 + 2*3^2 + 2*3^3 + 2*3^4 + 2*3^5 + 2*3^6 + 2*3^7 + 2*3^8 + 2*3^9 + 2*3^10 + 2*3^11 + 2*3^12 + 2*3^13 + 2*3^14 + 2*3^15 + 2*3^16 + 2*3^17 + 2*3^18 + 2*3^19 + O(3^20)
+
+       sage: 1 / K(4)
+       1 + 2*3 + 2*3^3 + 2*3^5 + 2*3^7 + 2*3^9 + 2*3^11 + 2*3^13 + 2*3^15 + 2*3^17 + 2*3^19 + O(3^20)
+       sage: 1 / K(4) * K(4)
+       1 + O(3^20)
+
+Tronquer revient à considèrer le morphisme partiel `\phi` de `\QQ`
+dans `\ZZ/p^k\ZZ`:
 
 -   Ce morphisme n'est définit que pour les rationnels `x` dont le
     dénominateur n'est pas divisible par `p`
@@ -329,8 +372,6 @@ On considère le morphisme partiel `\phi` de `\QQ` dans `GF(p^k)`:
 -   Si on connaît `\phi(x)` pour `k` suffisamment grand, on peut
     retrouver `x` par *reconstruction rationnelle*.
     Rappel: encore une conséquence d'Euclide étendu!
-
-.. TODO:: Rajouter un exercice sur l'expansion `p`-adique des entiers puis des rationnels
 
 .. TOPIC:: Algorithme
 
@@ -447,11 +488,12 @@ Et pourtant::
 
 Comment cela marche-t-il???
 
-.. TODO:: introduire le nombre de coeffs non nuls comme taille de la matrice
-
-
 Algorithmes de type «boîtes noire»
 ==================================
+
+On cherche des algorithmes dont la complexité soit contrôlée non
+seulement par la taille `n` de la matrice, mais aussi par son nombre
+`m` de coefficients non nuls.
 
 Algorithme de Wiedemann
 -----------------------
@@ -460,17 +502,18 @@ Algorithme de Wiedemann
 
     Calculer le polynôme minimal d'une matrice
 
-.. TOPIC:: Remarque
+.. TOPIC:: Exercice
 
     Soit `P` le polynôme minimal d'une matrice carrée `M`.
 
     Soient `U` et `V` deux vecteurs.
 
-    Alors la suite de nombre `u_k = U M^k V` satisfait une relation de
-    récurence donnée par les coefficients de `P`.
+    Montrer que la suite de nombre `u_k = U M^k V` satisfait une
+    relation de récurence donnée par les coefficients de `P`.
 
+.. TOPIC:: Solution
 
-.. TODO:: Mettre cette remarque sous forme d'exercice et rédiger la correction
+    .. TODO:: rédiger
 
 .. TOPIC:: Rappel: Algorithme de Berlekamp-Massey
 
@@ -482,7 +525,6 @@ Algorithme de Wiedemann
     Encore une conséquence d'Euclide étendu ...
 
     Voir TP pour les détails.
-
 
 .. TOPIC:: Algorithme de Wiedemann
 
@@ -534,7 +576,7 @@ http://en.wikipedia.org/wiki/Newton%27s_identities
         - Étape 2: sur un corps algébriquement clos, on triangularise
         - Étape 3: généralisation à un corps quelconque, avec extension implicite du corps is besoin
 
-    Question: à quel point rappeller les identités de Newton?
+    Question: rappeller les identités de Newton, avec démo Sage
 
     On pourrait se donner 1/2h de plus
 
