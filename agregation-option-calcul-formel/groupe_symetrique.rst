@@ -7,10 +7,6 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Groupe Sym�
 
 .. MODULEAUTHOR:: `Nicolas M. Thiéry <http://Nicolas.Thiery.name/>`_ <Nicolas.Thiery at u-psud.fr>
 
-Ce document dans d'autres formats:
-`feuille de travail <groupe_symmetrique.ipynb>`_,
-`source RST <groupe_symmetrique.rst>`_.
-
 *****************
 Groupe symétrique
 *****************
