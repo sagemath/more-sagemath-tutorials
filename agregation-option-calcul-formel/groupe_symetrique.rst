@@ -150,7 +150,9 @@ l'ordre inverse et on définit: `\sigma \tau = \tau \circ \sigma`.
         sage: sigma = G([2,3,1])
         sage: tau   = G([2,1,3])
 
-    Correction::
+.. TOPIC:: Solution
+
+    ::
 
         sage: (sigma * tau).domain()
         [1, 3, 2]
@@ -223,8 +225,17 @@ donnée par les longueurs de ses cycles.
 
     #.  Quelles sont les classes de conjugaisons du groupe symétrique?
 
-        Conséquence: les représentations du groupe symétrique sont
-        indexées par les partitions.
+.. TOPIC:: Solution
+
+    #.  Chaque cycle `(i_1,\dots,i_k)` de `\tau` contribue un cycle
+        `(\sigma(i_1),\dots,\sigma(i_k))` dans `\sigma\tau\sigma^{-1}`.
+
+    #.  Deux permutations sont dans la même classe de conjugaison si et
+        seulement si elles ont même type cyclique. Les classes de
+        conjugaisons sont donc indexées par les partitions.
+
+    Conséquence: les représentations du groupe symétrique sont
+    indexées par les partitions.
 
 Générateurs du groupe symétrique
 ================================
@@ -294,7 +305,7 @@ groupe symétrique.
 Exemples
 ========
 
-- Groupe trivial.
+- Groupe trivial `id_n`.
 
 - Groupe cyclique `C_n`::
 
@@ -324,6 +335,17 @@ Exemples
 
     Construire le groupe des symétries du cube::
 
+          7-----8
+         /|    /|
+        5-----6 |
+        | |   | |
+        | 3---|-4
+        |/    |/
+        1-----2
+
+
+     ::
+
         sage: G = PermutationGroup([...])
 
 
@@ -342,28 +364,26 @@ Applications:
 Systèmes générateurs forts
 ==========================
 
-.. TODO:: Définir, ici ou ailleurs, la notation `G.n` pour une orbite
+.. TOPIC:: Problème: Soit `G\subset S_n` un groupe de permutation; `G` est typiquement très gros.
 
-Problème: Soit `G\subset S_n` un groupe de permutation; `G` est typiquement très gros.
+    #.  Comment le représenter? Le manipuler?
 
-#.  Comment le représenter? Le manipuler?
+    #.  Calculer son nombre d'éléments?
 
-#.  Calculer son nombre d'éléments?
+    #.  Tester si un élément est dedans?
 
-#.  Tester si un élément est dedans?
+    #.  Exprimer un élément en fonction des générateurs?
 
-#.  Exprimer un élément en fonction des générateurs?
+    #.  Déterminer ses sous-groupes?
 
-#.  Déterminer ses sous-groupes?
-
-#.  Est-il abélien, simple, résoluble, ... ?
-
-.. TODO:: Introduire tout cela sur le groupe des symétries du cube
-
+    #.  Est-il abélien, simple, résoluble, ... ?
 
 .. TOPIC:: Exercice
 
-    Soit `H` le sous groupe des éléments de `G` qui fixent `n`.
+    Soit `G` un groupe de permutations de `\{1,\dots,n\}`. Par
+    exemple, le groupe des symétries du cube (`n=8`).
+
+    Soit `H` le sous groupe des éléments de `G` qui fixent `8`.
 
     #. Supposons `|H|` connu. Comment en déduire `|G|`?
 
@@ -373,36 +393,67 @@ Problème: Soit `G\subset S_n` un groupe de permutation; `G` est typiquement tr�
        `H`. Comment tester si une permutation est dans `G`?
 
 
-.. TODO:: Correction
+.. TODO:: Solution
+
+    Rappel: on a `\sigma H=\tau H` si et seulement si `\sigma(n)=\tau(n)`
+
+    Du coup, la fonction:
+    .. MATH::
+
+        \phi: \begin{cases}
+                G    &\longmapsto G.n
+                g    &\longrightto g(n)
+              \end{cases}
+
+    induit un isomorphisme entre les classes à droite `\sigma H` et
+    les éléments de l'orbite `G.n` de `n` sous l'action de `G`.
+
+    #.  `|G| = |H| |G.x|`
+
+    #.  Il suffit de choisir pour chaque `x` dans `G.n` une permutation
+        `\sigma_{n,x}` telle que `\sigma_{n,x}(n)=x`.
+
+    #.  Soit `\tau` une permutation. Si `\sigma(n)\not\in G.n`, alors
+        `\sigma\not\in G`. Sinon, `\sigma_{nx}^{-1} \sigma` fixe `n`.
+        Donc `\sigma \in G \Longleftrightarrow \sigma_{nx}^{-1}\sigma\in H`.
+
+
+**On a une bonne idée? Appliquons la récursivement.**
 
 
 .. TOPIC:: Définition
 
     On considère la tour de groupes
 
-    .. math:: \{ id\}=G_{0}\subset G_{1}\subset\cdots\subset G_n=G,
+    .. math:: \{ id \} = G_0 \subset G_1 \subset \cdots \subset G_n = G,
 
-    où `G_{i}` est le sous-groupe des éléments de `G` qui fixent
+    où `G_i` est le sous-groupe des éléments de `G` qui fixent
     `\left\{i+1,\dots,n\right\}`.
 
     Pour décrire `G`, il suffit de décrire chacune des inclusions.
 
     Un *système générateur fort* est composé des représentants des
-    cosets (classes) de `G_{i}/G_{i-1}` pour chaque `i`.
+    classes de `G_{i}/G_{i-1}` pour chaque `i`.
 
     On abrège système générateur fort en SGS
     (pour *strong generating system*).
 
-.. TODO::
+.. TOPIC:: Remarque
 
-    Introduire le point de vue *système de générateur adapté* comme dans
-    la wikipedia: `\langle S\cap G_i\rangle = G_i` pour tout `i` et en
-    lien avec les bases adaptées.
+    Un système générateur fort est un système générateur `S` *adapté*
+    à la tour `S_0 \subset S_1 \subset \cdots \subset S_n`:
+
+    .. MATH::
+
+        \langle S\cap S_i\rangle = G \cap S_i = G_i
+
+    C'est l'analogue des bases sous forme échelon d'un espace
+    vectoriel `E` qui sont adaptées à un drapeau.
 
 
 .. TOPIC:: Exemple
 
-   `S_n` engendré par (toutes) les transpositions.
+   `S_n` engendré par toutes les transpositions.
 
 .. TOPIC:: Proposition
 
@@ -430,7 +481,7 @@ Problème: Soit `G\subset S_n` un groupe de permutation; `G` est typiquement tr�
         Comparer avec la taille du groupe.
 
 
-.. TOPIC:: Correction
+.. TOPIC:: Solution partielle
 
     ::
 
@@ -445,6 +496,10 @@ Problème: Soit `G\subset S_n` un groupe de permutation; `G` est typiquement tr�
        sage: SymmetricGroup(4).strong_generating_system(base_of_group=[4,3,2,1])
        [[(), (1,4), (2,4), (3,4)], [(), (1,2,3), (1,3,2)], [(), (1,2)], [()]]
 
+
+    Notons `h_i=|G_i|/|G_{i-1}`. Alors la taille d'un système
+    générateur fort est `h_1+\cdots+h_n \leq n(n+1)/2` alors que la
+    taille de `G` est `h_1\cdots h_n\leq n!`.
 
 .. TOPIC:: Définition
 
@@ -469,7 +524,7 @@ Comment calculer un système générateur fort?
 #.  Calculer l'orbite `G.n` de `n` (comment on fait?)
 
 #.  Les permutations qui envoient `n` sur `i`, `i` dans `G.n` donnent
-    des représentants des cosets de `G/G_n`
+    des représentants des classes de `G/G_n`
 
 #.  Calculer les générateurs de `G_n` (avec le `lemme de Schreier
     <http://en.wikipedia.org/wiki/Schreier%27s_subgroup_lemma>`_)
@@ -524,8 +579,8 @@ sous-espaces vectoriels, groupes de permutations):
 
 Pour cela, on se donne:
 
-#. Un ordre,
-#. Un drapeau de sous-structures .. TODO:: développer
+#. Un ordre
+#. Un drapeau de sous-structures vis à vis de cet ordre
 #. Un procédé de division: Euclide, ...
 #. Une notion de système générateur fort: PGCD, base de Gröbner,
    forme échelon, système fort de générateurs,
@@ -787,7 +842,7 @@ permutations `G` de `\{1,\dots,n\}` et que la base est
 `n,n-1,\dots,1`.
 
 On représentera un système générateur fort de `G` sous la forme d'une
-liste `l` telle que `l[i-1]` contient des représentants des cosets de
+liste `l` telle que `l[i-1]` contient des représentants des classes de
 `G_i/G_{i-1}`.  Ces représentants seront représenté sous la forme d'un
 dictionnaire associant à chaque élément `y` de l'orbite de `i` sous
 `G_i` une permutation `\sigma_{i,y}` de `G_i` telle que `\sigma_{i,y}(i)=y`.
