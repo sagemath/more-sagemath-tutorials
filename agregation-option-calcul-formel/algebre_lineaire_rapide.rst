@@ -576,13 +576,15 @@ http://en.wikipedia.org/wiki/Newton%27s_identities
         - Étape 2: sur un corps algébriquement clos, on triangularise
         - Étape 3: généralisation à un corps quelconque, avec extension implicite du corps is besoin
 
-    Question: rappeller les identités de Newton, avec démo Sage
+    Rappeler les identités de Newton, avec démo Sage
 
-    On pourrait se donner 1/2h de plus
+.. TODO:: Il reste 1/2h; soit attaquer le TP, soit prendre le temps ci-dessus
 
 *****************
 Travaux Pratiques
 *****************
+
+.. TODO:: rajouter un exo sur Faddeev-Leverrier
 
 Berlekamp Massé
 ===============
