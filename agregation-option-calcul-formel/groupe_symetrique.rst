@@ -211,11 +211,11 @@ donnée par les longueurs de ses cycles.
         donnée sous forme de décomposition en cycles par une
         permutation `\sigma` (avec pour résultat
         `\sigma\tau\sigma^{-1}`)?
-        Exemple: prendre `\sigma = (1,2,3,4,5,6,7,8,9)` et `\tau=(2,5,3)`.
+        Exemple: prendre `\sigma = (1,2,3,4,5,6,7,8)` et `\tau=(2,5,3)`.
 
         ::
 
-            sage: sigma = G([(1,2,3,4,5,6,7,8,9)])
+            sage: sigma = G([(1,2,3,4,5,6,7,8)])
             sage: tau   = G([(2,5,3)])
             sage: ~sigma * tau * sigma
 
@@ -340,7 +340,7 @@ Exemples
         1-----2
 
 
-     ::
+    ::
 
         sage: G = PermutationGroup([...])
 
