@@ -331,14 +331,16 @@ Exemples
 
     Construire le groupe des symétries du cube::
 
-          7-----8
-         /|    /|
-        5-----6 |
-        | |   | |
-        | 3---|-4
-        |/    |/
-        1-----2
+         .                                    7-----8
+         .                                   /|    /|
+         .                                  5-----6 |
+         .                                  | |   | |
+         .                                  | 3---|-4
+         .                                  |/    |/
+         .                                  1-----2
 
+
+.. TOPIC:: Solution
 
     ::
 
@@ -379,7 +381,7 @@ Systèmes générateurs forts
     Soit `G` un groupe de permutations de `\{1,\dots,n\}`. Par
     exemple, le groupe des symétries du cube (`n=8`).
 
-    Soit `H` le sous groupe des éléments de `G` qui fixent `8`.
+    Soit `H` le sous groupe des éléments de `G` qui fixent `n`.
 
     #. Supposons `|H|` connu. Comment en déduire `|G|`?
 
@@ -389,29 +391,30 @@ Systèmes générateurs forts
        `H`. Comment tester si une permutation est dans `G`?
 
 
-.. TODO:: Solution
+.. TOPIC:: Solution
 
-    Rappel: on a `\sigma H=\tau H` si et seulement si `\sigma(n)=\tau(n)`
+    Rappel: `\quad\sigma H=\tau H \quad\Longleftrightarrow\quad \sigma^{-1}\tau\in H \quad\Longleftrightarrow\quad \sigma(n)=\tau(n)`
 
     Du coup, la fonction:
+
     .. MATH::
 
         \phi: \begin{cases}
-                G    &\longmapsto G.n
-                g    &\longrightto g(n)
+                G    &\longmapsto G.n\\
+                g    &\longrightarrow g(n)
               \end{cases}
 
     induit un isomorphisme entre les classes à droite `\sigma H` et
     les éléments de l'orbite `G.n` de `n` sous l'action de `G`.
 
-    #.  `|G| = |H| |G.x|`
+    #.  `|G| = |H|\ |G.x|`
 
-    #.  Il suffit de choisir pour chaque `x` dans `G.n` une permutation
-        `\sigma_{n,x}` telle que `\sigma_{n,x}(n)=x`.
+    #.  Il suffit de choisir pour chaque `y` dans `G.n` une permutation
+        `\sigma_{n,y}` telle que `\sigma_{n,y}(n)=y`.
 
     #.  Soit `\tau` une permutation. Si `\sigma(n)\not\in G.n`, alors
-        `\sigma\not\in G`. Sinon, `\sigma_{nx}^{-1} \sigma` fixe `n`.
-        Donc `\sigma \in G \Longleftrightarrow \sigma_{nx}^{-1}\sigma\in H`.
+        `\sigma\not\in G`. Sinon, `\sigma_{n,\tau(n)}^{-1} \sigma` fixe `n`.
+        Donc `\sigma \in G \Longleftrightarrow \sigma_{n,\tau(n)}^{-1}\sigma\in H`.
 
 
 **On a une bonne idée? Appliquons la récursivement.**
@@ -421,15 +424,15 @@ Systèmes générateurs forts
 
     On considère la tour de groupes
 
-    .. math:: \{ id \} = G_0 \subset G_1 \subset \cdots \subset G_n = G,
+    .. math:: \{ id \} = G_0 \subset G_1 \subset \cdots \subset G_n = G\,,
 
-    où `G_i` est le sous-groupe des éléments de `G` qui fixent
-    `\left\{i+1,\dots,n\right\}`.
+    où `G_i:=G\cap S_i` est le sous-groupe des éléments de `G` qui
+    fixent `\left\{i+1,\dots,n\right\}`.
 
     Pour décrire `G`, il suffit de décrire chacune des inclusions.
 
-    Un *système générateur fort* est composé des représentants des
-    classes de `G_{i}/G_{i-1}` pour chaque `i`.
+    Un *système générateur fort* est composé des représentants
+    `\sigma_{i,y}` des classes de `G_{i}/G_{i-1}` pour chaque `i`.
 
     On abrège système générateur fort en SGS
     (pour *strong generating system*).
@@ -519,17 +522,42 @@ Comment calculer un système générateur fort?
 
 #.  Calculer l'orbite `G.n` de `n` (comment on fait?)
 
-#.  Les permutations qui envoient `n` sur `i`, `i` dans `G.n` donnent
-    des représentants des classes de `G/G_n`
+#. Les permutations `\sigma_{n,y}` qui envoient `n` sur `y`, `y` dans
+    `G.n` donnent des représentants des classes de `G/G_n`
 
-#.  Calculer les générateurs de `G_n` (avec le `lemme de Schreier
-    <http://en.wikipedia.org/wiki/Schreier%27s_subgroup_lemma>`_)
+#. Calculer les générateurs de `G_n` avec le (voir ci-dessous).
 
     .. TODO::
 
         Détailler; cf. les slides de James au Sage Days 86 , donner la complexité
 
-#. Réitérer
+#. Réitérer récursivement
+
+.. TOPIC:: `Lemme de Schreier <http://en.wikipedia.org/wiki/Schreier%27s_subgroup_lemma>`_ 
+
+    Soit `G` un groupe et `H` un sous-groupe. Soient `A` un ensemble
+    de générateurs de `G` et `U` des représentants des `H`-classes à
+    droite:
+
+    .. MATH::  G = \langle A \rangle \qquad \text { et } G=\bigcup_{u\in U} u H,
+
+    Alors:
+
+    .. MATH::  H = \langle u^{-1} a u' \ \mid\  u,u'\in U \ \text{ et }\ u^{-1}au'\in H \rangle
+
+
+.. TOPIC:: Démonstration
+
+    Soit `g\in G`. On l'exprime en fonction des générateurs: `g =
+    a_1\cdots a_k` avec les `a_i` dans `A`.
+
+    Pour tout `i`, prenons l'unique `u_i` tel que `a_i\cdots a_k \in u_i H`. Alors:
+
+    .. MATH:: g = a_1\cdots a_k = (a_1 u_2) (u_2^{-1}a_2u_3)(u_3^{-1}a_3u_4) \cdots (u_na_n)\,.
+
+    On note que chacun des facteurs est dans l'ensemble sus-mentionné. Ce
+    dernier engendre donc `H`.
+
 
 .. TOPIC:: Exercice:
 
@@ -817,8 +845,7 @@ Exercice (plus avancé)
 ======================
 
 #.  Consulter la documentation et le code de la méthode
-    :meth:`cycle_index` des groupes de permutations
-
+    :meth:`cycle_index` des groupes de permutations.
     C'est l'un de vos prédécesseurs qui l'a implantée!
 
 #.  Utilisez-la pour recalculer les exemples précédents.
