@@ -527,13 +527,13 @@ Comment calculer un système générateur fort?
 #. Les permutations `\sigma_{n,y}` qui envoient `n` sur `y`, `y` dans
     `G.n` donnent des représentants des classes de `G/G_n`
 
-#. Calculer les générateurs de `G_n` avec le (voir ci-dessous).
-
-    .. TODO::
-
-        Détailler; cf. les slides de James au Sage Days 86 , donner la complexité
+#. Calculer les générateurs de `G_n` avec le Lemme de Schreier (voir ci-dessous).
 
 #. Réitérer récursivement
+
+.. TODO::
+
+    Donner la complexité
 
 .. TOPIC:: `Lemme de Schreier <http://en.wikipedia.org/wiki/Schreier%27s_subgroup_lemma>`_ 
 
