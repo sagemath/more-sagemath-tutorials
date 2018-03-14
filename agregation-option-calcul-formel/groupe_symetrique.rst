@@ -30,6 +30,10 @@ Exemple::
 Pour voir ses éléments comme des fonctions::
 
     sage: F = FiniteSetMaps(['a','b','c'])
+    sage: F.domain()
+    {'a', 'b', 'c'}
+    sage: F.codomain()
+    {'a', 'b', 'c'}
     sage: for sigma in G: print F(sigma)
     map: a -> a, b -> b, c -> c
     map: a -> a, b -> c, c -> b
@@ -48,8 +52,6 @@ symétrique d’ordre* `n`.
 Exemple::
 
     sage: S3 = SymmetricGroup(3)
-
-.. TODO:: définir le domaine
 
 Maintenant, si `E` est un ensemble à `n` éléments, alors on sait que
 `S_E` est isomorphe à `S_n`::
