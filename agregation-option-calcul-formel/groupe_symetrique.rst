@@ -650,8 +650,6 @@ simplifier).
         sage: G = graphs.CycleGraph(8)
         sage: G.plot(vertex_colors={"red": [0,2,3,4,5], "blue": [1,6,7]})
 
-.. TODO:: Rajouter un exercice pour générer toutes les colorations avec IntegerVectorsModPermutationGroup
-
 Nous allons énoncer cette formule dans le cas général, en l’illustrant
 au fur et à mesure sur cet exemple.
 
@@ -660,6 +658,19 @@ au fur et à mesure sur cet exemple.
     Vérifier, en les dessinant tous à la main, qu’il y a `8`
     colliers à `n=5` perles rouges ou bleues. Préciser combien
     d'entre eux ont `0,1,2,\dots` perles rouges.
+
+    Comparer vos colliers avec les listes produites par
+    :class:`IntegerVectorsModPermutationGroup`::
+
+        sage: I = IntegerVectorsModPermutationGroup(DihedralGroup(8), max_part=1, sum=3)
+        sage: I.list()
+        [[1, 1, 1, 0, 0, 0, 0, 0],
+         [1, 1, 0, 1, 0, 0, 0, 0],
+         [1, 1, 0, 0, 1, 0, 0, 0],
+         [1, 0, 1, 0, 1, 0, 0, 0],
+         [1, 0, 1, 0, 0, 1, 0, 0]]
+        sage: I.cardinality()
+        5
 
 Soit `E` un ensemble fini (ici `E:=\left\{ 1,\dots,5\right\}`), et `F`
 un autre ensemble (ici `F:=\left\{ Rouge,Bleu\right\}`), typiquement
