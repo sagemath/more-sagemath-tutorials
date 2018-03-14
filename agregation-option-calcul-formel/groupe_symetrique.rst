@@ -662,15 +662,26 @@ au fur et à mesure sur cet exemple.
     Comparer vos colliers avec les listes produites par
     :class:`IntegerVectorsModPermutationGroup`::
 
-        sage: I = IntegerVectorsModPermutationGroup(DihedralGroup(8), max_part=1, sum=3)
-        sage: I.list()
-        [[1, 1, 1, 0, 0, 0, 0, 0],
-         [1, 1, 0, 1, 0, 0, 0, 0],
-         [1, 1, 0, 0, 1, 0, 0, 0],
-         [1, 0, 1, 0, 1, 0, 0, 0],
-         [1, 0, 1, 0, 0, 1, 0, 0]]
-        sage: I.cardinality()
-        5
+         sage: C5 = CyclicPermutationGroup(5)
+
+         sage: I = IntegerVectorsModPermutationGroup(C5, max_part=1)
+         sage: I.list()
+         [[0, 0, 0, 0, 0],
+         [1, 0, 0, 0, 0],
+         [1, 1, 0, 0, 0],
+         [1, 0, 1, 0, 0],
+         [1, 1, 1, 0, 0],
+         [1, 1, 0, 1, 0],
+         [1, 1, 1, 1, 0],
+         [1, 1, 1, 1, 1]]
+         sage: I.cardinality()
+         8
+
+         sage: I = IntegerVectorsModPermutationGroup(CyclicPermutationGroup(5), max_part=1, sum=3)
+         sage: I.list()
+         [[1, 1, 1, 0, 0], [1, 1, 0, 1, 0]]
+         sage: I.cardinality()
+         2
 
 Soit `E` un ensemble fini (ici `E:=\left\{ 1,\dots,5\right\}`), et `F`
 un autre ensemble (ici `F:=\left\{ Rouge,Bleu\right\}`), typiquement
