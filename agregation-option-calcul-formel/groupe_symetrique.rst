@@ -709,8 +709,8 @@ classes d’isomorphies, c’est-à-dire `8` dans notre exemple. Si
           = 1+q+2q^{2}+2q^{3}+q^{4}+q^{5},
 
 qui indique en particulier qu’il y a deux colliers avec respectivement
-deux ou trois perles rouges, et un collier avec respectivement une,
-deux, quatre, ou cinq perles rouges. On notera que le rôle joué par les
+deux ou trois perles rouges, et un collier avec respectivement zéro,
+une, quatre, ou cinq perles rouges. On notera que le rôle joué par les
 éléments de `F` (ici les couleurs rouges et bleues) sont
 parfaitement symétriques; cela rend relativement naturelle
 l'introduction des polynômes symétriques suivantes:
