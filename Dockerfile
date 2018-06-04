@@ -1,6 +1,6 @@
 # Dockerfile for binder (needs work)
 
-FROM sagemath/sagemath:8.0-2
+FROM sagemath/sagemath:8.2
 RUN sudo apt-get update && sudo apt-get install -y pandoc language-pack-fr
 
 # Inspired from https://mybinder.readthedocs.io/en/latest/dockerfile.html#preparing-your-dockerfile
