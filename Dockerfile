@@ -3,7 +3,7 @@
 # - https://mybinder.readthedocs.io/en/latest/dockerfile.html#preparing-your-dockerfile
 # - https://github.com/sagemath/sage-binder-env/blob/master/Dockerfile
 
-FROM sagemath/sagemath:8.1
+FROM sagemath/sagemath:8.2
 RUN sudo apt-get update && sudo apt-get install -y pandoc language-pack-fr
 
 # Copy the contents of the repo in ${HOME}
