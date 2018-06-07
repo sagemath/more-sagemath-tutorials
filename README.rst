@@ -20,7 +20,7 @@ collective writing, cross references, cross-reviews, and maturation in
 general.
 
 We use ReST + Sphinx as authoring format, following Sage's
-documentation conventions. Rationale:
+documentation conventions. Here is our rationale:
 
   - Can be tested, version controlled, ...;
   - Can be converted to many formats: ipynb, web page, pdf, ...;
