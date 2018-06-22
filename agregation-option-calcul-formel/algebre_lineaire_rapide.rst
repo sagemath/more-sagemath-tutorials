@@ -9,10 +9,6 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Algèbre li
 
 .. linkall
 
-Ce document dans d'autres formats:
-`feuille de travail <algebre_lineaire_rapide.ipynb>`_,
-`source RST <algebre_lineaire_rapide.rst>`_.
-
 Dans ce cours, nous explorons quelques limites de l'algorithme de Gauß
 en terme de performances, et donnons des approches pour les
 contourner.
