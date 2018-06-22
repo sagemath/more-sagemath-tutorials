@@ -9,10 +9,6 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Codes corre
 
 Référence: `Wikipedia: Codes correcteurs <http://fr.wikipedia.org/wiki/Code_correcteur>`_
 
-Ce document dans d'autres formats:
-`feuille de travail <codes_correcteurs.ipynb>`_,
-`source RST <codes_correcteurs.rst>`_.
-
 .. TODO:: utiliser des fonctionnalités de Sage sur les codes linéaires
 
 ************
