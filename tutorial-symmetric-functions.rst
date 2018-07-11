@@ -77,12 +77,15 @@ We first describe how to manipulate "variable free" symmetric functions (with co
 ::
 
     sage: from sage.combinat.q_analogues import *
-	....: from sage.combinat.sf.sfa import *
-	....: F = QQ['q','t'].fraction_field()
-	....: F.inject_variables()
-	....: Sym = SymmetricFunctions(F)
-	....: Sym.inject_shorthands(verbose=False) 
-	Defining q, t
+    sage: from sage.combinat.sf.sfa import *
+
+::
+
+    sage: F = QQ['q','t'].fraction_field()
+    sage: F.inject_variables()
+    Defining q, t
+    sage: Symqt = SymmetricFunctions(F)
+    sage: Symqt.inject_shorthands(verbose=False)
 
 ::
 
@@ -102,10 +105,8 @@ The keyword `verbose` allows you to make the injection quiet.
     
 ::
 
-	sage: 2+2
-	5
     sage: (q+t)*s[2,1,1]
-    (q+t)*s[2,1,1]
+    (q+t)*s[2, 1, 1]
 
 Now that we have acces to all the bases we need, we can start to manipulate them.
 Symmetric functions are indexed by partitions :math:`\mu`, with integers considered 
@@ -116,9 +117,9 @@ as partitions having size one (don't forget the brackets!)::
     
 ::
 
-	sage: e[3,2,1]
-	e[3,2,1]
-	
+    sage: e[3,2,1]
+    e[3, 2, 1]
+    
 The ring structure
 ^^^^^^^^^^^^^^^^^^
 
@@ -169,39 +170,39 @@ of their variables. Simple examples include
 To expand a symmetric function into a concrete polynomial in the set of 
 variables :math:`x_0, x_1, \dots, x_{n-1}`, one proceeds as follows::
 
-	sage: p[3].expand(3)
-	x0^3 + x1^3 + x2^3
-	
+    sage: p[3].expand(3)
+    x0^3 + x1^3 + x2^3
+    
 ::
 
-	sage: h[3].expand(3)
-	x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3
-	
+    sage: h[3].expand(3)
+    x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3
+    
 ::
-	
-	sage: e[3].expand(3)
-	x0*x1*x2
-	
-::
-
-	sage: s[3,1,1].expand(4)
-	x0^3*x1*x2 + x0^2*x1^2*x2 + x0*x1^3*x2 + x0^2*x1*x2^2 + x0*x1^2*x2^2 + x0*x1*x2^3 + x0^3*x1*x3 + x0^2*x1^2*x3 + x0*x1^3*x3 + x0^3*x2*x3 + 3*x0^2*x1*x2*x3 + 3*x0*x1^2*x2*x3 + x1^3*x2*x3 + x0^2*x2^2*x3 + 3*x0*x1*x2^2*x3 + x1^2*x2^2*x3 + x0*x2^3*x3 + x1*x2^3*x3 + x0^2*x1*x3^2 + x0*x1^2*x3^2 + x0^2*x2*x3^2 + 3*x0*x1*x2*x3^2 + x1^2*x2*x3^2 + x0*x2^2*x3^2 + x1*x2^2*x3^2 + x0*x1*x3^3 + x0*x2*x3^3 + x1*x2*x3^3
-
+    
+    sage: e[3].expand(3)
+    x0*x1*x2
+    
 ::
 
-	sage: m[3,1,1].expand(4)
-	x0^3*x1*x2 + x0*x1^3*x2 + x0*x1*x2^3 + x0^3*x1*x3 + x0*x1^3*x3 + x0^3*x2*x3 + x1^3*x2*x3 + x0*x2^3*x3 + x1*x2^3*x3 + x0*x1*x3^3 + x0*x2*x3^3 + x1*x2*x3^3
-	
+    sage: s[3,1,1].expand(4)
+    x0^3*x1*x2 + x0^2*x1^2*x2 + x0*x1^3*x2 + x0^2*x1*x2^2 + x0*x1^2*x2^2 + x0*x1*x2^3 + x0^3*x1*x3 + x0^2*x1^2*x3 + x0*x1^3*x3 + x0^3*x2*x3 + 3*x0^2*x1*x2*x3 + 3*x0*x1^2*x2*x3 + x1^3*x2*x3 + x0^2*x2^2*x3 + 3*x0*x1*x2^2*x3 + x1^2*x2^2*x3 + x0*x2^3*x3 + x1*x2^3*x3 + x0^2*x1*x3^2 + x0*x1^2*x3^2 + x0^2*x2*x3^2 + 3*x0*x1*x2*x3^2 + x1^2*x2*x3^2 + x0*x2^2*x3^2 + x1*x2^2*x3^2 + x0*x1*x3^3 + x0*x2*x3^3 + x1*x2*x3^3
+
 ::
-	
-	sage: f[3,1,1].expand(4)
-	3*x0^5 + 2*x0^4*x1 + x0^3*x1^2 + x0^2*x1^3 + 2*x0*x1^4 + 3*x1^5 + 2*x0^4*x2 + x0^3*x1*x2 + x0*x1^3*x2 + 2*x1^4*x2 + x0^3*x2^2 + x1^3*x2^2 + x0^2*x2^3 + x0*x1*x2^3 + x1^2*x2^3 + 2*x0*x2^4 + 2*x1*x2^4 + 3*x2^5 + 2*x0^4*x3 + x0^3*x1*x3 + x0*x1^3*x3 + 2*x1^4*x3 + x0^3*x2*x3 + x1^3*x2*x3 + x0*x2^3*x3 + x1*x2^3*x3 + 2*x2^4*x3 + x0^3*x3^2 + x1^3*x3^2 + x2^3*x3^2 + x0^2*x3^3 + x0*x1*x3^3 + x1^2*x3^3 + x0*x2*x3^3 + x1*x2*x3^3 + x2^2*x3^3 + 2*x0*x3^4 + 2*x1*x3^4 + 2*x2*x3^4 + 3*x3^5
+
+    sage: m[3,1,1].expand(4)
+    x0^3*x1*x2 + x0*x1^3*x2 + x0*x1*x2^3 + x0^3*x1*x3 + x0*x1^3*x3 + x0^3*x2*x3 + x1^3*x2*x3 + x0*x2^3*x3 + x1*x2^3*x3 + x0*x1*x3^3 + x0*x2*x3^3 + x1*x2*x3^3
+    
+::
+    
+    sage: f[3,1,1].expand(4)
+    3*x0^5 + 2*x0^4*x1 + x0^3*x1^2 + x0^2*x1^3 + 2*x0*x1^4 + 3*x1^5 + 2*x0^4*x2 + x0^3*x1*x2 + x0*x1^3*x2 + 2*x1^4*x2 + x0^3*x2^2 + x1^3*x2^2 + x0^2*x2^3 + x0*x1*x2^3 + x1^2*x2^3 + 2*x0*x2^4 + 2*x1*x2^4 + 3*x2^5 + 2*x0^4*x3 + x0^3*x1*x3 + x0*x1^3*x3 + 2*x1^4*x3 + x0^3*x2*x3 + x1^3*x2*x3 + x0*x2^3*x3 + x1*x2^3*x3 + 2*x2^4*x3 + x0^3*x3^2 + x1^3*x3^2 + x2^3*x3^2 + x0^2*x3^3 + x0*x1*x3^3 + x1^2*x3^3 + x0*x2*x3^3 + x1*x2*x3^3 + x2^2*x3^3 + 2*x0*x3^4 + 2*x1*x3^4 + 2*x2*x3^4 + 3*x3^5
 
 For sure, one may use any other set of variables via the optional "alphabet"::
 
-	sage: g = s[2,1]
-	....: g.expand(3, alphabet =['x','y','z'])
-	x^2*y + x*y^2 + x^2*z + 2*x*y*z + y^2*z + x*z^2 + y*z^2
+    sage: g = s[2,1]
+    sage: g.expand(3, alphabet =['x','y','z'])
+    x^2*y + x*y^2 + x^2*z + 2*x*y*z + y^2*z + x*z^2 + y*z^2
 
 .. TOPIC:: Exercise
 
@@ -228,32 +229,31 @@ For sure, one may use any other set of variables via the optional "alphabet"::
         sage: R.inject_variables()
         Defining x0, x1, x2, x3, x4
         sage: l = list(R.gens())
-		....: for xn, n in zip(l[1:], range(2,6)) :
-		....:     f1 = e([k]).expand(n)
-		....:     print f1
-		....:     f2 = e([k]).expand(n-1,l[:n-1])+xn*(e([k-1]).expand(n-1,l[:n-1]))
-		....:     print f2
-		....:     g1 = h([k]).expand(n)
-		....:     print g1
-		....:     g2 = h([k]).expand(n-1,l[:n-1])+xn*(h([k-1]).expand(n,l[:n]))
-		....:     print g2
-		....:     
-		0
-		0
-		x0^3 + x0^2*x1 + x0*x1^2 + x1^3
-		x0^3 + x0^2*x1 + x0*x1^2 + x1^3
-		x0*x1*x2
-		x0*x1*x2
-		x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3
-		x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3
-		x0*x1*x2 + x0*x1*x3 + x0*x2*x3 + x1*x2*x3
-		x0*x1*x2 + x0*x1*x3 + x0*x2*x3 + x1*x2*x3
-		x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3 + x0^2*x3 + x0*x1*x3 + x1^2*x3 + x0*x2*x3 + x1*x2*x3 + x2^2*x3 + x0*x3^2 + x1*x3^2 + x2*x3^2 + x3^3
-		x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3 + x0^2*x3 + x0*x1*x3 + x1^2*x3 + x0*x2*x3 + x1*x2*x3 + x2^2*x3 + x0*x3^2 + x1*x3^2 + x2*x3^2 + x3^3
-		x0*x1*x2 + x0*x1*x3 + x0*x2*x3 + x1*x2*x3 + x0*x1*x4 + x0*x2*x4 + x1*x2*x4 + x0*x3*x4 + x1*x3*x4 + x2*x3*x4
-		x0*x1*x2 + x0*x1*x3 + x0*x2*x3 + x1*x2*x3 + x0*x1*x4 + x0*x2*x4 + x1*x2*x4 + x0*x3*x4 + x1*x3*x4 + x2*x3*x4
-		x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3 + x0^2*x3 + x0*x1*x3 + x1^2*x3 + x0*x2*x3 + x1*x2*x3 + x2^2*x3 + x0*x3^2 + x1*x3^2 + x2*x3^2 + x3^3 + x0^2*x4 + x0*x1*x4 + x1^2*x4 + x0*x2*x4 + x1*x2*x4 + x2^2*x4 + x0*x3*x4 + x1*x3*x4 + x2*x3*x4 + x3^2*x4 + x0*x4^2 + x1*x4^2 + x2*x4^2 + x3*x4^2 + x4^3
-		x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3 + x0^2*x3 + x0*x1*x3 + x1^2*x3 + x0*x2*x3 + x1*x2*x3 + x2^2*x3 + x0*x3^2 + x1*x3^2 + x2*x3^2 + x3^3 + x0^2*x4 + x0*x1*x4 + x1^2*x4 + x0*x2*x4 + x1*x2*x4 + x2^2*x4 + x0*x3*x4 + x1*x3*x4 + x2*x3*x4 + x3^2*x4 + x0*x4^2 + x1*x4^2 + x2*x4^2 + x3*x4^2 + x4^3
+        sage: for xn, n in zip(l[1:], range(2,6)):
+        ....:     f1 = e([k]).expand(n)
+        ....:     print(f1)
+        ....:     f2 = e([k]).expand(n-1,l[:n-1])+xn*(e([k-1]).expand(n-1,l[:n-1]))
+        ....:     print(f2)
+        ....:     g1 = h([k]).expand(n)
+        ....:     print(g1)
+        ....:     g2 = h([k]).expand(n-1,l[:n-1])+xn*(h([k-1]).expand(n,l[:n]))
+        ....:     print(g2)     
+        0
+        0
+        x0^3 + x0^2*x1 + x0*x1^2 + x1^3
+        x0^3 + x0^2*x1 + x0*x1^2 + x1^3
+        x0*x1*x2
+        x0*x1*x2
+        x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3
+        x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3
+        x0*x1*x2 + x0*x1*x3 + x0*x2*x3 + x1*x2*x3
+        x0*x1*x2 + x0*x1*x3 + x0*x2*x3 + x1*x2*x3
+        x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3 + x0^2*x3 + x0*x1*x3 + x1^2*x3 + x0*x2*x3 + x1*x2*x3 + x2^2*x3 + x0*x3^2 + x1*x3^2 + x2*x3^2 + x3^3
+        x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3 + x0^2*x3 + x0*x1*x3 + x1^2*x3 + x0*x2*x3 + x1*x2*x3 + x2^2*x3 + x0*x3^2 + x1*x3^2 + x2*x3^2 + x3^3
+        x0*x1*x2 + x0*x1*x3 + x0*x2*x3 + x1*x2*x3 + x0*x1*x4 + x0*x2*x4 + x1*x2*x4 + x0*x3*x4 + x1*x3*x4 + x2*x3*x4
+        x0*x1*x2 + x0*x1*x3 + x0*x2*x3 + x1*x2*x3 + x0*x1*x4 + x0*x2*x4 + x1*x2*x4 + x0*x3*x4 + x1*x3*x4 + x2*x3*x4
+        x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3 + x0^2*x3 + x0*x1*x3 + x1^2*x3 + x0*x2*x3 + x1*x2*x3 + x2^2*x3 + x0*x3^2 + x1*x3^2 + x2*x3^2 + x3^3 + x0^2*x4 + x0*x1*x4 + x1^2*x4 + x0*x2*x4 + x1*x2*x4 + x2^2*x4 + x0*x3*x4 + x1*x3*x4 + x2*x3*x4 + x3^2*x4 + x0*x4^2 + x1*x4^2 + x2*x4^2 + x3*x4^2 + x4^3
+        x0^3 + x0^2*x1 + x0*x1^2 + x1^3 + x0^2*x2 + x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x2^3 + x0^2*x3 + x0*x1*x3 + x1^2*x3 + x0*x2*x3 + x1*x2*x3 + x2^2*x3 + x0*x3^2 + x1*x3^2 + x2*x3^2 + x3^3 + x0^2*x4 + x0*x1*x4 + x1^2*x4 + x0*x2*x4 + x1*x2*x4 + x2^2*x4 + x0*x3*x4 + x1*x3*x4 + x2*x3*x4 + x3^2*x4 + x0*x4^2 + x1*x4^2 + x2*x4^2 + x3*x4^2 + x4^3
 
 
 Convert a concrete symmetric polynomial into an abstract symmetric function
@@ -266,21 +266,21 @@ in the variables, maybe written as a formal symmetric function in any chosen bas
 ::
 
     sage: pol1 = (p([2])+e([2,1])).expand(3)
-    ....: pol1
-	x0^2*x1 + x0*x1^2 + x0^2*x2 + 3*x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x0^2 + x1^2 + x2^2
+    sage: pol1
+    x0^2*x1 + x0*x1^2 + x0^2*x2 + 3*x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x0^2 + x1^2 + x2^2
     sage: n = 3
-	....: R = PolynomialRing(FractionField(QQ['q','t']),'x',n)
-	....: X=R.gens()
-	....: R.inject_variables()
-	Defining x0, x1, x2
-	
+    sage: R = PolynomialRing(FractionField(QQ['q','t']),'x',n)
+    sage: X=R.gens()
+    sage: R.inject_variables()
+    Defining x0, x1, x2
+    
 ::
 
-	sage: Discr=mul(mul((X[k]-X[j])^2 for j in range(k)) for k in range(1,n))
-	sage: Discr
-	x0^4*x1^2 + (-2)*x0^3*x1^3 + x0^2*x1^4 + (-2)*x0^4*x1*x2 + 2*x0^3*x1^2*x2 + 2*x0^2*x1^3*x2 + (-2)*x0*x1^4*x2 + x0^4*x2^2 + 2*x0^3*x1*x2^2 + (-6)*x0^2*x1^2*x2^2 + 2*x0*x1^3*x2^2 + x1^4*x2^2 + (-2)*x0^3*x2^3 + 2*x0^2*x1*x2^3 + 2*x0*x1^2*x2^3 + (-2)*x1^3*x2^3 + x0^2*x2^4 + (-2)*x0*x1*x2^4 + x1^2*x2^4
-	sage: e.from_polynomial(Discr)
-	e[2, 2, 1, 1] - 4*e[2, 2, 2] - 4*e[3, 1, 1, 1] + 18*e[3, 2, 1] - 27*e[3, 3] - 8*e[4, 1, 1] + 24*e[4, 2]
+    sage: Discr=mul(mul((X[k]-X[j])^2 for j in range(k)) for k in range(1,n))
+    sage: Discr
+    x0^4*x1^2 + (-2)*x0^3*x1^3 + x0^2*x1^4 + (-2)*x0^4*x1*x2 + 2*x0^3*x1^2*x2 + 2*x0^2*x1^3*x2 + (-2)*x0*x1^4*x2 + x0^4*x2^2 + 2*x0^3*x1*x2^2 + (-6)*x0^2*x1^2*x2^2 + 2*x0*x1^3*x2^2 + x1^4*x2^2 + (-2)*x0^3*x2^3 + 2*x0^2*x1*x2^3 + 2*x0*x1^2*x2^3 + (-2)*x1^3*x2^3 + x0^2*x2^4 + (-2)*x0*x1*x2^4 + x1^2*x2^4
+    sage: e.from_polynomial(Discr)
+    e[2, 2, 1, 1] - 4*e[2, 2, 2] - 4*e[3, 1, 1, 1] + 18*e[3, 2, 1] - 27*e[3, 3] - 8*e[4, 1, 1] + 24*e[4, 2]
 
 
 The ``pol`` input of the function ``from_polynomial(pol)`` is assumed to 
@@ -290,8 +290,8 @@ lie in a polynomial ring over the same base field as that used for the symmetric
 ::
 
     sage: n = 3
-    ....: R = PolynomialRing(FractionField(QQ['q','t']),'y',n)
-    ....: R.inject_variables()
+    sage: R = PolynomialRing(FractionField(QQ['q','t']),'y',n)
+    sage: R.inject_variables()
     Defining y0, y1, y2
     
 Here, we will work with three variables (:math:`y_0, y_1` and :math:`y_2`).
@@ -302,7 +302,7 @@ Finally, we can declare our polynomial and convert it into a symmetric function
 ::
 
     sage: pol2 = y0^2*y1 + y0*y1^2 + y0^2*y2 + 2*y0*y1*y2 + y1^2*y2 + y0*y2^2 + y1*y2^2
-    ....: m.from_polynomial(pol2)
+    sage: m.from_polynomial(pol2)
     2*m[1, 1, 1] + m[2, 1]
 
 
@@ -312,10 +312,9 @@ In the preceeding example, the base ring of polynomials is the same as the base
 ::
 
     sage: print(s.base_ring())
-    Rational Field
+    Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field
     sage: print(pol2.base_ring())
-    Rational Field
-
+    Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field
 
 
 Thus a concrete symmetric polynomial over :math:`\mathbb{Q}(q,t)` may be transformed into an abstract symmetric function in any basis.
@@ -355,22 +354,20 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
     ....:     print(s(mu))
     ....:     print(e(s(mu)))
     s[5]
-	e[1, 1, 1, 1, 1] - 4*e[2, 1, 1, 1] + 3*e[2, 2, 1] + 3*e[3, 1, 1] - 2*e[3, 2] - 2*e[4, 1] + e[5]
-	s[4, 1]
-	e[2, 1, 1, 1] - 2*e[2, 2, 1] - e[3, 1, 1] + 2*e[3, 2] + e[4, 1] - e[5]
-	s[3, 2]
-	e[2, 2, 1] - e[3, 1, 1] - e[3, 2] + e[4, 1]
-	s[3, 1, 1]
-	e[3, 1, 1] - e[3, 2] - e[4, 1] + e[5]
-	s[2, 2, 1]
-	e[3, 2] - e[4, 1]
-	s[2, 1, 1, 1]
-	e[4, 1] - e[5]
-	s[1, 1, 1, 1, 1]
-	e[5]
+    e[1, 1, 1, 1, 1] - 4*e[2, 1, 1, 1] + 3*e[2, 2, 1] + 3*e[3, 1, 1] - 2*e[3, 2] - 2*e[4, 1] + e[5]
+    s[4, 1]
+    e[2, 1, 1, 1] - 2*e[2, 2, 1] - e[3, 1, 1] + 2*e[3, 2] + e[4, 1] - e[5]
+    s[3, 2]
+    e[2, 2, 1] - e[3, 1, 1] - e[3, 2] + e[4, 1]
+    s[3, 1, 1]
+    e[3, 1, 1] - e[3, 2] - e[4, 1] + e[5]
+    s[2, 2, 1]
+    e[3, 2] - e[4, 1]
+    s[2, 1, 1, 1]
+    e[4, 1] - e[5]
+    s[1, 1, 1, 1, 1]
+    e[5]
 
-
-::
 
 .. TOPIC:: Exercise
 
@@ -403,7 +400,7 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 ::
 
     sage: for n in range (1,5) :
-    ....: 	  print p(h([n])) == sum(p(mu)/zee(mu) for mu in Partitions(n))
+    ....:     print(p(h([n])) == sum(p(mu)/zee(mu) for mu in Partitions(n)))
     True
     True
     True
@@ -434,23 +431,24 @@ These are eigenfunctions of the operator :math:`\nabla`.
 
 ::
 
-    sage: H = Sym.macdonald().Ht()
-	....: H.print_options(prefix="H")
-	....: t=H.t
-	....: q=H.q
+    sage: H = Symqt.macdonald().Ht()
 
 ::
 
     sage: s(H([2,1]))
-	q*t*s[1, 1, 1] + (q+t)*s[2, 1] + s[3]
-	sage: H(s[2,1])
-	((-q)/(-q*t^2+t^3+q^2-q*t))*H[1, 1, 1] + ((q^2+q*t+t^2)/(-q^2*t^2+q^3+t^3-q*t))*H[2, 1] + (t/(-q^3+q^2*t+q*t-t^2))*H[3]
+    q*t*s[1, 1, 1] + (q+t)*s[2, 1] + s[3]
+    sage: H(s[2,1])
+    ((-q)/(-q*t^2+t^3+q^2-q*t))*McdHt[1, 1, 1] + ((q^2+q*t+t^2)/(-q^2*t^2+q^3+t^3-q*t))*McdHt[2, 1] + (t/(-q^3+q^2*t+q*t-t^2))*McdHt[3]
 
 
 ::
 
     sage: [H(mu).nabla() for mu in Partitions(4)]
-    [q^6*H[4], q^3*t*H[3,1], q^2*t^2*H[2,2], q*t^3*H[2,1,1], t^6*H[1,1,1,1]
+    [q^6*McdHt[4],
+     q^3*t*McdHt[3, 1],
+     q^2*t^2*McdHt[2, 2],
+     q*t^3*McdHt[2, 1, 1],
+     t^6*McdHt[1, 1, 1, 1]]
 
 
 More basic commands on symmetric functions
@@ -541,20 +539,20 @@ The :math:`\omega` involution is the linear extension of the map which sends :ma
 
 :: 
 
-	sage: f = s[2]^2; f
-	s[2, 2] + s[3, 1] + s[4]
+    sage: f = s[2]^2; f
+    s[2, 2] + s[3, 1] + s[4]
     sage: h(f)
-    h[2,2]
+    h[2, 2]
     sage: e(f.omega())
-    e[2,2]
+    e[2, 2]
     sage: [(s(mu),s(mu).omega()) for mu in Partitions(5)]
-	[(s[5], s[1, 1, 1, 1, 1]),
-	 (s[4, 1], s[2, 1, 1, 1]),
-	 (s[3, 2], s[2, 2, 1]),
-	 (s[3, 1, 1], s[3, 1, 1]),
-	 (s[2, 2, 1], s[3, 2]),
-	 (s[2, 1, 1, 1], s[4, 1]),
-	 (s[1, 1, 1, 1, 1], s[5])]
+    [(s[5], s[1, 1, 1, 1, 1]),
+     (s[4, 1], s[2, 1, 1, 1]),
+     (s[3, 2], s[2, 2, 1]),
+     (s[3, 1, 1], s[3, 1, 1]),
+     (s[2, 2, 1], s[3, 2]),
+     (s[2, 1, 1, 1], s[4, 1]),
+     (s[1, 1, 1, 1, 1], s[5])]
 
 ::
 
@@ -580,14 +578,14 @@ Thus, we get
 
         sage: p([2,2,1]).scalar(p([2,2,1]))
         8
-		sage: Matrix([[p(mu).scalar(p(nu)/zee(mu)) for nu in Partitions(5)] for mu in Partitions(5)])
-		[1 0 0 0 0 0 0]
-		[0 1 0 0 0 0 0]
-		[0 0 1 0 0 0 0]
-		[0 0 0 1 0 0 0]
-		[0 0 0 0 1 0 0]
-		[0 0 0 0 0 1 0]
-		[0 0 0 0 0 0 1]
+        sage: Matrix([[p(mu).scalar(p(nu)/zee(mu)) for nu in Partitions(5)] for mu in Partitions(5)])
+        [1 0 0 0 0 0 0]
+        [0 1 0 0 0 0 0]
+        [0 0 1 0 0 0 0]
+        [0 0 0 1 0 0 0]
+        [0 0 0 0 1 0 0]
+        [0 0 0 0 0 1 0]
+        [0 0 0 0 0 0 1]
 
 
 Other scalar products, such as the :math:`q,t`-scalar product
@@ -602,10 +600,10 @@ this value is :math:`z_{\mu}`, but other interesting cases include:
 
 This is already refined as `scalar_qt()`::
 
-	sage: Matrix([[p(mu).scalar_qt(p(nu)/zee(mu)) for nu in Partitions(3)] for mu in Partitions(3)])
-	[                            (-q^3 + 1)/(-t^3 + 1)                                                 0                                                 0]
-	[                                                0           (q^3 - q^2 - q + 1)/(t^3 - t^2 - t + 1)                                                 0]
-	[                                                0                                                 0 (-q^3 + 3*q^2 - 3*q + 1)/(-t^3 + 3*t^2 - 3*t + 1)]
+    sage: Matrix([[p(mu).scalar_qt(p(nu)/zee(mu)) for nu in Partitions(3)] for mu in Partitions(3)])
+    [                            (-q^3 + 1)/(-t^3 + 1)                                                 0                                                 0]
+    [                                                0           (q^3 - q^2 - q + 1)/(t^3 - t^2 - t + 1)                                                 0]
+    [                                                0                                                 0 (-q^3 + 3*q^2 - 3*q + 1)/(-t^3 + 3*t^2 - 3*t + 1)]
 
 
 Schur Positivity
@@ -644,9 +642,6 @@ For example, we can verify the well-known Schur positivity of product of Schur
     The product of  s[1, 1]  and  s[3]  is Schur positive.
     The product of  s[1, 1]  and  s[2, 1]  is Schur positive.
     The product of  s[1, 1]  and  s[1, 1, 1]  is Schur positive.
-
-::
-
 
 
 .. TOPIC:: Exercise
@@ -746,12 +741,12 @@ of SAGE-variables to be considered as **constants**, using the option
 ::
 
     sage: p([3,2]).plethysm(h([3,1]))
-	1/36*p[3, 3, 3, 3, 2, 2, 2, 2] + 1/12*p[4, 3, 3, 3, 3, 2, 2] + 1/12*p[6, 3, 3, 2, 2, 2, 2] + 1/18*p[6, 3, 3, 3, 3, 2] + 1/4*p[6, 4, 3, 3, 2, 2] + 1/6*p[6, 6, 3, 3, 2] + 1/18*p[9, 3, 2, 2, 2, 2] + 1/6*p[9, 4, 3, 2, 2] + 1/9*p[9, 6, 3, 2]
-	sage: g = p([1]) + t*s([2,1])
-	....: p([2]).plethysm(g,include=[t])
-	p[2] + 1/3*t^2*p[2, 2, 2] + (-1/3*t^2)*p[6]
-	sage: p([2]).plethysm(g,exclude=[t])
-	p[2] + 1/3*t*p[2, 2, 2] + (-1/3*t)*p[6]
+    1/36*p[3, 3, 3, 3, 2, 2, 2, 2] + 1/12*p[4, 3, 3, 3, 3, 2, 2] + 1/12*p[6, 3, 3, 2, 2, 2, 2] + 1/18*p[6, 3, 3, 3, 3, 2] + 1/4*p[6, 4, 3, 3, 2, 2] + 1/6*p[6, 6, 3, 3, 2] + 1/18*p[9, 3, 2, 2, 2, 2] + 1/6*p[9, 4, 3, 2, 2] + 1/9*p[9, 6, 3, 2]
+    sage: g = p([1]) + t*s([2,1])
+    sage: p([2]).plethysm(g,include=[t])
+    p[2] + 1/3*t^2*p[2, 2, 2] + (-1/3*t^2)*p[6]
+    sage: p([2]).plethysm(g,exclude=[t])
+    p[2] + 1/3*t*p[2, 2, 2] + (-1/3*t)*p[6]
 
 It is costumary to also write :math:`f[g]` for :math:`f\circ g` in 
 mathematical texts, but SAGE uses the shorthand notation :math:`f(g)` 
@@ -778,7 +773,7 @@ symmetric function (unique up to a scalar) of degree 1.
 ::
 
     sage: s[3](s[4](One*(1+q)))
-    (q^12+q^11+2*q^10+3*q^9+4*q^8+4*q^7+5*q^6+4*q^5+4*q^4+3*q^3+2*q^2+q+1)*s
+    (q^12+q^11+2*q^10+3*q^9+4*q^8+4*q^7+5*q^6+4*q^5+4*q^4+3*q^3+2*q^2+q+1)*s[]
 
 
 One should compare this with
@@ -792,14 +787,13 @@ One should compare this with
 ::
 
     sage: s[4](X*(1+q))
-    q^2*s[2,2] + (q^3+q^2+q)*s[3,1] + (q^4+q^3+q^2+q+1)*s[4]
+    q^2*s[2, 2] + (q^3+q^2+q)*s[3, 1] + (q^4+q^3+q^2+q+1)*s[4]
 
 
 ::
 
     sage: s[4](X/(1-q)).map_coefficients(factor)
-	((q-1)^-4*(q+1)^-2*q^6*(q^2+1)^-1*(q^2+q+1)^-1)*s[1, 1, 1, 1] + ((q-1)^-4*(q+1)^-2*q^3*(q^2+1)^-1)*s[2, 1, 1] + ((q-1)^-4*(q+1)^-2*q^2*(q^2+q+1)^-1)*s[2, 2] + ((q-1)^-4*(q+1)^-2*q*(q^2+1)^-1)*s[3, 1] + ((q-1)^-4*(q+1)^-2*(q^2+1)^-1*(q^2+q+1)^-1)*s[4]
-
+    ((q-1)^-4*(q+1)^-2*q^6*(q^2+1)^-1*(q^2+q+1)^-1)*s[1, 1, 1, 1] + ((q-1)^-4*(q+1)^-2*q^2*(q^2+q+1)^-1)*s[2, 2] + ((q-1)^-4*(q+1)^-2*q^3*(q^2+1)^-1)*s[2, 1, 1] + ((q-1)^-4*(q+1)^-2*q*(q^2+1)^-1)*s[3, 1] + ((q-1)^-4*(q+1)^-2*(q^2+1)^-1*(q^2+q+1)^-1)*s[4]
 
 ::
 
@@ -838,7 +832,7 @@ of the bigraded character of the :math:`\mathbb{S}_n`-module of diagonal harmoni
 ::
 
     sage: s(e[3].nabla())
-    (q^3+q^2*t+q*t^2+t^3+q*t)*s[1,1,1] + (q^2+q*t+t^2+q+t)*s[2,1] + s[3]
+    (q^3+q^2*t+q*t^2+t^3+q*t)*s[1, 1, 1] + (q^2+q*t+t^2+q+t)*s[2, 1] + s[3]
 
 
 The global dimension of this module is :math:`(n+1)^{n-1}`, and the dimension of its alternating component (see exercise below) is the Catalan number :math:`C_n=\frac{1}{n+1}\binom{2n}{n}`. And there are many other interesting properties of the bigraded version.
@@ -856,7 +850,7 @@ There are also interesting conjectures on the effect of :math:`\nabla` on Schur 
 ::
 
     sage: (-s([2,2,1])).nabla()
-    (q^4*t+q^3*t^2+q^2*t^3+q*t^4)*s[1, 1, 1, 1, 1] + (q^4+2*q^3*t+2*q^2*t^2+2*q*t^3+t^4+q^2*t+q*t^2)*s[2, 1, 1, 1] + (q^3+2*q^2*t+2*q*t^2+t^3)*s[2, 2, 1] + (q^3+q^2*t+q*t^2+t^3+q^2+2*q*t+t^2)*s[3, 1, 1] + (q^2+q*t+t^2)*s[3, 2] + (q+t)*s[4, 1]
+    (q^6*t^3+q^5*t^4+q^4*t^5+q^3*t^6)*s[1, 1, 1, 1, 1] + (q^5*t^2+2*q^4*t^3+2*q^3*t^4+q^2*t^5)*s[2, 2, 1] + (q^6*t^2+2*q^5*t^3+2*q^4*t^4+2*q^3*t^5+q^2*t^6+q^4*t^3+q^3*t^4)*s[2, 1, 1, 1] + (q^4*t^2+q^3*t^3+q^2*t^4)*s[3, 2] + (q^5*t^2+q^4*t^3+q^3*t^4+q^2*t^5+q^4*t^2+2*q^3*t^3+q^2*t^4)*s[3, 1, 1] + (q^3*t^2+q^2*t^3)*s[4, 1]
 
 .. TOPIC:: Exercise
 
@@ -869,32 +863,32 @@ There are also interesting conjectures on the effect of :math:`\nabla` on Schur 
  *Note that the n-th q,t-Catalan number can be computed by using the command ``qt_catalan_number(n)`` which has to be imported from* ``sage.combinat.q_analogues`` if it hasn't already been done.*
 
 ::
-	
-	sage: from sage.combinat.q_analogues import *
-	....: for n in range (1,6) :
-	....:     show((n,qt_catalan_number(n)))
-	(1, 1)
-	(2, q + t)
-	(3, q^3 + q^2*t + q*t^2 + t^3 + q*t)
-	(4, q^6 + q^5*t + q^4*t^2 + q^3*t^3 + q^2*t^4 + q*t^5 + t^6 + q^4*t + q^3*t^2 + q^2*t^3 + q*t^4 + q^3*t + q^2*t^2 + q*t^3)
-	(5, q^10 + q^9*t + q^8*t^2 + q^7*t^3 + q^6*t^4 + q^5*t^5 + q^4*t^6 + q^3*t^7 + q^2*t^8 + q*t^9 + t^10 + q^8*t + q^7*t^2 + q^6*t^3 + q^5*t^4 + q^4*t^5 + q^3*t^6 + q^2*t^7 + q*t^8 + q^7*t + 2*q^6*t^2 + 2*q^5*t^3 + 2*q^4*t^4 + 2*q^3*t^5 + 2*q^2*t^6 + q*t^7 + q^6*t + q^5*t^2 + 2*q^4*t^3 + 2*q^3*t^4 + q^2*t^5 + q*t^6 + q^4*t^2 + q^3*t^3 + q^2*t^4)
-	sage: for n in range (1,6) :
-    ....:     show((n,e([n]).nabla().scalar(e([n])).substitute({q:1,t:1})))
-	(1, 1)
-	(2, 2)
-	(3, 5)
-	(4, 14)
-	(5, 42)
-	
+    
+    sage: from sage.combinat.q_analogues import *
+    sage: for n in range (1,6) :
+    ....:     print((n,qt_catalan_number(n)))
+    (1, 1)
+    (2, q + t)
+    (3, q^3 + q^2*t + q*t^2 + t^3 + q*t)
+    (4, q^6 + q^5*t + q^4*t^2 + q^3*t^3 + q^2*t^4 + q*t^5 + t^6 + q^4*t + q^3*t^2 + q^2*t^3 + q*t^4 + q^3*t + q^2*t^2 + q*t^3)
+    (5, q^10 + q^9*t + q^8*t^2 + q^7*t^3 + q^6*t^4 + q^5*t^5 + q^4*t^6 + q^3*t^7 + q^2*t^8 + q*t^9 + t^10 + q^8*t + q^7*t^2 + q^6*t^3 + q^5*t^4 + q^4*t^5 + q^3*t^6 + q^2*t^7 + q*t^8 + q^7*t + 2*q^6*t^2 + 2*q^5*t^3 + 2*q^4*t^4 + 2*q^3*t^5 + 2*q^2*t^6 + q*t^7 + q^6*t + q^5*t^2 + 2*q^4*t^3 + 2*q^3*t^4 + q^2*t^5 + q*t^6 + q^4*t^2 + q^3*t^3 + q^2*t^4)
+    sage: for n in range (1,6) :
+    ....:     print((n,e([n]).nabla().scalar(e([n])).substitute({q:1,t:1})))
+    (1, 1)
+    (2, 2)
+    (3, 5)
+    (4, 14)
+    (5, 42)
+    
 ::
 
-	sage: for n in range (1,6) :
-    ....:     show((n,factor(e([n]).nabla().scalar(e([n])).substitute({t:1/q}))))
-	(1, 1)
-	(2, q^-1 * (q^2 + 1))
-	(3, q^-3 * (q^2 - q + 1) * (q^4 + q^3 + q^2 + q + 1))
-	(4, q^-6 * (q^2 - q + 1) * (q^4 + 1) * (q^6 + q^5 + q^4 + q^3 + q^2 + q + 1))
-	(5, q^-10 * (q^4 + 1) * (q^4 - q^3 + q^2 - q + 1) * (q^6 + q^3 + 1) * (q^6 + q^5 + q^4 + q^3 + q^2 + q + 1))
+    sage: for n in range (1,6) :
+    ....:     print((n,factor(e([n]).nabla().scalar(e([n])).substitute({t:1/q}))))
+    (1, 1)
+    (2, q^-1 * (q^2 + 1))
+    (3, q^-3 * (q^2 - q + 1) * (q^4 + q^3 + q^2 + q + 1))
+    (4, q^-6 * (q^2 - q + 1) * (q^4 + 1) * (q^6 + q^5 + q^4 + q^3 + q^2 + q + 1))
+    (5, q^-10 * (q^4 + 1) * (q^4 - q^3 + q^2 - q + 1) * (q^6 + q^3 + 1) * (q^6 + q^5 + q^4 + q^3 + q^2 + q + 1))
 
 
 .. TOPIC:: Solution
@@ -926,13 +920,16 @@ directly::
 or to lift to the ring of symmetric functions::
 
     sage: f.lift()
-    s[2, 2, 2] + s[2, 2, 1, 1] + s[3, 3] + 2*s[3, 2, 1] + s[3, 1, 1, 1] + s[4, 1, 1] + s[4, 2]
+    s[2, 2, 1, 1] + s[2, 2, 2] + s[3, 1, 1, 1] + 2*s[3, 2, 1] + s[3, 3] + s[4, 1, 1] + s[4, 2]
+
 
 
 However, it is not always possible to convert a symmetric function to the :math:`k`-bounded subspace::
 
     sage: s = Sym.schur()
-    sage: ks(s[2,1,1])  # not tested
+    sage: ks(s[2,1])
+    ks3[2, 1]
+
 
 The :math:`k`-Schur functions are more generally defined with a parameter :math:`t` and they are
 a basis of the subspace spanned by the Hall-Littlewood :math:`Qp` symmetric functions
@@ -1050,7 +1047,7 @@ The Schur functions `s_\lambda` can also be interpreted as irreducible character
 ::
 
     sage: M = Matrix([[s[mu.conjugate()].scalar(p[nu.conjugate()]) for nu in Partitions(5)] for mu in Partitions(5)])
-	....: M
+    sage: M
     [ 1 -1  1  1 -1 -1  1]
     [ 4 -2  0  1  1  0 -1]
     [ 5 -1  1 -1 -1  1  0]
@@ -1080,12 +1077,12 @@ composition of the `S_n` representation represented by :math:`g` with the
 ::
 
     sage: g = s[2]^2
-	....: g.inner_plethysm(s[2])
-	s[2]
-	sage: Matrix([[s(mu).inner_plethysm(s(nu)) for nu in Partitions(4)] for mu in Partitions(3)])
-	[                                  s[4]          s[2, 1, 1] + 2*s[3, 1] + s[4]         s[1, 1, 1, 1] + s[2, 2] + s[4] s[1, 1, 1, 1] + 2*s[2, 1, 1] + s[3, 1]                          s[1, 1, 1, 1]]
-	[                                     0         s[2, 1, 1] + s[2, 2] + s[3, 1]                                s[2, 2]         s[2, 1, 1] + s[2, 2] + s[3, 1]                                      0]
-	[                                     0                          s[1, 1, 1, 1]                                      0                                   s[4]                                      0]
+    sage: g.inner_plethysm(s[2])
+    s[2]
+    sage: Matrix([[s(mu).inner_plethysm(s(nu)) for nu in Partitions(4)] for mu in Partitions(3)])
+    [                                  s[4]          s[2, 1, 1] + 2*s[3, 1] + s[4]         s[1, 1, 1, 1] + s[2, 2] + s[4] s[1, 1, 1, 1] + 2*s[2, 1, 1] + s[3, 1]                          s[1, 1, 1, 1]]
+    [                                     0         s[2, 1, 1] + s[2, 2] + s[3, 1]                                s[2, 2]         s[2, 1, 1] + s[2, 2] + s[3, 1]                                      0]
+    [                                     0                          s[1, 1, 1, 1]                                      0                                   s[4]                                      0]
 
 
 More specific applications
@@ -1100,11 +1097,11 @@ Sage knows certain categorical information about this algebra.
 
 ::
 
-	sage: Sym.category()
-	Join of Category of hopf algebras over Rational Field
-		and Category of graded algebras over Rational Field
-		and Category of monoids with realizations
-		and Category of coalgebras over Rational Field with realizations
+    sage: Sym.category()
+    Join of Category of hopf algebras over Fraction Field of Univariate Polynomial Ring in t over Rational Field
+        and Category of graded algebras over Fraction Field of Univariate Polynomial Ring in t over Rational Field
+        and Category of monoids with realizations
+        and Category of coalgebras over Fraction Field of Univariate Polynomial Ring in t over Rational Field with realizations
 
 
 Let us explore the other operations of :math:`p`. We can ask for the mathematical properties of :math:`p`.
@@ -1112,33 +1109,33 @@ Let us explore the other operations of :math:`p`. We can ask for the mathematica
 ::
 
     sage: p.categories()
-    [Category of graded bases of Symmetric Functions over Rational Field,
-     Category of filtered bases of Symmetric Functions over Rational Field,
-     Category of bases of Symmetric Functions over Rational Field,
-     Category of graded hopf algebras with basis over Rational Field,
-     Category of filtered hopf algebras with basis over Rational Field,
-     Category of hopf algebras with basis over Rational Field,
-     Category of realizations of hopf algebras over Rational Field,
-     Category of hopf algebras over Rational Field,
-     Category of graded algebras with basis over Rational Field,
-     Category of filtered algebras with basis over Rational Field,
-     Category of bialgebras with basis over Rational Field,
-     Category of algebras with basis over Rational Field,
-     Category of graded algebras over Rational Field,
-     Category of filtered algebras over Rational Field,
-     Category of bialgebras over Rational Field,
-     Category of commutative algebras over Rational Field,
-     Category of algebras over Rational Field,
+    [Category of graded bases of Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of filtered bases of Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of bases of Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of graded hopf algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of filtered hopf algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of hopf algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of realizations of hopf algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of hopf algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of graded algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of filtered algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of bialgebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of graded algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of commutative algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of filtered algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of bialgebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
      Category of commutative rings,
      Category of rings,
-     Category of associative algebras over Rational Field,
+     Category of associative algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
      Category of rngs,
      Category of semirings,
      Category of associative additive commutative additive associative additive unital distributive magmas and additive magmas,
-     Category of unital algebras with basis over Rational Field,
-     Category of magmatic algebras with basis over Rational Field,
-     Category of unital algebras over Rational Field,
-     Category of magmatic algebras over Rational Field,
+     Category of unital algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of magmatic algebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of unital algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of magmatic algebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
      Category of additive commutative additive associative additive unital distributive magmas and additive magmas,
      Category of additive commutative additive associative distributive magmas and additive magmas,
      Category of additive associative distributive magmas and additive magmas,
@@ -1152,20 +1149,20 @@ Let us explore the other operations of :math:`p`. We can ask for the mathematica
      Category of commutative magmas,
      Category of unital magmas,
      Category of magmas,
-     Category of graded modules with basis over Rational Field,
-     Category of filtered modules with basis over Rational Field,
-     Category of coalgebras with basis over Rational Field,
-     Category of vector spaces with basis over Rational Field,
-     Category of modules with basis over Rational Field,
-     Category of graded modules over Rational Field,
-     Category of realizations of coalgebras over Rational Field,
-     Category of filtered modules over Rational Field,
-     Category of coalgebras over Rational Field,
-     Category of vector spaces over Rational Field,
-     Category of modules over Rational Field,
-     Category of bimodules over Rational Field on the left and Rational Field on the right,
-     Category of right modules over Rational Field,
-     Category of left modules over Rational Field,
+     Category of graded modules with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of filtered modules with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of coalgebras with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of vector spaces with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of modules with basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of graded modules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of realizations of coalgebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of filtered modules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of coalgebras over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of vector spaces over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of modules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of bimodules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field on the left and Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field on the right,
+     Category of right modules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
+     Category of left modules over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
      Category of commutative additive groups,
      Category of additive groups,
      Category of additive inverse additive unital additive magmas,
@@ -1176,11 +1173,12 @@ Let us explore the other operations of :math:`p`. We can ask for the mathematica
      Category of additive commutative additive magmas,
      Category of additive semigroups,
      Category of additive magmas,
-     Category of realizations of Symmetric Functions over Rational Field,
+     Category of realizations of Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field,
      Category of realizations of sets,
      Category of sets,
      Category of sets with partial maps,
      Category of objects]
+
 
 
 To start with, :math:`p` is a graded algebra, the grading being induced by the size of the partitions. Due to this, the one is the basis element indexed by the empty partition::
@@ -1216,19 +1214,19 @@ In part, this means that we have a **coproduct** on symmetric functions
 
 For instance, we have ::
 
-	sage: One=s[0]
-	....: X=s[1]
-	....: Y=tensor([X,One])
-	....: Z=tensor([One,X])
+    sage: One=s[0]
+    sage: X=s[1]
+    sage: Y=tensor([X,One])
+    sage: Z=tensor([One,X])
 
 ::
 
-	sage: s[3](Y+Z)
-	s[] # s[3] + s[1] # s[2] + s[2] # s[1] + s[3] # s[]
-	sage: s[3,2,1].coproduct()
-	s[] # s[3, 2, 1] + s[1] # s[2, 2, 1] + s[1] # s[3, 1, 1] + s[1] # s[3, 2] + s[1, 1] # s[2, 1, 1] + s[1, 1] # s[2, 2] + s[1, 1] # s[3, 1] + s[1, 1, 1] # s[2, 1] + s[2] # s[2, 1, 1] + s[2] # s[2, 2] + s[2] # s[3, 1] + s[2, 1] # s[1, 1, 1] + 2*s[2, 1] # s[2, 1] + s[2, 1] # s[3] + s[2, 1, 1] # s[1, 1] + s[2, 1, 1] # s[2] + s[2, 2] # s[1, 1] + s[2, 2] # s[2] + s[2, 2, 1] # s[1] + s[3] # s[2, 1] + s[3, 1] # s[1, 1] + s[3, 1] # s[2] + s[3, 1, 1] # s[1] + s[3, 2] # s[1] + s[3, 2, 1] # s[]
-	sage: s[3,2,1](Y+Z)
-	s[] # s[3, 2, 1] + s[1] # s[2, 2, 1] + s[1] # s[3, 1, 1] + s[1] # s[3, 2] + s[1, 1] # s[2, 1, 1] + s[1, 1] # s[2, 2] + s[1, 1] # s[3, 1] + s[1, 1, 1] # s[2, 1] + s[2] # s[2, 1, 1] + s[2] # s[2, 2] + s[2] # s[3, 1] + s[2, 1] # s[1, 1, 1] + 2*s[2, 1] # s[2, 1] + s[2, 1] # s[3] + s[2, 1, 1] # s[1, 1] + s[2, 1, 1] # s[2] + s[2, 2] # s[1, 1] + s[2, 2] # s[2] + s[2, 2, 1] # s[1] + s[3] # s[2, 1] + s[3, 1] # s[1, 1] + s[3, 1] # s[2] + s[3, 1, 1] # s[1] + s[3, 2] # s[1] + s[3, 2, 1] # s[]
+    sage: s[3](Y+Z)
+    s[] # s[3] + s[1] # s[2] + s[2] # s[1] + s[3] # s[]
+    sage: s[3,2,1].coproduct()
+    s[] # s[3, 2, 1] + s[1] # s[2, 2, 1] + s[1] # s[3, 1, 1] + s[1] # s[3, 2] + s[1, 1] # s[2, 1, 1] + s[1, 1] # s[2, 2] + s[1, 1] # s[3, 1] + s[1, 1, 1] # s[2, 1] + s[2] # s[2, 1, 1] + s[2] # s[2, 2] + s[2] # s[3, 1] + s[2, 1] # s[1, 1, 1] + 2*s[2, 1] # s[2, 1] + s[2, 1] # s[3] + s[2, 1, 1] # s[1, 1] + s[2, 1, 1] # s[2] + s[2, 2] # s[1, 1] + s[2, 2] # s[2] + s[2, 2, 1] # s[1] + s[3] # s[2, 1] + s[3, 1] # s[1, 1] + s[3, 1] # s[2] + s[3, 1, 1] # s[1] + s[3, 2] # s[1] + s[3, 2, 1] # s[]
+    sage: s[3,2,1](Y+Z)
+    s[] # s[3, 2, 1] + s[1] # s[2, 2, 1] + s[1] # s[3, 1, 1] + s[1] # s[3, 2] + s[1, 1] # s[2, 1, 1] + s[1, 1] # s[2, 2] + s[1, 1] # s[3, 1] + s[1, 1, 1] # s[2, 1] + s[2] # s[2, 1, 1] + s[2] # s[2, 2] + s[2] # s[3, 1] + s[2, 1] # s[1, 1, 1] + 2*s[2, 1] # s[2, 1] + s[2, 1] # s[3] + s[2, 1, 1] # s[1, 1] + s[2, 1, 1] # s[2] + s[2, 2] # s[1, 1] + s[2, 2] # s[2] + s[2, 2, 1] # s[1] + s[3] # s[2, 1] + s[3, 1] # s[1, 1] + s[3, 1] # s[2] + s[3, 1, 1] # s[1] + s[3, 2] # s[1] + s[3, 2, 1] # s[]
 
 
 Skew Schur fonctions
@@ -1243,30 +1241,35 @@ For instance, we have the skew Schur :math:`s_{321/2}`.
 
 ::
 
-	sage: s[3,2,1].skew_by(s[2])
-	s[2, 1, 1] + s[2, 2] + s[3, 1]
+    sage: Sym = SymmetricFunctions(QQ)
+    sage: Sym.inject_shorthands(verbose=false)
+
+::
+
+    sage: s[3,2,1].skew_by(s[2])
+    s[2, 1, 1] + s[2, 2] + s[3, 1]
 
 Thus we get the same result as above.
 
 ::
 
-	sage: add(tensor([s[3,2,1].skew_by(s(mu)),s(mu)]) for k in range(7) for mu in Partitions(k))
-	s[] # s[3, 2, 1] + s[1] # s[2, 2, 1] + s[1] # s[3, 1, 1] + s[1] # s[3, 2] + s[1, 1] # s[2, 1, 1] + s[1, 1] # s[2, 2] + s[1, 1] # s[3, 1] + s[1, 1, 1] # s[2, 1] + s[2] # s[2, 1, 1] + s[2] # s[2, 2] + s[2] # s[3, 1] + s[2, 1] # s[1, 1, 1] + 2*s[2, 1] # s[2, 1] + s[2, 1] # s[3] + s[2, 1, 1] # s[1, 1] + s[2, 1, 1] # s[2] + s[2, 2] # s[1, 1] + s[2, 2] # s[2] + s[2, 2, 1] # s[1] + s[3] # s[2, 1] + s[3, 1] # s[1, 1] + s[3, 1] # s[2] + s[3, 1, 1] # s[1] + s[3, 2] # s[1] + s[3, 2, 1] # s[]
+    sage: add(tensor([s[3,2,1].skew_by(s(mu)),s(mu)]) for k in range(7) for mu in Partitions(k))
+    s[] # s[3, 2, 1] + s[1] # s[2, 2, 1] + s[1] # s[3, 1, 1] + s[1] # s[3, 2] + s[1, 1] # s[2, 1, 1] + s[1, 1] # s[2, 2] + s[1, 1] # s[3, 1] + s[1, 1, 1] # s[2, 1] + s[2] # s[2, 1, 1] + s[2] # s[2, 2] + s[2] # s[3, 1] + s[2, 1] # s[1, 1, 1] + 2*s[2, 1] # s[2, 1] + s[2, 1] # s[3] + s[2, 1, 1] # s[1, 1] + s[2, 1, 1] # s[2] + s[2, 2] # s[1, 1] + s[2, 2] # s[2] + s[2, 2, 1] # s[1] + s[3] # s[2, 1] + s[3, 1] # s[1, 1] + s[3, 1] # s[2] + s[3, 1, 1] # s[1] + s[3, 2] # s[1] + s[3, 2, 1] # s[]
 
 In particular, we get
 
 .. MATH:: \Delta(h_n) = \sum_{k+j=n} h_k\otimes h_j.
-
+    
 ::
 
-	sage: h[4].coproduct()
-	h[] # h[4] + h[1] # h[3] + h[2] # h[2] + h[3] # h[1] + h[4] # h[]
-	sage: h[4](Y+Z)
-	h[] # h[4] + h[1] # h[3] + h[2] # h[2] + h[3] # h[1] + h[4] # h[]
-	sage: tensor([h,e])(h[4](Y-Z))
-	h[] # e[4] - h[1] # e[3] + h[2] # e[2] - h[3] # e[1] + h[4] # e[]
-	sage: s[3,1](Y-Z)
-	s[] # s[2, 1, 1] - s[1] # s[1, 1, 1] - s[1] # s[2, 1] + s[1, 1] # s[1, 1] + s[2] # s[1, 1] + s[2] # s[2] - s[2, 1] # s[1] - s[3] # s[1] + s[3, 1] # s[]
+    sage: h[4].coproduct()
+    h[] # h[4] + h[1] # h[3] + h[2] # h[2] + h[3] # h[1] + h[4] # h[]
+    sage: h[4](Y+Z)
+    h[] # h[4] + h[1] # h[3] + h[2] # h[2] + h[3] # h[1] + h[4] # h[]
+    sage: tensor([h,e])(h[4](Y-Z))
+    h[] # e[4] - h[1] # e[3] + h[2] # e[2] - h[3] # e[1] + h[4] # e[]
+    sage: s[3,1](Y-Z)
+    s[] # s[2, 1, 1] - s[1] # s[1, 1, 1] - s[1] # s[2, 1] + s[1, 1] # s[1, 1] + s[2] # s[1, 1] + s[2] # s[2] - s[2, 1] # s[1] - s[3] # s[1] + s[3, 1] # s[]
 
 
 Cauchy kernel formula
@@ -1292,16 +1295,16 @@ where one "thinks" :math:`\mathbf{x}=s_1\otimes \mathbb{1}` and
 
 ::
 
-	sage: h4xy=add(tensor([s(mu),s(mu)]) for mu in Partitions(4)); h4xy
-	s[1, 1, 1, 1] # s[1, 1, 1, 1] + s[2, 1, 1] # s[2, 1, 1] + s[2, 2] # s[2, 2] + s[3, 1] # s[3, 1] + s[4] # s[4]
-	sage: s[4](Y*Z)
-	s[1, 1, 1, 1] # s[1, 1, 1, 1] + s[2, 1, 1] # s[2, 1, 1] + s[2, 2] # s[2, 2] + s[3, 1] # s[3, 1] + s[4] # s[4]
-	sage: tensor([h,m])(h4xy)
-	h[1, 1, 1, 1] # m[1, 1, 1, 1] + h[2, 1, 1] # m[2, 1, 1] + h[2, 2] # m[2, 2] + h[3, 1] # m[3, 1] + h[4] # m[4]
-	sage: tensor([e,h])(h4xy)
-	e[1, 1, 1, 1] # h[4] + e[2, 1, 1] # h[3, 1] - 4*e[2, 1, 1] # h[4] + e[2, 2] # h[2, 2] - 2*e[2, 2] # h[3, 1] + 2*e[2, 2] # h[4] + e[3, 1] # h[2, 1, 1] - 2*e[3, 1] # h[2, 2] - e[3, 1] # h[3, 1] + 4*e[3, 1] # h[4] + e[4] # h[1, 1, 1, 1] - 4*e[4] # h[2, 1, 1] + 2*e[4] # h[2, 2] + 4*e[4] # h[3, 1] - 4*e[4] # h[4]
-	sage: tensor([p,p])(h4xy)
-	1/24*p[1, 1, 1, 1] # p[1, 1, 1, 1] + 1/4*p[2, 1, 1] # p[2, 1, 1] + 1/8*p[2, 2] # p[2, 2] + 1/3*p[3, 1] # p[3, 1] + 1/4*p[4] # p[4]
+    sage: h4xy=add(tensor([s(mu),s(mu)]) for mu in Partitions(4)); h4xy
+    s[1, 1, 1, 1] # s[1, 1, 1, 1] + s[2, 1, 1] # s[2, 1, 1] + s[2, 2] # s[2, 2] + s[3, 1] # s[3, 1] + s[4] # s[4]
+    sage: s[4](Y*Z)
+    s[1, 1, 1, 1] # s[1, 1, 1, 1] + s[2, 1, 1] # s[2, 1, 1] + s[2, 2] # s[2, 2] + s[3, 1] # s[3, 1] + s[4] # s[4]
+    sage: tensor([h,m])(h4xy)
+    h[1, 1, 1, 1] # m[1, 1, 1, 1] + h[2, 1, 1] # m[2, 1, 1] + h[2, 2] # m[2, 2] + h[3, 1] # m[3, 1] + h[4] # m[4]
+    sage: tensor([e,h])(h4xy)
+    e[1, 1, 1, 1] # h[4] + e[2, 1, 1] # h[3, 1] - 4*e[2, 1, 1] # h[4] + e[2, 2] # h[2, 2] - 2*e[2, 2] # h[3, 1] + 2*e[2, 2] # h[4] + e[3, 1] # h[2, 1, 1] - 2*e[3, 1] # h[2, 2] - e[3, 1] # h[3, 1] + 4*e[3, 1] # h[4] + e[4] # h[1, 1, 1, 1] - 4*e[4] # h[2, 1, 1] + 2*e[4] # h[2, 2] + 4*e[4] # h[3, 1] - 4*e[4] # h[4]
+    sage: tensor([p,p])(h4xy)
+    1/24*p[1, 1, 1, 1] # p[1, 1, 1, 1] + 1/4*p[2, 1, 1] # p[2, 1, 1] + 1/8*p[2, 2] # p[2, 2] + 1/3*p[3, 1] # p[3, 1] + 1/4*p[4] # p[4]
 
 
 The coproduct, being cocommutative on the generators, is cocommutative everywhere::
@@ -1337,12 +1340,12 @@ power-sum symmetric functions).
 Here are further examples::
 
     sage: g = s[2]^2
-	....: g.antipode()
-	s[1, 1, 1, 1] + s[2, 1, 1] + s[2, 2]
-	sage: g.coproduct()
-	s[] # s[2, 2] + s[] # s[3, 1] + s[] # s[4] + 2*s[1] # s[2, 1] + 2*s[1] # s[3] + s[1, 1] # s[1, 1] + s[1, 1] # s[2] + s[2] # s[1, 1] + 3*s[2] # s[2] + 2*s[2, 1] # s[1] + s[2, 2] # s[] + 2*s[3] # s[1] + s[3, 1] # s[] + s[4] # s[]
-	sage: g.coproduct().apply_multilinear_morphism( lambda x,y: x*y.antipode() )
-	0
+    sage: g.antipode()
+    s[1, 1, 1, 1] + s[2, 1, 1] + s[2, 2]
+    sage: g.coproduct()
+    s[] # s[2, 2] + s[] # s[3, 1] + s[] # s[4] + 2*s[1] # s[2, 1] + 2*s[1] # s[3] + s[1, 1] # s[1, 1] + s[1, 1] # s[2] + s[2] # s[1, 1] + 3*s[2] # s[2] + 2*s[2, 1] # s[1] + s[2, 2] # s[] + 2*s[3] # s[1] + s[3, 1] # s[] + s[4] # s[]
+    sage: g.coproduct().apply_multilinear_morphism( lambda x,y: x*y.antipode() )
+    0
     
 In this interpretation of symmetric functions as characters on the symmetric group, 
 the multiplication and comultiplication are interpreted as induction 
@@ -1374,24 +1377,24 @@ if :math:`\mu=\nu`, and the result is equal to :math:`0` otherwise.
 
 ::
 
-	sage: g
-	s[2, 2] + s[3, 1] + s[4]
-	sage: g.kronecker_product(g)
-	s[1, 1, 1, 1] + 3*s[2, 1, 1] + 4*s[2, 2] + 5*s[3, 1] + 3*s[4]
-	sage: g.kronecker_product(s[4])
-	s[2, 2] + s[3, 1] + s[4]
-	sage: g.kronecker_product(e[4])
-	s[1, 1, 1, 1] + s[2, 1, 1] + s[2, 2]
-	sage: g.omega()
-	s[1, 1, 1, 1] + s[2, 1, 1] + s[2, 2]
-	sage: Matrix([[p(mu).kronecker_product(p(nu)/zee(nu)) for nu in Partitions(5)] for mu in Partitions(5)])
-	[            p[5]                0                0                0                0                0                0]
-	[               0          p[4, 1]                0                0                0                0                0]
-	[               0                0          p[3, 2]                0                0                0                0]
-	[               0                0                0       p[3, 1, 1]                0                0                0]
-	[               0                0                0                0       p[2, 2, 1]                0                0]
-	[               0                0                0                0                0    p[2, 1, 1, 1]                0]
-	[               0                0                0                0                0                0 p[1, 1, 1, 1, 1]]
+    sage: g
+    s[2, 2] + s[3, 1] + s[4]
+    sage: g.kronecker_product(g)
+    s[1, 1, 1, 1] + 3*s[2, 1, 1] + 4*s[2, 2] + 5*s[3, 1] + 3*s[4]
+    sage: g.kronecker_product(s[4])
+    s[2, 2] + s[3, 1] + s[4]
+    sage: g.kronecker_product(e[4])
+    s[1, 1, 1, 1] + s[2, 1, 1] + s[2, 2]
+    sage: g.omega()
+    s[1, 1, 1, 1] + s[2, 1, 1] + s[2, 2]
+    sage: Matrix([[p(mu).kronecker_product(p(nu)/zee(nu)) for nu in Partitions(5)] for mu in Partitions(5)])
+    [            p[5]                0                0                0                0                0                0]
+    [               0          p[4, 1]                0                0                0                0                0]
+    [               0                0          p[3, 2]                0                0                0                0]
+    [               0                0                0       p[3, 1, 1]                0                0                0]
+    [               0                0                0                0       p[2, 2, 1]                0                0]
+    [               0                0                0                0                0    p[2, 1, 1, 1]                0]
+    [               0                0                0                0                0                0 p[1, 1, 1, 1, 1]]
 
 
 
