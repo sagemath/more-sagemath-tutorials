@@ -29,7 +29,8 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.ifconfig',
     'sage_package.sphinx',
-    'nbsphinx'
+    'nbsphinx',
+    'sphinxcontrib.jupyter'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -304,3 +305,58 @@ def setup(app):
     import os
     if os.environ.get('READTHEDOCS') == 'True':
         app.connect('build-finished', rtd_finalize)
+
+# -- Options for Jupyter output ------------------------------------------
+
+# Conversion Mode Settings
+# If "all", convert codes and texts into jupyter notebook
+# If "code", convert code-blocks only
+jupyter_conversion_mode = "all"
+
+jupyter_write_metadata = False
+
+# Location for _static folder
+jupyter_static_file_path = ["_static"]
+
+# Configure Jupyter Kernels
+jupyter_kernels = {
+    "sagemath": {
+        "kernelspec": {
+            "display_name": "SageMath",
+            "language": "SageMath",
+            "name": "sagemath"
+            },
+        "file_extension": ".sage",
+    },
+    "python3": {
+        "kernelspec": {
+            "display_name": "Python",
+            "language": "python3",
+            "name": "python3"
+            },
+        "file_extension": ".py",
+    },
+    "julia": {
+        "kernelspec": {
+            "display_name": "Julia 0.6.0",
+            "language": "julia",
+            "name": "julia-0.6"
+            },
+        "file_extension": ".jl"
+    }
+}
+
+jupyter_headers = {}
+
+# Prepend a Welcome Message to Each Notebook
+jupyter_header_block = "welcome.rst"
+
+jupyter_python_autosave = True
+
+# Not yet used by sphinxcontrib-jupyter
+jupyter_default_lang = "sagemath"
+
+rst_prolog=r"""
+`\def\NN{\mathbb{N}}`
+"""
+
