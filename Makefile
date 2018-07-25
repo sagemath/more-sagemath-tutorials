@@ -217,9 +217,9 @@ pseudoxml:
 
 .PHONY: jupyter
 jupyter: automodules
-	$(SPHINXBUILD) -b jupyter $(ALLSPHINXOPTS) $(BUILDDIR)/jupyter
+	$(SPHINXBUILD) -b jupyter $(ALLSPHINXOPTS) $(BUILDDIR)/html
 	@echo
-	@echo "Build finished. The Jupyter notebooks are in $(BUILDDIR)/jupyter."
+	@echo "Build finished. The Jupyter notebooks are in $(BUILDDIR)/html."
 
 ##############################################################################
 # Stuff in addition of the standard Sphinx's makefile
