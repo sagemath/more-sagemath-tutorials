@@ -1,6 +1,4 @@
-.. -*- coding: utf-8 -*-
 .. _agregation.introduction.calcul_formel:
-
 
 Calcul Formel: Qu'est-ce?
 =========================
