@@ -358,5 +358,6 @@ jupyter_default_lang = "sagemath"
 
 rst_prolog=r"""
 `\def\NN{\mathbb{N}}`
+`\def\ZZ{\mathbb{Z}}`
+`\def\QQ{\mathbb{Q}}`
 """
-
