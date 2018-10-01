@@ -9,13 +9,13 @@ L'objectif de la séance est de prendre en main le logiciel ``Sage``.
 préalables, et de préparer une mini-illustration de trois minutes que
 vous présenterez en fin de séance.
 
-Voici quelques pistes:
+* Lire le premier chapitre de `Calcul Mathématique avec Sage <http://sagebook.gforge.inria.fr/>`_
 
-* Parcourir le premier chapitre de `Calcul Mathématique avec Sage <http://sagebook.gforge.inria.fr/>`_
+* Reparcourir :ref:`les notes d'introduction <agregation.introduction>`
 
-* Parcourir le :ref:`tutorial-comprehensions`
+* Suivre le :ref:`tutorial-comprehensions`
 
-* Parcourir le :ref:`tutorial-programming-python`
+* Suivre le :ref:`tutorial-programming-python`
 
 * Faire le maximum de problèmes du `Projet Euler <http://projecteuler.net>`_
   (`Version en Français <http://submoon.freeshell.org/fr/sphinx/euler.html>`_)
