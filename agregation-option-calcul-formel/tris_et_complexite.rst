@@ -168,11 +168,16 @@ Quelques courbes de complexité
     ....:      for f,color in zip(funs, colors)) + time_labels
     sage: p
 
-.. TODO:: changer la formulation en chercher la plus grande taille de problème traitable en 1s, 1an
-
 .. TOPIC:: Exercice
 
-    On dispose d'un ordinateur pouvant exécuter `10^{9}` opérations élémentaires par seconde (1GHz). On a un problème (par exemple, chercher un mot dans une liste, calculer le déterminant d'une matrice), et des instances de taille `1,10,100,1000` de ce problème. Enfin, on a plusieurs algorithmes pour résoudre ce problème, dont on connaît les complexités respectives: `O(\log n)`, `O(n)`, `O(n\log n)`, `O(n^{2})`, `O(n^{3})`, `O(n^{10})`, `O(2^{n})`, `O(n!)`, `O(n^{n})`. Évaluer dans chacun des cas le temps nécessaire.
+    On dispose d'un ordinateur pouvant exécuter `10^{9}` opérations
+    élémentaires par seconde (1GHz). On a un problème (par exemple,
+    chercher un mot dans une liste, calculer le déterminant d'une
+    matrice). Enfin, on a plusieurs algorithmes pour résoudre ce
+    problème, dont on connaît les complexités respectives: `O(\log
+    n)`, `O(n)`, `O(n\log n)`, `O(n^{2})`, `O(n^{3})`, `O(n^{10})`,
+    `O(2^{n})`, `O(n!)`, `O(n^{n})`. Évaluer la taille de problème
+    que l'on peut traiter en une seconde? en un an?
 
 Synthèse
 --------
@@ -549,10 +554,14 @@ Charger ce fichier dans ``Sage`` avec::
 
     sage: %run tris.py
 
-Cela suppose que `SageMath` a été lancé dans le même répertoire, ou
-que la feuille de travail soit dans ce même répertoire. Si vous
-utilisez des variables globales pour compter les opérations, utilisez
-à la place::
+Cela suppose que `SageMath` a été lancé dans le même répertoire:
+
+    cd ~/Agregation/OptionC/TP2/
+    sage -notebook jupyter
+
+ou au moins que la feuille de travail soit dans ce même répertoire. Si
+vous utilisez des variables globales pour compter les opérations,
+utilisez à la place::
 
     sage: %run -i tris.py
 
@@ -564,12 +573,6 @@ Dans un terminal, aller dans le dossier, et lancer les tests du
 fichier tris.py avec::
 
     sage -t tris.py
-
-.. WARNING::
-
-    Dans les salles de TP, SageMath est installé via ses paquets
-    Debian/Ubuntu; ceux-ci ont actuellement (Sage 7.5, 01/2017) un
-    bogue qui ne leur permet pas de lancer les tests comme ci-dessus.
 
 Ouvrir le fichier avec votre éditeur de texte favori (par exemple
 ``gedit``), et compléter les tests de la fonction tri.
