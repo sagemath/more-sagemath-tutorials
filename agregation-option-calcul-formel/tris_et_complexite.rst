@@ -554,7 +554,7 @@ Charger ce fichier dans ``Sage`` avec::
 
     sage: %run tris.py
 
-Cela suppose que `SageMath` a été lancé dans le même répertoire:
+Cela suppose que ``SageMath`` a été lancé dans le même répertoire::
 
     cd ~/Agregation/OptionC/TP2/
     sage -notebook jupyter
