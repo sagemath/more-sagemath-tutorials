@@ -104,6 +104,7 @@ Exercice 1: Test et correction des algorithmes de recherche
 
     Compléter / modifier le squelette qui y est fourni afin de mettre
     en pratique les deux premiers objectifs du TP:
+
     -   documenter votre fonction recherche,
     -   incorporer les tests effectués «à la main» dans la question
         précédente,
