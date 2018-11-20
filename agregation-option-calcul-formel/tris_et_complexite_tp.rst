@@ -15,7 +15,7 @@ L’objectif de ce TP est triple:
 
 
 Organisation du code:
-=====================
+---------------------
 
 
 #. Ecrire des fonctions dans un fichier séparé et les charger dans
@@ -25,7 +25,7 @@ Organisation du code:
 
 
 Correction des programmes:
-==========================
+--------------------------
 
 
 #. Exécuter les tests de manière automatique,
@@ -33,7 +33,7 @@ Correction des programmes:
 
 
 Complexité des programmes:
-==========================
+--------------------------
 
 
 #. Mesurer un nombre d’opérations, un temps d’exécution,
@@ -41,21 +41,21 @@ Complexité des programmes:
 
 
 Exercice 1: Tests et corrections des algorithmes de recherche.
---------------------------------------------------------------
+==============================================================
 
 
 1. Implanter une fonction recherche(liste, valeur)
                         renvoyant la première position de valeur dans la
                         liste, ou None si valeur n’est pas dans la
                         liste.
-2. Tester votre fonction avec les exemples ci
-                           dessous.
-
+2. Tester votre fonction avec les exemples ci dessous::
+     
     sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 21)
     9
     sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 69)
     7
     sage: recherche([9,20,3,40,37,42,69,65,21,66,1,74,50], 5)
+
 
 Note: on remarquera que, comme ci-dessus, l'objet ``None``
 n'est pas affiché par Python::
@@ -94,20 +94,20 @@ Indication: utiliser les tests suivants::
 
 3. Complétez / modifiez le squelette présent dans le fichier
    recherche.py afin de mettre en pratique les deux premiers objectifs
-   du TP::
-   -  documentez votre fonction recherche,
-   -  incorporez-y les tests effectués “à la main” dans la question
+   du TP:
+   
+-  documentez votre fonction recherche,
+-  incorporez-y les tests effectués “à la main” dans la question
          précédente,
-   -  écrivez en commentaire les pré et post conditions ainsi que
+-  écrivez en commentaire les pré et post conditions ainsi que
             l’invariant de boucle pour votre fonction recherche.
 
 Vous pouvez éditer le fichier recherche.py en l’ouvrant dans
             l’éditeur de votre choix. Vous pouvez également l’éditer
             depuis Jupyter.
 
-4. Chargez le fichier recherche.py dans Jupyter à l’aide de
-               la commande::
-
+4. Chargez le fichier recherche.py dans Jupyter à l’aide de la commande::
+		 
     sage: %run recherche.py
 
 
@@ -117,26 +117,16 @@ dossier depuis lequel vous avez lancé ``SageMath``.
 5. Constatez que vous pouvez maintenant utiliser les fonctions présentes
    dans recherche.py.
 
-6. Testez votre fonction de recherche depuis le terminal avec la
-      commande “sage -t recherche.py”. Expérimentez avec cette
-      fonctionalité, notamment ajoutez des tests faux en entête de votre
-      fonction.
+6. Testez votre fonction de recherche depuis le terminal avec la commande “sage -t recherche.py”. Expérimentez avec cette fonctionalité, notamment ajoutez des tests faux en entête de votre fonction.
 
-      7. Reprenez toutes les étapes précédentes avec la recherche
-         dichotomique, en supposant que la liste en argument est triée.
-         Prenez le temps de bien écrire votre invariant de boucle, cela
-         va s’avérer crucial.
-         Utilisez deux bornes inf et sup, vérifiant à chaque étape
-         l’invariant inf <= i < sup, où i est la première position
-         (éventuelle) de valeur dans la liste.
+7. Reprenez toutes les étapes précédentes avec la recherche dichotomique, en supposant que la liste en argument est triée. Prenez le temps de bien écrire votre invariant de boucle, cela va s’avérer crucial. Utilisez deux bornes inf et sup, vérifiant à chaque étape l’invariant inf <= i < sup, où i est la première position (éventuelle) de valeur dans la liste.
 
 
 Exercice 2: Complexité des algorithmes de recherche.
-----------------------------------------------------
+====================================================
 
 
-1. Utilisez la fonctionalité de Sage pour mesurer le temps d’exécution
-   de vos fonctions recherche sur diverses entrées::
+1. Utilisez la fonctionalité de ``SageMath`` pour mesurer le temps d’exécution de vos fonctions recherche sur diverses entrées::
 
     sage: %time recherche([1,2,3],5);
 
@@ -146,15 +136,12 @@ Quel est l’inconvénient de cette mesure ? Vous pouvez aussi utiliser::
 
     sage: %timeit recherche([1,2,3],5);
 
-
 qui exécute plusieurs fois la commande et renvoie un temps moyenné.
 
 
-2. Seconde méthode de mesure: instrumenter vos fonctions de recherche en
-   insérant un compteur pour le nombre de comparaisons effectuées lors
-   d’un appel.
+2. Seconde méthode de mesure: instrumenter vos fonctions de recherche en insérant un compteur pour le nombre de comparaisons effectuées lors d’un appel.
 
-   Indication: essayez l’exemple suivant::
+Indication: essayez l’exemple suivant::
 
     sage: def f():
     ....:     global compteur
@@ -168,18 +155,13 @@ qui exécute plusieurs fois la commande et renvoie un temps moyenné.
     10
 
 
-Votre programme ainsi modifié contient une variable globale et doit donc
-être chargé avec::
+Votre programme ainsi modifié contient une variable globale et doit donc être chargé avec::
   
-  sage: %run -i recherche.py
+    sage: %run -i recherche.py
 
 
 
-3. Complexité pratique: faites quelques statistiques sur le nombre de
-   comparaisons en moyenne et au pire utilisées par vos fonctions de
-   recherche fonction de la taille de la liste, et représenter
-   graphiquement les résultats. Comparer l’efficacité des deux méthodes
-   de recherche en les présentant dans un même graphique.
+3. Complexité pratique: faites quelques statistiques sur le nombre de comparaisons en moyenne et au pire utilisées par vos fonctions de recherche fonction de la taille de la liste, et représenter graphiquement les résultats. Comparer l’efficacité des deux méthodes de recherche en les présentant dans un même graphique.
 
 Indications:
 
@@ -206,7 +188,7 @@ une recherche en moins d’une heure et d’une semaine.
 
 
 Exercice 3: Implantation de quelques algorithmes de tri
--------------------------------------------------------
+=======================================================
 
 
 Le but de cet exercice est de mettre en pratique les compétences
@@ -269,7 +251,7 @@ deux sous-listes sont obtenues comme les éléments plus petits et plus
 grands que le pivot.
 
 
-4. Pour les plus rapides, vous pouvez implanter les tris suivant:
+5. Pour les plus rapides, vous pouvez implanter les tris suivant:
 
 - tri insertion en place,
 - tri par tas (Indication: utiliser le module `heapq <http://docs.python.org/library/heapq.html>`_ de Python),
@@ -280,7 +262,7 @@ grands que le pivot.
     - Définir une fonction récursive ``insere(arbre, i)`` qui insère
     un nombre ``i`` dans un arbre binaire de recherche.
 
-5. Complexité de l’algorithme de tri de Python:
+6. Complexité de l’algorithme de tri de Python:
 
 Estimer la complexité de la fonction suivante::
 
