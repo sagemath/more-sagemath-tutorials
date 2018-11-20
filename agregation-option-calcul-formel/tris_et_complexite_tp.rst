@@ -95,9 +95,12 @@ Exercice 1: Test et correction des algorithmes de recherche
         sage: recherche([1,3,9,20,21,37,40,42,50,65,66,69,74], 5)
 
 
-3.  Télécharger le fichier `recherche.py <media/recherche.py>`_ dans
-    le dossier utilisé pour ce TP. L'ouvrir avec l’éditeur de texte de votre choix; cela peut être
-    avec l’éditeur intégré dans Jupyter.
+3.  Télécharger le fichier annexe `recherche.py <media/recherche.py>`_
+    et le mettre dans un dossier de votre choix, comme par exemple
+    ``~/Agregation/OptionC/TP2/tris.py``.
+
+    L'ouvrir avec l’éditeur de texte de votre choix (par exemple
+    ``gedit``, ou l’éditeur intégré dans Jupyter.
 
     Compléter / modifier le squelette qui y est fourni afin de mettre
     en pratique les deux premiers objectifs du TP:
@@ -112,20 +115,27 @@ Exercice 1: Test et correction des algorithmes de recherche
             assert <condition>
 
 
-4.  Charger le fichier recherche.py dans une feuille de travail Jupyter
+4.  Charger le fichier ``recherche.py`` dans une feuille de travail Jupyter
     à l’aide de la commande::
 
         sage: %run recherche.py
 
-    Attention, cela présuppose que le fichier recherche.py se trouve
-    dans le même dossier que la feuille de travail.
+
+    Attention, cela présuppose que ``SageMath`` a été lancé dans le même répertoire::
+
+        cd ~/Agregation/OptionC/TP2/
+        sage -notebook jupyter
+
+    ou au moins que la feuille de travail soit dans ce même
+    répertoire.
 
 5.  Vérifier que vous pouvez maintenant utiliser les fonctions présentes
     dans recherche.py.
 
-6.  Testez votre fonction de recherche depuis le terminal avec la
-    commande::
+6.  Tester votre fonction de recherche: dans un terminal, aller dans le
+    dossier, et lancer les tests du fichier tris.py avec::
 
+        cd ~/Agregation/OptionC/TP2/
         sage -t recherche.py
 
     Expérimenter avec cette fonctionalité; notamment ajouter des tests
@@ -180,6 +190,7 @@ Exercice 2: Complexité pratique des algorithmes de recherche
 
         sage: %run -i recherche.py
 
+    (voir la documentation de `%run` pour les détails).
 
 
 3.  Complexité pratique: faire quelques statistiques sur le nombre de
@@ -216,12 +227,15 @@ Exercice 3: Implantation de quelques algorithmes de tri
 =======================================================
 
 Le but de cet exercice est de mettre en pratique les compétences
-acquises dans les exercices précédents, dans un cadre plus élaboré.
+acquises dans les exercices précédents, dans un cadre un peu plus
+élaboré.
 
 Pour chaque algorithme de tri, bien prendre le temps de spécifier les
 invariants, tracer des courbes statistiques de complexité au pire et
 en moyenne. Comparer avec les courbes théoriques et comparer
-l'efficacité des différents algorithmes.
+l'efficacité relative des différents algorithmes.
+
+Vous pouvez partir du fichier annexe `tris.py <media/tris.py>`_.
 
 Un premier algorithme de tri
 ----------------------------
@@ -269,6 +283,10 @@ fusionner pour maintenir le tri ? Cette étape de fusion doit être
 réalisée en `|L_1|+|L_2|` opérations, où `L_1` et `L_2` sont les
 listes triées à fusionner.
 
+Indication: utiliser une fonction récursive; si nécessaire,
+s'entraîner en implantant au préalable une fonction récursive pour
+calculer `n!`
+
 
 Tri rapide
 ----------
@@ -285,16 +303,16 @@ Autres tris
 Pour les plus rapides, vous pouvez implanter les tris suivant:
 
 - tri insertion en place,
-- tri par tas (Indication: utiliser le module `heapq <http://docs.python.org/library/heapq.html>`_ de Python),
-- tri par insertion dans un Arbre Binaires de Recherche.
-    - Consulter la documentation de :class:`LabelledBinaryTree` pour
-    trouver comment construire des arbres binaires étiquetés.
+- tri par tas. Indication: utiliser le module `heapq <http://docs.python.org/library/heapq.html>`_ de Python,
 
-    - Définir une fonction récursive ``insere(arbre, i)`` qui insère
-    un nombre ``i`` dans un arbre binaire de recherche.
+- tri par insertion dans un Arbre Binaires de Recherche. Indications:
+    #. consulter la documentation de :class:`LabelledBinaryTree` pour
+       trouver comment construire des arbres binaires étiquetés.
+    #. Définir une fonction récursive ``insere(arbre, i)`` qui insère
+       un nombre ``i`` dans un arbre binaire de recherche.
 
-Complexité de l’algorithme de tri de Python
--------------------------------------------
+Exercice 4: Complexité de l’algorithme de tri de Python
+=======================================================
 
 Estimer la complexité de la fonction suivante::
 
@@ -308,14 +326,62 @@ Que peut-on en déduire?
 
 Pour en savoir plus, voir l'article sur `Tim sort <http://en.wikipedia.org/wiki/Timsort>`_
 
-*******************
-Quelques références
-*******************
 
--  Wikipédia Française: `Complexité algorithmique <http://fr.wikipedia.org/wiki/Complexité_algorithmique>`_
+Exercice 5: bancs d'essais au chronomètre
+=========================================
 
-.. -  `Un support de cours sur les tris <http://dept-info.labri.u-bordeaux.fr/~lachaud/IUT/ASD-Prog-E1-2000/planning-prof.html>`_
+Des collègues sont en train d'implanter une bibliothèque pour faire
+très facilement des bancs d'essais, en particulier pour
+l'enseignement. C'est encore expérimental, mais ils sont preneurs de
+retour. En l'état, il n'est pas clair s'il sera possible d'avoir cette
+bibliothèque le jour du concours.
 
--  `Une fiche de TP sur les tris <http://www.lri.fr/~denise/M2Spec/97-98.1/TDSpec6.ps>`_
+Si vous êtes partant pour essayer cette bibliothèque, télécharger le
+fichier `bleachermark.py <media/bleachermark.py>`_ et le mettre dans le même
+répertoire que votre feuille de travail.
 
-.. -  `Démonstration de bubble sort et quicksort <http://jade.lim.univ-mrs.fr/~vancan/mait/demo/SortDemo/example1.html>`_
+Voici un exemple d'utilisation dans lequel on fait un banc d'essai
+pour la fonction `sorted` de Python pour différentes tailles de
+listes. On commence par écrire un générateur de listes aléatoires de
+taille donnée::
+
+    sage: from random import randint
+    sage: def random_list(n):
+    ....:     return [randint(0, n) for i in range(n)]
+
+On construit le banc d'essai::
+
+    sage: from bleachermark import *
+    sage: BB = SimpleBleachermark(random_list, sorted, sizes=[2^k for k in range(10)])
+
+On le lance::
+
+    sage: BB.run()
+
+On peut l'interrompre à tout moment et le relancer ultérieurement.
+
+Ensuite on peut accéder à la moyenne du temps de calcul pour `sorted`
+pour chaque taille::
+
+    sage: BB.averages()                              # random
+    {1: 4.870000000005703e-06,
+     2: 5.19999999995413e-06,
+     4: 6.820000000002935e-06,
+     8: 7.3599999999807154e-06,
+     16: 1.0719999999997399e-05,
+     32: 1.774000000003717e-05,
+     64: 3.4700000000000843e-05,
+     128: 7.322999999999524e-05,
+     256: 0.00015710000000003,
+     512: 0.00034635999999997223}
+
+Voici comment en faire un graphique::
+
+    sage: points( BB.averages().items() )            # not tested
+
+De même, on peut accéder au min, max, ainsi qu'à l'intégralité des
+temps de calculs avec::
+
+    sage: BB.mins()                                  # not tested
+    sage: BB.maxes()                                 # not tested
+    sage: BB.timings()                               # not tested
