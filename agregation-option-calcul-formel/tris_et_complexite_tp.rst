@@ -2,7 +2,7 @@
 .. _agregation.tris_et_complexite_tp:
 
 ====================================================================================
-Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Tris et complexité, Travaux Prastiques
+Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Tris et complexité, Travaux Pratiques
 ====================================================================================
 
 
