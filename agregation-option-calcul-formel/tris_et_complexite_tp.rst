@@ -1,5 +1,5 @@
 .. -*- coding: utf-8 -*-
-.. _agregation.tris_et_complexite_tp:
+.. _agregation.tris_et_complexite.tp:
 
 ====================================================================================
 Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Tris et complexité, Travaux Pratiques

@@ -368,7 +368,7 @@ Analyse de complexité
 Travaux pratiques
 *****************
 
-Voir :ref:`agregation.introduction.tp`
+Voir :ref:`agregation.tris_et_complexite.tp`
 
 
 *******************
