@@ -245,7 +245,8 @@ trouver l’algorithme! Cela devrait vous convaincre qu’une fois le bon
 invariant écrit, la programmation en découle assez simplement.
 
 L’invariant est: «à l’étape `k`, les `k` premiers éléments de la liste
-sont triés».
+sont les `k` plus petits éléments de la liste originale, et sont
+triés».
 
 Tri à bulle en place
 --------------------
