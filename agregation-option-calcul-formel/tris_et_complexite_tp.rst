@@ -359,7 +359,7 @@ fichier `bleachermark.py <media/bleachermark.py>`_ et le mettre dans le même
 répertoire que votre feuille de travail.
 
 Voici un exemple d'utilisation dans lequel on fait un banc d'essai
-pour la fonction `sorted` de Python pour différentes tailles de
+pour la fonction ``sorted`` de Python pour différentes tailles de
 listes. On commence par écrire un générateur de listes aléatoires de
 taille donnée::
 
@@ -378,7 +378,7 @@ On le lance::
 
 On peut l'interrompre à tout moment et le relancer ultérieurement.
 
-Ensuite on peut accéder à la moyenne du temps de calcul pour `sorted`
+Ensuite on peut accéder à la moyenne du temps de calcul pour ``sorted``
 pour chaque taille::
 
     sage: BB.averages()                              # random
