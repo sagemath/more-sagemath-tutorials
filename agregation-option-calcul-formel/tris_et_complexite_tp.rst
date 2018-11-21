@@ -322,7 +322,7 @@ Exercice 4: Complexité de l’algorithme de tri de Python
 Estimer la complexité de la fonction suivante::
 
     sage: def fusion(l1, l2):
-    ....:     sort(l1+l2)
+    ....:     return sorted(l1+l2)
 
 
 lorsque elle est appliquée à des listes aléatoires, respectivement triées.
