@@ -106,10 +106,13 @@ Exercice 1: Test et correction des algorithmes de recherche
     en pratique les deux premiers objectifs du TP:
 
     -   documenter votre fonction recherche,
+
     -   incorporer les tests effectués «à la main» dans la question
         précédente,
+
     -   écrire en commentaire les pré et post conditions ainsi que
         l'invariant de boucle pour votre fonction recherche.
+
     -   chaque fois que possible, traduire ces commentaires sous forme
         exécutable par la machine, en utilisant la commande::
 
