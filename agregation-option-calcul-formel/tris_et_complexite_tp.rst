@@ -96,7 +96,7 @@ Exercice 1: Test et correction des algorithmes de recherche
 
 
 3.  Télécharger le fichier annexe `recherche.py <media/recherche.py>`_
-    et le mettre dans un dossier de votre choix, comme par exemple
+    et l'enregistrer dans un dossier de votre choix, comme par exemple
     ``~/Agregation/OptionC/TP2/tris.py``.
 
     L'ouvrir avec l’éditeur de texte de votre choix (par exemple
@@ -157,19 +157,32 @@ Exercice 2: Complexité pratique des algorithmes de recherche
 ============================================================
 
 
-1.  Utiliser la fonctionalité de ``SageMath`` pour mesurer le temps
-    d’exécution de vos fonctions recherche sur diverses entrées::
+1.  Utiliser la fonctionalité de ``Python`` pour mesurer le temps
+    d'exécution de vos fonctions recherche sur diverses entrées::
 
         sage: %time recherche([1,2,3],5);
 
+    Lancer cette commande plusieurs fois; que constatez vous?
 
-
-    Quel est l’inconvénient de cette mesure ? Vous pouvez aussi utiliser::
+    Pour obtenir un temps moyenné automatiquement sur plusieurs
+    exécutions, vous pouvez aussi utiliser::
 
         sage: %timeit recherche([1,2,3],5);
 
-    qui exécute plusieurs fois la commande et renvoie un temps moyenné.
+    Ces deux commandes ont l'inconvénient d'afficher leur résultat
+    plutôt que de le renvoyer, ce qui ne permet pas de récupérer les
+    valeurs automatiquement pour, par exemple, en faire un graphique.
 
+    Pour automatiser le processus, il faut donc en revenir à la
+    *fonction* `time.time` qui renvoie l'heure actuelle (en secondes
+    depuis le premier janvier 1970)::
+
+        sage: import time
+        sage: avant = time.time(); recherche([1,2,3], 5); apres = time.time()
+        sage: apres-avant             # random
+
+    Dans l'exercice 5 on verra une bibliothèque plus avancée pour
+    automatiser le processus.
 
 2.  Seconde méthode de mesure: instrumenter vos fonctions de recherche
     en insérant un compteur pour le nombre de comparaisons effectuées
