@@ -360,4 +360,6 @@ rst_prolog=r"""
 `\def\NN{\mathbb{N}}`
 `\def\ZZ{\mathbb{Z}}`
 `\def\QQ{\mathbb{Q}}`
+`\def\RR{\mathbb{R}}`
+`\def\CC{\mathbb{C}}`
 """
