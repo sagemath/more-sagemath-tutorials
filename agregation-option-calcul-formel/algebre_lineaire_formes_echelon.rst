@@ -13,10 +13,6 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Algèbre li
 
     - Formaliser un peu plus la forme LU
 
-    - Formaliser la division d'un vecteur par une matrice sous forme
-      échelon; lien avec la division Euclidienne.
-
-
 Formes normales
 ===============
 
@@ -28,8 +24,18 @@ forme normale des éléments de `C`.
 
 .. TOPIC:: Exemples
 
-    - `E=\ZZ` muni de l'égalité modulo `p`, `f: x \mapsto x % p`
-    - `E=\ZZ\times \ZZ`, `(a,b) \rho (c,d)` si `a/b=c/d`, `f`:
+    - `E=\ZZ`
+
+      `\rho`: égalité modulo `p`
+
+      `f: x \mapsto x \mod p`
+
+    - `E=\ZZ\times \ZZ`
+
+      `\rho`: `(a,b) \rho (c,d)` si `ad=bc`
+
+      `f`: ???
+
     - ...
 
 .. TOPIC:: Quel intérêt?
@@ -37,12 +43,12 @@ forme normale des éléments de `C`.
     Les formes normales permettent de représenter les classes
     d'équivalence et donc de calculer dans le quotient.
 
+.. TOPIC:: Question
 
-.. TOPIC:: Formes normales pour les matrices?
+   Formes normales pour les matrices?
 
 Échauffement
 ============
-
 
 .. TOPIC:: Exercice
 
@@ -62,30 +68,62 @@ forme normale des éléments de `C`.
 
     Solution partielle::
 
-        sage: M = matrix(GF(5), [[0,0,3,1,4], [3,1,4,2,1], [4,3,2,1,3]]); M
+        sage: K = GF(5)
+
+        sage: M = matrix(K, [[0,0,3,1,4], [3,1,4,2,1], [4,3,2,1,3]]); M
         [0 0 3 1 4]
         [3 1 4 2 1]
         [4 3 2 1 3]
 
         sage: v = vector(SR.var('x1,x2,x3,x4,x5'))
-        sage: [(eq == 0) for eq in M*v]
+        sage: [(eq == 0) for eq in matrix(ZZ,M)*v]
 
         sage: M.echelon_form()
         [1 2 0 3 3]
         [0 0 1 2 3]
         [0 0 0 0 0]
+
+    Calcul du pivot de Gauß à la main::
+
+        sage: N = copy(M)
+        sage: N
+        [0 0 3 1 4]
+        [3 1 4 2 1]
+        [4 3 2 1 3]
+        sage: N[0],N[1] = N[1],N[0]
+        sage: N
+        [3 1 4 2 1]
+        [0 0 3 1 4]
+        [4 3 2 1 3]
+        sage: N[0] = N[0] / K(3)
+        sage: N
+        [1 2 3 4 2]
+        [0 0 3 1 4]
+        [4 3 2 1 3]
+        sage: N[2] = N[2] - 4*N[0]
+        sage: N
+        [1 2 3 4 2]
+        [0 0 3 1 4]
+        [0 0 0 0 0]
+        sage: N[1] = N[1] / K(3)
+        sage: N
+        [1 2 3 4 2]
+        [0 0 1 2 3]
+        [0 0 0 0 0]
+        sage: N[0] = N[0] - 3*N[1]
+        sage: N
+        [1 2 0 3 3]
+        [0 0 1 2 3]
+        [0 0 0 0 0]
+
+    Calcul d'une base des solutions::
+
         sage: M.right_kernel()
         Vector space of degree 5 and dimension 3 over Finite Field of size 5
         Basis matrix:
         [1 0 0 4 4]
         [0 1 0 3 3]
         [0 0 1 1 4]
-
-
-.. TODO::
-
-    - Changer le système pour que L2 et L3 ne soient pas colinéaires
-    - Donner la solution par manipulation de lignes avec Sage
 
 .. TOPIC:: Remarque Sage
 
@@ -144,12 +182,12 @@ Forme échelon (réduite)
 
     ::
 
-        sage: M = random_matrix(QQ, 4, 8, algorithm='echelon_form', num_pivots=3); M # random
+        sage: M2 = random_matrix(QQ, 4, 8, algorithm='echelon_form', num_pivots=3); M2 # random
         [ 1 -3  0 -2  0  3  1  0]
         [ 0  0  1 -5  0 -2 -1 -1]
         [ 0  0  0  0  1 -1  3  1]
         [ 0  0  0  0  0  0  0  0]
-        sage: M.pivots()                                                             # random
+        sage: M2.pivots()                                                             # random
         (0, 2, 4)
 
 .. TOPIC:: Remarque
@@ -157,30 +195,140 @@ Forme échelon (réduite)
     L'algorithme du pivot de Gauß-Jordan transforme une matrice
     jusqu'à ce qu'elle soit sous forme échelon (réduite).
 
+
+Forme échelon, réduction, et division euclidienne
+-------------------------------------------------
+
+.. TOPIC:: Exercice
+
+    Revenons à notre matrice::
+
+        sage: M
+        [0 0 3 1 4]
+        [3 1 4 2 1]
+        [4 3 2 1 3]
+
+    Déterminer si les vecteurs suivants sont des combinaisons linéaires
+    des lignes de `M`::
+
+        sage: u = vector([1, 2, 4, 1, 0])
+        sage: v = vector([2, 1, 4, 0, 1])
+
+.. TOPIC:: Solution
+
+    Sur `M`, ce n'est pas évident. Par contre, si on part de sa forme
+    échelon `N`::
+
+        sage: N = M.echelon_form(); N
+
+    On voit aisément que `u` est combinaison linéaire des lignes de
+    `N`::
+
+        sage: u
+        (1, 2, 4, 1, 0)
+        sage: u - N[0]
+        (0, 0, 4, 3, 2)
+        sage: u - N[0] - 4*N[1]
+        (0, 0, 0, 0, 0)
+
+    Mais pas `v`::
+
+        sage: v
+        (2, 1, 4, 0, 1)
+        sage: v - 2*N[0]
+        (0, 2, 4, 4, 0)
+        sage: v - 2*N[0] - 4*N[1]
+        (0, 2, 0, 1, 3)
+
+.. TOPIC:: Théorème-Définition: réduction modulo forme échelon
+
+    Soit `N` une matrice sous forme échelon, et `u` un vecteur, Alors,
+    on peut écrire de manière unique `u = N q + r`, où `Nq` est une
+    combinaison linéaire de lignes de `N` et `r` a des coefficients
+    non nuls dans les colones caractéristiques de `N`.
+
+    (moralement, on ajoute `u` en dernière ligne de `N` et on finit le
+    pivot de Gauß).
+
+    On appelle `r` la *réduction* de `u` modulo `N`.
+
+.. TOPIC:: Exercice
+
+    Considérons les deux polynômes suivants::
+
+        sage: x = QQ['x'].gen()
+        sage: P = x^2 - 2*x + 1
+        sage: U = x^5 - x + 2
+
+    Considérer la base canonique `x^5, x^4, \ldots, 1` des polynômes
+    de degré inférieur à 5, et écrire la matrice `N` des polynômes
+    `x^3P,x^2P,xP,P`, vus comme vecteurs dans cette base. De même
+    écrire le vecteur `u` représentant le polynôme `U` dans cette
+    base. Calculer la réduction de `u` module `N`.
+
+    Que constatez-vous?
+
+.. TOPIC:: Solution
+
+    Construisons N et u::
+
+        sage: N = matrix([[1,-2,1,0,0,0],[0,1,-2,1,0,0],[0,0,1,-2,1,0],[0,0,0,1,-2,1]])
+        sage: u = vector([1, 0, 0, 0, -1, 2])
+
+    Calculons la réduction::
+
+        sage: u - N[0]
+        (0, 2, -1, 0, -1, 2)
+        sage: u - N[0] - 2*N[1]
+        (0, 0, 3, -2, -1, 2)
+        sage: u - N[0] - 2*N[1] - 3*N[2]
+        (0, 0, 0, 4, -4, 2)
+        sage: u - N[0] - 2*N[1] - 3*N[2] -4*N[2]
+        (0, 0, -4, 12, -8, 2)
+        sage: u - N[0] - 2*N[1] - 3*N[2] -4*N[3]
+        (0, 0, 0, 0, 4, -2)
+
+    Comparons cela avec la division Euclidienne::
+
+        sage: U % P
+        4*x - 2
+        sage: U // P
+        x^3 + 2*x^2 + 3*x + 4
+
+.. TOPIC:: Conclusion
+
+    La division Euclidienne est un cas particulier de réduction d'un
+    vecteur modulo une forme échelon. Le vecteur `q` donne la résultat
+    de la division et `r` le reste.
+
 Forme échelon et matrices équivalentes
 --------------------------------------
 
 .. TOPIC:: Exercice: matrices à deux lignes
 
-    Pour chacunes des matrices suivantes, écrire sous forme de
-    multiplication à gauche par une matrice `P` `2\times 2` la
-    première étape du pivot de Gauß::
+    Pour chacunes des matrices suivantes, écrire la première étape du
+    pivot de Gauß sous forme de multiplication à gauche par une
+    matrice `P` de taille `2\times 2` ::
 
        sage: var('a1,b1,c1,a2,b2,c2')
-       sage: M1 = matrix([[a1,b1,c1],[0,b2,c2]]); M1
 
-       sage: M2 = matrix([[0,b1,c1],[1,b2,c2]]); M2
+    Échange lignes `1` et `2` pour::
+
+       sage: M1 = matrix([[0,b1,c1],[1,b2,c2]]); M1
+
+    Renormalisation `L_1 = \frac{1}{a_1} L_1` pour::
+
+       sage: M2 = matrix([[a1,b1,c1],[0,b2,c2]]); M2
+
+    Pivot `L_2 = L_2 -\frac{a_2}{a_1}L_1` pour::
 
        sage: M3 = matrix([[a1,b1,c1],[a2,b2,c2]]); M3
 
-
-    .. TODO:: Préciser dans le texte l'opération sur les lignes voulue pour chacun des cas
-
     Solutions::
 
-       sage: P = matrix([[1/a1,0],[0,1]]);   P, P*M1
+       sage: P = matrix([[0,1],[1,0]]);      P, P*M1
 
-       sage: P = matrix([[0,1],[1,0]]);      P, P*M2
+       sage: P = matrix([[1/a1,0],[0,1]]);   P, P*M2
 
        sage: P = matrix([[1,0],[-a2/a1,1]]); P, P*M3
 
@@ -206,7 +354,7 @@ Forme échelon et matrices équivalentes
 
     Solution::
 
-        sage: M = M.LU()
+        sage: M.LU()
 
 Disons ici que deux matrices `M` et `M'` de `M_{n,m}(K)` sont
 *équivalentes* (modulo l'action de `GL_n(K)` à gauche) s'il existe une
@@ -483,7 +631,7 @@ Applications des formes échelon
 
     #.  Déterminer une base de `E`.
 
-    #.  Tester si un vecteur appartient à `E`.
+    #.  Tester si un vecteur `x` appartient à `E`.
 
     #.  Tester si `E=F`.
 
