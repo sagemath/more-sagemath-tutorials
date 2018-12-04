@@ -9,10 +9,6 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Algèbre li
 
 ``Mathematics is the art of reducing any problem to linear algebra`` - William Stein.
 
-.. TODO::
-
-    - Formaliser un peu plus la forme LU
-
 Formes normales
 ===============
 
@@ -243,9 +239,9 @@ Forme échelon, réduction, et division euclidienne
 .. TOPIC:: Théorème-Définition: réduction modulo forme échelon
 
     Soit `N` une matrice sous forme échelon, et `u` un vecteur, Alors,
-    on peut écrire de manière unique `u = N q + r`, où `Nq` est une
+    on peut écrire de manière unique `u = q N + r`, où `qN` est une
     combinaison linéaire de lignes de `N` et `r` a des coefficients
-    non nuls dans les colones caractéristiques de `N`.
+    nuls dans les colones caractéristiques de `N`.
 
     (moralement, on ajoute `u` en dernière ligne de `N` et on finit le
     pivot de Gauß).
@@ -338,15 +334,15 @@ Forme échelon et matrices équivalentes
     - Les opérations sur les lignes peuvent être implantées par
       multiplication à gauche par des matrices inversibles.
 
-    - Si `M` est obtenue de `N` par l'algorithme du pivot de Gauß,
-      alors `M=PN` où `P` est une matrice inversible, éventuellement
+    - Si `N` est obtenue de `M` par l'algorithme du pivot de Gauß,
+      alors `N=PM` où `P` est une matrice inversible, éventuellement
       de déterminant `1` (le produit des matrices ci-dessus).
 
     - S'il n'y a pas de permutation à effectuer, alors on peut écrire
-      `N` sous la forme `N=LU`, où `U=N` et triangulaire supérieure
-      (upper triangular), et `L` est triangulaire inférieure (lower
-      triangular): le produit des inverses des matrices ci-dessus.
-      On appelle cela la *décomposition `LU`*.
+      `M` sous la forme `M=LU`, où `U=N` est triangulaire supérieure
+      (upper triangular), et `L=P^{-1}` est triangulaire inférieure
+      (lower triangular): le produit des inverses des matrices
+      ci-dessus. On appelle cela la *décomposition `LU`*.
 
 .. TOPIC:: Exercice
 
@@ -671,7 +667,10 @@ Applications des formes échelon
     #.  Calculer les espaces propres de `\phi`.
 
 
-.. TODO:: Décomposition LU, exercice en TD ou TP
+.. TODO::
+
+    - Décomposition LU, exercice en TD ou TP
+    - Le cours est un peu long; décider quoi déplacer en TP
 
 Résumé
 ======
@@ -732,8 +731,11 @@ telle base en se ramenant à du calcul matriciel.
 
 Indications:
 
--   Vous pouvez au choix réutiliser la méthode ``echelon_form`` des
-    matrices ou la réimplanter.
+-   Utiliser la méthode ``echelon_form`` des matrices. Si vous n'avez
+    pas encore eu l'occasion d'implanter un pivot de Gauß, faites le
+    au préalable, en faisant pour simplifier l'hypothèque que toutes
+    les colonnes sont caractéristiques, de sorte que le résultat est
+    triangulaire supérieur avec pivots sur la diagonale.
 
 -   Essayez les commandes suivantes::
 
@@ -746,16 +748,23 @@ Indications:
 Test d'appartenance d'un vecteur à un sous-espace vectoriel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Soit `V` une liste de vecteurs et `u` un autre vecteur. On
-veut tester si `u` est dans le sous espace vectoriel engendré
-par `V`::
+Soit `V` une liste de vecteurs et `u` un autre vecteur. On veut tester
+si `u` est dans le sous espace vectoriel engendré par `V`::
 
     sage: u = E([1, 2, 5, 3, 0, 1, 6, 3, 0, 5])
     sage: u in V
     False
 
-Comme ci-dessus, implanter votre propre fonction
-``appartient(V,v)`` qui se ramène à du calcul matriciel.
+Comme ci-dessus, implanter votre propre fonction ``appartient(V,u``
+qui se ramène à du calcul matriciel. On pourra par exemple supposer
+que `V` est sous forme échelon, et calculer la réduction de `u` par
+rapport à `V`.
+
+Indication::
+
+    sage: v = vector([0,0,1,0,3,0,0,5])
+    sage: v.nonzero_positions()
+    [2, 4, 7]
 
 Test d'égalité de deux espaces vectoriels
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
