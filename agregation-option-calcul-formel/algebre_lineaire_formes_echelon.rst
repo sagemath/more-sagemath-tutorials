@@ -760,7 +760,7 @@ que `V` est sous forme échelon, et calculer la réduction de `u` par
 rapport à `V`.
 
 Indication: mettre `V` sous forme de matrice `M` et utiliser
-`M.characteristic_columns()`.
+`M.pivots()` pour en récupérer les colonnes caractéristiques.
 
 Version avancée: calculer `q` et `r` tels que `u=qV + r`.
 
