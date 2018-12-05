@@ -759,11 +759,8 @@ qui se ramène à du calcul matriciel. On pourra par exemple supposer
 que `V` est sous forme échelon, et calculer la réduction de `u` par
 rapport à `V`.
 
-Indication::
-
-    sage: v = vector([0,0,1,0,3,0,0,5])
-    sage: v.nonzero_positions()
-    [2, 4, 7]
+Indication: mettre `V` sous forme de matrice `M` et utiliser
+`M.characteristic_columns()`.
 
 Test d'égalité de deux espaces vectoriels
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
