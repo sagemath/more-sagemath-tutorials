@@ -733,7 +733,7 @@ Indications:
 
 -   Utiliser la méthode ``echelon_form`` des matrices. Si vous n'avez
     pas encore eu l'occasion d'implanter un pivot de Gauß, faites le
-    au préalable, en faisant pour simplifier l'hypothèque que toutes
+    au préalable, en faisant pour simplifier l'hypothèse que toutes
     les colonnes sont caractéristiques, de sorte que le résultat est
     triangulaire supérieur avec pivots sur la diagonale.
 
@@ -742,8 +742,7 @@ Indications:
         sage: M = matrix(V)
         sage: list(M)
         sage: M[1].is_zero()
-        sage: l = [ 1, 5, 3, 2, 9 ]
-        sage: [ x^2 for x in l ]
+        sage: [ n^2 for n in range(20) if n.is_prime() ]
 
 Test d'appartenance d'un vecteur à un sous-espace vectoriel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
