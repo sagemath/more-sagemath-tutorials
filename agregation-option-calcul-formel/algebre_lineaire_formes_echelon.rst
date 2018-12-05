@@ -762,6 +762,8 @@ rapport à `V`.
 Indication: mettre `V` sous forme de matrice `M` et utiliser
 `M.characteristic_columns()`.
 
+Variante: calculer `q` et `r` tels que `u=qV + r`.
+
 Test d'égalité de deux espaces vectoriels
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
