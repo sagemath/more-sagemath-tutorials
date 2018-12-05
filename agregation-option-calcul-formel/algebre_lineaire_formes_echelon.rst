@@ -791,6 +791,12 @@ et `\langle V\rangle`.
 De même implanter ``SEV_intersection(U,V)`` et
 ``SEV_en_somme_directe(U,V)``.
 
+.. TODO::
+
+    Proposer des exercices d'illustration à base d'interact: par
+    exemple une mini application de calcul guidé de pivot de Gauß, ou
+    de réduction d'un vecteur par rapport à une matrice échelonnée.
+
 Exercice 2: Algèbre linéaire, représentations des monoïdes et Chaînes de Markov
 -------------------------------------------------------------------------------
 
