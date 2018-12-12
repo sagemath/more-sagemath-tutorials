@@ -517,9 +517,19 @@ Codage par interpolation (Reed-Solomon)
 TP: Codage et décodage
 **********************
 
-Note: Sage contient de nombreuses fonctionalités autour du codage.
-Un point d'entrée est ``codes?`` ainsi que le tutoriel thématique
-:ref:`coding_theory`.
+.. TOPIC:: Exercice préliminaire
+
+   #. Sage contient de nombreuses fonctionalités autour du codage. Un
+       point d'entrée est ``codes?`` ainsi que le tutoriel thématique
+       :ref:`coding_theory`. Y jeter un coup d'oeil.
+
+   #.  Essayer l'exemple suivant et consulter la documentation de
+       ``@interact``: :func:`sagenb.notebook.interact.interact`;
+       voir aussi la `documentation de jupyter <https://ipywidgets.readthedocs.io/en/stable/examples/Using%20Interact.html>`_::
+
+         sage: @interact
+         ....: def f(x=[1,5]):
+         ....:     return x^2
 
 Choisir à la carte parmi les exercices suivants.
 
@@ -536,10 +546,10 @@ Choisir à la carte parmi les exercices suivants.
         l'existence de codes parfaits non triviaux?
 
         Indications:
-        - implanter une fonction pour calculer la borne de Hamming
-        - utiliser `@interact` (voir l'exemple du cours et
-          :ref:`interact`) pour explorer rapidement les valeurs
-          qu'elle prend en fonction de `q`, `n`, `e`.
+
+        -   implanter une fonction pour calculer la borne de Hamming
+        -   utiliser ``@interact`` pour explorer rapidement les valeurs
+            qu'elle prend en fonction de `q`, `n`, `e`.
 
     #.  Déterminer empiriquement quels paramètres de code (dimension,
         distance, ...) seraient souhaitables pour différentes
