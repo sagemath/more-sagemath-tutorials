@@ -211,7 +211,7 @@ Borne de Hamming, codes parfaits
     Les boules dans `\ZZ/q\ZZ^3`::
 
         sage: @interact
-        ....: def boule(r=slider([0,1,2,3]), q=slider([1,2,3,4,5]):
+        ....: def boule(r=slider([0,1,2,3]), q=slider([2,3,4,5])):
         ....:     K = GF(q)
         ....:     V = K^3
         ....:     return dessin_boules([V.zero()], r)
@@ -236,6 +236,11 @@ Borne de Hamming, codes parfaits
         ....: C = codes.HammingCode(GF(2),3)
         ....: dessin_boules(C, 1, projection=projection_7_3)
 
+.. TODO::
+
+    The above example does not work with thebelab because the file is
+    not available for %run; how to fix that?
+
 .. TOPIC:: Exercice: Borne de Hamming sur `|C|`.
 
     Soit `A=\ZZ/q\ZZ`.
@@ -250,7 +255,7 @@ Borne de Hamming, codes parfaits
 
     #. Application numérique: `n=6,q=2,d=3`: `|C|\leq?`.
 
-.. TODO:: faire un interact pour l'application numérique
+.. TODO:: donner la solution, et faire un interact pour l'application numérique
 
 .. TOPIC:: Définition: code parfait
 
