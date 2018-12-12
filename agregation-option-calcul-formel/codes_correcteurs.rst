@@ -157,8 +157,9 @@ Premiers concepts
 
     Cas dégénérés: lorsque `|C|\leq 1`, on prendra par convention
     `d(C)=+\infty`. Cela peut paraître plus naturel en prenant la
-    définition alternative: `d(C) := \max_{k\in \NN}, \forall x\ne y
-    \in C, k\leq d(x,y)`.
+    définition alternative:
+
+    .. MATH:: `d(C) := \max_{k\in \NN}, \forall x\ne y \in C, \quad k\leq d(x,y)`.
 
 .. TOPIC:: Exercice: En petite dimension:
 
