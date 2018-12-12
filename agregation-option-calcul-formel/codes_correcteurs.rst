@@ -144,7 +144,7 @@ Premiers concepts
 
     .. MATH::
 
-        D(C) := \max_{k\in \NN} \quad \forall c\in C, B(c,k) \cap C = \{c\}
+        D(C) := \max_{k\in \NN} \quad \forall c\in C, \quad B(c,k) \cap C = \{c\}
 
     .. MATH::
 
@@ -529,7 +529,7 @@ TP: Codage et décodage
        voir aussi la `documentation de jupyter <https://ipywidgets.readthedocs.io/en/stable/examples/Using%20Interact.html>`_::
 
          sage: @interact
-         ....: def f(x=[1,5]):
+         ....: def f(x=slider(1,10,1)):
          ....:     return x^2
 
 Choisir à la carte parmi les exercices suivants.
