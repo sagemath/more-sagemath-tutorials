@@ -68,7 +68,7 @@ Premiers concepts
 
     Un *code* `C` est un sous-ensemble de *mots* dans `M:=A^{n}`, où
 
-    - `A` est un *alphabet*, comme `A:=\mathbb{Z}/q\mathbb{Z}`.
+    -  `A` est un *alphabet*, comme `A:=\mathbb{Z}/q\mathbb{Z}`.
        Typiquement `q=2` (codes binaires).
 
     - `n` est un entier, la *dimension* du code
@@ -159,7 +159,7 @@ Premiers concepts
     `d(C)=+\infty`. Cela peut paraître plus naturel en prenant la
     définition alternative:
 
-    .. MATH:: `d(C) := \max_{k\in \NN}, \forall x\ne y \in C, \quad k\leq d(x,y)`.
+    .. MATH:: d(C) := \max_{k\in \NN}, \forall x\ne y \in C, \quad k\leq d(x,y)
 
 .. TOPIC:: Exercice: En petite dimension:
 
@@ -254,9 +254,9 @@ Borne de Hamming, codes parfaits
 
 .. TOPIC:: Définition: code parfait
 
-    Un code `C` est *parfait* si `|C| |B(x,e)| = |A^n|`, i.e.
+    Un code `C` est *parfait* si `|C| |B(x,e(C))| = |A^n|`, i.e.
 
-    .. math:: |C| \sum_{k=0}^e \binom n k (q-1)^k = q^n
+    .. math:: |C| \sum_{k=0}^{e(C)} \binom n k (q-1)^k = q^n
 
 .. TOPIC:: Exemples
 
