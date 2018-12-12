@@ -211,8 +211,8 @@ Borne de Hamming, codes parfaits
     Les boules dans `\ZZ/q\ZZ^3`::
 
         sage: @interact
-        ....: def boule(r=slider([0,1,2,3]), q=slider([2,3,4,5])):
-        ....:     K = GF(q)
+        ....: def _(r=slider(0,3,1), q=slider(2,7,1)):
+        ....:     K = IntegerModRing(q)
         ....:     V = K^3
         ....:     return dessin_boules([V.zero()], r)
 
@@ -238,14 +238,17 @@ Borne de Hamming, codes parfaits
 
 .. TODO::
 
-    The above example does not work with thebelab because the file is
-    not available for %run; how to fix that?
+    - The above example does not work with thebelab because the file
+      is not available for %run; how to fix that?
+
+    - Generalize projection_7_3 to projection(n, 3), and
+      make it the default value
 
 .. TOPIC:: Exercice: Borne de Hamming sur `|C|`.
 
     Soit `A=\ZZ/q\ZZ`.
 
-    #. Taille de la boule `B(x,e):=\{y,d(x,y)\leq e\}` de `A^n` de
+    #. Taille de la boule `B(x,e):=\{y,\quad d(x,y)\leq e\}` de `A^n` de
        centre `x` et de rayon `e`?
        Indication: commencer par `q=2` et `x=0\cdots0`.
 
@@ -253,15 +256,21 @@ Borne de Hamming, codes parfaits
 
     #. Conclusion?
 
-    #. Application numérique: `n=6,q=2,d=3`: `|C|\leq?`.
+.. TOPIC:: Solution
 
-.. TODO:: donner la solution, et faire un interact pour l'application numérique
+    .. MATH: |B(x,e)| = \sum_{k=0}^{e} \binom n k (q-1)^k
+
+    .. MATH:: |C| \sum_{k=0}^{e(C)} \binom n k (q-1)^k \quad \leq \quad q^n
+
+    Application numérique: `n=6,q=2,d=3`: `|C|\leq?`.
+
+.. TODO:: faire un interact pour l'application numérique
 
 .. TOPIC:: Définition: code parfait
 
     Un code `C` est *parfait* si `|C| |B(x,e(C))| = |A^n|`, i.e.
 
-    .. math:: |C| \sum_{k=0}^{e(C)} \binom n k (q-1)^k = q^n
+    .. MATH:: |C| \sum_{k=0}^{e(C)} \binom n k (q-1)^k \quad = \quad q^n
 
 .. TOPIC:: Exemples
 
