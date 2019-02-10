@@ -1,4 +1,4 @@
-.. _tutorial-notebook-and-help:
+.. _tutorial-start-here:
 
 =====================
 Tutorial: start here!
@@ -144,7 +144,7 @@ The ``Help`` menu gives access to the HTML documentation for ``Sage``
 (and other pieces of software). This includes the ``Sage`` tutorial,
 the ``Sage`` thematic tutorials, and the ``Sage`` reference manual.
 This documentation is also available online from ``Sage``'s web site
-`http://sagemath.org`_.
+http://sagemath.org .
 
 Completion and contextual documentation
 ---------------------------------------
@@ -517,7 +517,7 @@ Accessing Sage
 
 - In general, Sage computations can be embedded in any web page using
   `Thebelab <https://sage-package.readthedocs.io/en/latest/sage_package/thebe.html>`_
-  or the `Sage-cell server <https://sagecell.sagemath.org/`_.
+  or the `Sage-cell server <https://sagecell.sagemath.org/>`_.
 
 - `Binder <http://mybinder.org>`_ is a service that lets you run
   Jupyter online on top of an arbitrary software stack. Sessions are
@@ -562,6 +562,6 @@ Resources
 - Sage's web page: http://sagemath.org
 - The open book `Computational Mathematics with Sage <http://sagebook.gforge.inria.fr/english.html>`_
   (originally written in `French <http://sagebook.gforge.inria.fr/>`; also translated in `German <http://www.loria.fr/~zimmerma/sagebook/CalculDeutsch.pdf/>`)
-- :ref:`Sage's main tutorial <tutorial>`_
+- :ref:`Sage's main tutorial <tutorial>`
 - `Sage's official thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_
 - `More Sage tutorials <https://more-sagemath-tutorials.readthedocs.io/>`_
