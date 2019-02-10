@@ -11,20 +11,20 @@ Tutorial: start here!
 About SageMath and this document
 ================================
 
-<SageMath `http://sagemath.org`> is a general purpose computational
-mathematics system developed by a worldwide community of hundreds of
-researchers, teachers and engineers. It's based on the Python
-programming language and includes GAP, PARI/GP, Singular, and dozens
-of other specialized libraries.
+`SageMath <http://sagemath.org>`_ (``Sage`` for short) is a general
+purpose computational mathematics system developed by a worldwide
+community of hundreds of researchers, teachers and engineers. It's
+based on the Python programming language and includes GAP, PARI/GP,
+Singular, and dozens of other specialized libraries.
 
 This live document will guide you through the first steps of using
-Sage, and provide pointers to read and do more.
+Sage, and provide pointers to explore and learn further.
 
 In the following, we will be assuming that you are reading this
 document as a Jupyter notebook (Jupyter is the primary user interface
-for SageMath). If you are reading it instead as a web page, you can
-click on ``Run on mybinder.org`` to get access to the notebook online.
-If you have Sage already installed on your machine, you may instead
+for Sage). If you are reading it instead as a web page, you can click
+on ``Run on mybinder.org`` to get access to the notebook online. If
+you have Sage already installed on your machine, you may instead
 download the notebook.
 
 .. If you just want to try out a few things, you may also just click the
@@ -34,15 +34,18 @@ download the notebook.
 Entering, Editing, and Evaluating Input
 =======================================
 
-SageMath can be used as a pocket calculator: you type in some
-expression to be calculated, SageMath evaluates it, and prints the
-result, and repeat. This is called the Read-Eval-Print-Loop. In the
-Jupyter notebook, you type the expression in an **input cell**, or
-**code cell**. This is the rectangle below this paragraph containing
-`1+1` (if instead you see ``sage: 1+1``, you are reading this
-document as a web page and won't be able to play with the examples).
-Click on the cell to select it, and press ``shift-enter`` to evaluate
-it. You may instead click the play button
+A first calculation
+-------------------
+
+Sage can be used as a pocket calculator: you type in some expression
+to be calculated, Sage evaluates it, and prints the result; and
+repeat. This is called the *Read-Eval-Print-Loop*. In the Jupyter
+notebook, you type the expression in an **input cell**, or **code
+cell**. This is the rectangle below this paragraph containing `1+1`
+(if instead you see ``sage: 1+1``, you are reading this document as a
+web page and won't be able to play with the examples). Click on the
+cell to select it, and press ``shift-enter`` to evaluate it. You may
+instead click the play button
 ..  .. image:: media/RunCellIcon.png
 in the tool bar, or use the ``Cell`` menu::
 
@@ -57,12 +60,16 @@ much faster later. Click again in the cell, replace `1+1` by `2+2`,
 and evaluate it. Notice how much quicker it is now? That's because a
 new Sage process had to be started when evaluating the first cell.
 
-Congratulations, you have done your first calculations with
-``SageMath``. Take now the time to explore the ``Help`` menu. We
-specifically recommend taking ``User Interface Tour``, and coming back
-to ``Keyboard shortcut`` every now and then for faster use of Jupyter.
-The Jupyter developers also maintain
-`an example notebook <http://nbviewer.jupyter.org/github/ipython/ipython/blob/3.x/examples/Notebook/Index.ipynb>`_
+Congratulations, you have done your first calculations with ``Sage``.
+
+Using the Jupyter notebook
+--------------------------
+
+Take now the time to explore the ``Help`` menu. We specifically
+recommend taking ``User Interface Tour``, and coming back to
+``Keyboard shortcut`` every now and then for faster use of Jupyter.
+The Jupyter developers also maintain a `tutorial notebook
+<http://nbviewer.jupyter.org/github/ipython/ipython/blob/3.x/examples/Notebook/Index.ipynb>`_
 which may assist you.
 
 For now we just review the basics. Use the menu item ``Insert ->
@@ -79,7 +86,6 @@ now! The text you see is using the
 <http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html>`_
 markup language. Do some changes to the text, and evaluate it again to
 rerender it.
-
 Markdown supports a fair amount of basic formatting,
 such as bold, underline, basic lists, and so forth.
 Thanks to the TeX rendering engine
@@ -91,7 +97,15 @@ It can be fun to type in fairly complicated math, like this:
 
    \zeta(s)=\sum_{n=1}^{\infty}\frac{1}{n^s}=\prod_p \left(\frac{1}{1-p^{-s}}\right)
 
-We are now done with basic interaction with SageMath. Much richer
+If you *mess everything up*, you can use the menu ``Kernel ->
+Restart`` to restart Sage. You can also use the menu ``File -> Create
+Checkpoint`` to save notebook, and ``File -> Restore to previous
+Checkpoint`` to reset to the latest version that was saved.
+
+More interactions
+-----------------
+
+We are now done with basic interaction with Sage. Much richer
 interactions are possible thanks to Jupyter' *interactive widgets*.
 That will be the topic for a later tutorial; here is just a teaser for
 now. Try clicking on the sliders to illustrate multiplication below.
@@ -105,14 +119,6 @@ editing the input cell (make sure to also change xmax,ymax)::
     ....:     P.show(aspect_ratio=1, gridlines='minor',figsize=[3,3],xmax=14,ymax=14)
 
 
-If you *mess everything up*, click on Action -&gt; Restart Worksheet
-at the top of the screen to reset all the variable names and restart
-everything. You can also click "Undo" in the upper right to revert the
-worksheet to a previously saved state.
-
-Click the ``Log`` link at the top of this page to view a log of
-recent computations!
-
 A brief tour
 ============
 
@@ -125,45 +131,50 @@ A brief tour
 Help system
 ===========
 
-There are various ways of getting help in Sage.
+We review the three main ways to get help in Sage:
 
-- navigate through the documentation (there is a link ``Help`` at the top right
-  of the worksheet),
+- navigating through the documentation
 - ``tab`` completion,
 - contextual help.
 
-We detail below the latter two methods through examples.
+Navigating through the documentation
+------------------------------------
+
+The ``Help`` menu gives access to the HTML documentation for ``Sage``
+(and other pieces of software). This includes the ``Sage`` tutorial,
+the ``Sage`` thematic tutorials, and the ``Sage`` reference manual.
+This documentation is also available online from ``Sage``'s web site
+`http://sagemath.org`_.
 
 Completion and contextual documentation
-=======================================
+---------------------------------------
 
-Start typing something and press the ``tab`` key. The interface tries to
+Start typing something and press the ``Tab`` key. The interface tries to
 complete it with a command name. If there is more than one completion, then
 they are all presented to you. Remember that Sage is case sensitive, i.e. it
-differentiates upper case from lower case. Hence the ``tab`` completion of
+differentiates upper case from lower case. Hence the ``Tab`` completion of
 ``klein`` won't show you the ``KleinFourGroup`` command that builds the group
-`\ZZ/2 \times \ZZ/2` as a permutation group. Try it on the next cells:
+`\ZZ/2 \times \ZZ/2` as a permutation group. Try pressing the ``Tab``
+key in the following cells:
 
 .. skip
 
 ::
 
-    sage: klein<tab>
+    sage: klein
 
-    sage: Klein<tab>
+    sage: Klein
 
-To see documentation and examples for a command, type a question mark ``?`` at
-the end of the command name and press the ``tab`` key as in:
+To see documentation and examples for a command, type a question mark
+``?`` at the end of the command name and evaluate the cell:
 
 .. skip
 
 ::
 
-    sage: KleinFourGroup?<tab>
+    sage: KleinFourGroup?
 
-::
-
-    sage: # edit here
+    sage:
 
 .. TOPIC:: Exercise A
 
@@ -173,18 +184,21 @@ the end of the command name and press the ``tab`` key as in:
 
     ::
 
-        sage: factor?<tab>
+        sage: factor?
 
     ::
 
-        sage: # edit here
+        sage: 
+
+Digression: assignments and methods
+-----------------------------------
 
 In the above manipulations we have not stored any data for
 later use. This can be done in Sage with the ``=`` symbol as in::
 
     sage: a = 3
     sage: b = 2
-    sage: a+b
+    sage: a + b
     5
 
 This can be understood as Sage evaluating the expression to the right
@@ -225,16 +239,20 @@ writing **f(my_object)** you write **my_object.f()**::
     True
 
 See :ref:`tutorial-objects-and-classes` for details.
-To know all methods of an object you can once more use tab-completion. Write the
-name of the object followed by a dot and then press ``tab``:
+
+Method discovery with tab completion
+------------------------------------
+
+.. TODO:: Replace the examples below by less specialized ones
+
+To know all methods of an object you can once more use tab-completion.
+Write the name of the object followed by a dot and then press ``Tab``:
 
 .. skip
 
 ::
 
-    sage: a.<tab>
-
-    sage: # edit here
+    sage: a.
 
 .. TOPIC:: Exercise B
 
@@ -244,11 +262,11 @@ name of the object followed by a dot and then press ``tab``:
 
     ::
 
-        sage: Permutation?<tab>
+        sage: Permutation?
 
     ::
 
-        sage: # edit here
+        sage: 
 
 
     What is the ``inverse`` of ``p``?
@@ -257,9 +275,9 @@ name of the object followed by a dot and then press ``tab``:
 
     ::
 
-        sage: p.inv<tab>
+        sage: p.inv
 
-        sage: # edit here
+        sage: 
 
     Does ``p`` have the ``pattern`` 123? What about 1234? And 312? (even if you don't
     know what a pattern is, you should be able to find a command that does this).
@@ -268,9 +286,9 @@ name of the object followed by a dot and then press ``tab``:
 
     ::
 
-        sage: p.pat<tab>
+        sage: p.pat
 
-        sage: # edit here
+        sage: 
 
 Some linear algebra
 ===================
@@ -292,11 +310,11 @@ Some linear algebra
 
     ::
 
-        sage: matrix?<tab>
+        sage: matrix?
 
     ::
 
-        sage: # edit here
+        sage: 
 
     Then, using methods of the matrix,
 
@@ -309,9 +327,9 @@ Some linear algebra
 
     ::
 
-        sage: # edit here
+        sage: 
 
-        sage: # edit here
+        sage: 
 
     Now that you know how to access the different methods of matrices,
 
@@ -323,11 +341,11 @@ Some linear algebra
 
     ::
 
-        sage: vector?<tab>
+        sage: vector?
 
     ::
 
-        sage: # edit here
+        sage: 
 
 .. NOTE::
 
@@ -348,11 +366,11 @@ after writing ``plot?`` in a cell:
 
 ::
 
-    sage: plot?<tab>
+    sage: plot?
 
 ::
 
-    sage: # edit here
+    sage: 
 
 Here is a simple example::
 
@@ -434,15 +452,15 @@ In this case those variables are defined implicitly::
     domain `[-3,3]` and color it red. Use the :func:`find_root` method to
     numerically approximate the root of `f` on the interval `[1,2]`::
 
-        sage: # edit here
+        sage: 
 
     Compute the tangent line to `f` at `x=1`::
 
-        sage: # edit here
+        sage: 
 
     Plot `f` and the tangent line to `f` at `x=1` in one image::
 
-        sage: # edit here
+        sage: 
 
 .. TOPIC:: Exercise E (Advanced)
 
@@ -457,14 +475,14 @@ In this case those variables are defined implicitly::
 
     ::
 
-        sage: # edit here
+        sage: 
 
     Expand `y` as a truncated Taylor series around `0` and containing
     `n=10` terms.
 
     ::
 
-        sage: # edit here
+        sage: 
 
     Do you recognize the coefficients of the Taylor series expansion? You might
     want to use the `On-Line Encyclopedia of Integer Sequences
@@ -476,20 +494,61 @@ In this case those variables are defined implicitly::
     ::
 
 
-        sage: oeis?<tab>
+        sage: oeis?
 
     ::
 
-        sage: # edit here
-
-Going further
-=============
+        sage: 
 
 Congratulations for completing your first Sage tutorial!
 
+Exploring further
+=================
 
-.. TODO:
+Accessing Sage
+--------------
 
-    - Brief description of the various ways to use Sage, with links
-    - Pointers to further tutorials
-    - ...
+- The `Sage cell service <sagecell.sagemath.org>`_ lets you evaluate
+  individual Sage commands.
+
+- `Binder <http://mybinder.org>`_ is a service that lets you run Jupyter
+  notebooks online on top of an arbitrary software stack. Sessions are
+  free, anonymous, and temporary. You can use one of the existing
+  repositories, or create your own.
+
+- `Cocalc <http://cocalc.com>`_ (Collaborative Calculation) is an online
+  service that gives access to a wealth of computational systems,
+  including Sage, with extra goodies for teaching. It's free for basic
+  usage.
+
+- Sage can be
+  `installed on most major operating systems <https://doc.sagemath.org/html/en/installation/>`_
+  (Linux, MacOS, Windows), through usual package managers or installers,
+  or by compiling from source.
+
+- Sage computations can be embedded in any web page using
+  `Thebelab <https://sage-package.readthedocs.io/en/latest/sage_package/thebe.html>`_
+  or the `Sage-cell server <https://sagecell.sagemath.org/`_.
+
+Ways to use Sage
+----------------
+
+There are many ways beyond the Jupyter notebook to use Sage:
+interactive command line, programs scripts, ...
+See the `Sage tutorial <https://doc.sagemath.org/html/en/tutorial/introduction.html#ways-to-use-sage>`_.
+
+.. NOTE::
+
+    Sage used to have its own legacy notebook system, which has been
+    phased out in favor of Jupyter. If you have old notebooks, here is
+    `how to migrate them <https://doc.sagemath.org/html/en/prep/Logging-On.html#the-export-screen-and-jupyter-notebook>`_.
+
+Resources
+---------
+
+- Sage's web page: `http://sagemath.org`_
+- The open book `Computational Mathematics with Sage <http://sagebook.gforge.inria.fr/>`_
+  (originally written in French; also translated in German)
+- :ref:`Sage's main tutorial <tutorial>`_
+- `Sage's official thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_
+- `More Sage tutorials <https://more-sagemath-tutorials.readthedocs.io/>`_
