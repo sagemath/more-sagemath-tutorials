@@ -4,10 +4,6 @@
 Tutorial: start here!
 =====================
 
-.. This worksheet is based on William Stein's `JPL09__intro_to_sage.sws
-.. <http://modular.math.washington.edu/talks/20090701-sage_graphics_tutorial/JPL09___intro_to_sage.sws>`_
-.. worksheet.
-
 About SageMath and this document
 ================================
 
@@ -27,9 +23,13 @@ on ``Run on mybinder.org`` to get access to the notebook online. If
 you have Sage already installed on your machine, you may instead
 download the notebook.
 
-.. If you just want to try out a few things, you may also just click the
-.. ``Activate`` button on the upper right corner to play with the
-.. examples.
+.. TODO::
+
+    - credits on sources of inspiration
+    - Make sure the following works: If you just want to try out a few
+      things, you may also just click the ``Activate`` button on the
+      upper right corner to play with the examples.
+
 
 Entering, Editing, and Evaluating Input
 =======================================
@@ -290,8 +290,12 @@ Write the name of the object followed by a dot and then press ``Tab``:
 
         sage: 
 
-Some linear algebra
-===================
+
+Exercises
+=========
+
+Linear algebra
+--------------
 
 .. TOPIC:: Exercise C
 
@@ -355,8 +359,8 @@ Some linear algebra
     ``right_kernel``), and so on.
 
 
-Some Plotting
-=============
+Plotting
+--------
 
 The :func:`plot` command allows you to draw plots of functions. Recall
 that you can access the documentation by pressing the ``tab`` key
@@ -407,7 +411,7 @@ Plotting multiple functions at once is as easy as adding them together::
     Graphics object consisting of 2 graphics primitives
 
 Symbolic Expressions
-====================
+--------------------
 
 Here is an example of a symbolic function::
 
@@ -511,24 +515,33 @@ Accessing Sage
 - The `Sage cell service <sagecell.sagemath.org>`_ lets you evaluate
   individual Sage commands.
 
-- `Binder <http://mybinder.org>`_ is a service that lets you run Jupyter
-  notebooks online on top of an arbitrary software stack. Sessions are
+- In general, Sage computations can be embedded in any web page using
+  `Thebelab <https://sage-package.readthedocs.io/en/latest/sage_package/thebe.html>`_
+  or the `Sage-cell server <https://sagecell.sagemath.org/`_.
+
+- `Binder <http://mybinder.org>`_ is a service that lets you run
+  Jupyter online on top of an arbitrary software stack. Sessions are
   free, anonymous, and temporary. You can use one of the existing
   repositories, or create your own.
+
+  .. TODO:: add links about both
 
 - `Cocalc <http://cocalc.com>`_ (Collaborative Calculation) is an online
   service that gives access to a wealth of computational systems,
   including Sage, with extra goodies for teaching. It's free for basic
   usage.
 
+- `JupyterHub <https://jupyter.org/hub>`_ lets you (or your
+  institution or ...) deploy multiuser Jupyter service.
+
+- The `Sage Debian Live <https://sagedebianlive.metelu.net/>`_ USB key
+  let's you run Linux with Sage and many other goodies on your
+  computer without having to install them.
+
 - Sage can be
   `installed on most major operating systems <https://doc.sagemath.org/html/en/installation/>`_
   (Linux, MacOS, Windows), through usual package managers or installers,
   or by compiling from source.
-
-- Sage computations can be embedded in any web page using
-  `Thebelab <https://sage-package.readthedocs.io/en/latest/sage_package/thebe.html>`_
-  or the `Sage-cell server <https://sagecell.sagemath.org/`_.
 
 Ways to use Sage
 ----------------
@@ -546,9 +559,9 @@ See the `Sage tutorial <https://doc.sagemath.org/html/en/tutorial/introduction.h
 Resources
 ---------
 
-- Sage's web page: `http://sagemath.org`_
-- The open book `Computational Mathematics with Sage <http://sagebook.gforge.inria.fr/>`_
-  (originally written in French; also translated in German)
+- Sage's web page: http://sagemath.org
+- The open book `Computational Mathematics with Sage <http://sagebook.gforge.inria.fr/english.html>`_
+  (originally written in `French <http://sagebook.gforge.inria.fr/>`; also translated in `German <http://www.loria.fr/~zimmerma/sagebook/CalculDeutsch.pdf/>`)
 - :ref:`Sage's main tutorial <tutorial>`_
 - `Sage's official thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_
 - `More Sage tutorials <https://more-sagemath-tutorials.readthedocs.io/>`_
