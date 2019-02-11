@@ -1,8 +1,8 @@
 .. _tutorial-start-here:
 
-=====================
-Tutorial: start here!
-=====================
+===========
+Start here!
+===========
 
 About SageMath and this document
 ================================
