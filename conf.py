@@ -356,7 +356,10 @@ jupyter_python_autosave = True
 # Not yet used by sphinxcontrib-jupyter
 jupyter_default_lang = "sagemath"
 
+# TODO: add binder link, github logo, specific file reference
 rst_prolog=r"""
+This document is one of `More SageMath Tutorials <https://more-sagemath-tutorials.readthedocs.io/en/latest/>`_.
+You may `edit it on github <http://github.com/sagemath/more-sagemath-tutorials/>`_.
 `\def\NN{\mathbb{N}}`
 `\def\ZZ{\mathbb{Z}}`
 `\def\QQ{\mathbb{Q}}`
