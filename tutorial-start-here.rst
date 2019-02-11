@@ -124,8 +124,114 @@ A brief tour
 
 .. TODO::
 
-   Here, or in a separate file, a list of striking examples showcasing
-   the different areas covered by Sage.
+   Insert more striking examples showcasing the different areas
+   covered by Sage.
+
+
+
+Calculus
+--------
+
+::
+
+    sage: %display latex
+    sage: var('x,y')
+    sage: f = (cos(pi/4-x)-tan(x)) / (1-sin(pi/4 + x)); f
+    sage: limit(f, x = pi/4, dir='minus')
+
+    sage: factor(x^100 - 1)
+
+    sage: solve([x^2+y^2 == 1, y^2 == x^3 + x + 1], x, y)
+
+    sage: plot3d(sin(pi*sqrt(x^2+y^2)) / sqrt(x^2+y^2), (x,-5,5), (y,-5,5), viewer="threejs")
+
+Combinatorics
+-------------
+
+Fast counting::
+
+    sage: Partitions(100000).cardinality()
+    27493510569775696512677516320986352688173429315980054758203125984302147328114964173055050741660736621590157844774296248940493063070200461792764493033510116079342457190155718943509725312466108452006369558934464248716828789832182345009262853831404597021307130674510624419227311238999702284408609370935531629697851569569892196108480158600569421098519
+
+Playing poker::
+
+    sage: Suit = Set(["Coeur", "Carreau", "Pique", "Trefle"])
+    ....: Values  = Set([2, 3, 4, 5, 6, 7, 8, 9, 10, "Valet", "Dame", "Roi", "As"])
+    ....: Cards   = cartesian_product([Values, Suits])
+    ....: Hands    = Subsets(Cartes, 5)
+    ....: Hands.random_element()
+    {(5, 'Pique'), (4, 'Coeur'), (8, 'Trefle'), ('As', 'Trefle'), (10, 'Carreau')}
+    sage: Mains.cardinality()
+    2598960
+
+Algebraic Combinatorics
+-----------------------
+
+Drawing an affine root systems::
+
+    sage: L = RootSystem(["G",2,1]).ambient_space()
+    sage: p = L.plot(affine=False, level=1)
+    sage: p.show(aspect_ratio=[1,1,2], frame=False)
+
+Number Theory
+-------------
+
+    sage: E = EllipticCurve('389a')
+    sage: plot(E,thickness=3)
+
+Graph Theory
+------------
+
+Coloring graphs::
+
+    sage: g = graphs.PetersenGraph(); g
+    sage: g.plot(partition=g.coloring())
+
+Geometry
+--------
+
+::
+
+    sage: polytopes.truncated_icosidodecahedron().plot(viewer="threejs")
+
+Programming and plotting
+------------------------
+
+::
+
+    sage: n, l, x, y = 10000, 1, 0, 0
+    ....: p = [[0, 0]]
+    ....: for k in range(n):
+    ....:     theta = (2 * pi * random()).n(digits=5)
+    ....:     x, y = x + l * cos(theta), y + l * sin(theta)
+    ....:     p.append([x, y])
+    ....: g = line(p, thickness=.4) + line([p[n], [0, 0]], color='red', thickness=2)
+    ....: g.show(aspect_ratio=1)
+
+
+Interactive plots
+-----------------
+
+::
+
+    sage: var('x')
+    ....: @interact
+    ....: def g(f=x*sin(1/x),
+    ....:       c=slider(-1, 1, .01, default=-.5),
+    ....:       n=(1..30),
+    ....:       xinterval=range_slider(-1, 1, .1, default=(-8,8), label="x-interval"),
+    ....:       yinterval=range_slider(-1, 1, .1, default=(-3,3), label="y-interval")):
+    ....:     x0 = c
+    ....:     degree = n
+    ....:     xmin,xmax = xinterval
+    ....:     ymin,ymax = yinterval
+    ....:     p   = plot(f, xmin, xmax, thickness=4)
+    ....:     dot = point((x0,f(x=x0)),pointsize=80,rgbcolor=(1,0,0))
+    ....:     ft = f.taylor(x,x0,degree)
+    ....:     pt = plot(ft, xmin, xmax, color='red', thickness=2, fill=f)
+    ....:     show(dot + p + pt, ymin=ymin, ymax=ymax, xmin=xmin, xmax=xmax)
+    ....:     html('$f(x)\;=\;%s$'%latex(f))
+    ....:     html('$P_{%s}(x)\;=\;%s+R_{%s}(x)$'%(degree,latex(ft),degree))
 
 
 Help system
