@@ -303,13 +303,13 @@ Fast counting::
 
 Playing poker::
 
-    sage: Suit = Set(["Coeur", "Carreau", "Pique", "Trefle"])
-    ....: Values  = Set([2, 3, 4, 5, 6, 7, 8, 9, 10, "Valet", "Dame", "Roi", "As"])
+    sage: Suits   = Set(["Hearts", "Diamonds", "Spades", "Clubs"])
+    ....: Values  = Set([2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"])
     ....: Cards   = cartesian_product([Values, Suits])
-    ....: Hands    = Subsets(Cartes, 5)
+    ....: Hands   = Subsets(Cards, 5)
     ....: Hands.random_element()
     {(5, 'Pique'), (4, 'Coeur'), (8, 'Trefle'), ('As', 'Trefle'), (10, 'Carreau')}
-    sage: Mains.cardinality()
+    sage: Hands.cardinality()
     2598960
 
 Algebraic Combinatorics
@@ -317,9 +317,9 @@ Algebraic Combinatorics
 
 Drawing an affine root systems::
 
-    sage: L = RootSystem(["G",2,1]).ambient_space()
+    sage: L = RootSystem(["G", 2, 1]).ambient_space()
     sage: p = L.plot(affine=False, level=1)
-    sage: p.show(aspect_ratio=[1,1,2], frame=False)
+    sage: p.show(aspect_ratio=[1, 1, 2], frame=False)
 
 Number Theory
 -------------
@@ -327,7 +327,7 @@ Number Theory
 ::
 
     sage: E = EllipticCurve('389a')
-    sage: plot(E,thickness=3)
+    sage: plot(E, thickness=3)
 
 Games
 -----
