@@ -565,3 +565,4 @@ Resources
 - :ref:`Sage's main tutorial <tutorial>`
 - `Sage's official thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_
 - `More Sage tutorials <https://more-sagemath-tutorials.readthedocs.io/>`_
+- `Sage's quick reference cards <https://wiki.sagemath.org/quickref>`_
