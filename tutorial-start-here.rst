@@ -7,7 +7,7 @@ Tutorial: start here!
 About SageMath and this document
 ================================
 
-`SageMath <http://sagemath.org>`_ (``Sage`` for short) is a general
+`SageMath <https://www.sagemath.org>`_ (``Sage`` for short) is a general
 purpose computational mathematics system developed by a worldwide
 community of hundreds of researchers, teachers and engineers. It's
 based on the Python programming language and includes GAP, PARI/GP,
@@ -31,7 +31,7 @@ download the notebook.
       upper right corner to play with the examples.
 
 
-Entering, Editing, and Evaluating Input
+Entering, editing, and evaluating input
 =======================================
 
 A first calculation
@@ -54,42 +54,39 @@ in the tool bar, or use the ``Cell`` menu::
 
 Sage prints out its response in an **output cell** just below the
 input cell (that's the ``2``, so Sage confirms that :math:`1+1=2`).
-Note also that Jupyter has automatically inserted a new input cell,
-and made it active, after you evaluated your first cell. It will be
-much faster later. Click again in the cell, replace `1+1` by `2+2`,
+Click again in the cell, replace `1+1` by `2+2`,
 and evaluate it. Notice how much quicker it is now? That's because a
-new Sage process had to be started when evaluating the first cell.
+Sage process had to be started the first time, and then stayed ready.
 
 Congratulations, you have done your first calculations with ``Sage``.
 
-Using the Jupyter notebook
+Using the Jupyter Notebook
 --------------------------
 
-Take now the time to explore the ``Help`` menu. We specifically
+Now take some time to explore the ``Help`` menu. We specifically
 recommend taking ``User Interface Tour``, and coming back to
-``Keyboard shortcut`` every now and then for faster use of Jupyter.
+``Keyboard shortcuts`` every now and then to get fast at Jupyter.
 The Jupyter developers also maintain a `tutorial notebook
-<http://nbviewer.jupyter.org/github/ipython/ipython/blob/3.x/examples/Notebook/Index.ipynb>`_
-which may assist you.
+<https://nbviewer.jupyter.org/github/ipython/ipython/blob/3.x/examples/Notebook/Index.ipynb>`_
+which you may find useful.
 
 For now we just review the basics. Use the menu item ``Insert ->
-Insert cell below`` to create a new input cell below this paragraph,
-and calculate anything simple expression of your liking.
+Insert Cell Below`` to create a new input cell below this paragraph,
+then calculate any simple expression of your liking.
 
-You can move around and edit any cell by clicking in it (or using the
-keyboard to move up or down). Go back and change your `2+2` above to
-`3+3` and re-evaluate it.
+You can move around and edit any cell by clicking in it. Go back and change
+your `2+2` above to `3+3` and re-evaluate it.
 
 You can also edit any **text cell** by double clicking on it. Try it
 now! The text you see is using the
 `Markdown
-<http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html>`_
+<https://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html>`_
 markup language. Do some changes to the text, and evaluate it again to
 rerender it.
 Markdown supports a fair amount of basic formatting,
 such as bold, underline, basic lists, and so forth.
 Thanks to the TeX rendering engine
-`MathJax <http://www.mathjax.org/>`_, you may
+`MathJax <https://www.mathjax.org/>`_, you may
 embed mathematical formulae such as $\sin(x) - y^3$ just like with LaTeX.
 It can be fun to type in fairly complicated math, like this:
 
@@ -98,25 +95,25 @@ It can be fun to type in fairly complicated math, like this:
    \zeta(s)=\sum_{n=1}^{\infty}\frac{1}{n^s}=\prod_p \left(\frac{1}{1-p^{-s}}\right)
 
 If you *mess everything up*, you can use the menu ``Kernel ->
-Restart`` to restart Sage. You can also use the menu ``File -> Create
-Checkpoint`` to save notebook, and ``File -> Restore to previous
-Checkpoint`` to reset to the latest version that was saved.
+Restart`` to restart Sage. You can also use the menu ``File -> Save and
+Checkpoint`` to save notebook, and ``File -> Revert to Checkpoint -> ...``
+to reset to any previously saved version.
 
 More interactions
 -----------------
 
 We are now done with basic interaction with Sage. Much richer
-interactions are possible thanks to Jupyter' *interactive widgets*.
+interactions are possible thanks to Jupyter's *interactive widgets*.
 That will be the topic for a later tutorial; here is just a teaser for
 now. Try clicking on the sliders to illustrate multiplication below.
 Also, you can try changing the slider ranges to something different by
-editing the input cell (make sure to also change xmax,ymax)::
+editing the input cell (make sure to also change ``xmax``, ``ymax``)::
 
     sage: @interact
-    ....: def f(n=(1..15), m=(1..15)):
-    ....:     print "n * m =", n*m, " =", factor(n*m)
-    ....:     P = polygon([(0,0),(0,n),(m,n),(m,0)])
-    ....:     P.show(aspect_ratio=1, gridlines='minor',figsize=[3,3],xmax=14,ymax=14)
+    ....: def f(n=(1 .. 15), m=(1 .. 15)):
+    ....:     print("n * m = {} = {}".format(n * m, factor(n * m)))
+    ....:     P = polygon([(0, 0), (0, n), (m, n), (m, 0)])
+    ....:     P.show(aspect_ratio=1, gridlines='minor', figsize=[3, 3], xmax=14, ymax=14)
 
 
 A brief tour
@@ -144,7 +141,7 @@ The ``Help`` menu gives access to the HTML documentation for ``Sage``
 (and other pieces of software). This includes the ``Sage`` tutorial,
 the ``Sage`` thematic tutorials, and the ``Sage`` reference manual.
 This documentation is also available online from ``Sage``'s web site
-http://sagemath.org .
+https://www.sagemath.org .
 
 Completion and contextual documentation
 ---------------------------------------
@@ -193,7 +190,7 @@ To see documentation and examples for a command, type a question mark
 Digression: assignments and methods
 -----------------------------------
 
-In the above manipulations we have not stored any data for
+In the above manipulations we did not store any data for
 later use. This can be done in Sage with the ``=`` symbol as in::
 
     sage: a = 3
@@ -207,7 +204,7 @@ associating that object with a label, given by the left-hand side (see
 the foreword of :ref:`tutorial-objects-and-classes` for
 details). Multiple assignments can be done at once::
 
-    sage: a,b = 2,3
+    sage: a, b = 2, 3
     sage: a
     2
     sage: b
@@ -215,9 +212,9 @@ details). Multiple assignments can be done at once::
 
 This allows us to swap the values of two variables directly::
 
-    sage: a,b = 2,3
-    sage: a,b = b,a
-    sage: a,b
+    sage: a, b = 2, 3
+    sage: a, b = b, a
+    sage: a, b
     (3, 2)
 
 We can also assign a common value to several variables simultaneously::
@@ -337,8 +334,8 @@ Linear algebra
 
     Now that you know how to access the different methods of matrices,
 
-    6. Create the vector `v = (1,-1,-1,1)`.
-    7. Compute the two products: `M\cdot v` and `v\cdot M`. What mathematically
+    6. Create the vector `v = (1, -1, -1, 1)`.
+    7. Compute the two products: `M \cdot v` and `v \cdot M`. What mathematically
        borderline operation is Sage doing implicitly?
 
     .. skip
@@ -353,7 +350,8 @@ Linear algebra
 
 .. NOTE::
 
-    Vectors in Sage are row vectors. A method such as ``eigenspaces`` might not
+    Vectors in Sage can be used as row vectors or column vectors.
+    A method such as ``eigenspaces`` might not
     return what you expect, so it is best to specify ``eigenspaces_left`` or
     ``eigenspaces_right`` instead. Same thing for kernel (``left_kernel`` or
     ``right_kernel``), and so on.
@@ -380,13 +378,13 @@ Here is a simple example::
 
     sage: var('x')   # make sure x is a symbolic variable
     x
-    sage: plot(sin(x^2), (x,0,10))
+    sage: plot(sin(x^2), (x, 0, 10))
     Graphics object consisting of 1 graphics primitive
 
 Here is a more complicated plot. Try to change every single input to the plot
 command in some way, evaluating to see what happens::
 
-    sage: P = plot(sin(x^2), (x,-2,2), rgbcolor=(0.8,0,0.2), thickness=3, linestyle='--', fill='axis')
+    sage: P = plot(sin(x^2), (x, -2, 2), rgbcolor=(0.8, 0, 0.2), thickness=3, linestyle='--', fill='axis')
     sage: show(P, gridlines=True)
 
 Above we used the :func:`show` command to show a plot after it was created. You can
@@ -403,10 +401,10 @@ the options for how you can change the values of the given inputs.
 
     sage: P.show(
 
-Plotting multiple functions at once is as easy as adding them together::
+Plotting multiple functions at once is as easy as adding the plots together::
 
-    sage: P1 = plot(sin(x), (x,0,2*pi))
-    sage: P2 = plot(cos(x), (x,0,2*pi), rgbcolor='red')
+    sage: P1 = plot(sin(x), (x, 0, 2*pi))
+    sage: P2 = plot(cos(x), (x, 0, 2*pi), rgbcolor='red')
     sage: P1 + P2
     Graphics object consisting of 2 graphics primitives
 
@@ -453,16 +451,16 @@ In this case those variables are defined implicitly::
 .. TOPIC:: Exercise D
 
     Define the symbolic function `f(x) = x \sin(x^2)`. Plot `f` on the
-    domain `[-3,3]` and color it red. Use the :func:`find_root` method to
-    numerically approximate the root of `f` on the interval `[1,2]`::
+    domain `[-3, 3]` and color it red. Use the :func:`find_root` method to
+    numerically approximate the root of `f` on the interval `[1, 2]`::
 
         sage: 
 
-    Compute the tangent line to `f` at `x=1`::
+    Compute the tangent line to `f` at `x = 1`::
 
         sage: 
 
-    Plot `f` and the tangent line to `f` at `x=1` in one image::
+    Plot `f` and the tangent line to `f` at `x = 1` in one image::
 
         sage: 
 
@@ -474,15 +472,15 @@ In this case those variables are defined implicitly::
 
         y = 1 + x y^2
 
-    There are two solutions, take the one for which `\lim_{x\to0}y(x)=1`.
+    There are two solutions, take the one for which `\lim_{x\to0} y(x) = 1`.
     (Don't forget to create the variables `x` and `y`!).
 
     ::
 
         sage: 
 
-    Expand `y` as a truncated Taylor series around `0` and containing
-    `n=10` terms.
+    Expand `y` as a truncated Taylor series around `0` containing
+    `n = 10` terms.
 
     ::
 
@@ -490,7 +488,7 @@ In this case those variables are defined implicitly::
 
     Do you recognize the coefficients of the Taylor series expansion? You might
     want to use the `On-Line Encyclopedia of Integer Sequences
-    <http://oeis.org>`_, or better yet, Sage's class :class:`OEIS` which
+    <https://oeis.org>`_, or better yet, Sage's class :class:`OEIS` which
     queries the encyclopedia:
 
     .. skip
@@ -519,20 +517,20 @@ Accessing Sage
   `Thebelab <https://sage-package.readthedocs.io/en/latest/sage_package/thebe.html>`_
   or the `Sage-cell server <https://sagecell.sagemath.org/>`_.
 
-- `Binder <http://mybinder.org>`_ is a service that lets you run
+- `Binder <https://mybinder.org>`_ is a service that lets you run
   Jupyter online on top of an arbitrary software stack. Sessions are
   free, anonymous, and temporary. You can use one of the existing
   repositories, or create your own.
 
   .. TODO:: add links about both
 
-- `Cocalc <http://cocalc.com>`_ (Collaborative Calculation) is an online
+- `Cocalc <https://cocalc.com>`_ (Collaborative Calculation in the Cloud) is an online
   service that gives access to a wealth of computational systems,
   including Sage, with extra goodies for teaching. It's free for basic
   usage.
 
 - `JupyterHub <https://jupyter.org/hub>`_ lets you (or your
-  institution or ...) deploy multiuser Jupyter service.
+  institution or ...) deploy a multi-user Jupyter service.
 
 - The `Sage Debian Live <https://sagedebianlive.metelu.net/>`_ USB key
   let's you run Linux with Sage and many other goodies on your
@@ -540,14 +538,14 @@ Accessing Sage
 
 - Sage can be
   `installed on most major operating systems <https://doc.sagemath.org/html/en/installation/>`_
-  (Linux, MacOS, Windows), through usual package managers or installers,
+  (Linux, macOS, Windows), through usual package managers or installers,
   or by compiling from source.
 
 Ways to use Sage
 ----------------
 
-There are many ways beyond the Jupyter notebook to use Sage:
-interactive command line, programs scripts, ...
+There are many ways beyond the Jupyter Notebook to use Sage:
+interactive command line, program scripts, ...
 See the `Sage tutorial <https://doc.sagemath.org/html/en/tutorial/introduction.html#ways-to-use-sage>`_.
 
 .. NOTE::
@@ -559,10 +557,10 @@ See the `Sage tutorial <https://doc.sagemath.org/html/en/tutorial/introduction.h
 Resources
 ---------
 
-- Sage's web page: http://sagemath.org
+- Sage's web page: https://www.sagemath.org
 - The open book `Computational Mathematics with Sage <http://sagebook.gforge.inria.fr/english.html>`_
   (originally written in `French <http://sagebook.gforge.inria.fr/>`; also translated in `German <http://www.loria.fr/~zimmerma/sagebook/CalculDeutsch.pdf/>`)
 - :ref:`Sage's main tutorial <tutorial>`
-- `Sage's official thematic tutorials <http://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_
+- `Sage's official thematic tutorials <https://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_
 - `More Sage tutorials <https://more-sagemath-tutorials.readthedocs.io/>`_
 - `Sage's quick reference cards <https://wiki.sagemath.org/quickref>`_
