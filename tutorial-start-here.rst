@@ -109,7 +109,7 @@ now. Try clicking on the sliders to illustrate multiplication below.
 Also, you can try changing the slider ranges to something different by
 editing the input cell (make sure to also change ``xmax``, ``ymax``)::
 
-    sage: @interact
+    sage: @interact                                # not tested
     ....: def f(n=(1 .. 15), m=(1 .. 15)):
     ....:     print("n * m = {} = {}".format(n * m, factor(n * m)))
     ....:     P = polygon([(0, 0), (0, n), (m, n), (m, 0)])
@@ -152,19 +152,33 @@ Geometry**: Schemes, Plane, Elliptic and Hyperelliptic Curves,
 Calculus
 --------
 
+.. skip
+
 ::
 
     sage: %display latex
-    sage: var('x,y')
+
+::
+
+    sage: x,y = var('x,y')
     sage: f = (cos(pi/4-x)-tan(x)) / (1-sin(pi/4 + x)); f
+    -(cos(1/4*pi - x) - tan(x))/(sin(1/4*pi + x) - 1)
     sage: limit(f, x = pi/4, dir='minus')
+    +Infinity
 
     sage: solve([x^2+y^2 == 1, y^2 == x^3 + x + 1], x, y)
+    [[x == -1/2*I*sqrt(3) - 1/2, y == -sqrt(-1/2*I*sqrt(3) + 3/2)],
+     [x == -1/2*I*sqrt(3) - 1/2, y == sqrt(-1/2*I*sqrt(3) + 3/2)],
+     [x == 1/2*I*sqrt(3) - 1/2, y == -sqrt(1/2*I*sqrt(3) + 3/2)],
+     [x == 1/2*I*sqrt(3) - 1/2, y == sqrt(1/2*I*sqrt(3) + 3/2)],
+     [x == 0, y == -1], [x == 0, y == 1]]
 
     sage: plot3d(sin(pi*sqrt(x^2+y^2)) / sqrt(x^2+y^2), (x,-5,5), (y,-5,5), viewer="threejs")
+    Graphics3d Object
 
     sage: contour_plot(y^2 + 1 - x^3 - x, (x,-pi,pi), (y,-pi,pi),
     ....:              contours=[-8,-4,0,4,8], colorbar=True)
+    Graphics object consisting of 1 graphics primitive
 
 Algebra
 -------
@@ -172,13 +186,14 @@ Algebra
 ::
 
     sage: factor(x^100 - 1)
+    (x^40 - x^30 + x^20 - x^10 + 1)*(x^20 + x^15 + x^10 + x^5 + 1)*(x^20 - x^15 + x^10 - x^5 + 1)*(x^8 - x^6 + x^4 - x^2 + 1)*(x^4 + x^3 + x^2 + x + 1)*(x^4 - x^3 + x^2 - x + 1)*(x^2 + 1)*(x + 1)*(x - 1)
 
     sage: p = 54*x^4+36*x^3-102*x^2-72*x-12
     sage: p.factor()
     6*(x^2 - 2)*(3*x + 1)^2
 
     sage: for K in [ZZ, QQ, ComplexField(16), QQ[sqrt(2)], GF(5)]:
-    ....:     print K, ":"; print K['x'](p).factor()
+    ....:     print(K, ":"); print(K['x'](p).factor())
     Integer Ring :
     2 * 3 * (3*x + 1)^2 * (x^2 - 2)
     Rational Field :
@@ -191,12 +206,14 @@ Algebra
     (4) * (x + 2)^2 * (x^2 + 3)
 
     sage: ZZ.category()
-    Category of euclidean domains
+    Join of Category of euclidean domains and Category of infinite enumerated sets and Category of metric spaces
 
     sage: sorted( ZZ.category().axioms() )
     ['AdditiveAssociative', 'AdditiveCommutative', 'AdditiveInverse', 'AdditiveUnital',
-     'Associative', 'Commutative',
-     'Distributive', 'NoZeroDivisors', 'Unital']
+     'Associative', 'Commutative', 'Distributive',
+     'Enumerated', 'Infinite',
+     'NoZeroDivisors',
+     'Unital']
 
 Linear algebra
 --------------
@@ -235,7 +252,7 @@ Linear algebra
 Computing the rank of a large sparse matrix::
 
     sage: M = random_matrix(GF(7), 10000, sparse=True, density=3/10000)
-    sage: M.rank()
+    sage: M.rank()                        # random
     9263
 
 Geometry
@@ -244,6 +261,7 @@ Geometry
 ::
 
     sage: polytopes.truncated_icosidodecahedron().plot(viewer="threejs")
+    Graphics3d Object
 
 Programming and plotting
 ------------------------
@@ -251,13 +269,13 @@ Programming and plotting
 ::
 
     sage: n, l, x, y = 10000, 1, 0, 0
-    ....: p = [[0, 0]]
-    ....: for k in range(n):
+    sage: p = [[0, 0]]
+    sage: for k in range(n):
     ....:     theta = (2 * pi * random()).n(digits=5)
     ....:     x, y = x + l * cos(theta), y + l * sin(theta)
     ....:     p.append([x, y])
-    ....: g = line(p, thickness=.4) + line([p[n], [0, 0]], color='red', thickness=2)
-    ....: g.show(aspect_ratio=1)
+    sage: g = line(p, thickness=.4) + line([p[n], [0, 0]], color='red', thickness=2)
+    sage: g.show(aspect_ratio=1)
 
 
 Interactive plots
@@ -265,8 +283,8 @@ Interactive plots
 
 ::
 
-    sage: var('x')
-    ....: @interact
+    sage: x = var('x')
+    sage: @interact                                # not tested
     ....: def g(f=x*sin(1/x),
     ....:       c=slider(-1, 1, .01, default=-.5),
     ....:       n=(1..30),
@@ -291,7 +309,9 @@ Graph Theory
 Coloring graphs::
 
     sage: g = graphs.PetersenGraph(); g
+    Petersen graph: Graph on 10 vertices
     sage: g.plot(partition=g.coloring())
+    Graphics object consisting of 26 graphics primitives
 
 Combinatorics
 -------------
@@ -304,10 +324,10 @@ Fast counting::
 Playing poker::
 
     sage: Suits   = Set(["Hearts", "Diamonds", "Spades", "Clubs"])
-    ....: Values  = Set([2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"])
-    ....: Cards   = cartesian_product([Values, Suits])
-    ....: Hands   = Subsets(Cards, 5)
-    ....: Hands.random_element()
+    sage: Values  = Set([2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"])
+    sage: Cards   = cartesian_product([Values, Suits])
+    sage: Hands   = Subsets(Cards, 5)
+    sage: Hands.random_element()                        # random
     {(5, 'Pique'), (4, 'Coeur'), (8, 'Trefle'), ('As', 'Trefle'), (10, 'Carreau')}
     sage: Hands.cardinality()
     2598960
@@ -328,6 +348,7 @@ Number Theory
 
     sage: E = EllipticCurve('389a')
     sage: plot(E, thickness=3)
+    Graphics object consisting of 2 graphics primitives
 
 Games
 -----
@@ -335,8 +356,34 @@ Games
 Sudoku solver::
 
     sage: S = Sudoku('5...8..49...5...3..673....115..........2.8..........187....415..3...2...49..5...3'); S
+    +-----+-----+-----+
+    |5    |  8  |  4 9|
+    |     |5    |  3  |
+    |  6 7|3    |    1|
+    +-----+-----+-----+
+    |1 5  |     |     |
+    |     |2   8|     |
+    |     |     |  1 8|
+    +-----+-----+-----+
+    |7    |    4|1 5  |
+    |  3  |    2|     |
+    |4 9  |  5  |    3|
+    +-----+-----+-----+
 
-    sage: S.solve()
+    sage: list(S.solve())
+    [+-----+-----+-----+
+     |5 1 3|6 8 7|2 4 9|
+     |8 4 9|5 2 1|6 3 7|
+     |2 6 7|3 4 9|5 8 1|
+     +-----+-----+-----+
+     |1 5 8|4 6 3|9 7 2|
+     |9 7 4|2 1 8|3 6 5|
+     |3 2 6|7 9 5|4 1 8|
+     +-----+-----+-----+
+     |7 8 2|9 3 4|1 5 6|
+     |6 3 5|1 7 2|8 9 4|
+     |4 9 1|8 5 6|7 2 3|
+     +-----+-----+-----+]
 
 
 Help system
@@ -345,7 +392,7 @@ Help system
 We review the three main ways to get help in Sage:
 
 - navigating through the documentation
-- ``tab`` completion,
+- tab-completion,
 - contextual help.
 
 Navigating through the documentation
@@ -385,6 +432,10 @@ To see documentation and examples for a command, type a question mark
 
     sage: KleinFourGroup?
 
+.. skip
+
+::
+
     sage:
 
 .. TOPIC:: Exercise A
@@ -396,6 +447,8 @@ To see documentation and examples for a command, type a question mark
     ::
 
         sage: factor?
+
+    .. skip
 
     ::
 
@@ -451,7 +504,7 @@ writing **f(my_object)** you write **my_object.f()**::
 
 See :ref:`tutorial-objects-and-classes` for details.
 
-Method discovery with tab completion
+Method discovery with tab-completion
 ------------------------------------
 
 .. TODO:: Replace the examples below by less specialized ones
@@ -575,7 +628,7 @@ Plotting
 --------
 
 The :func:`plot` command allows you to draw plots of functions. Recall
-that you can access the documentation by pressing the ``tab`` key
+that you can access the documentation by pressing the ``Tab`` key
 after writing ``plot?`` in a cell:
 
 .. skip
@@ -606,7 +659,7 @@ also use ``P.show`` instead::
 
     sage: P.show(gridlines=True)
 
-Try putting the cursor right after ``P.show(`` and pressing tab to get a list of
+Try putting the cursor right after ``P.show(`` and pressing ``Tab`` to get a list of
 the options for how you can change the values of the given inputs.
 
 .. skip
@@ -689,12 +742,16 @@ In this case those variables are defined implicitly::
     There are two solutions, take the one for which `\lim_{x\to0} y(x) = 1`.
     (Don't forget to create the variables `x` and `y`!).
 
+    .. skip
+
     ::
 
         sage: 
 
     Expand `y` as a truncated Taylor series around `0` containing
     `n = 10` terms.
+
+    .. skip
 
     ::
 
@@ -711,6 +768,8 @@ In this case those variables are defined implicitly::
 
 
         sage: oeis?
+
+    .. skip
 
     ::
 
@@ -776,7 +835,7 @@ Resources
 - Bug Tracker: https://trac.sagemath.org
 
 - The open book `Computational Mathematics with Sage <http://sagebook.gforge.inria.fr/english.html>`_
-  (originally written in `French <http://sagebook.gforge.inria.fr/>`_; also translated in `German <http://www.loria.fr/~zimmerma/sagebook/CalculDeutsch.pdf/>`)
+  (originally written in `French <http://sagebook.gforge.inria.fr/>`_; also translated in `German <http://www.loria.fr/~zimmerma/sagebook/CalculDeutsch.pdf/>`_)
 - :ref:`Sage's main tutorial <tutorial>`_
 - `Sage's official thematic tutorials <https://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_
 - `More Sage tutorials <https://more-sagemath-tutorials.readthedocs.io/>`_
