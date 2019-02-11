@@ -774,8 +774,8 @@ Resources
 - Bug Tracker: https://trac.sagemath.org
 
 - The open book `Computational Mathematics with Sage <http://sagebook.gforge.inria.fr/english.html>`_
-  (originally written in `French <http://sagebook.gforge.inria.fr/>`; also translated in `German <http://www.loria.fr/~zimmerma/sagebook/CalculDeutsch.pdf/>`)
-- :ref:`Sage's main tutorial <tutorial>`
+  (originally written in `French <http://sagebook.gforge.inria.fr/>`_; also translated in `German <http://www.loria.fr/~zimmerma/sagebook/CalculDeutsch.pdf/>`)
+- :ref:`Sage's main tutorial <tutorial>`_
 - `Sage's official thematic tutorials <https://doc.sagemath.org/html/en/thematic_tutorials/index.html>`_
 - `More Sage tutorials <https://more-sagemath-tutorials.readthedocs.io/>`_
 - `Sage's quick reference cards <https://wiki.sagemath.org/quickref>`_
