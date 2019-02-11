@@ -169,6 +169,8 @@ Calculus
 Algebra
 -------
 
+::
+
     sage: factor(x^100 - 1)
 
     sage: p = 54*x^4+36*x^3-102*x^2-72*x-12
