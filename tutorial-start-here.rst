@@ -122,11 +122,34 @@ editing the input cell (make sure to also change xmax,ymax)::
 A brief tour
 ============
 
+Here is a very brief tour showcasing the different areas of
+mathematics covered by Sage:
+**2D/3D Graphics**, **Categories**, **Basic Rings and Fields**: Integers
+and Rational Numbers, Real and Complex Numbers, Finite Rings and Fields,
+Polynomials, Formal Power Series, p-Adic Numbers, Quaternion Algebras,
+**Linear Algebra**: Matrices and Spaces of Matrices, Vectors and
+Modules, Tensors on Free Modules of Finite Rank, **Calculus and
+Analysis**: Symbolic Calculus, Mathematical Constants, Elementary and
+Special Functions, Asymptotic Expansions, Numerical Optimization,
+**Probability and Statistics**, Probability , Statistics, Quantitative
+Finance, **Mathematical Structures**: Sets, Monoids, Groups, Semirings,
+Rings, Algebras, **Discrete Mathematics** Combinatorics, Graph Theory,
+Quivers, Matroid Theory, Discrete Dynamics, Coding Theory, Cryptography,
+Game Theory, Symbolic Logic, SAT solvers, **Geometry and Topology**:
+Combinatorial and Discrete Geometry, Hyperbolic Geometry, Cell Complexes
+and their Homology, Differential Forms, Manifolds, Parametrized
+Surfaces, Knot Theory, **Number Fields and Function Fields**, **Number
+Theory**: Diophantine approximation, Quadratic Forms, L-Functions,
+Arithmetic Subgroups of :math:`SL_2(Z)`, General Hecke Algebras and
+Hecke Modules, Modular Symbols, Modular Forms, Modular Forms for Hecke
+Triangle Groups, Modular Abelian Varieties, **Algebraic and Arithmetic
+Geometry**: Schemes, Plane, Elliptic and Hyperelliptic Curves,
+**Databases**, **Games**
+
 .. TODO::
 
-   Insert more striking examples showcasing the different areas
-   covered by Sage.
-
+   - Insert more striking examples
+   - Insert Read More links
 
 
 Calculus
@@ -139,53 +162,82 @@ Calculus
     sage: f = (cos(pi/4-x)-tan(x)) / (1-sin(pi/4 + x)); f
     sage: limit(f, x = pi/4, dir='minus')
 
-    sage: factor(x^100 - 1)
-
     sage: solve([x^2+y^2 == 1, y^2 == x^3 + x + 1], x, y)
 
     sage: plot3d(sin(pi*sqrt(x^2+y^2)) / sqrt(x^2+y^2), (x,-5,5), (y,-5,5), viewer="threejs")
 
-Combinatorics
--------------
+    sage: contour_plot(y^2 + 1 - x^3 - x, (x,-pi,pi), (y,-pi,pi),
+    ....:              contours=[-8,-4,0,4,8], colorbar=True)
 
-Fast counting::
+Algebra
+-------
 
-    sage: Partitions(100000).cardinality()
-    27493510569775696512677516320986352688173429315980054758203125984302147328114964173055050741660736621590157844774296248940493063070200461792764493033510116079342457190155718943509725312466108452006369558934464248716828789832182345009262853831404597021307130674510624419227311238999702284408609370935531629697851569569892196108480158600569421098519
+    sage: factor(x^100 - 1)
 
-Playing poker::
+    sage: p = 54*x^4+36*x^3-102*x^2-72*x-12
+    sage: p.factor()
+    6*(x^2 - 2)*(3*x + 1)^2
 
-    sage: Suit = Set(["Coeur", "Carreau", "Pique", "Trefle"])
-    ....: Values  = Set([2, 3, 4, 5, 6, 7, 8, 9, 10, "Valet", "Dame", "Roi", "As"])
-    ....: Cards   = cartesian_product([Values, Suits])
-    ....: Hands    = Subsets(Cartes, 5)
-    ....: Hands.random_element()
-    {(5, 'Pique'), (4, 'Coeur'), (8, 'Trefle'), ('As', 'Trefle'), (10, 'Carreau')}
-    sage: Mains.cardinality()
-    2598960
+    sage: for K in [ZZ, QQ, ComplexField(16), QQ[sqrt(2)], GF(5)]:
+    ....:     print K, ":"; print K['x'](p).factor()
+    Integer Ring :
+    2 * 3 * (3*x + 1)^2 * (x^2 - 2)
+    Rational Field :
+    (54) * (x + 1/3)^2 * (x^2 - 2)
+    Complex Field with 16 bits of precision :
+    (54.00) * (x - 1.414) * (x + 0.3333)^2 * (x + 1.414)
+    Number Field in sqrt2 with defining polynomial x^2 - 2 :
+    (54) * (x - sqrt2) * (x + sqrt2) * (x + 1/3)^2
+    Finite Field of size 5 :
+    (4) * (x + 2)^2 * (x^2 + 3)
 
-Algebraic Combinatorics
------------------------
+    sage: ZZ.category()
+    Category of euclidean domains
 
-Drawing an affine root systems::
+    sage: sorted( ZZ.category().axioms() )
+    ['AdditiveAssociative', 'AdditiveCommutative', 'AdditiveInverse', 'AdditiveUnital',
+     'Associative', 'Commutative',
+     'Distributive', 'NoZeroDivisors', 'Unital']
 
-    sage: L = RootSystem(["G",2,1]).ambient_space()
-    sage: p = L.plot(affine=False, level=1)
-    sage: p.show(aspect_ratio=[1,1,2], frame=False)
+Linear algebra
+--------------
 
-Number Theory
--------------
+::
 
-    sage: E = EllipticCurve('389a')
-    sage: plot(E,thickness=3)
+    sage: A = matrix(GF(7), 4, [5,5,4,3,0,3,3,4,0,1,5,4,6,0,6,3]); A
+    [5 5 4 3]
+    [0 3 3 4]
+    [0 1 5 4]
+    [6 0 6 3]
 
-Graph Theory
-------------
+    sage: P = A.characteristic_polynomial(); P
+    x^4 + 5*x^3 + 6*x + 2
 
-Coloring graphs::
+    sage: P(A)
+    [0 0 0 0]
+    [0 0 0 0]
+    [0 0 0 0]
+    [0 0 0 0]
 
-    sage: g = graphs.PetersenGraph(); g
-    sage: g.plot(partition=g.coloring())
+    sage: A.eigenspaces_left()
+    [
+    (4, Vector space of degree 4 and dimension 1 over Finite Field of size 7
+    User basis matrix:
+    [1 4 6 1]),
+    (1, Vector space of degree 4 and dimension 1 over Finite Field of size 7
+    User basis matrix:
+    [1 3 3 4]),
+    (2, Vector space of degree 4 and dimension 2 over Finite Field of size 7
+    User basis matrix:
+    [1 0 2 3]
+    [0 1 6 0])
+    ]
+
+Computing the rank of a large sparse matrix::
+
+    sage: M = random_matrix(GF(7), 10000, sparse=True, density=3/10000)
+    sage: M.rank()
+    9263
 
 Geometry
 --------
@@ -232,6 +284,60 @@ Interactive plots
     ....:     show(dot + p + pt, ymin=ymin, ymax=ymax, xmin=xmin, xmax=xmax)
     ....:     html('$f(x)\;=\;%s$'%latex(f))
     ....:     html('$P_{%s}(x)\;=\;%s+R_{%s}(x)$'%(degree,latex(ft),degree))
+
+
+Graph Theory
+------------
+
+Coloring graphs::
+
+    sage: g = graphs.PetersenGraph(); g
+    sage: g.plot(partition=g.coloring())
+
+Combinatorics
+-------------
+
+Fast counting::
+
+    sage: Partitions(100000).cardinality()
+    27493510569775696512677516320986352688173429315980054758203125984302147328114964173055050741660736621590157844774296248940493063070200461792764493033510116079342457190155718943509725312466108452006369558934464248716828789832182345009262853831404597021307130674510624419227311238999702284408609370935531629697851569569892196108480158600569421098519
+
+Playing poker::
+
+    sage: Suit = Set(["Coeur", "Carreau", "Pique", "Trefle"])
+    ....: Values  = Set([2, 3, 4, 5, 6, 7, 8, 9, 10, "Valet", "Dame", "Roi", "As"])
+    ....: Cards   = cartesian_product([Values, Suits])
+    ....: Hands    = Subsets(Cartes, 5)
+    ....: Hands.random_element()
+    {(5, 'Pique'), (4, 'Coeur'), (8, 'Trefle'), ('As', 'Trefle'), (10, 'Carreau')}
+    sage: Mains.cardinality()
+    2598960
+
+Algebraic Combinatorics
+-----------------------
+
+Drawing an affine root systems::
+
+    sage: L = RootSystem(["G",2,1]).ambient_space()
+    sage: p = L.plot(affine=False, level=1)
+    sage: p.show(aspect_ratio=[1,1,2], frame=False)
+
+Number Theory
+-------------
+
+::
+
+    sage: E = EllipticCurve('389a')
+    sage: plot(E,thickness=3)
+
+Games
+-----
+
+Sudoku solver::
+
+    sage: S = Sudoku('5...8..49...5...3..673....115..........2.8..........187....415..3...2...49..5...3'); S
+
+    sage: S.solve()
 
 
 Help system
@@ -666,6 +772,9 @@ Resources
 ---------
 
 - Sage's web page: http://sagemath.org
+- Ask Sage: https://ask.sagemath.org
+- Bug Tracker: https://trac.sagemath.org
+
 - The open book `Computational Mathematics with Sage <http://sagebook.gforge.inria.fr/english.html>`_
   (originally written in `French <http://sagebook.gforge.inria.fr/>`; also translated in `German <http://www.loria.fr/~zimmerma/sagebook/CalculDeutsch.pdf/>`)
 - :ref:`Sage's main tutorial <tutorial>`
