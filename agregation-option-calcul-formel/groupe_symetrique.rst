@@ -541,11 +541,11 @@ Comment calculer un système générateur fort?
     de générateurs de `G` et `U` des représentants des `H`-classes à
     droite:
 
-    .. MATH::  G = \langle A \rangle \qquad \text { et } G=\bigcup_{u\in U} u H,
+    .. MATH::  G = \langle A \rangle \qquad \text { et } G=\bigcup_{u\in U} uH,
 
     Alors:
 
-    .. MATH::  H = \langle u^{-1} a u' \ \mid\  u,u'\in U \ \text{ et }\ u^{-1}au'\in H \rangle
+    .. MATH::  H = \langle v^{-1} a u \ \mid\  a\in A,\ u\in U \ \text{ et }\ v\in U,\ au\in vH \rangle
 
 
 .. TOPIC:: Démonstration
