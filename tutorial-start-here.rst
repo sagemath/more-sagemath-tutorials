@@ -18,18 +18,16 @@ Sage, and provide pointers to explore and learn further.
 
 In the following, we will be assuming that you are reading this
 document as a Jupyter notebook (Jupyter is the primary user interface
-for Sage). If you are reading it instead as a web page, you can click
+for Sage). If instead you are reading this document as a web page, you can click
 on ``Run on mybinder.org`` to get access to the notebook online. If
 you have Sage already installed on your machine, you may instead
-download the notebook.
+download this page ``As Jupyter notebook``. If you just want to try
+out a few things, you may also just click the ``Activate`` button on
+the upper right corner to play with the examples.
 
 .. TODO::
 
-    - credits on sources of inspiration
-    - Make sure the following works: If you just want to try out a few
-      things, you may also just click the ``Activate`` button on the
-      upper right corner to play with the examples.
-
+    - credits on the many sources of inspiration
 
 Entering, editing, and evaluating input
 =======================================
@@ -64,7 +62,7 @@ Using the Jupyter Notebook
 --------------------------
 
 Now take some time to explore the ``Help`` menu. We specifically
-recommend taking ``User Interface Tour``, and coming back to
+recommend taking the ``User Interface Tour``, and coming back to
 ``Keyboard shortcuts`` every now and then to get fast at Jupyter.
 The Jupyter developers also maintain a `tutorial notebook
 <https://nbviewer.jupyter.org/github/ipython/ipython/blob/3.x/examples/Notebook/Index.ipynb>`_
