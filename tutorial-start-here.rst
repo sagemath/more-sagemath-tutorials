@@ -119,8 +119,8 @@ editing the input cell (make sure to also change ``xmax``, ``ymax``)::
 A brief tour
 ============
 
-Here is a very brief tour showcasing the different areas of
-mathematics covered by Sage:
+Sage covers many areas of mathematics:
+
 **2D/3D Graphics**, **Categories**, **Basic Rings and Fields**: Integers
 and Rational Numbers, Real and Complex Numbers, Finite Rings and Fields,
 Polynomials, Formal Power Series, p-Adic Numbers, Quaternion Algebras,
@@ -143,11 +143,14 @@ Triangle Groups, Modular Abelian Varieties, **Algebraic and Arithmetic
 Geometry**: Schemes, Plane, Elliptic and Hyperelliptic Curves,
 **Databases**, **Games**
 
+We now engage in a brief tour.
+
 .. TODO::
 
+   - Better formatting of the above list of areas, with links to
+     relevant pieces of the documentation.
    - Insert more striking examples
    - Insert Read More links
-
 
 Calculus
 --------
