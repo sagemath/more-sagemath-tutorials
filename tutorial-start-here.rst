@@ -150,7 +150,7 @@ We now engage in a brief tour.
 
    - Better formatting of the above list of areas, with links to
      relevant pieces of the documentation.
-   - Insert more striking examples
+   - Insert more striking examples (including Sage-Manifolds!)
    - Insert Read More links
 
 Calculus
@@ -395,7 +395,7 @@ Help system
 
 We review the three main ways to get help in Sage:
 
-- navigating through the documentation
+- navigating through the documentation,
 - tab-completion,
 - contextual help.
 
