@@ -50,6 +50,8 @@ You may instead click the play button in the tool bar or use the
 ``Cell`` menu:
 
 .. image:: media/RunCellIcon.png
+   :align: center
+   :alt: run button and cell menu
 
 Sage prints out its response in an **output cell** just below the
 input cell (that's the ``2``, so Sage confirms that :math:`1+1=2`).
