@@ -42,13 +42,14 @@ notebook, you type the expression in an **input cell**, or **code
 cell**. This is the rectangle below this paragraph containing `1+1`
 (if instead you see ``sage: 1+1``, you are reading this document as a
 web page and won't be able to play with the examples). Click on the
-cell to select it, and press ``shift-enter`` to evaluate it. You may
-instead click the play button
-..  .. image:: media/RunCellIcon.png
-in the tool bar, or use the ``Cell`` menu::
-
+cell to select it, and press ``shift-enter`` to evaluate it::
     sage: 1 + 1
     2
+
+You may instead click the play button in the tool bar or use the
+``Cell`` menu:
+
+.. image:: media/RunCellIcon.png
 
 Sage prints out its response in an **output cell** just below the
 input cell (that's the ``2``, so Sage confirms that :math:`1+1=2`).
