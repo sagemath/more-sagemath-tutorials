@@ -299,6 +299,7 @@ def rtd_finalize(app, exception):
     import subprocess
     if exception is None:
         #subprocess.call("make jupyter", shell=True)
+        subprocess.call("make ipynb", shell=True)
         subprocess.call("make media", shell=True)
 
 def setup(app):
