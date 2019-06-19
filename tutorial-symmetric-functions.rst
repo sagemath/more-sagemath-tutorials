@@ -18,9 +18,8 @@ variables need not appear. Moreover, one may show that this does not
 cause any trouble in the calculations.
 `\def\QQ{mathbb{QQ}}`
 
-::
 
-Outputs printed in latex mode:: 
+*Outputs printed in latex mode*:: 
 
     sage: %display latex           # not tested
 
@@ -63,7 +62,8 @@ function ":math:`\mathrm{Sym}`" over :math:`\mathbb{Q}`::
 Abstract symmetric functions
 ----------------------------
 
-We first describe how to manipulate "variable free" symmetric functions (with coefficients in the ring of rational coefficient fractions in $q$ and $t$). Such functions are linear combinations of one of the six classical bases of symmetric functions; all indexed by interger partitions $\mu=\mu_1\mu_2\cdots \mu_k$. 
+We first describe how to manipulate "variable free" symmetric functions (with coefficients in the ring of rational coefficient fractions in :math:`q` and :math:`t`). 
+Such functions are linear combinations of one of the six classical bases of symmetric functions; all indexed by interger partitions :math:`\mu=\mu_1\mu_2\cdots \mu_k`. 
 
 -   The **power sum** symmetric functions :math:`p_\mu=p_{\mu_1}p_{\mu_2}\cdots p_{\mu_2}`
 
@@ -94,7 +94,7 @@ We first describe how to manipulate "variable free" symmetric functions (with co
 Another often used coefficient ring is :math:`\mathbb{Q}(q,t)`. 
 Thus, declaring first this ring (and "injecting" variables :math:`q` and 
 :math:`t` to make them available), one may introduce the ring of symmetric 
-functions over :math:`\mathbb{Q}[q,t]` as follows. The ``Symqt.inject_shorthands()`` 
+functions over :math:`\mathbb{Q}(q,t)` as follows. The ``Symqt.inject_shorthands()`` 
 command makes the "usual" short names (as in Macdonald book) available 
 (with Sage < 8.0, it will display a warning message you can ignore.).
 The keyword `verbose` allows you to make the injection quiet. 
@@ -1058,7 +1058,7 @@ The Schur functions `s_\lambda` can also be interpreted as irreducible character
     [ 1  1  1  1  1  1  1]
 
 
-We can indeed check that this agrees with the character table of $S_5$, 
+We can indeed check that this agrees with the character table of :math:`S_5`, 
 modulo our reordering by
 
 ::
