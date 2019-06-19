@@ -345,7 +345,7 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 
 .. TOPIC:: Exercise
 
- Print all the Schur functions on partitions of size 5 and convert them into the elementary basis.
+    Print all the Schur functions on partitions of size 5 and convert them into the elementary basis.
 
 .. TOPIC:: Solution
 
@@ -372,7 +372,7 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 
 .. TOPIC:: Exercise
 
- Compute the sum of the homogeneous functions on partitions of size 4 in the power sum basis.
+    Compute the sum of the homogeneous functions on partitions of size 4 in the power sum basis.
 
 .. TOPIC:: Solution
 
@@ -385,9 +385,9 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 
 .. TOPIC:: Exercise
 
- It is well konwn that  :math:`h_n(X) = \sum \limits_{\mu \vdash n} \dfrac{p_{\mu}(x)}{z_{\mu}}`. Verify this result for  :math:`n \in \{1,2,3,4\}`
+    It is well konwn that  :math:`h_n(X) = \sum \limits_{\mu \vdash n} \dfrac{p_{\mu}(x)}{z_{\mu}}`. Verify this result for  :math:`n \in \{1,2,3,4\}`
 
- Note that there exists a function ``zee()`` which takes a partition  :math:`\mu` and gives back the value of  :math:`z_{\mu}`. To use this function, you should import it from* ``sage.combinat.sf.sfa``.
+    Note that there exists a function ``zee()`` which takes a partition  :math:`\mu` and gives back the value of  :math:`z_{\mu}`. To use this function, you should import it from* ``sage.combinat.sf.sfa``.
 
 
 ::
@@ -647,7 +647,7 @@ For example, we can verify the well-known Schur positivity of product of Schur
 
 .. TOPIC:: Exercise
 
- Its representation theoretic signification implies that :math:`\nabla (e_n)` is Schur positive. Verify this for :math:`1 \leq n \leq 6`.
+    Its representation theoretic signification implies that :math:`\nabla (e_n)` is Schur positive. Verify this for :math:`1 \leq n \leq 6`.
 
 .. TOPIC:: Solution
 
@@ -855,13 +855,13 @@ There are also interesting conjectures on the effect of :math:`\nabla` on Schur 
 
 .. TOPIC:: Exercise
 
- We have the following relation between :math:`\nabla (e_n)` and the q,t-Catalan numbers :
+    We have the following relation between :math:`\nabla (e_n)` and the q,t-Catalan numbers :
 
- .. MATH:: C_n(q,t) = \langle \nabla e_n , e_n \rangle.
+    .. MATH:: C_n(q,t) = \langle \nabla e_n , e_n \rangle.
 
- Check this relation for :math:`1 \leq n \leq 5`
+    Check this relation for :math:`1 \leq n \leq 5`
 
- *Note that the n-th q,t-Catalan number can be computed by using the command ``qt_catalan_number(n)`` which has to be imported from* ``sage.combinat.q_analogues`` if it hasn't already been done*.
+    *Note that the n-th q,t-Catalan number can be computed by using the command ``qt_catalan_number(n)`` which has to be imported from* ``sage.combinat.q_analogues`` if it hasn't already been done*.
 
 ::
     
