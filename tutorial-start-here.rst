@@ -746,16 +746,12 @@ In this case those variables are defined implicitly::
     There are two solutions, take the one for which `\lim_{x\to0} y(x) = 1`.
     (Don't forget to create the variables `x` and `y`!).
 
-    .. skip
-
     ::
 
         sage: 
 
     Expand `y` as a truncated Taylor series around `0` containing
     `n = 10` terms.
-
-    .. skip
 
     ::
 
@@ -766,14 +762,10 @@ In this case those variables are defined implicitly::
     <https://oeis.org>`_, or better yet, Sage's class :class:`OEIS` which
     queries the encyclopedia:
 
-    .. skip
-
     ::
 
 
         sage: oeis?
-
-    .. skip
 
     ::
 
