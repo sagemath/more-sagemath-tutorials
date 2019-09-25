@@ -30,7 +30,7 @@ extensions = [
     'sphinx.ext.ifconfig',
     'sage_package.sphinx',
     'nbsphinx',
-    'sphinxcontrib.jupyter'
+    #'sphinxcontrib.jupyter'
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -358,6 +358,7 @@ jupyter_python_autosave = True
 jupyter_default_lang = "sagemath"
 
 # TODO: add binder link, github logo, specific file reference
+# Really include this prolog in the html version?
 rst_prolog=r"""
 This document is one of `More SageMath Tutorials <https://more-sagemath-tutorials.readthedocs.io/en/latest/>`_.
 You may `edit it on github <http://github.com/sagemath/more-sagemath-tutorials/>`_.
