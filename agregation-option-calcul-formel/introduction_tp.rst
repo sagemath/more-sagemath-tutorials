@@ -11,7 +11,8 @@ vous présenterez en fin de séance.
 
 Si vous n'avez pas encore encore eu l'occasion de le faire:
 
-* Lire le premier chapitre de `Calcul Mathématique avec Sage <http://sagebook.gforge.inria.fr/>`_
+* Lire le premier chapitre de `Calcul Mathématique avec Sage <http://sagebook.gforge.inria.fr/>`_.
+  À noter: la version anglaise est plus récente (2018).
 
 * Suivre le :ref:`tutorial-comprehensions`
 
