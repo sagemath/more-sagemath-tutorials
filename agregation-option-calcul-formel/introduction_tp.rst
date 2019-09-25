@@ -4,25 +4,29 @@
 Travaux pratiques
 *****************
 
-L'objectif de la séance est de prendre en main le logiciel ``Sage``.
-À vous d'explorer ses fonctionnalités selon vos goûts et connaissances
+L'objectif de la séance est de prendre en main le logiciel ``Sage``. À
+vous d'explorer ses fonctionnalités selon vos goûts et connaissances
 préalables, et de préparer une mini-illustration de trois minutes que
 vous présenterez en fin de séance.
 
-* Lire le premier chapitre de `Calcul Mathématique avec Sage <http://sagebook.gforge.inria.fr/>`_
+Si vous n'avez pas encore encore eu l'occasion de le faire:
 
-* Reparcourir :ref:`les notes d'introduction <agregation.introduction>`
+* Lire le premier chapitre de `Calcul Mathématique avec Sage <http://sagebook.gforge.inria.fr/>`_
 
 * Suivre le :ref:`tutorial-comprehensions`
 
 * Suivre le :ref:`tutorial-programming-python`
+
+Voici quelques pistes pour la suite:
+
+* Reparcourir :ref:`les notes d'introduction <agregation.introduction>`
 
 * Faire le maximum de problèmes du `Projet Euler <http://projecteuler.net>`_
   (`Version en Français <http://submoon.freeshell.org/fr/sphinx/euler.html>`_)
 
 Instructions pour les mini-illustrations:
 
-- Préparer une feuille de travail Jupyter, nommée <Prenom>-<Nom>
+- Préparer une feuille de travail Jupyter, nommée `<Prenom>-<Nom>`
   (pour moi, cela donnerait Nicolas-Thiéry)
 - La sauvegarder; cela donne un fichier comme Nicolas-Thiéry.ipynb
 - Envoyer ce fichier à Nicolas.Thiery@u-psud.fr dans un mail ayant
