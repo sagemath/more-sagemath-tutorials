@@ -145,9 +145,10 @@ Quelques courbes de complexité
 
     sage: var('n')
     sage: xmax=10^9
+    sage: ymin=10^-9
     sage: ymax=10^19
     sage: op_per_seconds=10^9
-    sage: funs = [n^0, log(n), sqrt(n), n, 1000*n, n*(log(n)), n^log(3,2), n^2, n^(2.3727.n(digits=5)), n^log(7,2), n^3, 2^n, 5^n, factorial(n), n^n]
+    sage: funs = [n^0, log(n), sqrt(n), n, 1000*n, n*(log(n)), n^log(3,2), n^2, n^(2.3727.n(digits=5)), n^log(7,2), n^3, 2^n, 5^n, gamma(n), n^n]
     sage: colors = rainbow(len(funs))
     sage: def time_label(s, t): return text(s, (1,t), horizontal_alignment = "left")
     sage: time_labels = sum(time_label(t,s)
@@ -160,9 +161,9 @@ Quelques courbes de complexité
     ....:         xshift=1.3^(len(funs)-2-funs.index(f))
     ....:         return text(label, ((f/op_per_seconds-ymax).find_root(1,100)*xshift, 3*ymax), horizontal_alignment="center", **options)
     ....:     return text(label, (1.1*xmax, f(n=xmax)/10^9), horizontal_alignment="left", **options)
-    sage: p = sum( plot(f/op_per_seconds,
+    sage: p = sum( plot((f+1.0)/op_per_seconds,
     ....:           xmin=1, xmax=(100 if f(n=100)>ymax else xmax),
-    ....:           ymax=ymax,
+    ....:           ymin=ymin, ymax=ymax,
     ....:           scale="loglog", gridlines=True, gridlinesstyle = {"color":'LightGray'},
     ....:           color=color) + legend(f, color=color)
     ....:      for f,color in zip(funs, colors)) + time_labels
