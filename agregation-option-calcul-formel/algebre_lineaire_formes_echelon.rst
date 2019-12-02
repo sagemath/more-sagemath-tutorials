@@ -18,21 +18,17 @@ chaque classe d'équivalence `C`, tous les élements de `C` sont envoyé
 sur le même élément `c` de `C`. L'élément `c` est alors appelé la
 forme normale des éléments de `C`.
 
-.. TOPIC:: Exemples
+.. TOPIC:: Exemple 1
 
     - `E=\ZZ`
+    - `\rho`: égalité modulo `p`
+    - `f: x \mapsto x \mod p`
 
-      `\rho`: égalité modulo `p`
-
-      `f: x \mapsto x \mod p`
+.. TOPIC:: Exemple 2
 
     - `E=\ZZ\times \ZZ`
-
-      `\rho`: `(a,b) \rho (c,d)` si `ad=bc`
-
-      `f`: ???
-
-    - ...
+    - `\rho`: `(a,b) \rho (c,d)` si `ad=bc`
+    - `f`: ???
 
 .. TOPIC:: Quel intérêt?
 
@@ -64,6 +60,8 @@ forme normale des éléments de `C`.
 
     Solution partielle::
 
+        sage: %display latex
+
         sage: K = GF(5)
 
         sage: M = matrix(K, [[0,0,3,1,4], [3,1,4,2,1], [4,3,2,1,3]]); M
@@ -72,7 +70,8 @@ forme normale des éléments de `C`.
         [4 3 2 1 3]
 
         sage: v = vector(SR.var('x1,x2,x3,x4,x5'))
-        sage: [(eq == 0) for eq in matrix(ZZ,M)*v]
+        sage: for eq in matrix(ZZ,M) * v:
+        sage:     display( eq == 0 )
 
         sage: M.echelon_form()
         [1 2 0 3 3]
@@ -344,13 +343,19 @@ Forme échelon et matrices équivalentes
       (lower triangular): le produit des inverses des matrices
       ci-dessus. On appelle cela la *décomposition `LU`*.
 
-.. TOPIC:: Exercice
+.. TOPIC:: Exemple
 
     Déterminer la décomposition `M=LU` de notre matrice favorite.
 
     Solution::
 
-        sage: M.LU()
+        sage: P, L, U = M.LU()
+        sage: P, L, U
+
+        sage: L * U
+
+        sage: P * L * U
+
 
 Disons ici que deux matrices `M` et `M'` de `M_{n,m}(K)` sont
 *équivalentes* (modulo l'action de `GL_n(K)` à gauche) s'il existe une
@@ -464,7 +469,7 @@ Sous espaces vectoriels et formes échelon
 .. TOPIC:: Exercice
 
     - Compter le nombre de points, droites, plans et hyperplans dans
-      `GF(q)^3` en fonction de leur rang.
+      `GF(q)^3`.
 
     - On se place maintenant dans `\RR^3`. Décrire géométriquement, en
       fonction de leur forme échelon, comment ces sous espaces
@@ -528,20 +533,18 @@ Appliquons le même programme.
 
     À chaque base ordonnée, on peut associer naturellement un drapeau
     complet.  Ici on considérera principalement le drapeau canonique
-    associé à la base canonique `e_1,\cdots,e_m` de `V=K^m`:
+    associé à la base canonique `e_1,\ldots,e_m` de `V=K^m`:
 
     .. MATH::
 
-        V_i:=\langle e_{m-i+1}, \ldots, e_m \rangle
+        \{0\} =
+        \langle\rangle \subsetneq
+        \langle e_n \rangle \subsetneq \cdots \subsetneq
+        \langle e_i,\ldots,e_n\rangle \subsetneq \cdots \subsetneq
+        \langle e_1,\ldots,e_n\rangle = V
 
     Note: on prend les éléments dans cet ordre pour que cela colle
-    avec nos petites habitudes de calcul du pivot de Gauß. Et pour
-    alléger les notations, on utilisera plutôt:
-
-    .. MATH::
-
-        \overline V_i:=\langle e_i, \ldots, e_m \rangle=V_{n-i+1}
-
+    avec nos petites habitudes de calcul du pivot de Gauß.
 
 .. TOPIC:: Formes échelon et bases adaptées
 
@@ -549,11 +552,11 @@ Appliquons le même programme.
 
     C'est une base `B` d'un espace vectoriel `E` *adaptée à un drapeau
     complet* donné. C'est-à-dire une base sur laquelle on peut lire
-    immédiatement les sous espaces `E_i:=E\cap \overline V_i`:
+    immédiatement les sous espaces `E_i:=E\cap \langle e_i,\ldots,e_n\rangle`:
 
     .. MATH::
 
-        \langle B \cap E_i\rangle = E_i
+        E_i = \langle B \cap E_i\rangle
 
     Le pivot de Gauß est un algorithme de calcul de base adaptée.
 
@@ -606,9 +609,42 @@ Appliquons le même programme.
     Gauß est le prototype du type de lien.
 
 
-.. TODO:: Faire un résumé ici
+Résumé
+======
 
-.. TODO:: vérifier / homogénéiser les notations
+La forme échelon d'une matrice joue un rôle central en algèbre
+linéaire car:
+
+- Il existe des algorithmes relativement peu coûteux pour la calculer
+  (par exemple Gauß: `O(n^3)`).
+
+- La plupart des problèmes en algèbre linéaire sur un corps se
+  traitent aisément sur cette forme échelon. Notamment:
+  - calcul sur matrices
+  - calcul sur les équations
+  - calcul sur espaces vectoriels
+  - calcul sur les morphismes
+
+- La forme échelon a un sens algébrique: c'est une forme normale pour
+  la relation d'équivalence induite par l'action à gauche du groupe
+  linéaire.
+
+- La forme échelon a un sens géométrique: c'est une forme normale pour
+  un sous-espace vectoriel; elle décrit sa position par rapport au
+  drapeau canonique.
+
+Nous verrons d'autres formes normales pour d'autres classes
+d'équivalences de matrices.
+
+
+TP
+==
+
+.. TODO::
+
+    - Réorganisation
+    - Décomposition LU: exercice en TP
+
 
 Applications des formes échelon
 -------------------------------
@@ -666,38 +702,6 @@ Applications des formes échelon
 
     #.  Calculer les espaces propres de `\phi`.
 
-
-.. TODO::
-
-    - Décomposition LU, exercice en TD ou TP
-    - Le cours est un peu long; décider quoi déplacer en TP
-
-Résumé
-======
-
-La forme échelon d'une matrice joue un rôle central en algèbre
-linéaire car:
-
-- Il existe des algorithmes relativement peu coûteux pour la calculer
-  (par exemple Gauß: `O(n^3)`).
-
-- La plupart des problèmes en algèbre linéaire sur un corps se
-  traitent aisément sur cette forme échelon.
-
-- La forme échelon a un sens algébrique: c'est une forme normale pour
-  la relation d'équivalence induite par l'action à gauche du groupe
-  linéaire.
-
-- La forme échelon a un sens géométrique: c'est une forme normale pour
-  un sous-espace vectoriel; elle décrit sa position par rapport au
-  drapeau canonique.
-
-Nous verrons d'autres formes normales pour d'autres classes
-d'équivalences de matrices.
-
-TP
-==
-
 Exercice 1: Du calcul matriciel au calcul sur les sous espaces vectoriels
 -------------------------------------------------------------------------
 
@@ -742,7 +746,7 @@ Indications:
         sage: M = matrix(V)
         sage: list(M)
         sage: M[1].is_zero()
-        sage: [ n^2 for n in range(20) if n.is_prime() ]
+        sage: [ n^2 for n in srange(20) if n.is_prime() ]
 
 Test d'appartenance d'un vecteur à un sous-espace vectoriel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
