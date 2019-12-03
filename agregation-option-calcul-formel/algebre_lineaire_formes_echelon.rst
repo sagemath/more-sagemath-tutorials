@@ -9,8 +9,8 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Algèbre li
 
 ``Mathematics is the art of reducing any problem to linear algebra`` - William Stein.
 
-Formes normales
-===============
+Avant propos: formes normales
+=============================
 
 Soit `E` en ensemble muni d'une relation d'équivalence `\rho`. Une
 fonction `f: E\mapsto E` donne une *forme normale* pour `\rho` si, pour
@@ -257,8 +257,8 @@ Forme échelon, réduction, et division euclidienne
 
     Considérer la base canonique `x^5, x^4, \ldots, 1` des polynômes
     de degré inférieur à 5, et écrire la matrice `N` des polynômes
-    `x^3P,x^2P,xP,P`, vus comme vecteurs dans cette base. De même
-    écrire le vecteur `u` représentant le polynôme `U` dans cette
+    `x^3P,x^2P,xP,P`, vus comme vecteurs ligne dans cette base. De même
+    écrire le vecteur ligne `u` représentant le polynôme `U` dans cette
     base. Calculer la réduction de `u` module `N`.
 
     Que constatez-vous?
@@ -464,7 +464,7 @@ Sous espaces vectoriels et formes échelon
 .. TOPIC:: Exercice
 
     Compter le nombre de sous espaces vectoriels de rang `2` d'un
-    espace de dimension `4` sur `GL(5)`.
+    espace de dimension `4` sur `GF(5)`.
 
 .. TOPIC:: Exercice
 
@@ -642,14 +642,46 @@ TP
 
 .. TODO::
 
-    - Réorganisation
     - Décomposition LU: exercice en TP
 
 
-Applications des formes échelon
--------------------------------
+Calcul de forme échelon: implantation
+-------------------------------------
 
-.. TOPIC:: Exercice: résolution d'équations linéaires
+Si vous n'avez jamais eu l'occasion d'implanter un pivot de Gauß, cela
+peut être un bon moment. Pour simplifier, faites l'hypothèse que
+toutes les colonnes sont caractéristiques, de sorte que le résultat
+est triangulaire supérieur avec pivots sur la diagonale.
+
+Indication: Essayez les commandes suivantes::
+
+    sage: M = random_matrix(QQ, 4, 4, algorithm='echelonizable', rank=4)
+    sage: list(M)
+    sage: M[1] + 2*M[2]
+    sage: M[1].is_zero()
+    sage: [ n^2 for n in srange(20) if n.is_prime() ]
+
+Pivot de Gauß interactif
+------------------------
+
+Explorer l'utilisation de `@interact` pour, par exemple, construire
+une mini application de calcul guidé de pivot de Gauß, ou de réduction
+d'un vecteur par rapport à une matrice échelonnée.
+
+Un point de départ serait une fonction comme ci-dessous prenant le
+numéro des deux lignes à combiner et le coefficient::
+
+    @interact
+    def f(i=..., j=..., c=...):
+        ...
+
+
+Calculer avec des espaces vectoriels et morphismes: algorithmes
+---------------------------------------------------------------
+
+Ces premiers exercices sont sur papier.
+
+.. TOPIC:: Exercice: résolution d'équations linéaires/affines
 
     Soit `E` un ensemble d'équations linéaires/affines. Retrouver les
     algorithmes usuels de résolution: existence de solution,
@@ -702,8 +734,8 @@ Applications des formes échelon
 
     #.  Calculer les espaces propres de `\phi`.
 
-Exercice 1: Du calcul matriciel au calcul sur les sous espaces vectoriels
--------------------------------------------------------------------------
+Calculer avec des espaces vectoriels: implantation
+--------------------------------------------------
 
 Calcul d'une base d'un sous espace vectoriel donné par des générateurs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -735,18 +767,7 @@ telle base en se ramenant à du calcul matriciel.
 
 Indications:
 
--   Utiliser la méthode ``echelon_form`` des matrices. Si vous n'avez
-    pas encore eu l'occasion d'implanter un pivot de Gauß, faites le
-    au préalable, en faisant pour simplifier l'hypothèse que toutes
-    les colonnes sont caractéristiques, de sorte que le résultat est
-    triangulaire supérieur avec pivots sur la diagonale.
-
--   Essayez les commandes suivantes::
-
-        sage: M = matrix(V)
-        sage: list(M)
-        sage: M[1].is_zero()
-        sage: [ n^2 for n in srange(20) if n.is_prime() ]
+-   Utiliser la méthode ``echelon_form`` des matrices.
 
 Test d'appartenance d'un vecteur à un sous-espace vectoriel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -795,14 +816,8 @@ et `\langle V\rangle`.
 De même implanter ``SEV_intersection(U,V)`` et
 ``SEV_en_somme_directe(U,V)``.
 
-.. TODO::
-
-    Proposer des exercices d'illustration à base d'interact: par
-    exemple une mini application de calcul guidé de pivot de Gauß, ou
-    de réduction d'un vecteur par rapport à une matrice échelonnée.
-
-Exercice 2: Algèbre linéaire, représentations des monoïdes et Chaînes de Markov
--------------------------------------------------------------------------------
+Algèbre linéaire, représentations des monoïdes et Chaînes de Markov
+-------------------------------------------------------------------
 
 Voir: `La bibliothèque de Tsetlin <bibliotheque_tsetlin.html>`_
 
