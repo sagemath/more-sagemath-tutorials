@@ -43,6 +43,7 @@ cell**. This is the rectangle below this paragraph containing `1+1`
 (if instead you see ``sage: 1+1``, you are reading this document as a
 web page and won't be able to play with the examples). Click on the
 cell to select it, and press ``shift-enter`` to evaluate it::
+
     sage: 1 + 1
     2
 
