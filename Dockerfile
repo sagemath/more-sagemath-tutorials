@@ -12,3 +12,5 @@ COPY --chown=sage:sage . ${HOME}
 # Install this package and dependencies and build the notebooks
 RUN sage -pip install .
 RUN echo "LC_CTYPE=fr_FR.UTF-8 make ipynb" | sage -sh
+# Fake the installation of media (will eventually be done by sphinx)
+RUN ln -s ../../media _build/html
