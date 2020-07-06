@@ -7,8 +7,10 @@ Demonstration: Basics
 Arithmetic::
 
     sage: 1 + 1
+    2
 
     sage: 1 + 3
+    4
 
     sage: ( 1 + 2 * (3 + 5)^2 ) * 2
     258
@@ -43,12 +45,12 @@ Polynomials::
 Symbolic calculations::
 
     sage: var('x,y')
+    (x, y)
     sage: f = sin(x) - cos(x*y) + 1 / (x^3+1)
     sage: f
-
-::
-
+    1/(x^3 + 1) - cos(x*y) + sin(x)
     sage: f.integrate(x)
+    1/3*sqrt(3)*arctan(1/3*sqrt(3)*(2*x - 1)) ...
 
 .. Next example taken from Calcul mathématique avec Sage
 
@@ -79,7 +81,7 @@ Symbolic calculations::
 
 Statistics::
 
-    sage: print r.summary(r.c(1,2,3,111,2,3,2,3,2,5,4))
+    sage: print(r.summary(r.c(1,2,3,111,2,3,2,3,2,5,4)))
 
 
 .. todo:: other examples from MuPAD-Combinat/lib/DOC/demo/mupad.tex

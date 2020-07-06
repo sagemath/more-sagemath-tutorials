@@ -48,12 +48,12 @@ appear in the first lines:
 ::
 
     sage: P.inverse?
-    Type:		instancemethod
-    Base Class:	<type 'instancemethod'>
-    String Form:	<bound method Permutation_class.inverse of [3, 1, 2]>
-    Namespace:	Interactive
-    File:		/opt/sage/local/lib/python2.6/site-packages/sage/combinat/permutation.py
-    Definition:	P.inverse(self)
+    Type: instancemethod
+    Base Class: <type 'instancemethod'>
+    String Form: <bound method Permutation_class.inverse of [3, 1, 2]>
+    Namespace: Interactive
+    File: /opt/sage/local/lib/python2.6/site-packages/sage/combinat/permutation.py
+    Definition: P.inverse(self)
     Docstring:
        Returns the inverse of a permutation
 
@@ -102,10 +102,10 @@ Search for the method definition in the file::
     def inverse(self):
         r"""
         Returns the inverse of a permutation
-	...
-	"""
+        ...
+        """
         w = range(len(self))
-	...
+        ...
 
 
 3.1 Edit the code
@@ -203,14 +203,14 @@ your modifications to the original sources::
     --- a/sage/combinat/permutation.py
     +++ b/sage/combinat/permutation.py
     @@ -1207,6 +1207,8 @@ class Permutation_class(CombinatorialObj
-		 [8, 10, 1, 6, 3, 7, 9, 2, 5, 4]
-		 sage: Permutation([2, 4, 1, 5, 3]).inverse()
-		 [3, 1, 5, 2, 4]
+                 [8, 10, 1, 6, 3, 7, 9, 2, 5, 4]
+                 sage: Permutation([2, 4, 1, 5, 3]).inverse()
+                 [3, 1, 5, 2, 4]
     +            sage: Permutation([]).inverse()
     +            []
-	     """
-	     w = range(len(self))
-	     for i,j in enumerate(self):
+             """
+             w = range(len(self))
+             for i,j in enumerate(self):
 
 And even revert your modifications. Try it now! Make a random
 modification to the code of ``inverse``. Rebuild ``Sage`` and run the

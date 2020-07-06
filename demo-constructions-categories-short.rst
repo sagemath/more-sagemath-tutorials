@@ -14,7 +14,7 @@ Demonstration: Algebraic constructions and categories
 
 ::
 
-    sage: for category in Fx.categories(): print category
+    sage: for category in Fx.categories(): print(category)
 
 ::
 

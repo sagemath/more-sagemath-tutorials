@@ -116,7 +116,7 @@ factorisation::
     6*(3*x + 1)^2*(x^2 - 2)
 
     sage: for A in [ZZ, QQ, ComplexField(16), QQ[sqrt(2)], GF(5)]:
-    ....:     print A, ":"; print A['x'](p).factor()
+    ....:     print(A, ":"); print(A['x'](p).factor())
     Integer Ring :
     2 * 3 * (3*x + 1)^2 * (x^2 - 2)
     Rational Field :
@@ -523,7 +523,7 @@ On trouve alors un indépendant de taille quatre::
     4.0
 
     sage: b_sol = LP.get_values(b)
-    sage: print b_sol
+    sage: print(b_sol)
     {0: 0.0, 1: 1.0, 2: 0.0, 3: 0.0, 4: 1.0, 5: 0.0, 6: 0.0, 7: 1.0, 8: 1.0, 9: 0.0}
 
     sage: I = [ v for v in petersen.vertices() if b_sol[v] ]; I
@@ -612,7 +612,7 @@ En quoi est-ce utile?
    hierarchie de classes::
 
     sage: for cls in K.__class__.mro():
-    ....:     print cls
+    ....:     print(cls)
     <class 'sage.rings.finite_rings.finite_field_prime_modn.FiniteField_prime_modn_with_category'>
     ...
     <class 'sage.categories.finite_fields.FiniteFields.parent_class'>
@@ -793,7 +793,7 @@ Let's try now the 0-Hecke monoid::
     sage: H = S.algebra(QQ)
     sage: H._repr_term = lambda x: '['+''.join(str(i) for i in x.reduced_word())+']'
     sage: for x in H.orthogonal_idempotents():
-    ....:     print x
+    ....:     print(x)
     [121321]
     -[121321] - [21321] + [2132] + [13] - [12132] + [2321] - [132] + [1213] - [12321] + [1232] + [1321] - [213]
     [232] - [2321] - [1232] + [12321]

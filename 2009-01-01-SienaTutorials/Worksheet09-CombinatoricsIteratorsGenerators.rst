@@ -50,28 +50,28 @@ The Python command  ``iter``  returns an iterator from an object (the object its
 
 ::
 
-    sage: it.next()
+    sage: next(it)
     1
 
 .. end of output
 
 ::
 
-    sage: it.next()
+    sage: next(it)
     2
 
 .. end of output
 
 ::
 
-    sage: it.next()
+    sage: next(it)
     3
 
 .. end of output
 
 ::
 
-    sage: it.next()
+    sage: next(it)
     Traceback (most recent call last):
     ...
     StopIteration
@@ -101,42 +101,42 @@ A  *generator*  is a function that is used to define an iterator. Instead of  ``
 
 ::
 
-    sage: f.next()
+    sage: next(f)
     1
 
 .. end of output
 
 ::
 
-    sage: f.next()
+    sage: next(f)
     1
 
 .. end of output
 
 ::
 
-    sage: f.next()
+    sage: next(f)
     2
 
 .. end of output
 
 ::
 
-    sage: f.next()
+    sage: next(f)
     3
 
 .. end of output
 
 ::
 
-    sage: f.next()
+    sage: next(f)
     5
 
 .. end of output
 
 ::
 
-    sage: f.next()
+    sage: next(f)
     8
 
 .. end of output
@@ -246,7 +246,7 @@ There are many objects in Sage that model sets of combinatorial objects.
 ::
 
     sage: for p in Partitions(4):
-    ....:     print p
+    ....:     print(p)
     [4]
     [3, 1]
     [2, 2]
@@ -258,7 +258,7 @@ There are many objects in Sage that model sets of combinatorial objects.
 ::
 
     sage: for c in Compositions(4):
-    ....:     print c
+    ....:     print(c)
     [1, 1, 1, 1]
     [1, 1, 2]
     [1, 2, 1]
@@ -288,7 +288,7 @@ There are many objects in Sage that model sets of combinatorial objects.
 ::
 
     sage: for dw in DyckWords(4):
-    ....:     print dw
+    ....:     print(dw)
     ()()()()
     ()()(())
     ()(())()
@@ -326,7 +326,7 @@ There are many objects in Sage that model sets of combinatorial objects.
 
     sage: it = iter(W)
     sage: for a in range(16):
-    ....:     print it.next()
+    ....:     print(next(it))
     word: 
     word: a
     word: b
@@ -367,7 +367,7 @@ There are many objects in Sage that model sets of combinatorial objects.
 
     sage: it = iter(P)
     sage: for a in range(10):
-    ....:     print it.next()
+    ....:     print(next(it))
     Finite poset containing 0 elements
     Finite poset containing 1 elements
     Finite poset containing 2 elements
