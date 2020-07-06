@@ -23,7 +23,7 @@ quotes (') or double quotes ("):
 ::
 
     sage: t = 'So is this!'
-    sage: print t
+    sage: print(t)
     So is this!
 
 .. end of output
@@ -38,7 +38,7 @@ You can also input a string using three quotes (""" or '''). This is useful if y
     sage: that includes 'single quotes'
     ....:           and "double quotes".
     sage: """
-    sage: print s
+    sage: print(s)
     This is a multi-line
             string
     that includes 'single quotes'
@@ -221,7 +221,7 @@ then the last column is  *bnnsaaa* , so the BWT of  *bananas* is *bnnsaaa*.
    (*Hint:*  String formatting can be done using the  ``%``  operator. Here is
    an example::
 
-       sage: print 'The sum of %s and %s is %s.' % (3,2,3+2)
+       sage: print('The sum of %s and %s is %s.' % (3,2,3+2))
        The sum of 3 and 2 is 5.
 
    If you are familiar with  *C*  then you will notice that string formating

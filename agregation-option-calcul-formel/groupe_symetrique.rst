@@ -34,7 +34,7 @@ Pour voir ses éléments comme des fonctions::
     {'a', 'b', 'c'}
     sage: F.codomain()
     {'a', 'b', 'c'}
-    sage: for sigma in G: print F(sigma)
+    sage: for sigma in G: print(F(sigma))
     map: a -> a, b -> b, c -> c
     map: a -> a, b -> c, c -> b
     map: a -> b, b -> a, c -> c
