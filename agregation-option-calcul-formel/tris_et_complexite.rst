@@ -144,6 +144,7 @@ Quelques courbes de complexité
 ::
 
     sage: var('n')
+    n
     sage: xmax=10^9
     sage: ymin=10^-9
     sage: ymax=10^19
@@ -168,6 +169,7 @@ Quelques courbes de complexité
     ....:           color=color) + legend(f, color=color)
     ....:      for f,color in zip(funs, colors)) + time_labels
     sage: p
+    Graphics object consisting of 36 graphics primitives
 
 .. TOPIC:: Exercice
 
@@ -178,7 +180,7 @@ Quelques courbes de complexité
     problème, dont on connaît les complexités respectives: `O(\log
     n)`, `O(n)`, `O(n\log n)`, `O(n^{2})`, `O(n^{3})`, `O(n^{10})`,
     `O(2^{n})`, `O(n!)`, `O(n^{n})`. Évaluer la taille de problème
-    que l'on peut traiter en une seconde? en un an?
+    que l'on peut traiter en une seconde ? en un an ?
 
 Synthèse
 --------
@@ -361,9 +363,9 @@ Analyse de complexité
     #. Recherche d'un échec et mat en `4` coups à partir d'une
        position donnée aux échecs.
 
-    #. Problème du sac à dos: étant donné un ensemble d'objets de
+    #. Problème du sac à dos : étant donné un ensemble d'objets de
        hauteur et de poids variables, et un sac à dos de hauteur
-       donnée, charger au maximum le sac à dos?
+       donnée, charger au maximum le sac à dos ?
 
 *****************
 Travaux pratiques
@@ -376,7 +378,7 @@ Voir :ref:`agregation.tris_et_complexite.tp`
 Quelques références
 *******************
 
--  Wikipédia Française: `Complexité algorithmique <http://fr.wikipedia.org/wiki/Complexité_algorithmique>`_
+-  Wikipédia Française: `Complexité algorithmique <https://fr.wikipedia.org/wiki/Complexité_algorithmique>`_
 
 .. -  `Un support de cours sur les tris <http://dept-info.labri.u-bordeaux.fr/~lachaud/IUT/ASD-Prog-E1-2000/planning-prof.html>`_
 
