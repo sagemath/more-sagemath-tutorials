@@ -204,13 +204,13 @@ by William Stein
     ....:         cur = rows[i]
     ....:         for j in range(len(cur)):
     ....:             e, f, k = cur[j]
-    ....:             if not e is None:
+    ....:             if e is not None:
     ....:                 if is_prime(e):
     ....:                      c = (1,0,0)
     ....:                 else:
     ....:                      c = (0,0,.4)
     ....:                 g += text(str(e), (j*2-len(cur),-i), fontsize=font, rgbcolor=c)
-    ....:                 if not k is None and not f is None:
+    ....:                 if k is not None and f is not None:
     ....:                     g += line([(j*2-len(cur),-i), ((k*2)-len(rows[i-1]),-i+1)], 
     ....:                     alpha=0.5)
     ....:     return g
