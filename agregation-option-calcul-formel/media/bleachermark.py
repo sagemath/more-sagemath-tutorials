@@ -328,10 +328,10 @@ class Bleachermark:
 
         """
         di = self.fetch_data()
-        res =  {bm:[[t[0] for t in run[1:]] for run in di[bm]] for bm in di.keys()}
+        res =  {bm:[[t[0] for t in run[1:]] for run in di[bm]] for bm in di}
         if not transposed:
             return res
-        return {bm:[[row[i] for row in res[bm]] for i in range(len(res[bm][0]))] for bm in res.keys()}
+        return {bm:[[row[i] for row in res[bm]] for i in range(len(res[bm][0]))] for bm in res}
 
     def averages(self):
         r"""
@@ -345,7 +345,7 @@ class Bleachermark:
         """
         timings = self.timings(transposed=True)
         res = {}
-        for bm in timings.keys():
+        for bm in timings:
             totals = map(lambda a: sum(a)/len(a), timings[bm])
             res[bm] = totals
         return res
@@ -357,7 +357,7 @@ class Bleachermark:
         timings = self.timings(transposed=True)
         averages = self.averages()
         res = {}
-        for bm in timings.keys():
+        for bm in timings:
             timbm = timings[bm]
             avgbm = averages[bm]
             lbm = []

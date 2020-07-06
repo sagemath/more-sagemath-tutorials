@@ -349,7 +349,7 @@ by William Stein
     ....:      S.plot_average(spline_samples).save('avg.png', figsize=[10,2])
     ....:      S.plot_diff().save('diff.png', figsize=[10,2])
     ....:      Y = S.yahoo()
-    ....:      k = Y.keys(); k.sort()
+    ....:      k = sorted(Y)
     ....:      html('Price during last 52 weeks:<br>Grey line is a spline through %s points (do not take seriously!):<br> <img src="cell://avg.png">'%spline_samples)
     ....:      html('Difference from previous day:<br> <img src="cell://diff.png">')
     ....:      html('<table align=center>' + '\n'.join('<tr><td>%s</td><td>%s</td></tr>'%(k[i], Y[k[i]]) for i in range(len(k))) + '</table>')
