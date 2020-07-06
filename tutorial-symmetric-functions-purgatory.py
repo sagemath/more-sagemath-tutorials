@@ -274,17 +274,17 @@ class SymmetricFunctions(UniqueRepresentation, Parent):
 
     See the documentation for ``plethysm`` for more information.
 
-	.. rubric:: Hopf algebra structure
+        .. rubric:: Hopf algebra structure
 
-	The ring of symmetric functions is further endowed with a coalgebra
-	structure. The coproduct is an algebra morphism, and therefore
-	determined by its values on the generators; the power sum generators
-	are primitive::
+        The ring of symmetric functions is further endowed with a coalgebra
+        structure. The coproduct is an algebra morphism, and therefore
+        determined by its values on the generators; the power sum generators
+        are primitive::
 
-		sage: p[1].coproduct()
-		p[] # p[1] + p[1] # p[]
-		sage: p[2].coproduct()
-		p[] # p[2] + p[2] # p[]
+                sage: p[1].coproduct()
+                p[] # p[1] + p[1] # p[]
+                sage: p[2].coproduct()
+                p[] # p[2] + p[2] # p[]
 
 
     .. rubric:: Transformations of symmetric functions

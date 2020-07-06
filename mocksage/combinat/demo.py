@@ -422,8 +422,8 @@ Root systems, Coxeter groups, ...
     sage: T = CartanType(["E", 8, 1])
     sage: print(T.dynkin_diagram())
     O 2
-	    |
-	    |
+            |
+            |
     O---O---O---O---O---O---O---O
     1   3   4   5   6   7   8   0
     E8~
@@ -440,10 +440,10 @@ Root systems, Coxeter groups, ...
     sage: print(W.character_table())  # Thanks GAP!
     CT1
 
-	  2  4  4  3  3  4  3  1  1  3  4
-	  3  1  .  .  .  .  .  1  1  .  1
+          2  4  4  3  3  4  3  1  1  3  4
+          3  1  .  .  .  .  .  1  1  .  1
 
-	    1a 2a 2b 4a 2c 2d 6a 3a 4b 2e
+            1a 2a 2b 4a 2c 2d 6a 3a 4b 2e
 
     X.1      1  1  1  1  1  1  1  1  1  1
     X.2      1  1  1 -1 -1 -1 -1  1  1 -1
@@ -501,7 +501,7 @@ Classical basis::
 Jack polynomials::
 
     sage: Sym = SymmetricFunctions(QQ['t'])
-    sage: Jack = Sym.jack_polynomials()		  # todo: not implemented
+    sage: Jack = Sym.jack_polynomials()             # todo: not implemented
     sage: P = Jack.P(); J = Jack.J(); Q = Jack.Q()  # todo: not implemented
     sage: J(P[2,1])                                 # todo: not implemented
     Traceback (most recent call last):
