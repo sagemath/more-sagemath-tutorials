@@ -54,7 +54,7 @@ Lattice points of polytopes
 
 ::
 
-    sage: A = random_matrix(ZZ, nrows=6,ncols=3,x=7)
+    sage: A = random_matrix(ZZ,nrows=6,ncols=3,x=7)
     sage: L = LatticePolytope(A)
     sage: L.plot3d()
     Graphics3d Object
@@ -69,7 +69,7 @@ Graphs up to an isomorphism
 ::
 
     sage: show(graphs(5, lambda G: G.size() <= 4))
-
+    <html>...
 
 
 Guessing and the like

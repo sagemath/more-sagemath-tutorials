@@ -21,17 +21,19 @@ and endow this set with the promotion action::
     sage: view(P)
 
     sage: L = P.linear_extensions(); L
-    The set of all linear extensions of Finite poset containing 4 elements
+    The set of all linear extensions of Finite poset containing 4 elements...
 
     sage: L.cardinality()
     6
 
     sage: list(L)
-    [[1, 2, 3, 4], [1, 3, 2, 4], [1, 3, 4, 2], [3, 1, 2, 4], [3, 1, 4, 2], [3, 4, 1, 2]]
+    [[1, 3, 2, 4], ...]
 
     sage: G = L.markov_chain_digraph(labeling="source")
     sage: view(G)
 
+.. link
+    
 ::
 
     sage: M = G.transition_monoid(); M
