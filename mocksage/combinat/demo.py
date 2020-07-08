@@ -6,8 +6,8 @@ Demonstration: Sage-Combinat
 
 ::
 
-    sage: %hide
-    sage: pretty_print_default()
+    sage: %hide                         # not tested
+    sage: pretty_print_default()        # not tested
 
 
 Elementary combinatorics
@@ -21,17 +21,27 @@ Combinatorial objects
 
     sage: p = Partition([3,3,2,1])
     sage: p
+    [3, 3, 2, 1]
 
     sage: p.pp()
+    ***
+    ***
+    **
+    *
 
     sage: p.conjugate().pp()
+    ****
+    ***
+    **
 
-    sage: p.conjugate
+    sage: p.conjugate()
+    [4, 3, 2]
 
 ::
 
     sage: s = Permutation([5,3,2,6,4,8,9,7,1])
     sage: s
+    [5, 3, 2, 6, 4, 8, 9, 7, 1]
 
     sage: (p,q) = s.robinson_schensted()
 
@@ -69,7 +79,7 @@ Enumerated sets (combinatorial classes)
     sage: Partitions(100000).cardinality()
     27493510569775696512677516320986352688173429315980054758203125984302147328114964173055050741660736621590157844774296248940493063070200461792764493033510116079342457190155718943509725312466108452006369558934464248716828789832182345009262853831404597021307130674510624419227311238999702284408609370935531629697851569569892196108480158600569421098519
 
-    sage: Permutations(20).random_element()
+    sage: Permutations(20).random_element()   # random
     [15, 6, 8, 14, 17, 16, 4, 7, 11, 3, 10, 5, 19, 9, 12, 2, 20, 18, 1, 13]
 
     sage: Compositions(10).unrank(100)      # TODO: non stupid algorithm
@@ -111,7 +121,7 @@ Constructions
 
     sage: C = DisjointUnionEnumeratedSets( [ Compositions(4), Permutations(3)] )
     sage: C
-    Union of Family (Compositions of 4, Standard permutations of 3)
+    Disjoint union of Family (Compositions of 4, Standard permutations of 3)
 
     sage: C.cardinality()
     14
@@ -121,20 +131,21 @@ Constructions
 
 ::
 
-    sage: C = CartesianProduct(Compositions(8), Permutations(20))
+    sage: C = cartesian_product([Compositions(8), Permutations(20)])
     sage: C
-    Cartesian product of Compositions of 8, Standard permutations of 20
+    the Cartesian product of (Compositions of 8, Standard permutations of 20)
 
     sage: C.cardinality()
     311411457046609920000
 
-    sage: C.random_element() # todo: broken
+    sage: C.random_element()    # random
+    ([2, 1, 1, 1, 2, 1], [19, 15, 18, 11, 16, 4, 2, 20, 3, 9, 1, 6, 8, 7, 5, 17, 10, 12, 14, 13])
 
 ::
 
     sage: F = Family(NonNegativeIntegers(), Permutations)
     sage: F
-    Lazy family (Permutations(i))_{i in Set of non negative integers}
+    Lazy family (...)_{i in Set of non negative integers}
 
     sage: F[1000]
     Standard permutations of 1000
@@ -160,19 +171,6 @@ Constructions
     [1, 2, 3, 4]
     [1, 2, 4, 3]
 
-    sage: for p in U:
-    ....:     print(p)
-    []
-    [1]
-    [1, 2]
-    [2, 1]
-    [1, 2, 3]
-    [1, 3, 2]
-    [2, 1, 3]
-    [2, 3, 1]
-    [3, 1, 2]
-    ...
-
 Summary:
 
  * Basic combinatorial classes + constructions give a flexible toolbox
@@ -190,7 +188,7 @@ Integer lists::
     [[4, 4, 2], [3, 5, 2], [3, 4, 3], [2, 5, 3], [2, 4, 4]]
 
     sage: Compositions(5, max_part = 3, min_length = 2, max_length = 3).list()
-    [[1, 1, 3], [1, 2, 2], [1, 3, 1], [2, 1, 2], [2, 2, 1], [2, 3], [3, 1, 1], [3, 2]]
+    [[3, 2], ...]
 
     sage: Partitions(5, max_slope = -1).list()
     [[5], [4, 1], [3, 2]]
@@ -226,7 +224,7 @@ Fibonacci words::
     sage: FW  = CombinatorialSpecies()
     sage: FW.define(Eps + Z0*FW  +  Z1*Eps + Z1*Z0*FW)
     sage: FW
-
+    Combinatorial species
     sage: L = FW.isotype_generating_series().coefficients(15)
     sage: L
 
@@ -363,7 +361,7 @@ A comparison of their complexity function::
     sage: D = list_plot([r.number_of_factors(i) for i in range(100)], color='black')
     sage: E = list_plot([ww.number_of_factors(i) for i in range(100)], color='orange')
     sage: A + B + C + D + E
-
+    Graphics object consisting of 5 graphics primitives
 
 Construction of a permutation and builds its associated Rauzy diagram::
 
@@ -414,10 +412,11 @@ Root systems, Coxeter groups, ...
 ::
 
     sage: L = RootSystem(['A',2,1]).weight_space()
-    sage: L.plot(size=[[-1..1],[-1..1]],alcovewalks=[[0,2,0,1,2,1,2,0,2,1]])
+    sage: L.plot(alcove_walk=[0,2,0,1,2,1,2,0,2,1])
+    Graphics object consisting of 148 graphics primitives
 
     sage: CartanType.samples()
-    [['A', 1], ['A', 5], ['B', 1], ['B', 5], ['C', 1], ['C', 5], ['D', 2], ['D', 3], ['D', 5], ['E', 6], ['E', 7], ['E', 8], ['F', 4], ['G', 2], ['I', 5], ['H', 3], ['H', 4], ['A', 1, 1], ['A', 5, 1], ['B', 1, 1], ['B', 5, 1], ['C', 1, 1], ['C', 5, 1], ['D', 3, 1], ['D', 5, 1], ['E', 6, 1], ['E', 7, 1], ['E', 8, 1], ['F', 4, 1], ['G', 2, 1], ['B', 5, 1]^*, ['C', 4, 1]^*, ['F', 4, 1]^*, ['G', 2, 1]^*, ['BC', 1, 2], ['BC', 5, 2]]
+    [['A', 1], ['A', 5], ...]
 
     sage: T = CartanType(["E", 8, 1])
     sage: print(T.dynkin_diagram())
@@ -428,15 +427,14 @@ Root systems, Coxeter groups, ...
     1   3   4   5   6   7   8   0
     E8~
 
-    sage: T.is_simply_laced(), T.is_finite(), T.is_crystalographic()
+    sage: T.is_simply_laced(), T.is_finite(), T.is_crystallographic()
     (True, False, True)
 
     sage: W = WeylGroup(["B", 3])
     sage: W
     Weyl Group of type ['B', 3] (as a matrix group acting on the ambient space)
-
     sage: W.cayley_graph(side = "left").plot3d(color_by_label = True)
-
+    Graphics3d Object
     sage: print(W.character_table())  # Thanks GAP!
     CT1
 
@@ -459,11 +457,11 @@ Root systems, Coxeter groups, ...
     sage: rho = SymmetricGroupRepresentation([3, 2], "orthogonal"); rho
     Orthogonal representation of the symmetric group corresponding to [3, 2]
     sage: rho([1, 3, 2, 4, 5])
-    1 & 0 & 0 & 0 & 0 \\
-    0 & -\frac{1}{2} & \frac{1}{2} \, \sqrt{3} & 0 & 0 \\
-    0 & \frac{1}{2} \, \sqrt{3} & \frac{1}{2} & 0 & 0 \\
-    0 & 0 & 0 & -\frac{1}{2} & \frac{1}{2} \, \sqrt{3} \\
-    0 & 0 & 0 & \frac{1}{2} \, \sqrt{3} & \frac{1}{2}
+    [          1           0           0           0           0]
+    [          0        -1/2 1/2*sqrt(3)           0           0]
+    [          0 1/2*sqrt(3)         1/2           0           0]
+    [          0           0           0        -1/2 1/2*sqrt(3)]
+    [          0           0           0 1/2*sqrt(3)         1/2]
 
 Affine Weyl groups::
 
@@ -472,12 +470,12 @@ Affine Weyl groups::
     Weyl Group of type ['C', 3, 1] (as a matrix group acting on the root space)
 
     sage: W.category()
-    Category of affine weyl groups
+    Category of irreducible affine weyl groups
     sage: W.an_element()
-    [-1  1  0  0]
-    [ 0  1  0  0]
-    [ 0  0  1  0]
-    [ 0  0  0  1]
+    [ 1  0  1 -2]
+    [ 2  0  1 -2]
+    [ 0  1  1 -2]
+    [ 0  0  1 -1]
 
     sage: W.from_reduced_word([1,2,3,0,3,0,3,2,1,3,3,2]).stanley_symmetric_function()
     256*m[1, 1, 1, 1, 1, 1] + 128*m[2, 1, 1, 1, 1] + 64*m[2, 2, 1, 1] + 32*m[2, 2, 2] + 48*m[3, 1, 1, 1] + 24*m[3, 2, 1] + 8*m[3, 3] + 16*m[4, 1, 1] + 8*m[4, 2] + 4*m[5, 1]
@@ -497,6 +495,7 @@ Classical basis::
     sage: p = Sym.powersum()
 
     sage: m(( ( h[2,1] * ( 1 + 3 * p[2,1]) ) + s[2](s[3])))
+    3*m[1, 1, 1] + ...
 
 Jack polynomials::
 
@@ -510,19 +509,19 @@ Jack polynomials::
 
 Macdonald polynomials::
 
-    sage: J = MacdonaldPolynomialsJ(QQ)
-    sage: P = MacdonaldPolynomialsP(QQ)
-    sage: Q = MacdonaldPolynomialsQ(QQ)
+    sage: Sym = SymmetricFunctions(FractionField(QQ['q','t']))
+    sage: J = Sym.macdonald().J()
+    sage: P = Sym.macdonald().P()
+    sage: Q = Sym.macdonald().Q()
     sage: J
-    Macdonald polynomials in the J basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field
+    Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the Macdonald J basis
     sage: f = P(J[2,2] + 3 * Q[3,1])
     sage: f
     (q^2*t^6-q^2*t^5-q^2*t^4-q*t^5+q^2*t^3+2*q*t^3+t^3-q*t-t^2-t+1)*McdP[2, 2] + ((3*q^3*t^5-6*q^3*t^4+3*q^3*t^3-3*q^2*t^4+6*q^2*t^3-3*q^2*t^2-3*q*t^3+6*q*t^2-3*q*t+3*t^2-6*t+3)/(q^7*t-2*q^6*t+2*q^4*t-q^4-q^3*t+2*q^3-2*q+1))*McdP[3, 1]
-    sage: f
 
     sage: Sym = SymmetricFunctions(J.base_ring())
     sage: s = Sym.s()
-    sage: s(f)
+    sage: s(f)  # not tested
 
 Semigroups
 ----------
@@ -534,16 +533,15 @@ Semigroups
     Category of finite semigroups
 
     sage: Cat.category_graph().plot(layout = "acyclic")
-
+    Graphics object consisting of 15 graphics primitives
     sage: S = Cat.example(alphabet = ('a','b','c'))
     sage: S
-    An example of finite semi-group: the left regular band generated by ('a', 'b', 'c')
+    An example of a finite semigroup: the left regular band generated by ('a', 'b', 'c')
 
     sage: S.cayley_graph(side = "left", simple = True).plot()
-
+    Graphics object consisting of 60 graphics primitives
     sage: S.j_transversal_of_idempotents()
-    ['cab', 'ca', 'ab', 'cb', 'a', 'c', 'b']
-    sage: S
+    ['abc', 'ac', 'ab', 'a', 'bc', 'b', 'c']
 
 Hopf algebras
 -------------
@@ -558,10 +556,11 @@ Hopf algebras
     sage: view(g, tightpage = True, viewer = "pdf")
 
     sage: Cat
+    Category of hopf algebras with basis over Rational Field
     sage: H = Cat.example()
     sage: H
-    The Hopf algebra of the Dihedral group of order 6 as a permutation group over Rational Field
-    sage: H
+    An example of Hopf algebra with basis: the group algebra of
+    the Dihedral group of order 6 as a permutation group over Rational Field
 
 A real life example
 -------------------
