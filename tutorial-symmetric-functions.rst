@@ -63,7 +63,7 @@ Abstract symmetric functions
 ----------------------------
 
 We first describe how to manipulate "variable free" symmetric functions (with coefficients in the ring of rational coefficient fractions in :math:`q` and :math:`t`). 
-Such functions are linear combinations of one of the six classical bases of symmetric functions; all indexed by interger partitions :math:`\mu=\mu_1\mu_2\cdots \mu_k`. 
+Such functions are linear combinations of one of the six classical bases of symmetric functions; all indexed by integer partitions :math:`\mu=\mu_1\mu_2\cdots \mu_k`. 
 
 -   The **power sum** symmetric functions :math:`p_\mu=p_{\mu_1}p_{\mu_2}\cdots p_{\mu_2}`
 
@@ -109,7 +109,7 @@ The keyword `verbose` allows you to make the injection quiet.
     sage: (q+t)*s[2,1,1]
     (q+t)*s[2, 1, 1]
 
-Now that we have acces to all the bases we need, we can start to manipulate them.
+Now that we have access to all the bases we need, we can start to manipulate them.
 Symmetric functions are indexed by partitions :math:`\mu`, with integers considered 
 as partitions having size one (don't forget the brackets!)::
 
@@ -286,7 +286,7 @@ in the variables, maybe written as a formal symmetric function in any chosen bas
 
 The ``pol`` input of the function ``from_polynomial(pol)`` is assumed to 
 lie in a polynomial ring over the same base field as that used for the symmetric
- functions, which thus has to be delared beforehand.
+ functions, which thus has to be declared beforehand.
  
 ::
 
@@ -307,7 +307,7 @@ Finally, we can declare our polynomial and convert it into a symmetric function
     2*m[1, 1, 1] + m[2, 1]
 
 
-In the preceeding example, the base ring of polynomials is the same as the base
+In the preceding example, the base ring of polynomials is the same as the base
  ring of symmetric polynomials considered, as checked by the following.
 
 ::
@@ -385,7 +385,7 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 
 .. TOPIC:: Exercise
 
-    It is well konwn that  :math:`h_n(X) = \sum \limits_{\mu \vdash n} \dfrac{p_{\mu}(x)}{z_{\mu}}`. Verify this result for  :math:`n \in \{1,2,3,4\}`
+    It is well known that  :math:`h_n(X) = \sum \limits_{\mu \vdash n} \dfrac{p_{\mu}(x)}{z_{\mu}}`. Verify this result for  :math:`n \in \{1,2,3,4\}`
 
     Note that there exists a function ``zee()`` which takes a partition  :math:`\mu` and gives back the value of  :math:`z_{\mu}`. To use this function, you should import it from* ``sage.combinat.sf.sfa``.
 
@@ -428,7 +428,7 @@ http://doc.sagemath.org/html/en/reference/combinat/sage/combinat/sf/macdonald.ht
 
 Here are some examples involving the "combinatorial" Macdonald symmetric functions. 
 These are eigenfunctions of the operator :math:`\nabla`. 
-(See below for more informations about :math:`\nabla`.)
+(See below for more information about :math:`\nabla`.)
 
 ::
 
@@ -749,7 +749,7 @@ of SAGE-variables to be considered as **constants**, using the option
     sage: p([2]).plethysm(g,exclude=[t])
     p[2] + 1/3*t*p[2, 2, 2] + (-1/3*t)*p[6]
 
-It is costumary to also write :math:`f[g]` for :math:`f\circ g` in 
+It is customary to also write :math:`f[g]` for :math:`f\circ g` in 
 mathematical texts, but SAGE uses the shorthand notation :math:`f(g)` 
 for better compatibility with python. For instance, the plethysm 
 :math:`s_4\circ s_2`, may also be computed as
@@ -1230,7 +1230,7 @@ For instance, we have ::
     s[] # s[3, 2, 1] + s[1] # s[2, 2, 1] + s[1] # s[3, 1, 1] + s[1] # s[3, 2] + s[1, 1] # s[2, 1, 1] + s[1, 1] # s[2, 2] + s[1, 1] # s[3, 1] + s[1, 1, 1] # s[2, 1] + s[2] # s[2, 1, 1] + s[2] # s[2, 2] + s[2] # s[3, 1] + s[2, 1] # s[1, 1, 1] + 2*s[2, 1] # s[2, 1] + s[2, 1] # s[3] + s[2, 1, 1] # s[1, 1] + s[2, 1, 1] # s[2] + s[2, 2] # s[1, 1] + s[2, 2] # s[2] + s[2, 2, 1] # s[1] + s[3] # s[2, 1] + s[3, 1] # s[1, 1] + s[3, 1] # s[2] + s[3, 1, 1] # s[1] + s[3, 2] # s[1] + s[3, 2, 1] # s[]
 
 
-Skew Schur fonctions
+Skew Schur functions
 ^^^^^^^^^^^^^^^^^^^^
 
 arise when one considers the effect of coproduct on Schur functions themselves
