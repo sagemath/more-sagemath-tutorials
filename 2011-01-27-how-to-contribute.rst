@@ -150,6 +150,7 @@ This creates a :red:`new directory` called ``sage-slabbe`` in the ``devel`` repo
         drwxr-xr-x 21 slabbe staff 714 14 jan 03:41 sagenb-main/
 
 .. class:: borderless
+    :noindex:
 
 .. list-table::
     :widths: 200 200 200
