@@ -83,7 +83,7 @@ Recommendations
   welcome, but refrain from other modifications.
 
   All other units are joint property. Any refactoring is welcome as
-  long at the original aim maintained.
+  long as the original aim is maintained.
 
 - Test the examples in the documents; e.g.::
 
