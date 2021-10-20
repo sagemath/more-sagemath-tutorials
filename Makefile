@@ -237,8 +237,9 @@ jupyter: automodules
 ##############################################################################
 # Stuff in addition of the standard Sphinx's makefile
 
-DIRS=$(wildcard 20* mocksage mocksage/combinat mocksage/combinat/words mocksage/plot mocksage/databases agregation-option-calcul-formel)
-PYALL=$(wildcard $(DIRS:%=%/*.py))
+MOCKSAGEDIRS=mocksage mocksage/combinat mocksage/combinat/words mocksage/plot mocksage/databases agregation-option-calcul-formel
+DIRS=$(wildcard 20* $MOCKSAGEDIRS )
+PYALL=$(wildcard $(MOCKSAGEDIRS:%=%/*.py))
 PY=$(PYALL:%/__init__.py=)
 PYRST=$(PY:%.py=%.rst)
 RST=$(wildcard *.rst $(wildcard $(DIRS:%=%/*.rst))) $(PYRST)
@@ -249,14 +250,14 @@ TEX=$(wildcard *.tex $(DIRS:%=%/*.tex))
 AGREGMEDIA=$(wildcard agregation-option-calcul-formel/media/*)
 
 RSTIPYNB=$(RST:%.rst=$(BUILDDIR)/html/%.ipynb)
-MEDIA= $(IPYNB:%=$(BUILDDIR)/html/%) $(PDF:%=$(BUILDDIR)/html/%) $(TEX:%.tex=$(BUILDDIR)/html/%.pdf) $(AGREGMEDIA:%=$(BUILDDIR)/html/%)
+WEB= $(IPYNB:%=$(BUILDDIR)/html/%) $(PDF:%=$(BUILDDIR)/html/%) $(TEX:%.tex=$(BUILDDIR)/html/%.pdf) $(AGREGMEDIA:%=$(BUILDDIR)/html/%)
 
 foo:
 	echo $(IPYNB)
 
 ipynb: $(RSTIPYNB)
 
-media: $(MEDIA)
+web: $(WEB)
 
 $(BUILDDIR)/html/%.ipynb: %.rst
 	mkdir -p `dirname $@`

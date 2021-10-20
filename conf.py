@@ -145,7 +145,7 @@ html_static_path = ['_static']
 # Add any extra paths that contain custom files (such as robots.txt or
 # .htaccess) here, relative to this directory. These files are copied
 # directly to the root of the documentation.
-#html_extra_path = []
+html_extra_path = ['assets']
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -300,7 +300,7 @@ def rtd_finalize(app, exception):
     if exception is None:
         #subprocess.call("make jupyter", shell=True)
         subprocess.call("make ipynb", shell=True)
-        subprocess.call("make media", shell=True)
+        subprocess.call("make web", shell=True)
 
 def setup(app):
     import os
