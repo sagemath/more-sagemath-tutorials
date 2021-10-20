@@ -444,6 +444,7 @@ This creates a :red:`new directory` called ``sage-slabbe`` in the ``devel`` repo
     > cd /opt/sage/devel/sage-slabbe
 
 .. class:: borderlesstable
+    :noindex:
 
 .. list-table::
     :widths: 200 200 200

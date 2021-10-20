@@ -396,7 +396,6 @@ On automatise l'opération de pivot avec:
 .. literalinclude:: media/programmation_lineaire.py
     :language: python
     :pyobject: pivot
-    :end-before: ####
 
 Ce qui donne::
 
@@ -2343,7 +2342,7 @@ Quelques références
 
 .. [LPFAQ] `Linear Programming FAQ <http://rutcor.rutgers.edu/~mnk/lp-faq.html>`_
 
-.. [Wikipedia] `Linear Programming <http://en.wikipedia.org/wiki/Linear_programming>`_
+.. [WikipediaLinearProgramming] `Linear Programming <http://en.wikipedia.org/wiki/Linear_programming>`_
 
 .. [CMS_LP] Le chapitre Programmation Linéaire de `Calcul Mathématique avec Sage <http://sagebook.gforge.inria.fr/>`_
       (version anglaise: Sage's :ref:`Mixed Integer Linear Programming thematic tutorial <linear_programming>`)

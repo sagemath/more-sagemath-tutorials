@@ -946,7 +946,7 @@ Quelques références
 .. [Knuth] The Art of Computer Programming, Sorting algorithms,
     Donald E. Knuth.
 
-.. [Wikipedia] http://en.wikipedia.org/wiki/Symmetric_group
+.. [WikipediaSymmetricGroup] http://en.wikipedia.org/wiki/Symmetric_group
 
 .. [Seress] Permutation Group Algorithms, Ákos Seress.
     http://www.cambridge.org/uk/catalogue/catalogue.asp?isbn=0511060165
