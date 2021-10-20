@@ -1,4 +1,5 @@
 .. _tutorial-start-here:
+.. _tutorial-notebook-and-help-long:
 
 ===========
 Start here!
