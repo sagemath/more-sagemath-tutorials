@@ -5,3 +5,4 @@ dist/
 build/
 .ipynb_checkpoints
 .eggs
+more-sagemath-tutorials

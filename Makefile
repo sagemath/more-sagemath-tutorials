@@ -19,6 +19,19 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
+all: jupyter html more-sagemath-tutorials
+
+more-sagemath-tutorials::
+	rsync -av _build/html/ more-sagemath-tutorials/ --delete --exclude '.ipynb_checkpoints' --exclude '.doctrees' --exclude '*.zip' --exclude 'sagebook*.pdf'
+
+install:
+	zip -r more-sagemath-tutorials/more-sagemath-tutorials.zip more-sagemath-tutorials
+	rsync -ravz --delete -P more-sagemath-tutorials/ Nicolas.Thiery.name:www/more-sagemath-tutorials/
+
+serve:
+	cd more-sagemath-tutorials && python -m http.server
+
+
 .PHONY: help
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -256,7 +269,7 @@ automodules: $(PYRST)
 
 %.rst: %.py
 	module=`echo $* | tr / .`; \
-	echo ".. automodule:: $$module" > $@
+	echo ".. _$$module:\n\nautomodule:: $$module" > $@
 
 distclean:
 	rm $(PYRST)
