@@ -22,6 +22,7 @@ Mercredi 20 octobre
 
 - `Cours: Exploration informatique sur les mots (fin) <cours-exploration-informatique-sur-les-mots.ipynb>`_
 - :ref:`bobo.2021.combinatoire_des_mots`
+- :ref:`Tutorial: Symmetric Groups <symmetric-group.md>`
 
 Références:
 
