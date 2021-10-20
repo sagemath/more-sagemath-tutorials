@@ -50,17 +50,17 @@ Demonstration: A real life example, parallel testing of a conjecture on J-Trivia
 ::
 
     sage: MuMon = mupad(Mon); MuMon
-		  / +-               -+ \
-		  | |  0, 1, 2, 3, 4  | |
-		  | |                 | |
-		  | |  1, 1, 4, 4, 4  | |
-		  | |                 | |
+                  / +-               -+ \
+                  | |  0, 1, 2, 3, 4  | |
+                  | |                 | |
+                  | |  1, 1, 4, 4, 4  | |
+                  | |                 | |
       Dom::MMonoid| |  2, 3, 2, 3, 4  | |
-		  | |                 | |
-		  | |  3, 3, 4, 4, 4  | |
-		  | |                 | |
-		  | |  4, 4, 4, 4, 4  | |
-		  \ +-               -+ /
+                  | |                 | |
+                  | |  3, 3, 4, 4, 4  | |
+                  | |                 | |
+                  | |  4, 4, 4, 4, 4  | |
+                  \ +-               -+ /
 
     sage: MuMon.count()
        5
@@ -145,7 +145,7 @@ Demonstration: A real life example, parallel testing of a conjecture on J-Trivia
     ....:     return is_isomorphic_matrices(MP.cartan_matrix(q),
     ....:                                   MP.cartan_matrix_mupad(q))
 
-    sage: for (((poset,), _), res) in check_conj_parallel(Posets(3).list()): print poset.cover_relations(), res
+    sage: for (((poset,), _), res) in check_conj_parallel(Posets(3).list()): print(poset.cover_relations(), res)
 
     sage: all(x[1] for x in check_conj_parallel(Posets(4).list()))
     True

@@ -35,14 +35,14 @@ l’entité qu’il modélise. La *classe* quant à elle définit deux choses:
 
 #. la *structure de données* d’un objet, c’est-à-dire comment
    l’information est organisée dans le bloc mémoire. Par exemple, la
-   classe ``Rational`` stipule qu’un nombre rationel comme
+   classe ``Rational`` stipule qu’un nombre rationnel comme
    `12/35` est représenté, en gros, par deux nombres entiers:
    son numérateur et son dénominateur.
 
 #. *son comportement*, et en particulier les *opérations* sur cet objet:
-   par exemple comment on extrait le numérateur d’un nombre rationel,
+   par exemple comment on extrait le numérateur d’un nombre rationnel,
    comment on calcule sa valeur absolue, comment on multiplie ou
-   additionne deux nombres rationels, etc. Chacune de ces opération est
+   additionne deux nombres rationnels, etc. Chacune de ces opération est
    implantée par une *méthode* (respectivement ``numer``, ``abs``,
    {\_\_mult\_\_}, {\_\_add\_\_}, ...).
 
@@ -762,7 +762,7 @@ Du coup, sa factorisation est sans ambiguïté::
       sage: factor(q)
       2 * 3 * (3*x + 1)^2 * (x^2 - 2)
 
-On procède de même sur le corps des rationels::
+On procède de même sur le corps des rationnels::
 
       sage: R = QQ['x']; R
       Univariate Polynomial Ring in x over Rational Field

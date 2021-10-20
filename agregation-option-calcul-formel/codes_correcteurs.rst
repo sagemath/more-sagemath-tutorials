@@ -393,7 +393,7 @@ Commençons par un petit échauffement.
 
     Solution::
 
-        sage: sage: C.cardinality()
+        sage: C.cardinality()
         16
         sage: def poids(c): return len([i for i in c if i])
         sage: poids(V([0,1,0,0,0,0,0]))

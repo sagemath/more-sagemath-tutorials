@@ -73,7 +73,7 @@ was stopped as soon as a counter-example was found.
 Let us print all counter-examples::
 
      sage: for (input, result) in check_par( (i,n) for i in srange(2,10) ):
-     ....:     if not result: print input
+     ....:     if not result: print(input)
      ((7, 49), {})
 
 Here is a powerful idiom to recover a counter-example::

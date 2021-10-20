@@ -191,7 +191,7 @@ and those of the right class modules::
     S[1] + S[2]
 
 
-sage: for cls in S.__class__.mro(): print cls
+sage: for cls in S.__class__.mro(): print(cls)
 ....: 
 
 

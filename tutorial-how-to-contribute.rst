@@ -213,27 +213,27 @@ Here is an example of a patch exported by ``Mercurial`` for the ticket
     +++ b/sage/modular/modform/element.py
     @@ -199,17 +199,17 @@ class ModularForm_abstract(ModuleElement
 
-	 def qexp(self, prec=None):
-	     """
+         def qexp(self, prec=None):
+             """
     -        Same as self.q_expansion(prec).
     +        Same as ``self.q_expansion(prec)``.
 
     -        .. seealso: :meth:`q_expansion`
     +        .. seealso:: :meth:`q_expansion`
 
-	     EXAMPLES::
+             EXAMPLES::
     -        
     +
-		 sage: CuspForms(1,12).0.qexp()
+                 sage: CuspForms(1,12).0.qexp()
     -            q - 24*q^2 + 252*q^3 - 1472*q^4 + 4830*q^5 + O(q^6)        
     +            q - 24*q^2 + 252*q^3 - 1472*q^4 + 4830*q^5 + O(q^6)
-	     """
-	     return self.q_expansion(prec)
+             """
+             return self.q_expansion(prec)
     -        
     +
 
-	 def __eq__(self, other):
-	     """
+         def __eq__(self, other):
+             """
 
 
 10. Upload the patch on Sage trac
@@ -282,7 +282,7 @@ Other useful Mercurial commands when managing several patches:
     Print the revision history of the specified files or the entire project::
 
         > cd /opt/sage/
-	> hg log
+        > hg log
 
         changeset:   15205:f24ce048fa66
         tag:         tip

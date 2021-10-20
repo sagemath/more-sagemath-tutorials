@@ -204,13 +204,13 @@ by William Stein
     ....:         cur = rows[i]
     ....:         for j in range(len(cur)):
     ....:             e, f, k = cur[j]
-    ....:             if not e is None:
+    ....:             if e is not None:
     ....:                 if is_prime(e):
     ....:                      c = (1,0,0)
     ....:                 else:
     ....:                      c = (0,0,.4)
     ....:                 g += text(str(e), (j*2-len(cur),-i), fontsize=font, rgbcolor=c)
-    ....:                 if not k is None and not f is None:
+    ....:                 if k is not None and f is not None:
     ....:                     g += line([(j*2-len(cur),-i), ((k*2)-len(rows[i-1]),-i+1)], 
     ....:                     alpha=0.5)
     ....:     return g
@@ -349,7 +349,7 @@ by William Stein
     ....:      S.plot_average(spline_samples).save('avg.png', figsize=[10,2])
     ....:      S.plot_diff().save('diff.png', figsize=[10,2])
     ....:      Y = S.yahoo()
-    ....:      k = Y.keys(); k.sort()
+    ....:      k = sorted(Y)
     ....:      html('Price during last 52 weeks:<br>Grey line is a spline through %s points (do not take seriously!):<br> <img src="cell://avg.png">'%spline_samples)
     ....:      html('Difference from previous day:<br> <img src="cell://diff.png">')
     ....:      html('<table align=center>' + '\n'.join('<tr><td>%s</td><td>%s</td></tr>'%(k[i], Y[k[i]]) for i in range(len(k))) + '</table>')
