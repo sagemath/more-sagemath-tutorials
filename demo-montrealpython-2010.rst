@@ -379,32 +379,32 @@ by Timothy Clemans and William Stein
     ....:         g = k.multiplicative_generator()
     ....:     a = ZZ.random_element(10, maxp)
     ....:     b = ZZ.random_element(10, maxp)
-    ....:     print """
-    sage: <html>
-    sage: <style>
-    sage: .gamodp, .gbmodp {
-    sage: color:#000;
-    sage: padding:5px
-    sage: }
-    sage: .gamodp {
-    sage: background:#846FD8
-    sage: }
-    sage: .gbmodp {
-    sage: background:#FFFC73
-    sage: }
-    sage: .dhsame {
-    sage: color:#000;
-    sage: font-weight:bold
-    sage: }
-    sage: </style>
-    sage: <h2 style="color:#000;font-family:Arial, Helvetica, sans-serif">%s-Bit Diffie-Hellman Key Exchange</h2>
-    sage: <ol style="color:#000;font-family:Arial, Helvetica, sans-serif">
-    sage: <li>Alice and Bob agree to use the prime number p = %s and base g = %s.</li>
-    sage: <li>Alice chooses the secret integer a = %s, then sends Bob (<span class="gamodp">g<sup>a</sup> mod p</span>):<br/>%s<sup>%s</sup> mod %s = <span class="gamodp">%s</span>.</li>
-    sage: <li>Bob chooses the secret integer b=%s, then sends Alice (<span class="gbmodp">g<sup>b</sup> mod p</span>):<br/>%s<sup>%s</sup> mod %s = <span class="gbmodp">%s</span>.</li>
-    sage: <li>Alice computes (<span class="gbmodp">g<sup>b</sup> mod p</span>)<sup>a</sup> mod p:<br/>%s<sup>%s</sup> mod %s = <span class="dhsame">%s</span>.</li>
-    sage: <li>Bob computes (<span class="gamodp">g<sup>a</sup> mod p</span>)<sup>b</sup> mod p:<br/>%s<sup>%s</sup> mod %s = <span class="dhsame">%s</span>.</li>
-    sage: </ol></html>
+    ....:     print("""
+    ....: <html>
+    ....: <style>
+    ....: .gamodp, .gbmodp {
+    ....: color:#000;
+    ....: padding:5px
+    ....: }
+    ....: .gamodp {
+    ....: background:#846FD8
+    ....: }
+    ....: .gbmodp {
+    ....: background:#FFFC73
+    ....: }
+    ....: .dhsame {
+    ....: color:#000;
+    ....: font-weight:bold
+    ....: }
+    ....: </style>
+    ....: <h2 style="color:#000;font-family:Arial, Helvetica, sans-serif">%s-Bit Diffie-Hellman Key Exchange</h2>
+    ....: <ol style="color:#000;font-family:Arial, Helvetica, sans-serif">
+    ....: <li>Alice and Bob agree to use the prime number p = %s and base g = %s.</li>
+    ....: <li>Alice chooses the secret integer a = %s, then sends Bob (<span class="gamodp">g<sup>a</sup> mod p</span>):<br/>%s<sup>%s</sup> mod %s = <span class="gamodp">%s</span>.</li>
+    ....: <li>Bob chooses the secret integer b=%s, then sends Alice (<span class="gbmodp">g<sup>b</sup> mod p</span>):<br/>%s<sup>%s</sup> mod %s = <span class="gbmodp">%s</span>.</li>
+    ....: <li>Alice computes (<span class="gbmodp">g<sup>b</sup> mod p</span>)<sup>a</sup> mod p:<br/>%s<sup>%s</sup> mod %s = <span class="dhsame">%s</span>.</li>
+    ....: <li>Bob computes (<span class="gamodp">g<sup>a</sup> mod p</span>)<sup>b</sup> mod p:<br/>%s<sup>%s</sup> mod %s = <span class="dhsame">%s</span>.</li>
+    ....: </ol></html>
     ....:     """ % (bits, p, g, a, g, a, p, (g^a), b, g, b, p, (g^b), (g^b), a, p, 
     ....:        (g^ b)^a, g^a, b, p, (g^a)^b)
 

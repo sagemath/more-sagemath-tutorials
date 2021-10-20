@@ -160,13 +160,13 @@ Matrices
 
     for P in Permutations(4):
         L = list(P)
-        print L
+        print(L)
 
    ::
 
     sage: for P in Permutations(4):
     ....:     L = list(P)
-    ....:     print L
+    ....:     print(L)
     [1, 2, 3, 4]
     [1, 2, 4, 3]
     [1, 3, 2, 4]

@@ -97,7 +97,7 @@ exemple, les questions de factorisation::
     6*(x^2 - 2)*(3*x + 1)^2
 
     sage: for K in [ZZ, QQ, ComplexField(16), QQ[sqrt(2)], GF(5)]:
-    ....:     print K, ":"; print K['x'](p).factor()
+    ....:     print(K, ":"); print(K['x'](p).factor())
     Integer Ring :
     2 * 3 * (3*x + 1)^2 * (x^2 - 2)
     Rational Field :

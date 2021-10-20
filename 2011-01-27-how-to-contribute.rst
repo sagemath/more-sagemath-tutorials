@@ -304,7 +304,7 @@ Now, you may use the following Mercurial commands to look at your local changes.
                      sage: Permutation([2, 4, 1, 5, 3]).inverse()
                      [3, 1, 5, 2, 4]
                  """
-        +        print "YO !!!! Let's inverse some permutations !!!"
+        +        print("YO !!!! Let's inverse some permutations !!!")
                  w = range(len(self))
                  for i,j in enumerate(self):
                      w[j-1] = i+1
@@ -436,7 +436,7 @@ Here is an example of a patch exported by Mercurial for the imaginary ticket
                      sage: Permutation([2, 4, 1, 5, 3]).inverse()
                      [3, 1, 5, 2, 4]
                  """
-        +        print "YO !!!! Let's inverse some permutations !!!"
+        +        print("YO !!!! Let's inverse some permutations !!!")
                  w = range(len(self))
                  for i,j in enumerate(self):
                      w[j-1] = i+1
