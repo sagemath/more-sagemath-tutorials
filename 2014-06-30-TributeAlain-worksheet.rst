@@ -10,7 +10,7 @@ About this worksheet
 --------------------
 
 This worksheet was produced at the occasion of a tribute to Alain
-Lascoux at `FPSAC'14 <http://fpsac.org/confs/fpsac-2014/`_.
+Lascoux at `FPSAC'14 <http://fpsac.org/confs/fpsac-2014/>`_.
 
 A computer exploration
 ----------------------
