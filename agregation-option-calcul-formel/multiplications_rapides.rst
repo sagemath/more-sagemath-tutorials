@@ -22,6 +22,8 @@ Inversion de matrices
 
     #. Calculer `M^{-1}` par pivot de Gauß.
 
+    #. Refaire le même calcul avec une matrice par blocs `M=\begin{pmatrix}A&B\\C&D\end{pmatrix}`!
+
 .. TOPIC:: Solution
 
     La matrice inverse::
@@ -35,6 +37,7 @@ Inversion de matrices
         [   d/(-b*c + a*d) (-b)/(-b*c + a*d)]
         [(-c)/(-b*c + a*d)    a/(-b*c + a*d)]
 
+
     Par pivot de Gauß::
 
         sage: I2 = matrix(2,2,1); I2
@@ -43,9 +46,10 @@ Inversion de matrices
         sage: M = M.augment(I2, subdivide=True); M
         [a b|1 0]
         [c d|0 1]
-        sage: M[1] = a*M[1] - c *M[0]; M
-        [         a          b|         1          0]
-        [         0 -b*c + a*d|        -c          a]
+        sage: M[1] = M[1] - c/a *M[0]; M
+        [             a              b|             1              0]
+        [             0 (-b*c + a*d)/a|        (-c)/a              1]
+
         sage: M[1] = M[1]/M[1,1]; M
         [                a                 b|                1                 0]
         [                0                 1|(-c)/(-b*c + a*d)    a/(-b*c + a*d)]
@@ -55,7 +59,6 @@ Inversion de matrices
         sage: M[0] = M[0]/a; M
         [                1                 0|   d/(-b*c + a*d) (-b)/(-b*c + a*d)]
         [                0                 1|(-c)/(-b*c + a*d)    a/(-b*c + a*d)]
-
 
 .. TOPIC:: Théorème: formule d'inversion de matrice par blocs
 
@@ -382,7 +385,7 @@ de degré `2^r` en appliquant récursivement l'étape précédente.
 
 .. TOPIC:: En pratique: implantation
 
-    L'algorithme de Karatsuba, étant plus compliqué en particulier à
+    L'algorithme de Karatsuba étant plus compliqué, en particulier à
     cause de la récursion, est moins performant en petit degré que
     l'algorithme naïf. Aussi les implantations utilisent l'étape de
     récurrence en haut degré, et basculent sur un produit naïf en deçà
@@ -484,7 +487,7 @@ Transformée de Fourier Discrète
     #. Donner la matrice inverse.
 
 
-    Indication: `\sum_{k=0}^{n-1} \omega^{ik} = \begin{cases}n&\text{si $i\equiv 0[n]$}\\0&\text{sinon}\end{cases}`
+    Indication: `\sum_{k=0}^{n-1} \omega^{ik} = \begin{cases}n&\text{ si } i\equiv 0[n]\\0&\text{ sinon}\end{cases}`
 
 .. TOPIC:: Proposition
 
