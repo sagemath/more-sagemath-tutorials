@@ -123,7 +123,7 @@ html_theme_path = ['themes']
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
-#html_title = None
+html_title = "More SageMath Tutorials"
 
 # A shorter title for the navigation bar.  Default is the same as html_title.
 #html_short_title = None
@@ -156,7 +156,7 @@ html_static_path = ['_static']
 #html_use_smartypants = True
 
 # Custom sidebar templates, maps document names to template names.
-html_sidebars = { '**': ['ipynblink.html', 'localtoc.html', 'relations.html', 'searchbox.html']}
+html_sidebars = { '**': ['title.html', 'ipynblink.html', 'localtoc.html', 'relations.html', 'searchbox.html']}
 
 # Additional templates that should be rendered to pages, maps page names to
 # template names.
@@ -357,11 +357,7 @@ jupyter_python_autosave = True
 # Not yet used by sphinxcontrib-jupyter
 jupyter_default_lang = "sagemath"
 
-# TODO: add binder link, github logo, specific file reference
-# Really include this prolog in the html version?
-rst_prolog=r"""
-This document is one of `More SageMath Tutorials <https://more-sagemath-tutorials.readthedocs.io/en/latest/>`_.
-You may `edit it on github <http://github.com/sagemath/more-sagemath-tutorials/>`_.
+rst_prolog = r"""
 `\def\NN{\mathbb{N}}`
 `\def\ZZ{\mathbb{Z}}`
 `\def\QQ{\mathbb{Q}}`
