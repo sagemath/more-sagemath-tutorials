@@ -22,7 +22,7 @@ Dans cette séance interactive, nous avons exploré comment manipuler des mots a
 - Un petit mémo sur les opérations: [2021-10-19-mots.ipynb](2021-10-19-mots.ipynb)
 - Un carnet de labo pour une exploration de propriétés de factorisations: [2021-10-19-carnet-de-labo-factorisations.ipynb](2021-10-19-carnet-de-labo-factorisations.ipynb)
 
-C'était avant tout un **exercice pédagogique** pour entre appercevoir quelques points résumés ci-dessous. Dans la pratique, **Sage contient une importante bibliothèque sur les mots** qui fournit la plupart des utilitaires que nous avons réinventé naïvement. C'est cette bibliothèque que vous allez mettre en action dans le [TP: Combinatoire des mots](combinatoire-des-mots.rst). 
+C'était avant tout un **exercice pédagogique** pour entre appercevoir quelques points résumés ci-dessous. Dans la pratique, **Sage contient une importante bibliothèque sur les mots** qui fournit la plupart des utilitaires que nous avons réinventé naïvement. C'est cette bibliothèque que vous allez mettre en action dans le [TP: Combinatoire des mots](combinatoire-des-mots.rst).
 
 +++ {"slideshow": {"slide_type": "slide"}}
 
