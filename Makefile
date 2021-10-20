@@ -242,13 +242,17 @@ PYALL=$(wildcard $(DIRS:%=%/*.py))
 PY=$(PYALL:%/__init__.py=)
 PYRST=$(PY:%.py=%.rst)
 RST=$(wildcard *.rst $(wildcard $(DIRS:%=%/*.rst))) $(PYRST)
-IPYNB=$(wildcard *.ipynb $(DIRS:%=%/*.ipynb))
+MD=$(wildcard *.md $(DIRS:%=%/*.md))
+IPYNB=$(wildcard *.ipynb $(DIRS:%=%/*.ipynb)) $(MD:%.md=%.ipynb)
 PDF=$(wildcard *.pdf $(DIRS:%=%/*.pdf))
 TEX=$(wildcard *.tex $(DIRS:%=%/*.tex))
 AGREGMEDIA=$(wildcard agregation-option-calcul-formel/media/*)
 
 RSTIPYNB=$(RST:%.rst=$(BUILDDIR)/html/%.ipynb)
 MEDIA= $(IPYNB:%=$(BUILDDIR)/html/%) $(PDF:%=$(BUILDDIR)/html/%) $(TEX:%.tex=$(BUILDDIR)/html/%.pdf) $(AGREGMEDIA:%=$(BUILDDIR)/html/%)
+
+foo:
+	echo $(IPYNB)
 
 ipynb: $(RSTIPYNB)
 
@@ -265,11 +269,14 @@ $(BUILDDIR)/html/%.pdf: %.tex
 	cp $< `dirname $@`
 	file=`basename $@ .pdf`; cd `dirname $@`; pdflatex $$file; bibtex $$file; pdflatex $$file; pdflatex $$file
 
-automodules: $(PYRST)
+automodules: $(PYRST) $(IPYNB)
 
 %.rst: %.py
 	module=`echo $* | tr / .`; \
 	echo ".. _$$module:\n\nautomodule:: $$module" > $@
+
+%.ipynb: %.md
+	jupytext $< --to md:myst
 
 distclean:
 	rm $(PYRST)
