@@ -72,7 +72,7 @@ On the computer where this tutorial has been written, ``/opt/sage`` is
 the root directory of ``Sage``, which is usually called
 ``SAGE_ROOT``. Please adapt all the examples below to your particular
 setup. Then, ``local/lib/python2.6/site-packages/`` is the
-subdirectory where ``Python`` code gets installed. Finaly
+subdirectory where ``Python`` code gets installed. Finally
 ``sage/combinat/permutation.py`` is the file containing the ``Python``
 module ``sage.combinat.permutation`` where this method is
 implemented::

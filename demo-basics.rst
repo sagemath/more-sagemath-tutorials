@@ -70,7 +70,7 @@ Symbolic calculations::
 
 .. todo:: arbitrary precision numerical approximation of the solution
 
-.. Simplication + exact solution
+.. Simplification + exact solution
 
 ::
 

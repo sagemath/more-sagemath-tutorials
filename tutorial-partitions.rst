@@ -8,7 +8,7 @@ Mélodie Lapointe (lapointe.melodie@courrier.uqam.ca) and Pauline Hubert (hubert
 Partitions
 ----------
 
-Recall that a **partition** :math:`\mu` of :math:`n`, one writes :math:`\mu \vdash n` or :math:`n  = |\mu|`, is an sequence of intergers :math:`(\mu_0,\mu_1,\dots,\mu_{k-1})` (the :math:`m_i`'s are the **parts** of :math:`\mu`) with :math:`\mu_0 \geq \mu_1 \geq \dots \geq \mu_{k-1} \geq 0` and :math:`n = \mu_0 + \mu_1 + \dots + \mu_{k-1}`. The number :math:`\ell(\mu):= k` of parts of :math:`\mu` is said to be its **length**. A partition :math:`\mu` may also be described as a **Ferrers diagram**, which is the :math:`n`-subset of :math:`\mathbb{N}\times \mathbb{N}` :
+Recall that a **partition** :math:`\mu` of :math:`n`, one writes :math:`\mu \vdash n` or :math:`n  = |\mu|`, is an sequence of integers :math:`(\mu_0,\mu_1,\dots,\mu_{k-1})` (the :math:`m_i`'s are the **parts** of :math:`\mu`) with :math:`\mu_0 \geq \mu_1 \geq \dots \geq \mu_{k-1} \geq 0` and :math:`n = \mu_0 + \mu_1 + \dots + \mu_{k-1}`. The number :math:`\ell(\mu):= k` of parts of :math:`\mu` is said to be its **length**. A partition :math:`\mu` may also be described as a **Ferrers diagram**, which is the :math:`n`-subset of :math:`\mathbb{N}\times \mathbb{N}` :
 
 .. Math:: 
     \left\{(a,b)|0 \leq a \leq \mu_i \text{ and } b < \ell(\mu)\right\}.
@@ -185,7 +185,7 @@ The default (total) order on partitions is the lexicographic order.
 Young Tableaux
 --------------
 
-An A-valued **Young tableaux** of **shape** :math:`\mu` is a "filling" of the cells of a Ferrers diagram of :math:`\mu` with elements of an ordered set A. Hence, it is a function :math:`\tau:\mu \rightarrow A`. A tableau is said to be **standard** if it is bijective (hence A has cardinality equal to the number of cells of :math:`\mu`), and its entries on each row (and each column) are stricly increasing from left to right (from bottom to top in french convention). A tableau (not necessarily bijective) is said to be **semistandard** if its entries are weakly increasing from left to right on each row,  and strictly increasing on each column. These object can be constructed in the following way.
+An A-valued **Young tableaux** of **shape** :math:`\mu` is a "filling" of the cells of a Ferrers diagram of :math:`\mu` with elements of an ordered set A. Hence, it is a function :math:`\tau:\mu \rightarrow A`. A tableau is said to be **standard** if it is bijective (hence A has cardinality equal to the number of cells of :math:`\mu`), and its entries on each row (and each column) are strictly increasing from left to right (from bottom to top in french convention). A tableau (not necessarily bijective) is said to be **semistandard** if its entries are weakly increasing from left to right on each row,  and strictly increasing on each column. These object can be constructed in the following way.
 
 ::
 

@@ -57,8 +57,8 @@ Let's use it::
 Graphical visualization with `runsnake`
 ---------------------------------------
 
-I find the output easier to intepret with `runsnake`; but this may
-just be a bias from having used it quite some. On the other hand it's
+I find the output easier to interpret with `runsnake`; but this may
+just be a bias from having used it quite some. On the other hand it is
 not integrated in the browser and harder to install.
 
 Installation on Linux::
