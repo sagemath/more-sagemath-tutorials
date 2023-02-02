@@ -31,7 +31,7 @@ Cas particuliers:
  - topologique: `X` compact, `T`: continu
  - mesurable: `X` équipé d'une mesure `\mu` préservée par `T`:
 
-	`\mu (T^{-1}(A)) = \mu(A)` pour tout `A` mesurable
+       `\mu (T^{-1}(A)) = \mu(A)` pour tout `A` mesurable
 
 Questions typiques:
 
@@ -213,7 +213,7 @@ et `T_Y`.
         inférieur.
 
         - Induire l'application sur un cône d'angle `\pi/4` centré en - 1.
-	- Recommencer avec `\pi/7`.
+        - Recommencer avec `\pi/7`.
 
 
 .. TOPIC:: Exercice
@@ -224,11 +224,10 @@ et `T_Y`.
     .. math::
 
         T(x,y)=
-	\begin{cases}
-	(1+a-y,x) &amp; (x,y)\in A\\
-	(x-1,1-y) &amp; (x,y)\in B
-	\end{cases}
-
+        \begin{cases}
+        (1+a-y,x) &amp; (x,y)\in A\\
+        (x-1,1-y) &amp; (x,y)\in B
+        \end{cases}
 
     #.  Pour `a` rationnel, décrire la partition à l'étape `n`.
 
