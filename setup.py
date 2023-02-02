@@ -1,8 +1,6 @@
-## -*- encoding: utf-8 -*-
-import os
-import sys
+# -*- encoding: utf-8 -*-
 from setuptools import setup, find_packages
-from codecs import open # To open the README file with proper encoding
+from codecs import open  # To open the README file with proper encoding
 
 description = 'More SageMath Thematic Tutorials'
 version = "0.0.1"
@@ -11,29 +9,29 @@ copyright = "2017, " + author
 license = 'GPLv2+'
 
 setup(
-    name = "more_sagemath_tutorials",
-    version = version,
-    description = description,
+    name="more_sagemath_tutorials",
+    version=version,
+    description=description,
     # get the long description from the README
-    long_description = open("README.rst", encoding='utf-8').read(),
+    long_description=open("README.rst", encoding='utf-8').read(),
     url='https://github.com/sagemath/more-sagemath-tutorials',
     author=author,
-    author_email='nthiery@users.sf.net', # choose a main contact email
-    license=license, # This should be consistent with the LICENCE file
+    author_email='nthiery@users.sf.net',  # choose a main contact email
+    license=license,  # This should be consistent with the LICENCE file
     classifiers=[
-      'Development Status :: 4 - Beta',
-      'Intended Audience :: Science/Research',
-      'Topic :: Software Development :: Build Tools',
-      'Topic :: Scientific/Engineering :: Mathematics',
-      'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
-      'Programming Language :: Python :: 2.7',
-    ], # classifiers list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
-    keywords = "SageMath tutorials",
-    packages = find_packages(),
-    setup_requires   = ['sage-package'],
-    install_requires = ['sage-package', 'sphinx', 'pygments>=2.4.1', 'rst2ipynb','nbsphinx','PyYAML', 'sphinxcontrib-jupyter'],
-    #dependency_links=['http://github.com/nthiery/rst2ipynb/tarball/master#egg=dev'],
-    entry_points = {
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Science/Research',
+        'Topic :: Software Development :: Build Tools',
+        'Topic :: Scientific/Engineering :: Mathematics',
+        'License :: OSI Approved :: GNU General Public License v2 or later (GPLv2+)',
+        'Programming Language :: Python :: 2.7',
+    ],  # classifiers list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
+    keywords="SageMath tutorials",
+    packages=find_packages(),
+    setup_requires=['sage-package'],
+    install_requires=['sage-package', 'sphinx', 'pygments>=2.4.1', 'rst2ipynb', 'nbsphinx', 'PyYAML', 'sphinxcontrib-jupyter'],
+    # dependency_links=['http://github.com/nthiery/rst2ipynb/tarball/master#egg=dev'],
+    entry_points={
         "distutils.commands": [
             "test = sage_package.setuptools:SageTest",
             "html = sphinx.setup_command:BuildDoc",
@@ -52,9 +50,9 @@ setup(
             'version': ('setup.py', version),
             'release': ('setup.py', version),
             'copyright': ('setup.py', copyright),
-            #'master_doc': ('setup.py', 'index'),
-            'build_dir':  ('setup.py', '_build'),
-            #'authors': ('setup.py', author),
+            # 'master_doc': ('setup.py', 'index'),
+            'build_dir': ('setup.py', '_build'),
+            # 'authors': ('setup.py', author),
         },
     }
 )
