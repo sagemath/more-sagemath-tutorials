@@ -63,7 +63,7 @@ Two origamis `(r,u) \in S_n \times S_n` and `(r',u') \in S_n \times S_n` are
 one point.
 
 Two origamis `\pi: X \rightarrow \mathbb{T}^2` and `\pi': X' \rightarrow
-\mathbb{T}^2` are *isomorphics* if there exists an homeomorphism `f: X \rightarrow
+\mathbb{T}^2` are *isomorphic* if there exists an homeomorphism `f: X \rightarrow
 X'` such that `f \circ \pi' = \pi`.::
 
     sage: o = Origami('(1,2)','(1,3)')
@@ -229,7 +229,7 @@ follows::
 
 The origamis in `\mathcal{H}(2)` can then be generated using those two cylinder
 diagrams by specifying the lengths of each separatrix, the height of each
-cylinder and an (optionnal) twist paramater::
+cylinder and an (optional) twist parameter::
 
     sage: c0,c1 = AbelianStratum(2).cylinder_diagrams()
 
