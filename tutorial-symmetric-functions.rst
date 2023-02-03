@@ -31,7 +31,7 @@ Before going into details with symmetric functions in sage, here is
 a quick example of what we can do in sage.
 
 We recall that the **complete homogeneous** symmetric functions 
-:math:`h_d` are defined in terms of the **power sum** symmetric functions
+:math:`h_d` can be written in terms of the **power sum** symmetric functions
  :math:`p_{\mu}` by the formula :
 
 .. MATH:: h_d = \sum \limits_{\mu \vdash d} \dfrac{1}{z_{\mu}} p_{\mu}
@@ -55,7 +55,7 @@ function ":math:`\mathrm{Sym}`" over :math:`\mathbb{Q}`::
 
     sage: p(h[6])
     1/720*p[1, 1, 1, 1, 1, 1] + 1/48*p[2, 1, 1, 1, 1] + 1/16*p[2, 2, 1, 1] + 1/48*p[2, 2, 2] + 1/18*p[3, 1, 1, 1] + 1/6*p[3, 2, 1] + 1/18*p[3, 3] + 1/8*p[4, 1, 1] + 1/8*p[4, 2] + 1/5*p[5, 1] + 1/6*p[6]
-    sage: sum((1/Partition(i).aut())*p(i) for i in Partitions(6).list())
+    sage: sum((1/mu.aut())*p(i) for mu in Partitions(6))
     1/720*p[1, 1, 1, 1, 1, 1] + 1/48*p[2, 1, 1, 1, 1] + 1/16*p[2, 2, 1, 1] + 1/48*p[2, 2, 2] + 1/18*p[3, 1, 1, 1] + 1/6*p[3, 2, 1] + 1/18*p[3, 3] + 1/8*p[4, 1, 1] + 1/8*p[4, 2] + 1/5*p[5, 1] + 1/6*p[6]
 
 
@@ -63,16 +63,16 @@ Abstract symmetric functions
 ----------------------------
 
 We first describe how to manipulate "variable free" symmetric functions (with coefficients in the ring of rational coefficient fractions in :math:`q` and :math:`t`). 
-Such functions are linear combinations of one of the six classical bases of symmetric functions; all indexed by integer partitions :math:`\mu=\mu_1\mu_2\cdots \mu_k`. 
+Such functions are linear combinations of one of the six classical bases of symmetric functions; all indexed by integer partitions :math:`\mu=\mu_1\mu_2\cdots \mu_k`.
 
--   The **power sum** symmetric functions :math:`p_\mu=p_{\mu_1}p_{\mu_2}\cdots p_{\mu_2}`
+-   The **power sum** symmetric functions :math:`p_\mu=p_{\mu_1}p_{\mu_2}\cdots p_{\mu_k}`
 
--   The **(complete) homogeneous** symmetric functions :math:`h_\mu=h_{\mu_1}h_{\mu_2}\cdots h_{\mu_2}`
+-   The **(complete) homogeneous** symmetric functions :math:`h_\mu=h_{\mu_1}h_{\mu_2}\cdots h_{\mu_k}`
 
--   The **elementary** symmetric functions :math:`e_\mu=e_{\mu_1}e_{\mu_2}\cdots e_{\mu_2}`
+-   The **elementary** symmetric functions :math:`e_\mu=e_{\mu_1}e_{\mu_2}\cdots e_{\mu_k}`
     
 -   The **monomial** functions :math:`m_{\mu}`
--   The **Schur** functions :math:`s{\mu}`
+-   The **Schur** functions :math:`s_{\mu}`
 -   The **forgotten** symmetric functions :math:`f_{\mu}`
 
 ::
@@ -120,7 +120,9 @@ as partitions having size one (don't forget the brackets!)::
 
     sage: e[3,2,1]
     e[3, 2, 1]
-    
+
+# Not entirely sure where this should go, but there should be something mentioning how input can be as s[2,1] or s([2,1]), since both conventions are used interchangeably throughout.
+
 The ring structure
 ^^^^^^^^^^^^^^^^^^
 
@@ -156,6 +158,16 @@ the bases, usually the first basis encountered in the expression::
 
     sage: p([2,2])+m([1,1])*s([2,1])
     1/6*p[1, 1, 1, 1, 1] - 1/6*p[2, 1, 1, 1] + p[2, 2] - 1/6*p[3, 1, 1] + 1/6*p[3, 2]
+    
+The length function gives the number of non-zero terms of the input
+with respect to the basis that would be chosen for output, and the result
+depends on this choice of basis.::
+
+    sage: len(p[2]*m[2])
+    1
+    
+    sage: len(m[2]*p[2])
+    2
 
 Concrete symmetric functions
 ----------------------------
@@ -202,7 +214,7 @@ variables :math:`x_0, x_1, \dots, x_{n-1}`, one proceeds as follows::
 For sure, one may use any other set of variables via the optional "alphabet"::
 
     sage: g = s[2,1]
-    sage: g.expand(3, alphabet =['x','y','z'])
+    sage: g.expand(3, alphabet=['x','y','z'])
     x^2*y + x*y^2 + x^2*z + 2*x*y*z + y^2*z + x*z^2 + y*z^2
 
 .. TOPIC:: Exercise
@@ -213,11 +225,14 @@ For sure, one may use any other set of variables via the optional "alphabet"::
 
     .. MATH::
 
-        e_k(n) = e_k(n-1) + x_ne_{k-1}(n-1), \\
-        h_k(n) = h_k(n-1) + x_nh_{k-1}(n), \\
+        e_k(n) = e_k(n-1) + x_{n-1}e_{k-1}(n-1), \\
+        h_k(n) = h_k(n-1) + x_{n-1}h_{k-1}(n), \\
         e_k(0)=h_k(0) = \delta_{k,0},
 
     where :math:`\delta_{k,0}` is the Kronecker delta.
+
+# I believe original indexing was off for convention that variables are going from x_0 to x_{n-1}
+# instead of x_1 to x_n .
 
     Check these relations for :math:`k=3` and :math:`2 \leq n \leq 5`.
 
@@ -229,15 +244,15 @@ For sure, one may use any other set of variables via the optional "alphabet"::
         sage: R = PolynomialRing(QQ,'x',5)
         sage: R.inject_variables()
         Defining x0, x1, x2, x3, x4
-        sage: l = list(R.gens())
-        sage: for xn, n in zip(l[1:], range(2,6)):
+        sage: X=R.gens()
+        sage: for n in range(2,6):
         ....:     f1 = e([k]).expand(n)
         ....:     print(f1)
-        ....:     f2 = e([k]).expand(n-1,l[:n-1])+xn*(e([k-1]).expand(n-1,l[:n-1]))
+        ....:     f2 = e([k]).expand(n-1,X[:n-1])+X[n-1]*(e([k-1]).expand(n-1,X[:n-1]))
         ....:     print(f2)
         ....:     g1 = h([k]).expand(n)
         ....:     print(g1)
-        ....:     g2 = h([k]).expand(n-1,l[:n-1])+xn*(h([k-1]).expand(n,l[:n]))
+        ....:     g2 = h([k]).expand(n-1,X[:n-1])+X[n-1]*(h([k-1]).expand(n,X[:n]))
         ....:     print(g2)     
         0
         0
@@ -266,8 +281,8 @@ in the variables, maybe written as a formal symmetric function in any chosen bas
 
 ::
 
-    sage: pol1 = (p([2])+e([2,1])).expand(3)
-    sage: pol1
+    sage: poly1 = (p([2])+e([2,1])).expand(3)
+    sage: poly1
     x0^2*x1 + x0*x1^2 + x0^2*x2 + 3*x0*x1*x2 + x1^2*x2 + x0*x2^2 + x1*x2^2 + x0^2 + x1^2 + x2^2
     sage: n = 3
     sage: R = PolynomialRing(FractionField(QQ['q','t']),'x',n)
@@ -284,9 +299,9 @@ in the variables, maybe written as a formal symmetric function in any chosen bas
     e[2, 2, 1, 1] - 4*e[2, 2, 2] - 4*e[3, 1, 1, 1] + 18*e[3, 2, 1] - 27*e[3, 3] - 8*e[4, 1, 1] + 24*e[4, 2]
 
 
-The ``pol`` input of the function ``from_polynomial(pol)`` is assumed to 
+The ``poly`` input of the function ``from_polynomial(poly)`` is assumed to 
 lie in a polynomial ring over the same base field as that used for the symmetric
- functions, which thus has to be declared beforehand.
+functions, which thus has to be delared beforehand.
  
 ::
 
@@ -297,15 +312,14 @@ lie in a polynomial ring over the same base field as that used for the symmetric
     
 Here, we will work with three variables (:math:`y_0, y_1` and :math:`y_2`).
 Finally, we can declare our polynomial and convert it into a symmetric function
- in the monomial basis for example.
+in the monomial basis for example.
 
 
 ::
 
-    sage: pol2 = y0^2*y1 + y0*y1^2 + y0^2*y2 + 2*y0*y1*y2 + y1^2*y2 + y0*y2^2 + y1*y2^2
+    sage: poly2 = y0^2*y1 + y0*y1^2 + y0^2*y2 + 2*y0*y1*y2 + y1^2*y2 + y0*y2^2 + y1*y2^2
     sage: m.from_polynomial(pol2)
     2*m[1, 1, 1] + m[2, 1]
-
 
 In the preceding example, the base ring of polynomials is the same as the base
  ring of symmetric polynomials considered, as checked by the following.
@@ -314,7 +328,7 @@ In the preceding example, the base ring of polynomials is the same as the base
 
     sage: print(s.base_ring())
     Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field
-    sage: print(pol2.base_ring())
+    sage: print(poly2.base_ring())
     Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field
 
 
@@ -385,15 +399,19 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 
 .. TOPIC:: Exercise
 
-    It is well known that  :math:`h_n(X) = \sum \limits_{\mu \vdash n} \dfrac{p_{\mu}(x)}{z_{\mu}}`. Verify this result for  :math:`n \in \{1,2,3,4\}`
+ *It is well known that  :math:`h_n(X) = \sum \limits_{\mu \vdash n} \dfrac{p_{\mu}(x)}{z_{\mu}}`. Verify this result for  :math:`n \in \{1,2,3,4\}`*
 
-    Note that there exists a function ``zee()`` which takes a partition  :math:`\mu` and gives back the value of  :math:`z_{\mu}`. To use this function, you should import it from* ``sage.combinat.sf.sfa``.
+*Note that the method ``mu.aut()`` on partitions gives the value :math:`z_{\mu}`. 
+Alternatively, one could import the function ``zee()`` from ``sage.combinat.sf.sfa``.
+ #*Note that there exists a function ``zee()`` which takes a partition  :math:`\mu` and gives back the value of  :math:`z_{\mu}`. To use this function, you should import it from* ``sage.combinat.sf.sfa``.
 
+#Math mode doesn't seem to render when encapsulated by * * for italicizing.
+# Just use extra * to cut out math mode expressions?
 
 ::
-
-    sage: from sage.combinat.sf.sfa import *
     sage: zee([4,4,2,1])
+    64
+    sage: Partition([4,4,2,1]).aut()
     64
 
 .. TOPIC:: Solution
@@ -401,7 +419,7 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 ::
 
     sage: for n in range (1,5) :
-    ....:     print(p(h([n])) == sum(p(mu)/zee(mu) for mu in Partitions(n)))
+    ....:     print(p(h([n])) == sum(p(mu)/mu.aut() for mu in Partitions(n)))
     True
     True
     True
@@ -422,7 +440,7 @@ Other important bases are implemented in SAGE.
 - The Witt basis
 - The zonal basis
 
-The well known Macdonald symmetric functions are also implemented in sage. 
+The Macdonald symmetric functions are also implemented in SAGE. 
 For more details, you can consult the following sage reference :
 http://doc.sagemath.org/html/en/reference/combinat/sage/combinat/sf/macdonald.html
 
@@ -536,7 +554,7 @@ Finally, the function ``support()`` returns the list of partitions that appear i
 The omega involution
 ^^^^^^^^^^^^^^^^^^^^
 
-The :math:`\omega` involution is the linear extension of the map which sends :math:`e_\lambda` to :math:`h_{\lambda}`.
+The :math:`\omega` involution is the linear extension of the map which sends :math:`e_{\lambda}` to :math:`h_{\lambda}`.
 
 :: 
 
@@ -599,7 +617,7 @@ this value is :math:`z_{\mu}`, but other interesting cases include:
 
 .. MATH:: \langle p_{\mu},p_{\mu}\rangle_{q,t} = z_\mu\,\prod_i\frac{1-q^{\mu_i}}{1-t^{\mu_i}}.
 
-This is already refined as `scalar_qt()`::
+This is already refined as ``scalar_qt()``::
 
     sage: Matrix([[p(mu).scalar_qt(p(nu)/zee(mu)) for nu in Partitions(3)] for mu in Partitions(3)])
     [                            (-q^3 + 1)/(-t^3 + 1)                                                 0                                                 0]
@@ -612,7 +630,7 @@ Schur Positivity
 
 When computing with symmetric functions, one often wants to check a given 
 symmetric function is Schur positive or not. In our current setup, this means 
-that coefficients polynomials in :math:`\mathbb{N}[q,t]`. The following function
+that the coefficients are polynomials in :math:`\mathbb{N}[q,t]`. The following function
  returns ``True`` if the given symmetric function is Schur positive and ``False`` 
  if not.
 
@@ -647,7 +665,7 @@ For example, we can verify the well-known Schur positivity of product of Schur
 
 .. TOPIC:: Exercise
 
-    Its representation theoretic signification implies that :math:`\nabla (e_n)` is Schur positive. Verify this for :math:`1 \leq n \leq 6`.
+ *One representation theoretic consequence of the above is that :math:`\nabla (e_n)` is Schur positive. Verify this for :math:`1 \leq n \leq 6`.*
 
 .. TOPIC:: Solution
 
@@ -726,6 +744,7 @@ Plethysm
 --------
 
 As its name strongly suggests, the ``plethysm()`` function computes the **plethysm** :math:`f\circ g`, of two symmetric functions :math:`f` and :math:`g`. Recall that this is the operation characterized by the properties
+
 - :math:`(f_1+f_2)\circ g =(f_1\circ g)+(f_2\circ g)`,
 - :math:`(f_1\cdot f_2)\circ g =(f_1\circ g)\cdot (f_2\circ g)`,
 - :math:`p_k\circ(g_1+g_2) =(p_k\circ g_1)+(p_k\circ g_2)`,
@@ -809,6 +828,8 @@ Suggests that we have the following positive coefficient polynomial
     sage: q_binomial(7,3)-q_binomial(8,2)
     q^9 + q^8 + q^7 + q^6 + q^5 + q^4 + q^3
     
+# I did not follow what this sequence of examples was trying to do/say at all.
+
 
 Some interesting operators on symmetric functions
 -------------------------------------------------
@@ -823,12 +844,12 @@ as eigenfunctions:
 where :math:`\mu` is a partition, :math:`\mu'` its conjugate, and :math:`n(\mu)` 
 is set to be equal to :math:`\sum_i (i-1)\mu_i`.
 This operator :math:`\nabla` is thus defined over symmetric functions with
- coefficients in the fraction field :math:`\mathbb{Q}[q,t]`, as is declared above.
+coefficients in the fraction field :math:`\mathbb{Q}[q,t]`, as is declared above.
 
 It has been shown by Haiman that :math:`\nabla(e_n)` is the Frobenius transform 
 of the bigraded character of the :math:`\mathbb{S}_n`-module of diagonal harmonic
- polynomials. Recall that the Frobernius transform encodes irreducible as Schur 
- functions.
+polynomials. Recall that the Frobenius transform encodes irreducible representations
+as Schur functions.
 
 ::
 
@@ -891,6 +912,7 @@ There are also interesting conjectures on the effect of :math:`\nabla` on Schur 
     (4, q^-6 * (q^2 - q + 1) * (q^4 + 1) * (q^6 + q^5 + q^4 + q^3 + q^2 + q + 1))
     (5, q^-10 * (q^4 + 1) * (q^4 - q^3 + q^2 - q + 1) * (q^6 + q^3 + 1) * (q^6 + q^5 + q^4 + q^3 + q^2 + q + 1))
 
+# Why does first set of code specialize to q=t=1? Shouldn't just print out the 1,t polynomial and skip the following block of code? Also, not sure why the factorization is being shown.
 
 .. TOPIC:: Solution
 
@@ -1036,13 +1058,14 @@ Representation theory of the symmetric group
 --------------------------------------------
 
 The Schur functions `s_\lambda` can also be interpreted as irreducible characters
- of the symmetric group :math:`S_n`, where :math:`n` is the size of the partition 
- :math:`\lambda`. Since the Schur functions of degree :math:`n` form a basis of 
- the symmetric functions of degree `n`, it follows that an arbitrary symmetric 
- function (homogeneous of degree `n`) may be interpreted as a function on the 
- symmetric group. In this interpretation the power sum symmetric function 
- :math:`p_\lambda` is the characteristic function of the conjugacy class with 
- shape :math:`\lambda`, multiplied by the order of the centralizer of an element.
+of the symmetric group :math:`S_n`, where :math:`n` is the size of the partition 
+:math:`\lambda`. Since the Schur functions of degree :math:`n` form a basis of 
+the symmetric functions of degree `n`, it follows that an arbitrary symmetric 
+function (homogeneous of degree `n`) may be interpreted as a function on the 
+symmetric group. In this interpretation the power sum symmetric function 
+:math:`p_\lambda` is the characteristic function of the conjugacy class with 
+shape :math:`\lambda`, multiplied by the order of the centralizer of an element, 
+:math:`z_{\lambda}`.
   Hence the irreducible characters can be computed as follows.
 
 ::
@@ -1057,9 +1080,8 @@ The Schur functions `s_\lambda` can also be interpreted as irreducible character
     [ 4  2  0  1 -1  0 -1]
     [ 1  1  1  1  1  1  1]
 
-
-We can indeed check that this agrees with the character table of :math:`S_5`, 
-modulo our reordering by
+We can indeed check that this agrees with the character table of $S_5$, 
+modulo our reordering by conjugation.
 
 ::
 
@@ -1091,10 +1113,10 @@ More specific applications
 
 The first part of this tutorial was meant to present general use 
 of symmetric functions in Sage. 
-Here are now more specific applications. 
+Now, here are some more specific applications. 
 
 
-Sage knows certain categorical information about this algebra.
+SAGE knows certain categorical information about the algebra of symmetric functions.
 
 ::
 
@@ -1233,7 +1255,7 @@ For instance, we have ::
 Skew Schur functions
 ^^^^^^^^^^^^^^^^^^^^
 
-arise when one considers the effect of coproduct on Schur functions themselves
+Skew Schur functions arise when one considers the effect of coproduct on Schur functions themselves
 
 .. MATH:: \Delta(s_\lambda) = \sum_{\mu\subseteq \lambda} s_{\lambda/\mu}\otimes s_\mu.
 
@@ -1285,6 +1307,8 @@ written here using plethystic notation. Its degree :math:`n` homogeneous compone
     \qquad {\rm iff}\qquad
     \langle F_\mu,G_\lambda\rangle=\delta_{\mu\lambda}, \qquad
     (\delta_{\mu \lambda}:\ \hbox{Kronecker "delta"})`
+
+#Below comment would be better placed above when first used in discussion of Hopf algebra structure
 
 where one "thinks" :math:`\mathbf{x}=s_1\otimes \mathbb{1}` and
  :math:`\mathbf{y}= \mathbb{1}\otimes s_1`. One says that 
@@ -1364,6 +1388,8 @@ group where the elements :math:`p_\mu/z_\mu` are the indicators of a permutation
 having cycle structure :math:`\mu`.  The Kronecker product of two symmetric 
 functions corresponds to the pointwise product of these class functions.
 
+# Set up a hyperlink to the Sym Group Rep Theory section?
+
 Since the Schur functions are the irreducible characters
 of the symmetric group under this identification, the Kronecker
 product of two Schur functions corresponds to the internal
@@ -1388,7 +1414,7 @@ if :math:`\mu=\nu`, and the result is equal to :math:`0` otherwise.
     s[1, 1, 1, 1] + s[2, 1, 1] + s[2, 2]
     sage: g.omega()
     s[1, 1, 1, 1] + s[2, 1, 1] + s[2, 2]
-    sage: Matrix([[p(mu).kronecker_product(p(nu)/zee(nu)) for nu in Partitions(5)] for mu in Partitions(5)])
+    sage: Matrix([[p(mu).kronecker_product(p(nu)/nu.aut()) for nu in Partitions(5)] for mu in Partitions(5)])
     [            p[5]                0                0                0                0                0                0]
     [               0          p[4, 1]                0                0                0                0                0]
     [               0                0          p[3, 2]                0                0                0                0]
