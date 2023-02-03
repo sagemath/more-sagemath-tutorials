@@ -319,23 +319,23 @@ Périodes, répétitions
 
     ::
 
-	sage: w = Word("abaabaa")
-	sage: w.periods()
-	[3, 6]
+        sage: w = Word("abaabaa")
+        sage: w.periods()
+        [3, 6]
 
     On note que Sage, comme pas mal de chercheurs, appellent période
     la longueur du mot `x` et non le mot lui-même. Voici les mots
     correspondants::
 
-	sage: w[:3]
-	word: aba
-	sage: w[:6]
-	word: abaaba
+        sage: w[:3]
+        word: aba
+        sage: w[:6]
+        word: abaaba
 
     On peut avoir directement toutes les périodes comme mots::
 
         sage: [w[:i] for i in w.periods()]
-	[word: aba, word: abaaba]
+        [word: aba, word: abaaba]
 
     .. WARNING:: Sage ne considère pas `w` comme une période de lui-même!?!
 
@@ -343,10 +343,10 @@ Périodes, répétitions
     période primitive::
 
         sage: w = Word("aaabaaaa")
-	sage: sage: sage: w.periods()
-	[5, 6, 7]
+        sage: w.periods()
+        [5, 6, 7]
         sage: [w[:i] for i in w.periods()]
-	[word: aaaba, word: aaabaa, word: aaabaaa]
+        [word: aaaba, word: aaabaa, word: aaabaaa]
 
 
 .. TOPIC:: Proposition

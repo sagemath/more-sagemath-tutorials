@@ -1,4 +1,3 @@
-.. -*- coding: utf-8 -*-
 .. _agregation.introduction.systemes:
 
 *******************************
@@ -74,9 +73,10 @@ Représentation arborescentes des objets, notion d'opérandes
 ::
 
       sage: var('a,b,c,d,e,f,g')
+      (a, b, c, d, e, f, g)
       sage: F = a + b * c + d * e * sin(f)^g
       sage: F.operands()
-      [sin(f)^g*d*e, b*c, a]
+      [d*e*sin(f)^g, b*c, a]
 
 .. Exercices, /usr/local/MuPAD/share/doc/en/tutorium.pdf p. 55
 
@@ -95,8 +95,10 @@ Structures de données
 Listes, ensembles et tables d'association::
 
       sage: liste    = [sin(1+x), 3, sin(1+x)]; liste
+      [sin(x + 1), 3, sin(x + 1)]
 
       sage: ensemble = { sin(1+x), 3, sin(1+x) }; ensemble
+      {sin(x + 1), 3}
 
       sage: tableAssociative = { sin(1+x) : 1, 3 : 2 }
 

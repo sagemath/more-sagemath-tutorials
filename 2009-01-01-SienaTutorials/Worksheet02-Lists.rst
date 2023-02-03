@@ -70,16 +70,18 @@ the output of the following commands will be.::
     sage: a = [1,2,3]
     sage: b = a
     sage: b[0] = 7
-    sage: print a, b
-       
+    sage: print(a, b)
+    ...
+    
 This result makes sense when you understand that ``a`` and ``b`` are both labels
 attached to the same list. Compare that result with the following.::    
 
     sage: a = 2
     sage: b = a
     sage: b = b + 1
-    sage: print a, b
-
+    sage: print(a, b)
+    ...
+    
 In this case, we changed the object that ``b`` is attached to (to the object
 ``2`` plus the object ``1``, which is the object ``3``), while ``a`` continues
 to be attached to the object ``2``. This concept will be useful to keep in
@@ -131,7 +133,8 @@ mind, as we discuss some methods which can be used to modify lists.
 
         sage: L = [3, 1, 2]
         sage: M = L.sort()
-        sage: print L, M
+        sage: print(L, M)
+        ...
 
 #. Now try the following.
 
@@ -139,7 +142,8 @@ mind, as we discuss some methods which can be used to modify lists.
         
         sage: L = [3, 1, 2]
         sage: M = sorted(L)
-        sage: print L, M
+        sage: print(L, M)
+        ...
 
 The range command
 -----------------
@@ -185,7 +189,7 @@ List Comprehensions
 
 We already know how to create the list :math:`[1, 2, \ldots, 10]`::
 
-    sage: range(1,11)
+    sage: list(range(1,11))
     [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 
 Using a *list comprehension,* we can now create the list :math:`[1^2, 2^2,
@@ -195,7 +199,7 @@ Using a *list comprehension,* we can now create the list :math:`[1^2, 2^2,
 
     sage: [i^2 for i in range(1,11)]
     [1, 4, 9, 16, 25, 36, 49, 64, 81, 100]
-	
+
 **Exercises:**
 
 #. Create two lists:
@@ -263,8 +267,9 @@ A list can be *filtered* using a list comprehension. For example, to create a
 list of the squares of the prime numbers between 1 and 100, we use a list
 comprehension as follows::
 
-	sage: [p^2 for p in [1,2,..,100] if is_prime(p)]
-	
+        sage: [p^2 for p in [1,2,..,100] if is_prime(p)]
+        [4, 9, ...]
+
 **Exercise:** Use a *list comprehension* to list all the natural numbers below
 20 that are multiples of 3 or 5. *Hints:*
 

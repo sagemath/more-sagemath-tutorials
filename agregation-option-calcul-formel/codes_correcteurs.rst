@@ -9,8 +9,6 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Codes corre
 
 Référence: `Wikipedia: Codes correcteurs <http://fr.wikipedia.org/wiki/Code_correcteur>`_
 
-.. TODO:: utiliser des fonctionnalités de Sage sur les codes linéaires
-
 ************
 Introduction
 ************
@@ -70,7 +68,7 @@ Premiers concepts
 
     Un *code* `C` est un sous-ensemble de *mots* dans `M:=A^{n}`, où
 
-    - `A` est un *alphabet*, comme `A:=\mathbb{Z}/q\mathbb{Z}`.
+    -  `A` est un *alphabet*, comme `A:=\mathbb{Z}/q\mathbb{Z}`.
        Typiquement `q=2` (codes binaires).
 
     - `n` est un entier, la *dimension* du code
@@ -96,13 +94,15 @@ Premiers concepts
 
     #.  Détection d'erreur: est-ce que `c'` est dans `C`?
 
-    #.  Décodage par distance minimale: on renvoie le mot de `C` le plus proche de `c'`.
+    #.  Correction d'erreur par distance minimale: on renvoie le mot de `C` le plus proche de `c'`.
 
 .. TOPIC:: Exercice: Est-ce raisonnable?
 
-    Calculer la probabilité qu'un mot de longueur `n` soit corrompu,
-    sachant que chacune de ses lettres a une probabilité `p` d'être
-    corrompue, indépendemment des autres.
+    On suppose que lors de la transmission chaque lettre a une
+    probabilité `p` d'être corrompue, indépendemment des autres.
+
+    Calculer la probabilité qu'un mot de longueur `n` arrive intact?
+    Avec moins d'une erreur? Avec moins de deux erreurs?
 
     Application numérique::
 
@@ -131,30 +131,47 @@ Premiers concepts
     - *Distance* `d(C)` du code: distance minimale entre deux points distincts du code
 
 
-    Formellement:
+    Pour formuler cela formellement, il est pratique d'introduire la
+    notion de boule naturellement associée à une métrique; étant donné
+    `x\in M`, et un entier `k\geq 0`, la *boule* de centre `x` et de
+    rayon `k` est:
 
-       .. MATH::
+    .. MATH::
 
-          D(C) := \max_{k\in \NN} \quad \forall x\in C \quad \forall y\ne x \quad d(x,y)\leq k \Longrightarrow y\not\in C
+        B(x,k) = \{y\in M,\quad d(x,y) \leq k\}
 
-       .. MATH::
+    Alors:
 
-          e(C) := \max_{k\in \NN} \quad \forall x\in C \quad \forall y \quad d(x,y)\leq k \Longrightarrow d(z,y)>k, \forall z\in C, z\ne x
+    .. MATH::
 
-       .. MATH::
+        D(C) := \max_{k\in \NN} \quad \forall c\in C, \quad B(c,k) \cap C = \{c\}
 
-          d(C) := \min_{x\ne y\in C} d(x,y)
+    .. MATH::
 
-    Variante: borner ces quantités par la longueur `n`.
+        e(C) := \max_{k\in \NN} \quad \forall c_1,c_2\in C, \quad
+            B(c_1,k) \cap B(c_2,k) \ne \emptyset \Longrightarrow c_1=c_2
+
+    .. MATH::
+
+        d(C) := \min_{x\ne y\in C} d(x,y)
+
+    Cas dégénérés: lorsque `|C|\leq 1`, on prendra par convention
+    `d(C)=+\infty`. Cela peut paraître plus naturel en prenant la
+    définition alternative:
+
+    .. MATH:: d(C) := \max_{k\in \NN}, \forall x\ne y \in C, \quad k\leq d(x,y)
 
 .. TOPIC:: Exercice: En petite dimension:
 
     #.  Trouver tous les codes de `(\mathbb{Z}/2\mathbb{Z})^{n}` pour
-        `n=0,\dots,2`.
+        `n=1`, `n=2`, `n=0`.
 
-    #.  Donner leur distance et leur *capacité de détection*.
+    #.  Pour chacun d'entre eux,, donner la distance `D(C)`, la
+        capacité de détection `D(C)`, la capacité de correction
+        `e(C)`. Dessiner les boules de centres dans `C` et de rayon
+        `e(C)`.
 
-    #.  Permettent-t’ils de corriger une erreur?
+    #.  Permettent-t'ils de corriger une erreur?
 
     #.  Donner un code de `(\mathbb{Z}/2\mathbb{Z})^{3}` permettant
         de corriger une erreur.
@@ -173,11 +190,12 @@ Borne de Hamming, codes parfaits
 
 .. TOPIC:: Problème: Kepler discret
 
-    Redondance minimale pour une capacité de correction donnée?
+    On se fixe un alphabet `A` avec `q=|A|`, une longueur `n` et une
+    capacité de correction `e`. Combien de mot peut on coder au
+    maximum?
 
-    Étant donnés un alphabet `A` avec `q=|A|`, une longueur `n` et une
-    capacité de correction `e`, trouver un code `C` ayant le plus
-    grand nombre possible de mots.
+    De manière équivalente: combien de boules non intersectantes de
+    rayon `e` peut-on faire rentrer dans `M`?
 
 .. TOPIC:: Exemples: visualisation des boules de rayon `e` autour de quelques codes binaires
 
@@ -190,27 +208,27 @@ Borne de Hamming, codes parfaits
         sage: SHOW_DEFAULTS['aspect_ratio'] = [1,1,1]
         sage: SHOW_DEFAULTS['viewer'] = 'threejs'
 
-    Les boules dans `\ZZ/3\ZZ`::
+    Les boules dans `\ZZ/q\ZZ^3`::
 
-        sage: K = GF(3)
-        sage: V = K^3
         sage: @interact
-        ....: def boule(r=slider([0,1,2,3])):
+        ....: def _(r=slider(0,3,1), q=slider(2,7,1)):
+        ....:     K = IntegerModRing(q)
+        ....:     V = K^3
         ....:     return dessin_boules([V.zero()], r)
 
-    Le code de triple répétition sur `\ZZ/3\ZZ`::
-
-        sage: K = GF(3)
-        sage: V = K^3
-        sage: C = V.subspace([[1,1,1]])
-        sage: dessin_boules(C,1)
-
-    et sur `\ZZ/2\ZZ`::
+    Le code de triple répétition sur `\ZZ/2\ZZ`::
 
         sage: K = GF(2)
         ....: V = K^3
         ....: C = V.subspace([[1,1,1]])
         ....: dessin_boules(C,1)
+
+    et sur `\ZZ/3\ZZ`::
+
+        sage: K = GF(3)
+        sage: V = K^3
+        sage: C = V.subspace([[1,1,1]])
+        sage: dessin_boules(C,1)
 
     Le code de Hamming::
 
@@ -218,11 +236,19 @@ Borne de Hamming, codes parfaits
         ....: C = codes.HammingCode(GF(2),3)
         ....: dessin_boules(C, 1, projection=projection_7_3)
 
+.. TODO::
+
+    - The above example does not work with thebelab because the file
+      is not available for %run; how to fix that?
+
+    - Generalize projection_7_3 to projection(n, 3), and
+      make it the default value
+
 .. TOPIC:: Exercice: Borne de Hamming sur `|C|`.
 
     Soit `A=\ZZ/q\ZZ`.
 
-    #. Taille de la boule `B(x,e):=\{y,d(x,y)\leq e\}` de `A^n` de
+    #. Taille de la boule `B(x,e):=\{y,\quad d(x,y)\leq e\}` de `A^n` de
        centre `x` et de rayon `e`?
        Indication: commencer par `q=2` et `x=0\cdots0`.
 
@@ -230,22 +256,31 @@ Borne de Hamming, codes parfaits
 
     #. Conclusion?
 
-    #. Application numérique: `n=6,q=2,d=3`: `|C|\leq?`.
+.. TOPIC:: Solution
+
+    .. MATH: |B(x,e)| = \sum_{k=0}^{e} \binom n k (q-1)^k
+
+    .. MATH:: |C| \sum_{k=0}^{e(C)} \binom n k (q-1)^k \quad \leq \quad q^n
+
+    Application numérique: `n=6,q=2,d=3`: `|C|\leq?`.
+
+.. TODO:: faire un interact pour l'application numérique
 
 .. TOPIC:: Définition: code parfait
 
-    Un code `C` est *parfait* si `|C| |B(x,e)| = |A^n|`, i.e.
+    Un code `C` est *parfait* si `|C| |B(x,e(C))| = |A^n|`, i.e.
 
-    .. math:: |C| \sum_{k=0}^e \binom n k (q-1)^k = q^n
+    .. MATH:: |C| \sum_{k=0}^{e(C)} \binom n k (q-1)^k \quad = \quad q^n
 
-.. TOPIC:: Exemple
+.. TOPIC:: Exemples
 
-    Le deuxième et le troisième code ci-dessus sont parfaits, mais pas
-    le premier.
+    Dans tous les exemples vus jusqu'ici, les seuls codes parfaits
+    sont les codes triviaux, le code de triple répétition sur un
+    alphabet à deux lettres et le code de Hamming.
 
 .. TOPIC:: Problème
 
-    Codage? Décodage?
+    Algorithmes de codage? de décodage?
 
 ***************
 Codes linéaires
@@ -350,15 +385,15 @@ Commençons par un petit échauffement.
         [0 0 1 0 1 1 0]
         [0 0 0 1 1 1 1]
 
-    Combien y-a-t’il de mots dans le code de Hamming `H(4,3)`?
+    Combien y-a-t’il de mots dans le code de Hamming `H(7,4)`?
 
     Calculer la distance de ce code (indice: se ramener en zéro!)
 
-    Quelle est sa capacité de detection? de correction? Est-il parfait?
+    Quelle est sa capacité de détection? de correction? Est-il parfait?
 
     Solution::
 
-        sage: sage: C.cardinality()
+        sage: C.cardinality()
         16
         sage: def poids(c): return len([i for i in c if i])
         sage: poids(V([0,1,0,0,0,0,0]))
@@ -419,6 +454,10 @@ propriétés.
 
 Donnons une structure d'*anneau quotient* à `A^n` en l'identifiant
 avec `A[X]/(X^n-1)`.
+
+Sous cette identification, les mots ci-dessus correspondent à
+
+    .. MATH:: 1 + X^2 + X^5, X+X^3+X^6, 1+X^2+X^4
 
 .. TOPIC:: Remarque
 
@@ -493,14 +532,21 @@ Codage par interpolation (Reed-Solomon)
 TP: Codage et décodage
 **********************
 
-Comme d'habitude, choisir à la carte parmi les exercices suivants.
+.. TOPIC:: Exercice préliminaire
 
+   #. Sage contient de nombreuses fonctionalités autour du codage. Un
+       point d'entrée est ``codes?`` ainsi que le tutoriel thématique
+       :ref:`coding_theory`. Y jeter un coup d'oeil.
 
-..  TOPIC:: Exercice: théorie des codes et Sage
+   #.  Essayer l'exemple suivant et consulter la documentation de
+       ``@interact``: :func:`sagenb.notebook.interact.interact`;
+       voir aussi la `documentation de jupyter <https://ipywidgets.readthedocs.io/en/stable/examples/Using%20Interact.html>`_::
 
-    Explorer les fonctionalités de Sage autour du codage. Un point
-    d'entrée est ``codes?`` ainsi que le tutoriel thématique
-    :ref:`coding_theory`.
+         sage: @interact
+         ....: def f(x=slider(1,10,1)):
+         ....:     return x^2
+
+Choisir à la carte parmi les exercices suivants.
 
 ..  TOPIC:: Exercice: illustrer un cours sur le codage
 
@@ -514,15 +560,22 @@ Comme d'habitude, choisir à la carte parmi les exercices suivants.
     #.  Déterminer en quelles (petites) dimensions on peut espérer
         l'existence de codes parfaits non triviaux?
 
+        Indications:
+
+        -   implanter une fonction pour calculer la borne de Hamming
+        -   utiliser ``@interact`` pour explorer rapidement les valeurs
+            qu'elle prend en fonction de `q`, `n`, `e`.
+
     #.  Déterminer empiriquement quels paramètres de code (dimension,
         distance, ...) seraient souhaitables pour différentes
         applications (par ex. transmission satellite depuis Voyager).
         On pourra par exemple calculer, en fonction de la dimension,
-        de la capacité de correction, et du taux d'erreur, calculer la
+        de la capacité de correction, et du taux d'erreur, la
         probabilité qu'un message erroné ne soit pas détecté ou pas
-        corrigé. Puis jouer avec les paramètres (avec un composant visuel
-        interactif comme ci-dessus? voir @interact) et la borne de
-        Hamming jusqu'à trouver des paramètres potentiels plausibles.
+        corrigé. Puis jouer avec les paramètres jusqu'à trouver des
+        paramètres potentiels plausibles.
+
+        Indication: comme ci-dessus
 
     #.  Simuler, avec les outils existant dans Sage une chaîne
         complète: codage, transmission, détection. Estimer

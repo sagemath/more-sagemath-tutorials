@@ -8,7 +8,7 @@ Mélodie Lapointe (lapointe.melodie@courrier.uqam.ca) and Pauline Hubert (hubert
 Partitions
 ----------
 
-Recall that a **partition** :math:`\mu` of :math:`n`, one writes :math:`\mu \vdash n` or :math:`n  = |\mu|`, is an sequence of intergers :math:`(\mu_0,\mu_1,\dots,\mu_{k-1})` (the :math:`m_i`'s are the **parts** of :math:`\mu`) with :math:`\mu_0 \geq \mu_1 \geq \dots \geq \mu_{k-1} \geq 0` and :math:`n = \mu_0 + \mu_1 + \dots + \mu_{k-1}`. The number :math:`\ell(\mu):= k` of parts of :math:`\mu` is said to be its **length**. A partition :math:`\mu` may also be described as a **Ferrers diagram**, which is the :math:`n`-subset of :math:`\mathbb{N}\times \mathbb{N}` :
+Recall that a **partition** :math:`\mu` of :math:`n`, one writes :math:`\mu \vdash n` or :math:`n  = |\mu|`, is an sequence of integers :math:`(\mu_0,\mu_1,\dots,\mu_{k-1})` (the :math:`m_i`'s are the **parts** of :math:`\mu`) with :math:`\mu_0 \geq \mu_1 \geq \dots \geq \mu_{k-1} \geq 0` and :math:`n = \mu_0 + \mu_1 + \dots + \mu_{k-1}`. The number :math:`\ell(\mu):= k` of parts of :math:`\mu` is said to be its **length**. A partition :math:`\mu` may also be described as a **Ferrers diagram**, which is the :math:`n`-subset of :math:`\mathbb{N}\times \mathbb{N}` :
 
 .. Math:: 
     \left\{(a,b)|0 \leq a \leq \mu_i \text{ and } b < \ell(\mu)\right\}.
@@ -28,6 +28,7 @@ Partition can be created/declared in SAGE the following way:
 ::
 
     sage: Partition([10,10,5,2,2,1])
+    [10, 10, 5, 2, 2, 1]
 
 .. end of output
 
@@ -39,6 +40,7 @@ One can also list all partitions of a given integer.
 ::
 
     sage: Partitions(4).list()
+    [[4], ...]
 
 .. end of output
 
@@ -52,12 +54,14 @@ Or simply count them.
 ::
     
     sage: Partitions(3000).cardinality()
+    4960251...
 
 .. end of output
 
 ::
     
     sage: Partitions(100000).cardinality()
+    274935...
 
 .. end of output
 
@@ -70,6 +74,7 @@ One may add constraints on partitions; for instance, to get partitions of 5 of l
 
     sage: p = Partitions(5,length=2)
     sage: p.list()
+    [[4, 1], ...]
 
 .. end of output
 
@@ -79,6 +84,7 @@ or get all partitions of 6 with length between 3 and 5.
     
     sage: p = Partitions(6,min_length=3,max_length=5)
     sage: p.list()
+    [[4, 1, 1], ...]
 
 .. end of output
 
@@ -97,7 +103,8 @@ By default SAGE uses the English convention, but it has become the tradition in 
 
     sage: mu = Partition([8,5,5,5,4,3,3,2])
     sage: print(mu.ferrers_diagram())
-
+    ...
+    
 .. end of output
 
 Cells
@@ -107,7 +114,9 @@ The list of cells of :math:`m` may be obtained as follows
 
 ::
 
+    sage: mu = Partition([8,5,5,5,4,3,3,2])
     sage: mu.cells()
+    [(0, 0), ...]
 
 .. end of output
 
@@ -116,7 +125,9 @@ If one insists on using the English convention, one could globally switch back a
 ::
 
     sage: Partitions.options(convention='english')
+    sage: mu = Partition([8,5,5,5,4,3,3,2])
     sage: print(mu.ferrers_diagram())
+    ...
 
 .. end of output
 
@@ -129,6 +140,7 @@ A partition :math:`\mu` is **included** in a partition :math:`\lambda` if :math:
     
     sage: p = Partitions(5,inner= [2,1])
     sage: p.list()
+    [[4, 1], ...]
 
 .. end of output
 
@@ -138,6 +150,7 @@ Or all partitions of 5 included in the partition :math:`[4,3,2,1]`.
     
     sage: p = Partitions(5,outer=[4,3,2,1])
     sage: p.list()
+    [[4, 1], ...]
 
 .. end of output
 
@@ -148,6 +161,7 @@ The default (total) order on partitions is the lexicographic order.
     sage: mu = Partition([4,3,3])
     sage: nu = Partition([4,4,1])
     sage: mu < nu
+    True
 
 .. end of output
 
@@ -163,6 +177,7 @@ The default (total) order on partitions is the lexicographic order.
     sage: q = var('q')
     sage: mu = [15,14,13,12,11,10,9,8,7,6,5,4,3,2,1]
     sage: show(sum(Partitions(i,outer=mu).cardinality()*q^i for i in range(20)))
+    ...
 
 .. end of output
 
@@ -170,15 +185,19 @@ The default (total) order on partitions is the lexicographic order.
 Young Tableaux
 --------------
 
-An A-valued **Young tableaux** of **shape** :math:`\mu` is a "filling" of the cells of a Ferrers diagram of :math:`\mu` with elements of an ordered set A. Hence, it is a function :math:`\tau:\mu \rightarrow A`. A tableau is said to be **standard** if it is bijective (hence A has cardinality equal to the number of cells of :math:`\mu`), and its entries on each row (and each column) are stricly increasing from left to right (from bottom to top in french convention). A tableau (not necessarily bijective) is said to be **semistandard** if its entries are weakly increasing from left to right on each row,  and strictly increasing on each column. These object can be constructed in the following way.
+An A-valued **Young tableaux** of **shape** :math:`\mu` is a "filling" of the cells of a Ferrers diagram of :math:`\mu` with elements of an ordered set A. Hence, it is a function :math:`\tau:\mu \rightarrow A`. A tableau is said to be **standard** if it is bijective (hence A has cardinality equal to the number of cells of :math:`\mu`), and its entries on each row (and each column) are strictly increasing from left to right (from bottom to top in french convention). A tableau (not necessarily bijective) is said to be **semistandard** if its entries are weakly increasing from left to right on each row,  and strictly increasing on each column. These object can be constructed in the following way.
 
 ::
 
     sage: t = SemistandardTableau([[1,2,4],[3,3,6],[5,7],[8]])
     sage: t.pp()
+    1  2  4
+    ...
     sage: print('')
     sage: s = StandardTableau([[1,2,4],[3,6],[5,7],[8]]) 
     sage: s.pp()
+    1  2  4
+    ...
 
 .. end of output
 
@@ -190,8 +209,10 @@ It is possible to list all semistandard and standard Young tableaux of a given p
 
     sage: x = SemistandardTableaux([4,3,3,2,1])
     sage: print(x.cardinality())
+    39...
     sage: y = StandardTableaux([4,3,3,2,1])
     sage: print(y.cardinality())
+    15...
 
 .. end of output
 
@@ -205,7 +226,8 @@ The functions for partitions, such as display, options, cardinality, and list, a
 ::
     
     sage: all(catalan_number(i)==StandardTableaux([i,i]).cardinality() for i in range(1,10))
-
+    True
+    
 .. end of output
 
 ***Exercise:***
@@ -215,14 +237,16 @@ The functions for partitions, such as display, options, cardinality, and list, a
 ::
     
     sage: var('x y z')
+    (x, y, z)
     sage: young_tableaux = []
     sage: monomials = []
-    sage: for i in Partitions(5).list():
-    sage:     young_tableaux.extend(SemistandardTableaux(i,max_entry=3).list())
+    sage: for i in Partitions(5):
+    ....:     young_tableaux.extend(SemistandardTableaux(i,max_entry=3).list())
     sage: for j in young_tableaux:
-    sage:     k = reduce(operator.add,j)
-    sage:     monomials.append(x^k.count(1)*y^k.count(2)*z^k.count(3))
+    ....:     k = reduce(operator.add,j)
+    ....:     monomials.append(x^k.count(1)*y^k.count(2)*z^k.count(3))
     sage: show(sum(monomials))
+    ...
 
 .. end of output
 
@@ -239,13 +263,15 @@ with :math:`h((i,j),\mu) := \mu_i + \mu'_j -i -j - 1`, may be coded as
 ::
     
     sage: def hook_formula(mu):
-    sage:     return factorial(add(k for k in mu))/prod(mu.hook_length(i,j) for i,j in mu.cells())
+    ....:     return factorial(add(k for k in mu))/prod(mu.hook_length(i,j) for i,j in mu.cells())
 
 .. end of output
 
-
+.. link
+   
 ::
     
     sage: hook_formula(Partition([4,3,1,1]))
+    216
 
 .. end of output

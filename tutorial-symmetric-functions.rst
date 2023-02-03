@@ -16,10 +16,10 @@ mostly stand for "abstract" symmetric polynomials, in which variables
 are not made explicit. Indeed for most practical calculations
 variables need not appear. Moreover, one may show that this does not
 cause any trouble in the calculations.
+`\def\QQ{mathbb{QQ}}`
 
-`\def\QQ{\mathbb{QQ}}`
 
-Outputs printed in latex mode:: 
+*Outputs printed in latex mode*:: 
 
     sage: %display latex           # not tested
 
@@ -62,7 +62,8 @@ function ":math:`\mathrm{Sym}`" over :math:`\mathbb{Q}`::
 Abstract symmetric functions
 ----------------------------
 
-We first describe how to manipulate "variable free" symmetric functions (with coefficients in the ring of rational coefficient fractions in :math:`q` and :math:`t`). Such functions are linear combinations of one of the six classical bases of symmetric functions; all indexed by integer partitions :math:`\mu=\mu_1\mu_2\cdots \mu_k`. 
+We first describe how to manipulate "variable free" symmetric functions (with coefficients in the ring of rational coefficient fractions in :math:`q` and :math:`t`). 
+Such functions are linear combinations of one of the six classical bases of symmetric functions; all indexed by integer partitions :math:`\mu=\mu_1\mu_2\cdots \mu_k`.
 
 -   The **power sum** symmetric functions :math:`p_\mu=p_{\mu_1}p_{\mu_2}\cdots p_{\mu_k}`
 
@@ -93,7 +94,7 @@ We first describe how to manipulate "variable free" symmetric functions (with co
 Another often used coefficient ring is :math:`\mathbb{Q}(q,t)`. 
 Thus, declaring first this ring (and "injecting" variables :math:`q` and 
 :math:`t` to make them available), one may introduce the ring of symmetric 
-functions over :math:`\mathbb{Q}[q,t]` as follows. The ``Symqt.inject_shorthands()`` 
+functions over :math:`\mathbb{Q}(q,t)` as follows. The ``Symqt.inject_shorthands()`` 
 command makes the "usual" short names (as in Macdonald book) available 
 (with Sage < 8.0, it will display a warning message you can ignore.).
 The keyword `verbose` allows you to make the injection quiet. 
@@ -108,7 +109,7 @@ The keyword `verbose` allows you to make the injection quiet.
     sage: (q+t)*s[2,1,1]
     (q+t)*s[2, 1, 1]
 
-Now that we have acces to all the bases we need, we can start to manipulate them.
+Now that we have access to all the bases we need, we can start to manipulate them.
 Symmetric functions are indexed by partitions :math:`\mu`, with integers considered 
 as partitions having size one (don't forget the brackets!)::
 
@@ -320,10 +321,8 @@ in the monomial basis for example.
     sage: m.from_polynomial(pol2)
     2*m[1, 1, 1] + m[2, 1]
 
-
-In the preceeding example, the base ring of polynomials is the same as the base
-ring of symmetric polynomials considered, as checked by the following.
-
+In the preceding example, the base ring of polynomials is the same as the base
+ ring of symmetric polynomials considered, as checked by the following.
 
 ::
 
@@ -360,7 +359,7 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 
 .. TOPIC:: Exercise
 
- *Print all the Schur functions on partitions of size 5 and convert them into the elementary basis.*
+    Print all the Schur functions on partitions of size 5 and convert them into the elementary basis.
 
 .. TOPIC:: Solution
 
@@ -387,7 +386,7 @@ For example, here we compute :math:`p_{22}+m_{11}s_{21}` in the elementary basis
 
 .. TOPIC:: Exercise
 
- *Compute the sum of the homogeneous functions on partitions of size 4 in the power sum basis.*
+    Compute the sum of the homogeneous functions on partitions of size 4 in the power sum basis.
 
 .. TOPIC:: Solution
 
@@ -447,7 +446,7 @@ http://doc.sagemath.org/html/en/reference/combinat/sage/combinat/sf/macdonald.ht
 
 Here are some examples involving the "combinatorial" Macdonald symmetric functions. 
 These are eigenfunctions of the operator :math:`\nabla`. 
-(See below for more informations about :math:`\nabla`.)
+(See below for more information about :math:`\nabla`.)
 
 ::
 
@@ -877,13 +876,13 @@ There are also interesting conjectures on the effect of :math:`\nabla` on Schur 
 
 .. TOPIC:: Exercise
 
- We have the following relation between :math:`\nabla (e_n)` and the q,t-Catalan numbers :
+    We have the following relation between :math:`\nabla (e_n)` and the q,t-Catalan numbers :
 
- .. MATH:: C_n(q,t) = \langle \nabla e_n , e_n \rangle.
+    .. MATH:: C_n(q,t) = \langle \nabla e_n , e_n \rangle.
 
- *Check this relation for :math:`1 \leq n \leq 5`*
+    Check this relation for :math:`1 \leq n \leq 5`
 
- *Note that the n-th q,t-Catalan number can be computed by using the command ``qt_catalan_number(n)`` which has to be imported from* ``sage.combinat.q_analogues`` if it hasn't already been done.*
+    *Note that the n-th q,t-Catalan number can be computed by using the command ``qt_catalan_number(n)`` which has to be imported from* ``sage.combinat.q_analogues`` if it hasn't already been done*.
 
 ::
     
@@ -1080,7 +1079,6 @@ shape :math:`\lambda`, multiplied by the order of the centralizer of an element,
     [ 5  1  1 -1  1 -1  0]
     [ 4  2  0  1 -1  0 -1]
     [ 1  1  1  1  1  1  1]
-
 
 We can indeed check that this agrees with the character table of $S_5$, 
 modulo our reordering by conjugation.

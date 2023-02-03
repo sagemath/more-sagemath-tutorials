@@ -290,7 +290,7 @@ Applications des formes échelon
     #.  Calculer la somme `E+F` et l'intersection `E\cap F` de deux espaces vectoriels
 
     #.  Calculer la sous-algèbre de `V` engendrée par `E`
-	(en supposant `V` muni d'une structure d'algèbre `(V,+,.,*)`)
+        (en supposant `V` muni d'une structure d'algèbre `(V,+,.,*)`)
 
         Plus généralement: clôture de `E` sous des opérations linéaires
 
@@ -331,8 +331,8 @@ Peut-on procéder comme précédemment?
     Exemple::
 
         sage: M = matrix([[10,1,2], [6,2,-1]]); M
-	[10  1  2]
-	[ 6  2 -1]
+        [10  1  2]
+        [ 6  2 -1]
 
     #.  Quel candidat pour une forme échelon?
 
@@ -342,11 +342,11 @@ Peut-on procéder comme précédemment?
 
     #.  Cette forme échelon est elle réduite?
 
-	::
+        ::
 
             sage: M.echelon_form()
-	    [  2   3  -4]
-	    [  0   7 -11]
+            [  2   3  -4]
+            [  0   7 -11]
 
     #.  Description du quotient?
 
@@ -359,9 +359,9 @@ Peut-on procéder comme précédemment?
     .. MATH::
         M :=
         \begin{pmatrix}
-	    u        & v        \\
-	    \frac br & \frac ar \\
-	\end{pmatrix}
+            u        & v        \\
+            \frac br & \frac ar \\
+        \end{pmatrix}
 
     alors: `M\begin{pmatrix}a\\b\end{pmatrix} = \begin{pmatrix}r\\0\end{pmatrix}` et `M\in GL(\ZZ)`!
 
@@ -632,27 +632,27 @@ TP
     (pas de permutation des lignes nécessaire).
 
     #.  (Échauffement) Écrire une fonction qui met une matrice à
-	coefficients dans un corps sous forme échelon à l'aide de
-	l'algorithme de Gauß. Vérifier votre programme pour::
+        coefficients dans un corps sous forme échelon à l'aide de
+        l'algorithme de Gauß. Vérifier votre programme pour::
 
-	    sage: M = matrix([[2, 1, 3], [1, 4, 9], [1, 8, 27]]); M
+            sage: M = matrix([[2, 1, 3], [1, 4, 9], [1, 8, 27]]); M
 
     #.  Écrire une fonction qui met une matrice à coefficients entiers
-	sous forme échelon à l'aide de l'algorithme de
-	Gauß-Bareiss. Vérifier votre programme pour la matrice
-	ci-dessus, puis sur une matrice aléatoire de grande taille.
+        sous forme échelon à l'aide de l'algorithme de
+        Gauß-Bareiss. Vérifier votre programme pour la matrice
+        ci-dessus, puis sur une matrice aléatoire de grande taille.
 
-	Évaluer la complexité pratique en prenant des matrices
-	aléatoire de taille `n=2^k`. Comparer avec ce que l'on obtient
-	avec Gauß, et avec Gauß sur un corps fini.
+        Évaluer la complexité pratique en prenant des matrices
+        aléatoire de taille `n=2^k`. Comparer avec ce que l'on obtient
+        avec Gauß, et avec Gauß sur un corps fini.
 
-	Qu'en pensez-vous?
+        Qu'en pensez-vous?
 
     #.  En déduire une fonction qui calcule le déterminant d'une
         matrice à coefficients entiers.
 
     #.  Faire la même chose pour des matrices à coefficients
-	polynomiaux univariés.
+        polynomiaux univariés.
 
     #.  En déduire une fonction qui calcule le polynôme
         caractéristique d'une matrice.
@@ -662,7 +662,7 @@ TP
 
     Voir: :ref:`agregation.bibliotheque_tsetlin`.
 
-    Ce texte est à approcher comme les textes de l'agrégation: il
+    Ce texte est à approcher comme les textes de l'agrégation : il
     s'agit d'un menu à la carte; vous pouvez choisir d'étudier
     certains points, pas tous, pas nécessairement dans l'ordre, et de
     façon plus ou moins fouillée. Vous pouvez aussi vous poser

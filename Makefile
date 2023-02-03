@@ -19,6 +19,19 @@ ALLSPHINXOPTS   = -d $(BUILDDIR)/doctrees $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 # the i18n builder cannot share the environment and doctrees with the others
 I18NSPHINXOPTS  = $(PAPEROPT_$(PAPER)) $(SPHINXOPTS) .
 
+all: jupyter html more-sagemath-tutorials
+
+more-sagemath-tutorials::
+	rsync -av _build/html/ more-sagemath-tutorials/ --delete --exclude '.ipynb_checkpoints' --exclude '.doctrees' --exclude '*.zip' --exclude 'sagebook*.pdf'
+
+install:
+	zip -r more-sagemath-tutorials/more-sagemath-tutorials.zip more-sagemath-tutorials
+	rsync -ravz --delete -P more-sagemath-tutorials/ Nicolas.Thiery.name:www/more-sagemath-tutorials/
+
+serve:
+	cd more-sagemath-tutorials && python -m http.server
+
+
 .PHONY: help
 help:
 	@echo "Please use \`make <target>' where <target> is one of"
@@ -224,22 +237,27 @@ jupyter: automodules
 ##############################################################################
 # Stuff in addition of the standard Sphinx's makefile
 
-DIRS=$(wildcard 20* mocksage mocksage/combinat mocksage/combinat/words mocksage/plot mocksage/databases agregation-option-calcul-formel)
-PYALL=$(wildcard $(DIRS:%=%/*.py))
+MOCKSAGEDIRS=mocksage mocksage/combinat mocksage/combinat/words mocksage/plot mocksage/databases agregation-option-calcul-formel
+DIRS=$(wildcard 20* $MOCKSAGEDIRS )
+PYALL=$(wildcard $(MOCKSAGEDIRS:%=%/*.py))
 PY=$(PYALL:%/__init__.py=)
 PYRST=$(PY:%.py=%.rst)
 RST=$(wildcard *.rst $(wildcard $(DIRS:%=%/*.rst))) $(PYRST)
-IPYNB=$(wildcard *.ipynb $(DIRS:%=%/*.ipynb))
+MD=$(wildcard *.md $(DIRS:%=%/*.md))
+IPYNB=$(wildcard *.ipynb $(DIRS:%=%/*.ipynb)) $(MD:%.md=%.ipynb)
 PDF=$(wildcard *.pdf $(DIRS:%=%/*.pdf))
 TEX=$(wildcard *.tex $(DIRS:%=%/*.tex))
 AGREGMEDIA=$(wildcard agregation-option-calcul-formel/media/*)
 
 RSTIPYNB=$(RST:%.rst=$(BUILDDIR)/html/%.ipynb)
-MEDIA= $(IPYNB:%=$(BUILDDIR)/html/%) $(PDF:%=$(BUILDDIR)/html/%) $(TEX:%.tex=$(BUILDDIR)/html/%.pdf) $(AGREGMEDIA:%=$(BUILDDIR)/html/%)
+WEB= $(IPYNB:%=$(BUILDDIR)/html/%) $(PDF:%=$(BUILDDIR)/html/%) $(TEX:%.tex=$(BUILDDIR)/html/%.pdf) $(AGREGMEDIA:%=$(BUILDDIR)/html/%)
+
+foo:
+	echo $(IPYNB)
 
 ipynb: $(RSTIPYNB)
 
-media: $(MEDIA)
+web: $(WEB)
 
 $(BUILDDIR)/html/%.ipynb: %.rst
 	mkdir -p `dirname $@`
@@ -252,11 +270,14 @@ $(BUILDDIR)/html/%.pdf: %.tex
 	cp $< `dirname $@`
 	file=`basename $@ .pdf`; cd `dirname $@`; pdflatex $$file; bibtex $$file; pdflatex $$file; pdflatex $$file
 
-automodules: $(PYRST)
+automodules: $(PYRST) $(IPYNB)
 
 %.rst: %.py
 	module=`echo $* | tr / .`; \
-	echo ".. automodule:: $$module" > $@
+	echo ".. _$$module:\n\nautomodule:: $$module" > $@
+
+%.ipynb: %.md
+	jupytext $< --to md:myst
 
 distclean:
 	rm $(PYRST)

@@ -60,6 +60,7 @@ Introduction to Sage
 * :ref:`sage.databases.demo_short`
 * :ref:`demo-number-theory`
 
+* :ref:`tutorial-start-here`
 * :ref:`prep-logging-on`
 * :ref:`prep-intro-tutorial`
 * :ref:`tutorial-notebook-and-help-long`

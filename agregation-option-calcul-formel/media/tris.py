@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 
-def tri(liste):
+def tri_bulle(liste):
     """
     Renvoie une copie triée de ``liste``.
 
@@ -10,9 +10,28 @@ def tri(liste):
 
     EXAMPLES::
 
-        sage: tri([2,1])
+        sage: tri_bulle([2,1])
         [1, 2]
+
+    .. TODO: rajouter des tests!
     """
     # Invariant: ...
     # Mettre ici votre code
     return liste
+
+def tri_bulle(liste):
+    """
+    """
+
+def tri_fusion(liste):
+    """
+    """
+
+def tri_rapide(liste):
+    """
+    """
+
+def tri_tas(liste):
+    """
+    """
+

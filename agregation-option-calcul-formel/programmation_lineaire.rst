@@ -22,8 +22,8 @@ applications en combinatoire polyhédrale.
 Programmation linéaire
 **********************
 
-Qu'est-ce que la programmation linéaire?
-========================================
+Qu'est-ce que la programmation linéaire ?
+=========================================
 
 Exemple: le problème du régime de Pauline
 -----------------------------------------
@@ -317,7 +317,7 @@ s'expriment en fonction des autres variables::
     Maximiser:             z =        - 7/2 x2 + 1/2*x3 - 5/2*s1 + 25/2
     Sous les contraintes:    x1       + 3/2*x2 + 1/2*x3 + 1/2*s1 = 5/2
                                 s2    -   5*x2            - 2*s1 = 1
-				   s3 - 1/2*x2 + 1/2*x3 - 3/2*s1 = 1/2
+                                   s3 - 1/2*x2 + 1/2*x3 - 3/2*s1 = 1/2
 
 On appelle cette opération un *pivot*.
 
@@ -396,7 +396,6 @@ On automatise l'opération de pivot avec:
 .. literalinclude:: media/programmation_lineaire.py
     :language: python
     :pyobject: pivot
-    :end-before: ####
 
 Ce qui donne::
 
@@ -1152,7 +1151,7 @@ tableau faisable.
     pour `P` (après pivotage de la fonction objective)!
 
     .. TODO:: Illustrer avec Sage; il faut juste permuter correctement
-	      les colonnes de `z`.
+              les colonnes de `z`.
 
 .. TOPIC:: Algorithme du simplexe en deux phases
 
@@ -1799,7 +1798,7 @@ Interprétation économique des variables duales
 .. TODO:: explication intuitive en 5 minutes pour l'agreg (en
           s'appuyant sur le problème du Bucheron?)
 
-	  Faire un interact?
+          Faire un interact?
 
 .. TOPIC:: Problème
 
@@ -2048,13 +2047,13 @@ Programmation linéaire
     formule devienne vraie).
 
     #.  Peut-on se ramener à la résolution d'un programme linéaire?
-	D'un programme linéaire mixte?
+        D'un programme linéaire mixte?
 
     #.  Quelle est la complexité?
 
     #.  Tester la satisfiabilité de `F` au moyen de
         :class:`MixedIntegerLinearProgram`. On pourra voir [CMS_LP]_ pour
-	des exemples d'utilisation.
+        des exemples d'utilisation.
 
     Note: pour résoudre de tel système, le plus naturel est d'utiliser
     depuis Sage des solveurs spécialisés de formules booléennes. Voir
@@ -2096,10 +2095,10 @@ Application aux graphes
        :alt: image
 
     #.  Modéliser ce problème sous la forme d'un programme linéaire et
-	le résoudre. Quelle est la complexité de cette méthode?
+        le résoudre. Quelle est la complexité de cette méthode?
 
     #.  Modéliser ce problème sous la forme d'un problème de flot et
-	le résoudre. Quelle est la complexité de cette méthode?
+        le résoudre. Quelle est la complexité de cette méthode?
 
 .. TOPIC:: Exercice: couplage maximal dans les graphes
 
@@ -2174,11 +2173,11 @@ matrices bistochastiques à coefficients entiers.
         que si `x_{ij}=0` alors `y_{ij}=0`.
 
     #.  En déduire une démonstration constructive du théorème de
-	Birkhoff-Von Neumann, que vous écrirez sous la forme d'un
-	programme.
+        Birkhoff-Von Neumann, que vous écrirez sous la forme d'un
+        programme.
 
     #.  Tester votre programme sur des matrices bistochastiques
-	aléatoires de grande taille (comment en fabriquer?)
+        aléatoires de grande taille (comment en fabriquer?)
 
 
 Dualités chaînes/antichaînes dans les ordres partiels; théorème de Dilworth
@@ -2322,14 +2321,14 @@ dualité de la programation linéaire (surprise).
 
     #.  Suivez le déroulement de la preuve sur l’ordre partiel précédent.
 
-    #.  Cette démonstration du théorème de Dilworth est constructive!
+    #.  Cette démonstration du théorème de Dilworth est constructive !
         En déduire un algorithme pour calculer une antichaîne de
         taille maximale et une couverture minimale en chaînes d'un
         ordre partiel.
 
-    #.  Quelle est la complexité de cet algorithme? Comparer avec la
-	recherche de clique maximale et de colorations minimales dans
-	un graphe.
+    #.  Quelle est la complexité de cet algorithme ? Comparer avec la
+        recherche de clique maximale et de colorations minimales dans
+        un graphe.
 
 *******************
 Quelques références
@@ -2343,7 +2342,7 @@ Quelques références
 
 .. [LPFAQ] `Linear Programming FAQ <http://rutcor.rutgers.edu/~mnk/lp-faq.html>`_
 
-.. [Wikipedia] `Linear Programming <http://en.wikipedia.org/wiki/Linear_programming>`_
+.. [WikipediaLinearProgramming] `Linear Programming <http://en.wikipedia.org/wiki/Linear_programming>`_
 
 .. [CMS_LP] Le chapitre Programmation Linéaire de `Calcul Mathématique avec Sage <http://sagebook.gforge.inria.fr/>`_
       (version anglaise: Sage's :ref:`Mixed Integer Linear Programming thematic tutorial <linear_programming>`)

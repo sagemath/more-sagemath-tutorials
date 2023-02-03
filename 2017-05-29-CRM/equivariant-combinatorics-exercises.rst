@@ -20,6 +20,7 @@ lectures.
     A solution::
 
         sage: var('u')
+        u
         sage: p = parametric_plot3d((u, -u^2, 0), (u,-40,40), boundary_style=None)
         sage: p.show(viewer="threejs", frame=False)
 
@@ -54,12 +55,12 @@ lectures.
       Michele D'Adderio, Luca Moci
 
     - `arXiv:1011.3654 <https://arxiv.org/abs/1011.3654>`_
-      Deformed diagonal h`armonic polynomials for complex reflection groups
+      Deformed diagonal harmonic polynomials for complex reflection groups
       François Bergeron, Nicolas Borie, Nicolas M.Thiéry
 
     - `arXiv:0812.3566 <https://arxiv.org/abs/0812.3566>`_
       Harmonics for Deformed Steenrod Operators
-      Francois Bergeron, Adriano Garsia, Nolan Wallach
+      François Bergeron, Adriano Garsia, Nolan Wallach
 
     - `arXiv:0812.3056 <https://arxiv.org/abs/0812.3056>`_
       Deformation of symmetric functions and the rational Steenrod algebra

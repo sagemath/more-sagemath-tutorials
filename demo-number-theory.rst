@@ -16,7 +16,7 @@ Use *matplotlib* to plot it::
 
 Use *mwrank* to do a 2-descent::
 
-    sage: print E.mwrank()
+    sage: print(E.mwrank())
     Curve [0,1,1,-2,0] :    Rank = 2
 
 *PARI* to compute Fourier coefficients `a_n`::

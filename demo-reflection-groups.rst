@@ -108,7 +108,7 @@ Posets related to Reflection groups
 The symmetric group is endowed with it's Coxeter (in fact Weyl) group structure::
 
     sage: W = SymmetricGroup(3)
-    sage: print W.category()
+    sage: print(W.category())
     Join of Category of finite enumerated permutation groups and Category of finite weyl groups
 
 Some computations with the weak order::

@@ -64,7 +64,7 @@ Twenty Two Easy Steps
     +-----------------------------------+-----------------------------------+
     | 6. Enable Mercurial queues        | 17. More on Mercurial queues      |
     +-----------------------------------+-----------------------------------+
-    | 7. Create an empty patch          | 18. Dowload a patch               |
+    | 7. Create an empty patch          | 18. Download a patch              |
     +-----------------------------------+-----------------------------------+
     | 8. Fix the bug                    | 19. Edit the series file          |
     +-----------------------------------+-----------------------------------+
@@ -150,6 +150,7 @@ This creates a :red:`new directory` called ``sage-slabbe`` in the ``devel`` repo
         drwxr-xr-x 21 slabbe staff 714 14 jan 03:41 sagenb-main/
 
 .. class:: borderless
+    :noindex:
 
 .. list-table::
     :widths: 200 200 200
@@ -175,7 +176,7 @@ Sage uses the program :red:`Mercurial` ( **hg** or **sage -hg** ) to manage all
 of its source code. Mercurial stores the evolution of every single file of Sage
 *since the beginning*.
 
-Since I am too lazy to write **sage -hg** everytime I use Mercurial, I added
+Since I am too lazy to write **sage -hg** every time I use Mercurial, I added
 the following line to my ``~/.bashrc`` file:
 
 .. container:: red
@@ -234,7 +235,7 @@ the file ``~/.hgrc`` and make sure it contains the line :red:`hgext.mq =` in
 the extensions section::
 
     [ui]
-    username = Sebastien Labbe <hidden adress email>
+    username = Sebastien Labbe <hidden email>
     [extensions]
     hgext.mq =
     color =
@@ -303,7 +304,7 @@ Now, you may use the following Mercurial commands to look at your local changes.
                      sage: Permutation([2, 4, 1, 5, 3]).inverse()
                      [3, 1, 5, 2, 4]
                  """
-        +        print "YO !!!! Let's inverse some permutations !!!"
+        +        print("YO !!!! Let's inverse some permutations !!!")
                  w = range(len(self))
                  for i,j in enumerate(self):
                      w[j-1] = i+1
@@ -398,13 +399,13 @@ Export the patch with **hg export**::
     hg export trac_12345-add_useless_print-sl.patch >
              ~/Documents/tmp/trac_12345-add_useless_print-sl.patch
 
-The command **hg export** also adds informations in the patch (author name, date, ...).
+The command **hg export** also adds information in the patch (author name, date, ...).
 
 .. container:: small
 
     .. Note::
 
-        Personnaly, I added the following alias to my ``~/.bashrc``::
+        Personally, I added the following alias to my ``~/.bashrc``::
 
             alias qtoptotmp='hg export `hg qtop` > ~/Documents/tmp/`hg qtop`'
 
@@ -422,7 +423,7 @@ Here is an example of a patch exported by Mercurial for the imaginary ticket
     ::
 
         # HG changeset patch
-        # User Sebastien Labbe <hidden adress email>
+        # User Sebastien Labbe <hidden email>
         # Date 1295311529 -3600
         # Node ID 4a6379cf0c965e1ce309846cbcb9f864932a3b6c
         # Parent  83e5e45a8935ac627c45ed14042bbebafeb1a800
@@ -435,7 +436,7 @@ Here is an example of a patch exported by Mercurial for the imaginary ticket
                      sage: Permutation([2, 4, 1, 5, 3]).inverse()
                      [3, 1, 5, 2, 4]
                  """
-        +        print "YO !!!! Let's inverse some permutations !!!"
+        +        print("YO !!!! Let's inverse some permutations !!!")
                  w = range(len(self))
                  for i,j in enumerate(self):
                      w[j-1] = i+1
@@ -478,8 +479,8 @@ Other useful Mercurial commands when patches multiplies:
     **hg qunapplied**
         Print the unapplied stack
 
-18. Dowload a patch
-===================
+18. Download a patch
+====================
 
 A feature available on a Sage Trac ticket interests you? You want to review a
 ticket?

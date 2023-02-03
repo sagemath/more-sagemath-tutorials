@@ -191,7 +191,7 @@ and those of the right class modules::
     S[1] + S[2]
 
 
-sage: for cls in S.__class__.mro(): print cls
+sage: for cls in S.__class__.mro(): print(cls)
 ....: 
 
 
@@ -213,13 +213,13 @@ Here are the composition factors of projective modules and left class
 modules::
 
     sage: for chi in P.basis():
-    ....:     print "%s = %s"%(chi, S(chi))
+    ....:     print("%s = %s"%(chi, S(chi)))
     P[0] = S[0] + S[1]
     P[1] = S[1] + S[2]
     P[2] = S[2]
 
     sage: for chi in T.basis():
-    ....:     print "%s = %s"%(chi, S(chi))
+    ....:     print("%s = %s"%(chi, S(chi)))
     T[0] = S[0]
     T[1] = S[0] + S[1]
     T[2] = S[1] + S[2]

@@ -1,4 +1,3 @@
-.. -*- coding: utf-8 -*-
 .. _agregation.introduction:
 
 ==============================================================================
@@ -6,8 +5,6 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Introductio
 ==============================================================================
 
 .. MODULEAUTHOR:: `Nicolas M. Thiéry <http://Nicolas.Thiery.name/>`_ <Nicolas.Thiery at u-psud.fr>
-
-.. LINKALL
 
 *********************
 Objectifs de l'option

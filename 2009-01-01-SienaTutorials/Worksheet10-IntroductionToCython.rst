@@ -32,12 +32,12 @@ Consider the following Python function that outputs a list of the first  ``m``  
 To time a function in Python, use the  ``time``  command::
 
     sage: time p = first_primes_python(5000)
-	Time: CPU 6.20 s, Wall: 6.64 s
+    Time: CPU 6.20 s, Wall: 6.64 s
 
 ::
 
     sage: p[:100]
-	[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541]
+    [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541]
 
 
 First steps with Cython
@@ -66,12 +66,12 @@ The Sage notebook will take the contents of this cell, convert it to Cython, com
 Note the speed up we obtained by just adding  ``%cython``::
 
     sage: time p = first_primes_cython_v1(5000)
-	Time: CPU 0.88 s, Wall: 0.91 s
+    Time: CPU 0.88 s, Wall: 0.91 s
 
 ::
 
     sage: time p = first_primes_cython_v1(10000)
-	Time: CPU 3.23 s, Wall: 3.45 s
+    Time: CPU 3.23 s, Wall: 3.45 s
 
 
 More Cython
@@ -123,22 +123,22 @@ a Python list at the end.
 ::
 
     sage: time p = first_primes_v3(10000)
-	Time: CPU 0.22 s, Wall: 0.23 s
+    Time: CPU 0.22 s, Wall: 0.23 s
 
 We did not screw up anything, this function actually does produce primes::
 
     sage: first_primes_v3(17)
-	[2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
+    [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59]
 
 And it agrees with the Sage version of the function::
 
     sage: first_primes_v3(10000) == primes_first_n(10000)
-	True
+    True
 
 But the Sage version is much, much better::
 
     sage: time p = primes_first_n(10000)
-	Time: CPU 0.00 s, Wall: 0.00 s
+    Time: CPU 0.00 s, Wall: 0.00 s
 
 ::
 

@@ -20,7 +20,7 @@ Demonstration: Symmetric functions
 
 ::
 
-    sage: # Typing 'objectname.<tab>' gives a lot of information about whant
+    sage: # Typing 'objectname.<tab>' gives a lot of information about what
     sage: # you can do with the object
     sage: S.
 

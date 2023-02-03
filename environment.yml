@@ -1,0 +1,11 @@
+name: more-sagemath-tutorials
+
+channels:
+- conda-forge
+
+dependencies:
+- dask
+- distributed
+- pip
+- pip:
+    - .

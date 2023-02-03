@@ -22,6 +22,8 @@ Inversion de matrices
 
     #. Calculer `M^{-1}` par pivot de Gauß.
 
+    #. Refaire le même calcul avec une matrice par blocs `M=\begin{pmatrix}A&B\\C&D\end{pmatrix}`!
+
 .. TOPIC:: Solution
 
     La matrice inverse::
@@ -35,6 +37,7 @@ Inversion de matrices
         [   d/(-b*c + a*d) (-b)/(-b*c + a*d)]
         [(-c)/(-b*c + a*d)    a/(-b*c + a*d)]
 
+
     Par pivot de Gauß::
 
         sage: I2 = matrix(2,2,1); I2
@@ -43,9 +46,10 @@ Inversion de matrices
         sage: M = M.augment(I2, subdivide=True); M
         [a b|1 0]
         [c d|0 1]
-        sage: M[1] = a*M[1] - c *M[0]; M
-        [         a          b|         1          0]
-        [         0 -b*c + a*d|        -c          a]
+        sage: M[1] = M[1] - c/a *M[0]; M
+        [             a              b|             1              0]
+        [             0 (-b*c + a*d)/a|        (-c)/a              1]
+
         sage: M[1] = M[1]/M[1,1]; M
         [                a                 b|                1                 0]
         [                0                 1|(-c)/(-b*c + a*d)    a/(-b*c + a*d)]
@@ -55,7 +59,6 @@ Inversion de matrices
         sage: M[0] = M[0]/a; M
         [                1                 0|   d/(-b*c + a*d) (-b)/(-b*c + a*d)]
         [                0                 1|(-c)/(-b*c + a*d)    a/(-b*c + a*d)]
-
 
 .. TOPIC:: Théorème: formule d'inversion de matrice par blocs
 
@@ -86,23 +89,24 @@ Inversion de matrices
     Soient respectivement `c_n` et `d_n` les complexités de la
     multiplication et de l'inversion de matrices de taille `n`.
 
-    Si `c_n=O(n^\omega)` avec `\omega>2`, alors `d_n=O(n^\omega)`.
+    Si `c_n=O(n^\omega)` avec `\omega\geq 2`, alors `d_n=O(n^\omega)`.
 
 .. TOPIC:: Démonstration (simplifiée)
 
     Soit `a` tel que `c_n\leq a n^\omega`, pour tout `n`. On va
-    chercher `b` tel que `d_n \leq ba n^\omega`, pour tout `n`.
+    chercher `b` tel que `d_n \leq bc_n=ba n^\omega`, pour tout `n`.
 
     Supposons que `n` et `b` sont tels que `d_n \leq ba n^\omega`.
 
-    Alors, en utilisant la formule par blocs ci-dessus,
+    Alors, en utilisant la formule par blocs ci-dessus, et en comptant
+    les additions avec les multiplications (`\omega \geq 2`),
 
     .. MATH::
 
         d_{2n}
-        \,\leq\,  2d_n + 8c_n
-        \,\leq\,  2ban^\omega + 8an^\omega
-        \,\leq\,  \frac{2+\frac 8b}{2^\omega} \,ba(2n)^\omega
+        \,\leq\,  2d_n + 14c_n
+        \,\leq\,  2ban^\omega + 14an^\omega
+        \,\leq\,  \frac{1+\frac 7b}{2^{\omega-1}} \,ba(2n)^\omega
 
     Donc, à condition de prendre `b` suffisamment grand, `d_{2n} \leq
     ba(2n)^\omega`, comme voulu.
@@ -381,7 +385,7 @@ de degré `2^r` en appliquant récursivement l'étape précédente.
 
 .. TOPIC:: En pratique: implantation
 
-    L'algorithme de Karatsuba, étant plus compliqué en particulier à
+    L'algorithme de Karatsuba étant plus compliqué, en particulier à
     cause de la récursion, est moins performant en petit degré que
     l'algorithme naïf. Aussi les implantations utilisent l'étape de
     récurrence en haut degré, et basculent sur un produit naïf en deçà
@@ -483,7 +487,7 @@ Transformée de Fourier Discrète
     #. Donner la matrice inverse.
 
 
-    Indication: `\sum_{k=0}^{n-1} \omega^{ik} = \begin{cases}n&\text{si $i\equiv 0[n]$}\\0&\text{sinon}\end{cases}`
+    Indication: `\sum_{k=0}^{n-1} \omega^{ik} = \begin{cases}n&\text{ si } i\equiv 0[n]\\0&\text{ sinon}\end{cases}`
 
 .. TOPIC:: Proposition
 
@@ -727,19 +731,16 @@ présentera sa démonstration aux autres.
           représentées par des polynômes), en utilisant l'exercice
           précédent pour les calculs d'inverse.
 
-
-       ..
-          sage: F = X - x*X^2
-          sage: F = 1 + x*X^2 - X
-          sage: A = 1
-          sage: def N(A): return A - F.subs(X=A) / Fp.subs(X=A)
-          sage: taylor(N(A), x, 0, 10)
-          512*x^10 + 256*x^9 + 128*x^8 + 64*x^7 + 32*x^6 + 16*x^5 + 8*x^4 + 4*x^3 + 2*x^2 + x + 1
-          sage: taylor(N(N(A)), x, 0, 20)
-          3392317952*x^20 + 993641216*x^19 + 291057920*x^18 + 85262464*x^17 + 24979584*x^16 + 7319744*x^15 + 2145600*x^14 + 629280*x^13 + 184736*x^12 + 54320*x^11 + 16016*x^10 + 4744*x^9 + 1416*x^8 + 428*x^7 + 132*x^6 + 42*x^5 + 14*x^4 + 5*x^3 + 2*x^2 + x + 1
-          sage: taylor(N(N(N(A))), x, 0, 20)
-          6563635312*x^20 + 1767205544*x^19 + 477632784*x^18 + 129644296*x^17 + 35357640*x^16 + 9694844*x^15 + 2674440*x^14 + 742900*x^13 + 208012*x^12 + 58786*x^11 + 16796*x^10 + 4862*x^9 + 1430*x^8 + 429*x^7 + 132*x^6 + 42*x^5 + 14*x^4 + 5*x^3 + 2*x^2 + x + 1
-
+..          sage: F = X - x*X^2
+..          sage: F = 1 + x*X^2 - X
+..          sage: A = 1
+..          sage: def N(A): return A - F.subs(X=A) / Fp.subs(X=A)
+..          sage: taylor(N(A), x, 0, 10)
+..          512*x^10 + 256*x^9 + 128*x^8 + 64*x^7 + 32*x^6 + 16*x^5 + 8*x^4 + 4*x^3 + 2*x^2 + x + 1
+..          sage: taylor(N(N(A)), x, 0, 20)
+..          3392317952*x^20 + 993641216*x^19 + 291057920*x^18 + 85262464*x^17 + 24979584*x^16 + 7319744*x^15 + 2145600*x^14 + 629280*x^13 + 184736*x^12 + 54320*x^11 + 16016*x^10 + 4744*x^9 + 1416*x^8 + 428*x^7 + 132*x^6 + 42*x^5 + 14*x^4 + 5*x^3 + 2*x^2 + x + 1
+..          sage: taylor(N(N(N(A))), x, 0, 20)
+..          6563635312*x^20 + 1767205544*x^19 + 477632784*x^18 + 129644296*x^17 + 35357640*x^16 + 9694844*x^15 + 2674440*x^14 + 742900*x^13 + 208012*x^12 + 58786*x^11 + 16796*x^10 + 4862*x^9 + 1430*x^8 + 429*x^7 + 132*x^6 + 42*x^5 + 14*x^4 + 5*x^3 + 2*x^2 + x + 1
 
 Quelques références
 ===================

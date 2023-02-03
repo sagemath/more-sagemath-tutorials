@@ -11,8 +11,8 @@ Nikolaus Conference 2010, Aachen: Sage-Combinat demo
 
 ::
 
-    sage: %hide
-    sage: pretty_print_default(False)
+    sage: %hide                           # not tested
+    sage: pretty_print_default(False)     # not tested
 
 
 Tableaux and the like
@@ -22,6 +22,7 @@ Tableaux and the like
 
     sage: s = Permutation([5,3,2,6,4,8,9,7,1])
     sage: s
+    [5, 3, 2, 6, 4, 8, 9, 7, 1]
 
     sage: (p,q) = s.robinson_schensted()
     sage: p.pp()
@@ -39,6 +40,7 @@ Counting & the like
 ::
 
     sage: Partitions(100000).cardinality()
+    27493510569...
 
 Species::
 
@@ -65,11 +67,12 @@ Lattice points of polytopes
 
 ::
 
-    sage: A=random_matrix(ZZ,3,6,x=7)
-    sage: L=LatticePolytope(A)
+    sage: A = random_matrix(ZZ,6,3,x=7)
+    sage: L = LatticePolytope(A)
     sage: L.plot3d()
+    Graphics3d Object
 
-    sage: L.npoints()  # should be cardinality!
+    sage: L.npoints()  # should be cardinality! # random
     28
 
 This example used PALP and J-mol
@@ -80,7 +83,8 @@ Graphs up to an isomorphism
 ::
 
     sage: show(graphs(5, lambda G: G.size() <= 4))
-
+    <html>...
+    
 Symmetric functions
 +++++++++++++++++++
 
@@ -89,17 +93,22 @@ Usual bases::
     sage: Sym = SymmetricFunctions(QQ); Sym
     Symmetric Functions over Rational Field
     sage: Sym.inject_shorthands()
-
+    Defining ...
+    
     sage: m(( ( h[2,1] * ( 1 + 3 * p[2,1]) ) + s[2](s[3])))
+    3*m[1, 1, 1] + ...
 
 Macdonald polynomials::
 
-    sage: J = MacdonaldPolynomialsJ(QQ)
-    sage: P = MacdonaldPolynomialsP(QQ)
-    sage: Q = MacdonaldPolynomialsQ(QQ)
+    sage: Sym = SymmetricFunctions(FractionField(QQ['q','t']))
+    sage: J = Sym.macdonald().J()
+    sage: P = Sym.macdonald().P()
+    sage: Q = Sym.macdonald().Q()
     sage: J
-    Macdonald polynomials in the J basis over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field
+    Symmetric Functions over Fraction Field of Multivariate Polynomial Ring in q, t over Rational Field in the Macdonald J basis
+
     sage: P(J[2,2] + 3 * Q[3,1])
+    (...)*McdP[2, 2] + ...
 
 Root systems
 ++++++++++++
@@ -107,51 +116,53 @@ Root systems
 ::
 
     sage: L = RootSystem(['A',2,1]).weight_space()
-    sage: L.plot(size=[[-1..1],[-1..1]],alcovewalks=[[0,2,0,1,2,1,2,0,2,1]])
+    sage: L.plot(alcove_walk=[0,2,0,1,2,1,2,0,2,1])
+    Graphics object consisting of 148 graphics primitives
 
     sage: W = WeylGroup(["B", 3])
     sage: W.cayley_graph(side = "left").plot3d(color_by_label = True)
-
+    Graphics3d Object
+    
 GAP at work
 +++++++++++
 
 ::
 
-    sage: print W.character_table()  # Thanks GAP!
+    sage: W = WeylGroup(["B", 3])
+    sage: print(W.character_table())  # Thanks GAP!
     CT1
-
-	  2  4  4  3  3  4  3  1  1  3  4
-	  3  1  .  .  .  .  .  1  1  .  1
-
-	    1a 2a 2b 4a 2c 2d 6a 3a 4b 2e
-
+    ...
     X.1      1  1  1  1  1  1  1  1  1  1
     X.2      1  1  1 -1 -1 -1 -1  1  1 -1
     X.3      1  1 -1 -1  1 -1  1  1 -1  1
     X.4      1  1 -1  1 -1  1 -1  1 -1 -1
     X.5      2  2  .  . -2  .  1 -1  . -2
     X.6      2  2  .  .  2  . -1 -1  .  2
-    X.7      3 -1  1  1  1 -1  .  . -1 -3
-    X.8      3 -1 -1 -1  1  1  .  .  1 -3
-    X.9      3 -1 -1  1 -1 -1  .  .  1  3
-    X.10     3 -1  1 -1 -1  1  .  . -1  3
+    X.7      3 -1 -1  1 -1 -1  .  .  1  3
+    X.8      3 -1  1  1  1 -1  .  . -1 -3
+    X.9      3 -1  1 -1 -1  1  .  . -1  3
+    X.10     3 -1 -1 -1  1  1  .  .  1 -3
 
     sage: type(W.character_table())
+    <class 'sage.interfaces.interface.AsciiArtString'>
 
-    sage: G = gap(W); G
+    sage: G = W.gap(); G
+    <matrix group of size 48 with 3 generators>
 
-    sage: G.Ch
+    sage: G.Ch      # not tested
 
     sage: T = G.CharacterTable(); T
+    CharacterTable( <matrix group of size 48 with 3 generators> )
 
-    sage: T.Irr()[10,10]
+    sage: T.Irr()[4,4]
+    -2
 
 Coxeter3 at work
 ++++++++++++++++
 
 ::
 
-    sage: W3 = CoxeterGroup(W, implementation="coxeter3")
+    sage: W3 = CoxeterGroup(["B", 3], implementation="coxeter3")
     sage: KL = matrix([ [ W3.kazhdan_lusztig_polynomial(u,v) if u.bruhat_le(v) else 0 for u in W3 ] 
     ....:             for v in W3])
     sage: show(KL)
@@ -170,10 +181,9 @@ Crystals
 
 ::
 
-    sage: latex.jsmath_avoid_list(['tikzpicture'])
-    sage: K = KirillovReshetikhinCrystal(['A',3,1], 2,2)
+    sage: K = crystals.KirillovReshetikhin(['A',3,1], 2,2)
     sage: G = K.digraph()
-    sage: G.set_latex_options(format = "dot2tex", edge_labels = True, color_by_label = {0:"black", 1:"blue", 2:"red", 3:"green"}, edge_options = lambda (u,v,label):({"backward":label ==0}))
+    sage: G.set_latex_options(format = "dot2tex", edge_labels = True, color_by_label = {0:"black", 1:"blue", 2:"red", 3:"green"}, edge_options=lambda u_v_label:({"backward": u_v_label[2] == 0}))
     sage: view(G, viewer="pdf", tightpage=True)
 
 * :ref:`demo-GAP3-Semigroupe`

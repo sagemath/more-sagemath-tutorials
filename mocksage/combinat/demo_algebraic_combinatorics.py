@@ -61,10 +61,10 @@ GAP at work
     sage: print(W.character_table())  # Thanks GAP!
     CT1
 
-	  2  4  4  3  3  4  3  1  1  3  4
-	  3  1  .  .  .  .  .  1  1  .  1
+          2  4  4  3  3  4  3  1  1  3  4
+          3  1  .  .  .  .  .  1  1  .  1
 
-	    1a 2a 2b 4a 2c 2d 6a 3a 4b 2e
+            1a 2a 2b 4a 2c 2d 6a 3a 4b 2e
 
     X.1      1  1  1  1  1  1  1  1  1  1
     X.2      1  1  1 -1 -1 -1 -1  1  1 -1

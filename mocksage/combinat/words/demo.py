@@ -86,13 +86,13 @@ Creation of a word morphism:
 - from a dictionary::
 
     sage: m = WordMorphism({'a':'abcab','b':'cb','c':'ab'})
-    sage: print m
+    sage: print(m)
     WordMorphism: a->abcab, b->cb, c->ab
 
 - from a string::
 
     sage: m = WordMorphism('a->abcab,b->cb,c->ab')
-    sage: print m
+    sage: print(m)
     WordMorphism: a->abcab, b->cb, c->ab
 
 Word Morphisms methods
@@ -107,7 +107,7 @@ Image of a word under a morphism::
 
 Power of a morphism::
 
-    sage: print m ^ 2
+    sage: print(m ^ 2)
     WordMorphism: a->abcabcbababcabcb, b->abcb, c->abcabcb
 
 Incidence matrix::
@@ -122,7 +122,7 @@ Fixed point of a morphism
 
 Iterated image under a morphism::
 
-    sage: print m
+    sage: print(m)
     WordMorphism: a->abcab, b->cb, c->ab
     sage: m('c')
     word: ab

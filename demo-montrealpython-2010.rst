@@ -204,13 +204,13 @@ by William Stein
     ....:         cur = rows[i]
     ....:         for j in range(len(cur)):
     ....:             e, f, k = cur[j]
-    ....:             if not e is None:
+    ....:             if e is not None:
     ....:                 if is_prime(e):
     ....:                      c = (1,0,0)
     ....:                 else:
     ....:                      c = (0,0,.4)
     ....:                 g += text(str(e), (j*2-len(cur),-i), fontsize=font, rgbcolor=c)
-    ....:                 if not k is None and not f is None:
+    ....:                 if k is not None and f is not None:
     ....:                     g += line([(j*2-len(cur),-i), ((k*2)-len(rows[i-1]),-i+1)], 
     ....:                     alpha=0.5)
     ....:     return g
@@ -349,7 +349,7 @@ by William Stein
     ....:      S.plot_average(spline_samples).save('avg.png', figsize=[10,2])
     ....:      S.plot_diff().save('diff.png', figsize=[10,2])
     ....:      Y = S.yahoo()
-    ....:      k = Y.keys(); k.sort()
+    ....:      k = sorted(Y)
     ....:      html('Price during last 52 weeks:<br>Grey line is a spline through %s points (do not take seriously!):<br> <img src="cell://avg.png">'%spline_samples)
     ....:      html('Difference from previous day:<br> <img src="cell://diff.png">')
     ....:      html('<table align=center>' + '\n'.join('<tr><td>%s</td><td>%s</td></tr>'%(k[i], Y[k[i]]) for i in range(len(k))) + '</table>')
@@ -379,32 +379,32 @@ by Timothy Clemans and William Stein
     ....:         g = k.multiplicative_generator()
     ....:     a = ZZ.random_element(10, maxp)
     ....:     b = ZZ.random_element(10, maxp)
-    ....:     print """
-    sage: <html>
-    sage: <style>
-    sage: .gamodp, .gbmodp {
-    sage: color:#000;
-    sage: padding:5px
-    sage: }
-    sage: .gamodp {
-    sage: background:#846FD8
-    sage: }
-    sage: .gbmodp {
-    sage: background:#FFFC73
-    sage: }
-    sage: .dhsame {
-    sage: color:#000;
-    sage: font-weight:bold
-    sage: }
-    sage: </style>
-    sage: <h2 style="color:#000;font-family:Arial, Helvetica, sans-serif">%s-Bit Diffie-Hellman Key Exchange</h2>
-    sage: <ol style="color:#000;font-family:Arial, Helvetica, sans-serif">
-    sage: <li>Alice and Bob agree to use the prime number p = %s and base g = %s.</li>
-    sage: <li>Alice chooses the secret integer a = %s, then sends Bob (<span class="gamodp">g<sup>a</sup> mod p</span>):<br/>%s<sup>%s</sup> mod %s = <span class="gamodp">%s</span>.</li>
-    sage: <li>Bob chooses the secret integer b=%s, then sends Alice (<span class="gbmodp">g<sup>b</sup> mod p</span>):<br/>%s<sup>%s</sup> mod %s = <span class="gbmodp">%s</span>.</li>
-    sage: <li>Alice computes (<span class="gbmodp">g<sup>b</sup> mod p</span>)<sup>a</sup> mod p:<br/>%s<sup>%s</sup> mod %s = <span class="dhsame">%s</span>.</li>
-    sage: <li>Bob computes (<span class="gamodp">g<sup>a</sup> mod p</span>)<sup>b</sup> mod p:<br/>%s<sup>%s</sup> mod %s = <span class="dhsame">%s</span>.</li>
-    sage: </ol></html>
+    ....:     print("""
+    ....: <html>
+    ....: <style>
+    ....: .gamodp, .gbmodp {
+    ....: color:#000;
+    ....: padding:5px
+    ....: }
+    ....: .gamodp {
+    ....: background:#846FD8
+    ....: }
+    ....: .gbmodp {
+    ....: background:#FFFC73
+    ....: }
+    ....: .dhsame {
+    ....: color:#000;
+    ....: font-weight:bold
+    ....: }
+    ....: </style>
+    ....: <h2 style="color:#000;font-family:Arial, Helvetica, sans-serif">%s-Bit Diffie-Hellman Key Exchange</h2>
+    ....: <ol style="color:#000;font-family:Arial, Helvetica, sans-serif">
+    ....: <li>Alice and Bob agree to use the prime number p = %s and base g = %s.</li>
+    ....: <li>Alice chooses the secret integer a = %s, then sends Bob (<span class="gamodp">g<sup>a</sup> mod p</span>):<br/>%s<sup>%s</sup> mod %s = <span class="gamodp">%s</span>.</li>
+    ....: <li>Bob chooses the secret integer b=%s, then sends Alice (<span class="gbmodp">g<sup>b</sup> mod p</span>):<br/>%s<sup>%s</sup> mod %s = <span class="gbmodp">%s</span>.</li>
+    ....: <li>Alice computes (<span class="gbmodp">g<sup>b</sup> mod p</span>)<sup>a</sup> mod p:<br/>%s<sup>%s</sup> mod %s = <span class="dhsame">%s</span>.</li>
+    ....: <li>Bob computes (<span class="gamodp">g<sup>a</sup> mod p</span>)<sup>b</sup> mod p:<br/>%s<sup>%s</sup> mod %s = <span class="dhsame">%s</span>.</li>
+    ....: </ol></html>
     ....:     """ % (bits, p, g, a, g, a, p, (g^a), b, g, b, p, (g^b), (g^b), a, p, 
     ....:        (g^ b)^a, g^a, b, p, (g^a)^b)
 

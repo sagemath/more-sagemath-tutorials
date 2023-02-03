@@ -31,7 +31,7 @@ Demonstration: Calculations with character rings of the biHecke monoid (experime
     sage: S0 = G0.S(); P0 = G0.P()
 
     sage: for e in P0.basis():
-    ....:     print "Ind(",e, ")=",P(G.induce_from_M0(S0(e))) # indirect doctest
+    ....:     print("Ind(",e, ")=",P(G.induce_from_M0(S0(e)))) # indirect doctest
     Ind( P[1234] )= P[1234]
     Ind( P[2134] )= P[2134] + P[2314] + P[2341] + P[2413] + P[4213]
     Ind( P[2314] )= P[2314] + P[2341]

@@ -9,16 +9,8 @@ Option Algèbre et Calcul Formel de l'Agrégation de Mathématiques: Algèbre li
 
 ``Mathematics is the art of reducing any problem to linear algebra`` - William Stein.
 
-.. TODO::
-
-    - Formaliser un peu plus la forme LU
-
-    - Formaliser la division d'un vecteur par une matrice sous forme
-      échelon; lien avec la division Euclidienne.
-
-
-Formes normales
-===============
+Avant propos: formes normales
+=============================
 
 Soit `E` en ensemble muni d'une relation d'équivalence `\rho`. Une
 fonction `f: E\mapsto E` donne une *forme normale* pour `\rho` si, pour
@@ -26,23 +18,29 @@ chaque classe d'équivalence `C`, tous les élements de `C` sont envoyé
 sur le même élément `c` de `C`. L'élément `c` est alors appelé la
 forme normale des éléments de `C`.
 
-.. TOPIC:: Exemples
+.. TOPIC:: Exemple 1
 
-    - `E=\ZZ` muni de l'égalité modulo `p`, `f: x \mapsto x % p`
-    - `E=\ZZ\times \ZZ`, `(a,b) \rho (c,d)` si `a/b=c/d`, `f`:
-    - ...
+    - `E=\ZZ`
+    - `\rho`: égalité modulo `p`
+    - `f: x \mapsto x \mod p`
+
+.. TOPIC:: Exemple 2
+
+    - `E=\ZZ\times \ZZ`
+    - `\rho`: `(a,b) \rho (c,d)` si `ad=bc`
+    - `f`: ???
 
 .. TOPIC:: Quel intérêt?
 
     Les formes normales permettent de représenter les classes
     d'équivalence et donc de calculer dans le quotient.
 
+.. TOPIC:: Question
 
-.. TOPIC:: Formes normales pour les matrices?
+   Formes normales pour les matrices?
 
 Échauffement
 ============
-
 
 .. TOPIC:: Exercice
 
@@ -62,30 +60,65 @@ forme normale des éléments de `C`.
 
     Solution partielle::
 
-        sage: M = matrix(GF(5), [[0,0,3,1,4], [3,1,4,2,1], [4,3,2,1,3]]); M
+        sage: %display latex
+
+        sage: K = GF(5)
+
+        sage: M = matrix(K, [[0,0,3,1,4], [3,1,4,2,1], [4,3,2,1,3]]); M
         [0 0 3 1 4]
         [3 1 4 2 1]
         [4 3 2 1 3]
 
         sage: v = vector(SR.var('x1,x2,x3,x4,x5'))
-        sage: [(eq == 0) for eq in M*v]
+        sage: for eq in matrix(ZZ,M) * v:
+        sage:     display( eq == 0 )
 
         sage: M.echelon_form()
         [1 2 0 3 3]
         [0 0 1 2 3]
         [0 0 0 0 0]
+
+    Calcul du pivot de Gauß à la main::
+
+        sage: N = copy(M)
+        sage: N
+        [0 0 3 1 4]
+        [3 1 4 2 1]
+        [4 3 2 1 3]
+        sage: N[0],N[1] = N[1],N[0]
+        sage: N
+        [3 1 4 2 1]
+        [0 0 3 1 4]
+        [4 3 2 1 3]
+        sage: N[0] = N[0] / K(3)
+        sage: N
+        [1 2 3 4 2]
+        [0 0 3 1 4]
+        [4 3 2 1 3]
+        sage: N[2] = N[2] - 4*N[0]
+        sage: N
+        [1 2 3 4 2]
+        [0 0 3 1 4]
+        [0 0 0 0 0]
+        sage: N[1] = N[1] / K(3)
+        sage: N
+        [1 2 3 4 2]
+        [0 0 1 2 3]
+        [0 0 0 0 0]
+        sage: N[0] = N[0] - 3*N[1]
+        sage: N
+        [1 2 0 3 3]
+        [0 0 1 2 3]
+        [0 0 0 0 0]
+
+    Calcul d'une base des solutions::
+
         sage: M.right_kernel()
         Vector space of degree 5 and dimension 3 over Finite Field of size 5
         Basis matrix:
         [1 0 0 4 4]
         [0 1 0 3 3]
         [0 0 1 1 4]
-
-
-.. TODO::
-
-    - Changer le système pour que L2 et L3 ne soient pas colinéaires
-    - Donner la solution par manipulation de lignes avec Sage
 
 .. TOPIC:: Remarque Sage
 
@@ -144,12 +177,12 @@ Forme échelon (réduite)
 
     ::
 
-        sage: M = random_matrix(QQ, 4, 8, algorithm='echelon_form', num_pivots=3); M # random
+        sage: M2 = random_matrix(QQ, 4, 8, algorithm='echelon_form', num_pivots=3); M2 # random
         [ 1 -3  0 -2  0  3  1  0]
         [ 0  0  1 -5  0 -2 -1 -1]
         [ 0  0  0  0  1 -1  3  1]
         [ 0  0  0  0  0  0  0  0]
-        sage: M.pivots()                                                             # random
+        sage: M2.pivots()                                                             # random
         (0, 2, 4)
 
 .. TOPIC:: Remarque
@@ -157,30 +190,140 @@ Forme échelon (réduite)
     L'algorithme du pivot de Gauß-Jordan transforme une matrice
     jusqu'à ce qu'elle soit sous forme échelon (réduite).
 
+
+Forme échelon, réduction, et division euclidienne
+-------------------------------------------------
+
+.. TOPIC:: Exercice
+
+    Revenons à notre matrice::
+
+        sage: M
+        [0 0 3 1 4]
+        [3 1 4 2 1]
+        [4 3 2 1 3]
+
+    Déterminer si les vecteurs suivants sont des combinaisons linéaires
+    des lignes de `M`::
+
+        sage: u = vector([1, 2, 4, 1, 0])
+        sage: v = vector([2, 1, 4, 0, 1])
+
+.. TOPIC:: Solution
+
+    Sur `M`, ce n'est pas évident. Par contre, si on part de sa forme
+    échelon `N`::
+
+        sage: N = M.echelon_form(); N
+
+    On voit aisément que `u` est combinaison linéaire des lignes de
+    `N`::
+
+        sage: u
+        (1, 2, 4, 1, 0)
+        sage: u - N[0]
+        (0, 0, 4, 3, 2)
+        sage: u - N[0] - 4*N[1]
+        (0, 0, 0, 0, 0)
+
+    Mais pas `v`::
+
+        sage: v
+        (2, 1, 4, 0, 1)
+        sage: v - 2*N[0]
+        (0, 2, 4, 4, 0)
+        sage: v - 2*N[0] - 4*N[1]
+        (0, 2, 0, 1, 3)
+
+.. TOPIC:: Théorème-Définition: réduction modulo forme échelon
+
+    Soit `N` une matrice sous forme échelon, et `u` un vecteur, Alors,
+    on peut écrire de manière unique `u = q N + r`, où `qN` est une
+    combinaison linéaire de lignes de `N` et `r` a des coefficients
+    nuls dans les colones caractéristiques de `N`.
+
+    (moralement, on ajoute `u` en dernière ligne de `N` et on finit le
+    pivot de Gauß).
+
+    On appelle `r` la *réduction* de `u` modulo `N`.
+
+.. TOPIC:: Exercice
+
+    Considérons les deux polynômes suivants::
+
+        sage: x = QQ['x'].gen()
+        sage: P = x^2 - 2*x + 1
+        sage: U = x^5 - x + 2
+
+    Considérer la base canonique `x^5, x^4, \ldots, 1` des polynômes
+    de degré inférieur à 5, et écrire la matrice `N` des polynômes
+    `x^3P,x^2P,xP,P`, vus comme vecteurs ligne dans cette base. De même
+    écrire le vecteur ligne `u` représentant le polynôme `U` dans cette
+    base. Calculer la réduction de `u` module `N`.
+
+    Que constatez-vous?
+
+.. TOPIC:: Solution
+
+    Construisons N et u::
+
+        sage: N = matrix([[1,-2,1,0,0,0],[0,1,-2,1,0,0],[0,0,1,-2,1,0],[0,0,0,1,-2,1]])
+        sage: u = vector([1, 0, 0, 0, -1, 2])
+
+    Calculons la réduction::
+
+        sage: u - N[0]
+        (0, 2, -1, 0, -1, 2)
+        sage: u - N[0] - 2*N[1]
+        (0, 0, 3, -2, -1, 2)
+        sage: u - N[0] - 2*N[1] - 3*N[2]
+        (0, 0, 0, 4, -4, 2)
+        sage: u - N[0] - 2*N[1] - 3*N[2] -4*N[2]
+        (0, 0, -4, 12, -8, 2)
+        sage: u - N[0] - 2*N[1] - 3*N[2] -4*N[3]
+        (0, 0, 0, 0, 4, -2)
+
+    Comparons cela avec la division Euclidienne::
+
+        sage: U % P
+        4*x - 2
+        sage: U // P
+        x^3 + 2*x^2 + 3*x + 4
+
+.. TOPIC:: Conclusion
+
+    La division Euclidienne est un cas particulier de réduction d'un
+    vecteur modulo une forme échelon. Le vecteur `q` donne la résultat
+    de la division et `r` le reste.
+
 Forme échelon et matrices équivalentes
 --------------------------------------
 
 .. TOPIC:: Exercice: matrices à deux lignes
 
-    Pour chacunes des matrices suivantes, écrire sous forme de
-    multiplication à gauche par une matrice `P` `2\times 2` la
-    première étape du pivot de Gauß::
+    Pour chacunes des matrices suivantes, écrire la première étape du
+    pivot de Gauß sous forme de multiplication à gauche par une
+    matrice `P` de taille `2\times 2` ::
 
        sage: var('a1,b1,c1,a2,b2,c2')
-       sage: M1 = matrix([[a1,b1,c1],[0,b2,c2]]); M1
 
-       sage: M2 = matrix([[0,b1,c1],[1,b2,c2]]); M2
+    Échange lignes `1` et `2` pour::
+
+       sage: M1 = matrix([[0,b1,c1],[1,b2,c2]]); M1
+
+    Renormalisation `L_1 = \frac{1}{a_1} L_1` pour::
+
+       sage: M2 = matrix([[a1,b1,c1],[0,b2,c2]]); M2
+
+    Pivot `L_2 = L_2 -\frac{a_2}{a_1}L_1` pour::
 
        sage: M3 = matrix([[a1,b1,c1],[a2,b2,c2]]); M3
 
-
-    .. TODO:: Préciser dans le texte l'opération sur les lignes voulue pour chacun des cas
-
     Solutions::
 
-       sage: P = matrix([[1/a1,0],[0,1]]);   P, P*M1
+       sage: P = matrix([[0,1],[1,0]]);      P, P*M1
 
-       sage: P = matrix([[0,1],[1,0]]);      P, P*M2
+       sage: P = matrix([[1/a1,0],[0,1]]);   P, P*M2
 
        sage: P = matrix([[1,0],[-a2/a1,1]]); P, P*M3
 
@@ -190,23 +333,29 @@ Forme échelon et matrices équivalentes
     - Les opérations sur les lignes peuvent être implantées par
       multiplication à gauche par des matrices inversibles.
 
-    - Si `M` est obtenue de `N` par l'algorithme du pivot de Gauß,
-      alors `M=PN` où `P` est une matrice inversible, éventuellement
+    - Si `N` est obtenue de `M` par l'algorithme du pivot de Gauß,
+      alors `N=PM` où `P` est une matrice inversible, éventuellement
       de déterminant `1` (le produit des matrices ci-dessus).
 
     - S'il n'y a pas de permutation à effectuer, alors on peut écrire
-      `N` sous la forme `N=LU`, où `U=N` et triangulaire supérieure
-      (upper triangular), et `L` est triangulaire inférieure (lower
-      triangular): le produit des inverses des matrices ci-dessus.
-      On appelle cela la *décomposition `LU`*.
+      `M` sous la forme `M=LU`, où `U=N` est triangulaire supérieure
+      (upper triangular), et `L=P^{-1}` est triangulaire inférieure
+      (lower triangular): le produit des inverses des matrices
+      ci-dessus. On appelle cela la *décomposition `LU`*.
 
-.. TOPIC:: Exercice
+.. TOPIC:: Exemple
 
     Déterminer la décomposition `M=LU` de notre matrice favorite.
 
     Solution::
 
-        sage: M = M.LU()
+        sage: P, L, U = M.LU()
+        sage: P, L, U
+
+        sage: L * U
+
+        sage: P * L * U
+
 
 Disons ici que deux matrices `M` et `M'` de `M_{n,m}(K)` sont
 *équivalentes* (modulo l'action de `GL_n(K)` à gauche) s'il existe une
@@ -315,12 +464,12 @@ Sous espaces vectoriels et formes échelon
 .. TOPIC:: Exercice
 
     Compter le nombre de sous espaces vectoriels de rang `2` d'un
-    espace de dimension `4` sur `GL(5)`.
+    espace de dimension `4` sur `GF(5)`.
 
 .. TOPIC:: Exercice
 
     - Compter le nombre de points, droites, plans et hyperplans dans
-      `GF(q)^3` en fonction de leur rang.
+      `GF(q)^3`.
 
     - On se place maintenant dans `\RR^3`. Décrire géométriquement, en
       fonction de leur forme échelon, comment ces sous espaces
@@ -384,20 +533,18 @@ Appliquons le même programme.
 
     À chaque base ordonnée, on peut associer naturellement un drapeau
     complet.  Ici on considérera principalement le drapeau canonique
-    associé à la base canonique `e_1,\cdots,e_m` de `V=K^m`:
+    associé à la base canonique `e_1,\ldots,e_m` de `V=K^m`:
 
     .. MATH::
 
-        V_i:=\langle e_{m-i+1}, \ldots, e_m \rangle
+        \{0\} =
+        \langle\rangle \subsetneq
+        \langle e_n \rangle \subsetneq \cdots \subsetneq
+        \langle e_i,\ldots,e_n\rangle \subsetneq \cdots \subsetneq
+        \langle e_1,\ldots,e_n\rangle = V
 
     Note: on prend les éléments dans cet ordre pour que cela colle
-    avec nos petites habitudes de calcul du pivot de Gauß. Et pour
-    alléger les notations, on utilisera plutôt:
-
-    .. MATH::
-
-        \overline V_i:=\langle e_i, \ldots, e_m \rangle=V_{n-i+1}
-
+    avec nos petites habitudes de calcul du pivot de Gauß.
 
 .. TOPIC:: Formes échelon et bases adaptées
 
@@ -405,11 +552,11 @@ Appliquons le même programme.
 
     C'est une base `B` d'un espace vectoriel `E` *adaptée à un drapeau
     complet* donné. C'est-à-dire une base sur laquelle on peut lire
-    immédiatement les sous espaces `E_i:=E\cap \overline V_i`:
+    immédiatement les sous espaces `E_i:=E\cap \langle e_i,\ldots,e_n\rangle`:
 
     .. MATH::
 
-        \langle B \cap E_i\rangle = E_i
+        E_i = \langle B \cap E_i\rangle
 
     Le pivot de Gauß est un algorithme de calcul de base adaptée.
 
@@ -462,14 +609,79 @@ Appliquons le même programme.
     Gauß est le prototype du type de lien.
 
 
-.. TODO:: Faire un résumé ici
+Résumé
+======
 
-.. TODO:: vérifier / homogénéiser les notations
+La forme échelon d'une matrice joue un rôle central en algèbre
+linéaire car:
 
-Applications des formes échelon
--------------------------------
+- Il existe des algorithmes relativement peu coûteux pour la calculer
+  (par exemple Gauß: `O(n^3)`).
 
-.. TOPIC:: Exercice: résolution d'équations linéaires
+- La plupart des problèmes en algèbre linéaire sur un corps se
+  traitent aisément sur cette forme échelon. Notamment:
+  - calcul sur matrices
+  - calcul sur les équations
+  - calcul sur espaces vectoriels
+  - calcul sur les morphismes
+
+- La forme échelon a un sens algébrique: c'est une forme normale pour
+  la relation d'équivalence induite par l'action à gauche du groupe
+  linéaire.
+
+- La forme échelon a un sens géométrique: c'est une forme normale pour
+  un sous-espace vectoriel; elle décrit sa position par rapport au
+  drapeau canonique.
+
+Nous verrons d'autres formes normales pour d'autres classes
+d'équivalences de matrices.
+
+
+TP
+==
+
+.. TODO::
+
+    - Décomposition LU: exercice en TP
+
+
+Calcul de forme échelon: implantation
+-------------------------------------
+
+Si vous n'avez jamais eu l'occasion d'implanter un pivot de Gauß, cela
+peut être un bon moment. Pour simplifier, faites l'hypothèse que
+toutes les colonnes sont caractéristiques, de sorte que le résultat
+est triangulaire supérieur avec pivots sur la diagonale.
+
+Indication: Essayez les commandes suivantes::
+
+    sage: M = random_matrix(QQ, 4, 4, algorithm='echelonizable', rank=4)
+    sage: list(M)
+    sage: M[1] + 2*M[2]
+    sage: M[1].is_zero()
+    sage: [ n^2 for n in srange(20) if n.is_prime() ]
+
+Pivot de Gauß interactif
+------------------------
+
+Explorer l'utilisation de `@interact` pour, par exemple, construire
+une mini application de calcul guidé de pivot de Gauß, ou de réduction
+d'un vecteur par rapport à une matrice échelonnée.
+
+Un point de départ serait une fonction comme ci-dessous prenant le
+numéro des deux lignes à combiner et le coefficient::
+
+    @interact
+    def f(i=..., j=..., c=...):
+        ...
+
+
+Calculer avec des espaces vectoriels et morphismes: algorithmes
+---------------------------------------------------------------
+
+Ces premiers exercices sont sur papier.
+
+.. TOPIC:: Exercice: résolution d'équations linéaires/affines
 
     Soit `E` un ensemble d'équations linéaires/affines. Retrouver les
     algorithmes usuels de résolution: existence de solution,
@@ -483,7 +695,7 @@ Applications des formes échelon
 
     #.  Déterminer une base de `E`.
 
-    #.  Tester si un vecteur appartient à `E`.
+    #.  Tester si un vecteur `x` appartient à `E`.
 
     #.  Tester si `E=F`.
 
@@ -522,37 +734,8 @@ Applications des formes échelon
 
     #.  Calculer les espaces propres de `\phi`.
 
-
-.. TODO:: Décomposition LU, exercice en TD ou TP
-
-Résumé
-======
-
-La forme échelon d'une matrice joue un rôle central en algèbre
-linéaire car:
-
-- Il existe des algorithmes relativement peu coûteux pour la calculer
-  (par exemple Gauß: `O(n^3)`).
-
-- La plupart des problèmes en algèbre linéaire sur un corps se
-  traitent aisément sur cette forme échelon.
-
-- La forme échelon a un sens algébrique: c'est une forme normale pour
-  la relation d'équivalence induite par l'action à gauche du groupe
-  linéaire.
-
-- La forme échelon a un sens géométrique: c'est une forme normale pour
-  un sous-espace vectoriel; elle décrit sa position par rapport au
-  drapeau canonique.
-
-Nous verrons d'autres formes normales pour d'autres classes
-d'équivalences de matrices.
-
-TP
-==
-
-Exercice 1: Du calcul matriciel au calcul sur les sous espaces vectoriels
--------------------------------------------------------------------------
+Calculer avec des espaces vectoriels: implantation
+--------------------------------------------------
 
 Calcul d'une base d'un sous espace vectoriel donné par des générateurs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -584,30 +767,27 @@ telle base en se ramenant à du calcul matriciel.
 
 Indications:
 
--   Vous pouvez au choix réutiliser la méthode ``echelon_form`` des
-    matrices ou la réimplanter.
-
--   Essayez les commandes suivantes::
-
-        sage: M = matrix(V)
-        sage: list(M)
-        sage: M[1].is_zero()
-        sage: l = [ 1, 5, 3, 2, 9 ]
-        sage: [ x^2 for x in l ]
+-   Utiliser la méthode ``echelon_form`` des matrices.
 
 Test d'appartenance d'un vecteur à un sous-espace vectoriel
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Soit `V` une liste de vecteurs et `u` un autre vecteur. On
-veut tester si `u` est dans le sous espace vectoriel engendré
-par `V`::
+Soit `V` une liste de vecteurs et `u` un autre vecteur. On veut tester
+si `u` est dans le sous espace vectoriel engendré par `V`::
 
     sage: u = E([1, 2, 5, 3, 0, 1, 6, 3, 0, 5])
     sage: u in V
     False
 
-Comme ci-dessus, implanter votre propre fonction
-``appartient(V,v)`` qui se ramène à du calcul matriciel.
+Comme ci-dessus, implanter votre propre fonction ``appartient(V,u``
+qui se ramène à du calcul matriciel. On pourra par exemple supposer
+que `V` est sous forme échelon, et calculer la réduction de `u` par
+rapport à `V`.
+
+Indication: mettre `V` sous forme de matrice `M` et utiliser
+`M.pivots()` pour en récupérer les colonnes caractéristiques.
+
+Version avancée: calculer `q` et `r` tels que `u=qV + r`.
 
 Test d'égalité de deux espaces vectoriels
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -636,8 +816,8 @@ et `\langle V\rangle`.
 De même implanter ``SEV_intersection(U,V)`` et
 ``SEV_en_somme_directe(U,V)``.
 
-Exercice 2: Algèbre linéaire, représentations des monoïdes et Chaînes de Markov
--------------------------------------------------------------------------------
+Algèbre linéaire, représentations des monoïdes et Chaînes de Markov
+-------------------------------------------------------------------
 
 Voir: `La bibliothèque de Tsetlin <bibliotheque_tsetlin.html>`_
 
