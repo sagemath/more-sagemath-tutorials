@@ -15,6 +15,7 @@ Construct an elliptic curve using John Cremona's table::
 Use *matplotlib* to plot it::
 
     sage: E.plot(thickness=3)
+    Graphics object consisting of 2 graphics primitives
 
 Use *mwrank* to do a 2-descent::
 
