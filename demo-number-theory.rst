@@ -4,6 +4,8 @@
 Demonstration: Sage combines the power of multiple software
 ===========================================================
 
+.. linkall
+
 (taken from a talk from William Stein)
 
 Construct an elliptic curve using John Cremona's table::
