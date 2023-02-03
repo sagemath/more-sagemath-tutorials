@@ -7,19 +7,20 @@ Demonstration: Plots (short version)
 Some nice plots::
 
     sage: plot(sin(x), -2*pi, 2*pi, fill = 'axis')
+    Graphics object consisting of 2 graphics primitives
 
 Taylor approximation::
 
     sage: f = sin(x)
     sage: g = f.taylor(x,0,3)
     sage: plot(g, -2*pi, 2*pi)
+    Graphics object consisting of 1 graphics primitive
 
 All the way to a full featured applet::
 
-    sage: %hide
-    sage: var('x')
-    sage: @interact
-    sage: def g(f=sin(x), c=0, n=(1..30),
+    sage: x = var('x')
+    sage: @interact                  # not tested
+    ....: def g(f=sin(x), c=0, n=(1..30),
     ....:       xinterval=range_slider(-10, 10, 1, default=(-8,8), label="x-interval"),
     ....:       yinterval=range_slider(-50, 50, 1, default=(-3,3), label="y-interval")):
     ....:     x0 = c
@@ -31,6 +32,5 @@ All the way to a full featured applet::
     ....:     ft = f.taylor(x,x0,degree)
     ....:     pt = plot(ft, xmin, xmax, color='red', thickness=2, fill=f)
     ....:     show(dot + p + pt, ymin=ymin, ymax=ymax, xmin=xmin, xmax=xmax)
-    ....:     html('$f(x)\;=\;%s$'%latex(f))
-    ....:     html('$P_{%s}(x)\;=\;%s+R_{%s}(x)$'%(degree,latex(ft),degree))
-
+    ....:     html(r'$f(x)\;=\;%s$'%latex(f))
+    ....:     html(r'$P_{%s}(x)\;=\;%s+R_{%s}(x)$'%(degree,latex(ft),degree))

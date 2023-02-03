@@ -23,6 +23,8 @@ examples.
 Introspection::
 
     sage: m = matrix([[1/2,1],[2,1]]); m
+    [1/2   1]
+    [  2   1]
 
 .. skip:
 
@@ -34,6 +36,8 @@ Introspection::
 
     sage: g.
 
-Looking at the sources::
+Looking at the sources:
+
+.. skip::
 
     sage: m.det

@@ -12,12 +12,12 @@ Construct an elliptic curve using John Cremona's table::
 
 Use *matplotlib* to plot it::
 
-    sage: plot(E,thickness=3)
+    sage: E.plot(thickness=3)
 
 Use *mwrank* to do a 2-descent::
 
     sage: print(E.mwrank())
-    Curve [0,1,1,-2,0] :    Rank = 2
+    Curve [0,1,1,-2,0] : ...
 
 *PARI* to compute Fourier coefficients `a_n`::
 
@@ -36,4 +36,4 @@ Use *mwrank* to do a 2-descent::
 
 *Magma* to compute the rank of the 3-selmer group::
 
-    sage: magma(E).ThreeSelmerGroup()
+    sage: magma(E).ThreeSelmerGroup()  # optional - magma

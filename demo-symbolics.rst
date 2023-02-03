@@ -15,9 +15,11 @@ petits.
 Une expression::
 
     sage: f = cos(x)^6 + sin(x)^6 + 3 * sin(x)^2 * cos(x)^2; f
-    sin(x)^6 + cos(x)^6 + 3*sin(x)^2*cos(x)^2
+    cos(x)^6 + sin(x)^6 + 3*cos(x)^2*sin(x)^2
 
-La même après avoir configuré les affichages en latex::
+La même après avoir configuré les affichages en latex:
+
+.. skip::
 
     sage: %display latex
     sage: f

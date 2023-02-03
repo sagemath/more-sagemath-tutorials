@@ -12,7 +12,7 @@ Demonstration: Algebraic constructions and categories
     sage: Px.<x> = QQ[]
     sage: Fx = Px.fraction_field()
 
-::
+.. ::
 
     sage: for category in Fx.categories(): print(category)
 
@@ -20,4 +20,4 @@ Demonstration: Algebraic constructions and categories
 
     sage: g = sage.categories.category.category_graph()
     sage: g.set_latex_options(format = "dot2tex")
-    sage: view(g, tightpage = True, viewer = "pdf")
+    sage: view(g, tightpage = True, viewer = "pdf")  # optional - dot2tex
