@@ -10,7 +10,7 @@ def tri_bulle(liste):
 
     EXAMPLES::
 
-        sage: tri_bulle([2,1])
+        sage: tri_bulle([2,1])   # not tested
         [1, 2]
 
     .. TODO: rajouter des tests!

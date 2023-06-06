@@ -55,7 +55,7 @@ EXAMPLE::
     ('stupid benchmark', 'zero', 1, 0.0, 0)]
 """
 
-from time import clock
+from time import time as clock
 from copy import copy
 from functools import reduce
 

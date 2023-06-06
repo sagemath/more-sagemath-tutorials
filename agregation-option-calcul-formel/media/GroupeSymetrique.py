@@ -30,7 +30,7 @@ def type_cyclique(sigma):
     EXAMPLES::
 
         sage: for sigma in DihedralGroup(6):
-        ...       print sigma, type_cyclique(sigma)
+        ....:     print(sigma, type_cyclique(sigma))
         () [1, 1, 1, 1, 1, 1]
         (2,6)(3,5) [2, 2, 1, 1]
         (1,2)(3,6)(4,5) [2, 2, 2]
@@ -90,8 +90,8 @@ def taille_groupe(sgf):
 
         sage: S = SymmetricGroup(3)
         sage: sgf = [ {1: S([(1,1)])},
-        ...           {1: S([(1,2)]), 2: S([(2,2)])},
-        ...           {1: S([(1,3)]), 2: S([(2,3)]), 3: S([(3,3)])} ]
+        ....:         {1: S([(1,2)]), 2: S([(2,2)])},
+        ....:         {1: S([(1,3)]), 2: S([(2,3)]), 3: S([(3,3)])} ]
         sage: taille_groupe(sgf)
         6
 
@@ -111,8 +111,8 @@ def liste_groupe(sgf):
 
         sage: S = SymmetricGroup(3)
         sage: sgf = [ {1: S([(1,1)])},
-        ...           {1: S([(1,2)]), 2: S([(2,2)])},
-        ...           {1: S([(1,3)]), 2: S([(2,3)]), 3: S([(3,3)])} ]
+        ....:         {1: S([(1,2)]), 2: S([(2,2)])},
+        ....:         {1: S([(1,3)]), 2: S([(2,3)]), 3: S([(3,3)])} ]
         sage: liste_groupe(sgf)
         [(1,2,3), (1,3,2), (1,2), (1,3), (2,3), ()]
 
@@ -133,8 +133,8 @@ def est_dans_groupe(sigma, sgf):
 
         sage: S = SymmetricGroup(3)
         sage: sgf = [ {1: S([(1,1)])},
-        ...           {1: S([(1,2)]), 2: S([(2,2)])},
-        ...           {1: S([(1,3)]), 2: S([(2,3)]), 3: S([(3,3)])} ]
+        ....:         {1: S([(1,2)]), 2: S([(2,2)])},
+        ....:         {1: S([(1,3)]), 2: S([(2,3)]), 3: S([(3,3)])} ]
         sage: est_dans_groupe(S([2,3,1]), sgf)
         True
         sage: all(est_dans_groupe(sigma, sgf) for sigma in S)

@@ -16,6 +16,7 @@ def recherche(liste,val):
         sage: recherche([2,1], 2)
         True
         sage: recherche([3,1], 2)
+        False
     """
     for i in liste:
         if i == val:

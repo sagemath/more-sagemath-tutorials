@@ -11,9 +11,7 @@ def nb_steps(A):
 
     EXAMPLES::
 
-        sage: M = random_matrix(ZZ, 5)  # random
-        sage: M
-
+        sage: M = random_matrix(ZZ, 5); M  # random
         [  1  -7   2   0  -3]
         [ -1   2   2  -5  -2]
         [ -1   2   7   2  -1]
@@ -21,7 +19,6 @@ def nb_steps(A):
         [  1   1   1  -1  -2]
         sage: nb_steps(M)
         2
-
     """
     s = 0
     newA = echelon_gauche(A)

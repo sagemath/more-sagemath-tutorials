@@ -31,6 +31,7 @@ def check_massey(sequence, connection, L=None):
     """
     if L is None:
         L = connection.degree()
+    sequence = list(sequence)
     for n in range(L + 1, len(sequence)):
         if sum(connection[i] * sequence[n - i]
                for i in range(connection.degree() + 1)):
@@ -80,6 +81,7 @@ def massey(sequence, P=QQ['x']):
     # valid starting from position L+1 (in particular L >= connection.degree())
     connection = P.one()
     L = 0
+    sequence = list(sequence)
 
     # old_connection is a previous value of connection at step m
     # It connects sequence[1..m-1] but not sequence[1..m],
