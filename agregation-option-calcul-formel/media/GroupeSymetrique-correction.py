@@ -9,6 +9,7 @@ TP: formule de Pòlya et systèmes de générateurs forts
 
 from sage.misc.misc_c import prod
 
+
 def p(k, poids):
     r"""
     Calcule `p_k` à partir de la liste des poids des éléments de `F`.
@@ -23,6 +24,7 @@ def p(k, poids):
         0
     """
     return sum(w**k for w in poids)
+
 
 def type_cyclique(sigma):
     r"""
@@ -62,8 +64,8 @@ def type_cyclique(sigma):
 
 
 def Polya(G, poids):
-    """
-    Implantation de la formule d'énumération de Pòlya
+    r"""
+    Implémentation de la formule d'énumération de Pòlya
 
     INPUT:
 
@@ -91,8 +93,9 @@ def Polya(G, poids):
     .. TODO:: Rajouter ici les autres exemples!
 
     """
-    return sum(prod( p(k, poids) for k in type_cyclique(sigma))
+    return sum(prod(p(k, poids) for k in type_cyclique(sigma))
                for sigma in G) / G.cardinality()
+
 
 def taille_groupe(sgf):
     r"""
@@ -115,6 +118,7 @@ def taille_groupe(sgf):
     """
     return prod(len(transversal) for transversal in sgf)
 
+
 def liste_groupe(sgf):
     r"""
     Renvoie la liste des éléments d'un groupe de permutations
@@ -136,10 +140,11 @@ def liste_groupe(sgf):
     """
     if len(sgf) == 1:
         return sgf[0].values()
-    else:
-        rec = liste_groupe(sgf[:-1])
-        transversal = sgf[-1].values()
-        return list( r * t for r in rec for t in transversal )
+
+    rec = liste_groupe(sgf[:-1])
+    transversal = sgf[-1].values()
+    return [r * t for r in rec for t in transversal]
+
 
 def est_dans_groupe(sigma, sgf):
     r"""
@@ -166,6 +171,6 @@ def est_dans_groupe(sigma, sgf):
     i = len(sgf)
     if i == 0:
         return sigma.is_one()
-    else:
-        sigma = sigma * sgf[i-1][sigma(i)]
-        return est_dans_groupe(sigma, sgf[:-1])
+
+    sigma = sigma * sgf[i - 1][sigma(i)]
+    return est_dans_groupe(sigma, sgf[:-1])

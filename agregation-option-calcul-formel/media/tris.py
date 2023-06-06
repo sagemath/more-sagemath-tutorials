@@ -19,19 +19,22 @@ def tri_bulle(liste):
     # Mettre ici votre code
     return liste
 
+
 def tri_bulle(liste):
     """
     """
+
 
 def tri_fusion(liste):
     """
     """
 
+
 def tri_rapide(liste):
     """
     """
 
+
 def tri_tas(liste):
     """
     """
-

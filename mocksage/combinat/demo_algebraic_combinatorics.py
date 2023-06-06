@@ -96,7 +96,7 @@ Coxeter3 at work
 ::
 
     sage: W3 = CoxeterGroup(W, implementation="coxeter3")
-    sage: KL = matrix([ [ W3.kazhdan_lusztig_polynomial(u,v) if u.bruhat_le(v) else 0 for u in W3 ] 
+    sage: KL = matrix([ [ W3.kazhdan_lusztig_polynomial(u,v) if u.bruhat_le(v) else 0 for u in W3 ]
     ....:             for v in W3])
     sage: show(KL)
 

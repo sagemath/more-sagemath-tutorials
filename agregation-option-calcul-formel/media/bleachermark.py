@@ -57,25 +57,29 @@ EXAMPLE::
 
 from time import clock
 from copy import copy
+from functools import reduce
 
-#This part handles the ctrl-c interruption.
-#class CTRLC(Exception):
-    #def __init__(self):
-        #pass
+# This part handles the ctrl-c interruption.
+# class CTRLC(Exception):
+# def __init__(self):
+# pass
 
 import signal
+
 
 def signal_ctrl_c(signal, frame):
     raise KeyboardInterrupt
 
+
 signal.signal(signal.SIGINT, signal_ctrl_c)
+
 
 class Benchmark():
     r"""
     A Benchmark is a pipeline of functions.
 
     """
-    def __init__(self, pipeline, label=None, fun_labels = None):
+    def __init__(self, pipeline, label=None, fun_labels=None):
         r"""
         Initializes the Benchmark
 
@@ -149,9 +153,8 @@ class Benchmark():
         for fun in self._pipeline:
             tim = clock()
             intervalue = fun(intervalue)
-            time_vals.append( (clock()-tim,  intervalue) )
+            time_vals.append((clock() - tim, intervalue))
         return time_vals
-
 
 
 def _make_autolabel(n):
@@ -159,6 +162,7 @@ def _make_autolabel(n):
     Return a generic label for a benchmark with count n
     """
     return "[%s]" % n
+
 
 _autolabel_regex = r"\[[0-9]*\]"
 
@@ -241,7 +245,7 @@ class Bleachermark:
         runner = runner(self, *args, **kwargs)
         self._current_runner = runner
 
-    def run(self, nruns = 100): # Refactored to the runnners model
+    def run(self, nruns=100):  # Refactored to the runnners model
         # This function should create a runner according to the passed parameters and run it
         # For the moment it just uses the serial runner with the parameter nruns
         # No automatic tweaking, no parallelism, no nothing
@@ -263,8 +267,9 @@ class Bleachermark:
         r"""
         Resumes the run of the current runner and stores the measurements produced.
         """
-        labels = [ l if l is not None else str(i) for (i,l) in
-                    zip(range(self.size()),[ b.label() for b in self._benchmarks]) ]
+        labels = [l if l is not None else str(i)
+                  for i, l in zip(range(self.size()),
+                                  [b.label() for b in self._benchmarks])]
         measurements = self._measurements
         while True:
             try:
@@ -274,12 +279,11 @@ class Bleachermark:
             except (StopIteration, KeyboardInterrupt):
                 return
 
-
     def clear(self):
         r"""
         Forget all measurements.
         """
-        self._measurements = { b.label(): [] for b in self._benchmarks }  # benchmark label -> ((timing, value) list) list
+        self._measurements = {b.label(): [] for b in self._benchmarks}  # benchmark label -> ((timing, value) list) list
 
     def fetch_data(self, format="dict"):
         r"""
@@ -295,7 +299,7 @@ class Bleachermark:
         """
         measurements = self._measurements
         if format == "dict":
-            #TODO: Really copy?
+            # TODO: Really copy?
             return copy(measurements)
         elif format == "flat":
             data = []
@@ -304,11 +308,11 @@ class Bleachermark:
                 fun_labels = benchmark.function_labels()
                 for run in measurements[label]:
                     for i in range(len(benchmark.pipeline())):
-                        m = run[i+1]
-                        data.append( (label, fun_labels[i], run[0], m[0], m[1]) )
+                        m = run[i + 1]
+                        data.append((label, fun_labels[i], run[0], m[0], m[1]))
             return data
         else:
-            raise ValueError("Invalid argument to format: %s".format(format))
+            raise ValueError("Invalid argument to format: {}".format(format))
 
     def timings(self, transposed=False):
         r"""
@@ -328,10 +332,10 @@ class Bleachermark:
 
         """
         di = self.fetch_data()
-        res =  {bm:[[t[0] for t in run[1:]] for run in di[bm]] for bm in di}
+        res = {bm: [[t[0] for t in run[1:]] for run in di[bm]] for bm in di}
         if not transposed:
             return res
-        return {bm:[[row[i] for row in res[bm]] for i in range(len(res[bm][0]))] for bm in res}
+        return {bm: [[row[i] for row in res[bm]] for i in range(len(res[bm][0]))] for bm in res}
 
     def averages(self):
         r"""
@@ -346,7 +350,7 @@ class Bleachermark:
         timings = self.timings(transposed=True)
         res = {}
         for bm in timings:
-            totals = map(lambda a: sum(a)/len(a), timings[bm])
+            totals = map(lambda a: sum(a) / len(a), timings[bm])
             res[bm] = totals
         return res
 
@@ -363,7 +367,7 @@ class Bleachermark:
             lbm = []
             for (timpart, avgpart) in zip(timbm, avgbm):
                 deviations = [(l - avgpart)**2 for l in timpart]
-                lbm.append(sum(deviations)/len(deviations))
+                lbm.append(sum(deviations) / len(deviations))
             res[bm] = lbm
         return res
 
@@ -375,21 +379,21 @@ class Bleachermark:
         """
         variances = self.variances()
         import math
-        return {bm:map(math.sqrt, variances[bm]) for bm in variances}
+        return {bm: map(math.sqrt, variances[bm]) for bm in variances}
 
     def maxes(self):
         r"""
         Return the maximum running times of the benchmarks run.
         """
         timings = self.timings(transposed=True)
-        return {bm:map(max, timings[bm]) for bm in timings}
+        return {bm: map(max, timings[bm]) for bm in timings}
 
     def mins(self):
         r"""
         Return the minimum running times of the benchmarks run.
         """
         timings = self.timings(transposed=True)
-        return {bm:map(min, timings[bm]) for bm in timings}
+        return {bm: map(min, timings[bm]) for bm in timings}
 
     def pipeline_data(self):
         r"""
@@ -405,27 +409,29 @@ class Bleachermark:
         """
         raise NotImplementedError("Not verified since Runner system")
         import re
-        my_labels = set( b.label() for b in self._benchmarks )
-        ot_labels = set( b.label() for b in other._benchmarks )
+        my_labels = set(b.label() for b in self._benchmarks)
+        ot_labels = set(b.label() for b in other._benchmarks)
         collisions = my_labels.intersect(ot_labels)
         if collisions:
             autolabel = re.compile(_autolabel_regex)
             counter = self.size()
             for label in collisions:
                 if autolabel.match(label):
-                    #Change name of other's benchmark
+                    # Change name of other's benchmark
                     other.benchmark(label)._set_label(_make_autolabel(counter))
                     counter += 1
                 else:
                     raise ValueError("Collision on label %s" % label)
 
-        #Now benchmarks can just be concatenated
+        # Now benchmarks can just be concatenated
         self._benchmarks.extend(other._benchmarks)
         for b in other._benchmarks:
             assert not b.label() in self._measurements
-            self._measurements[b.label()] = copy(other._measurements[b.label()]) #TODO: deepcopy?
+            self._measurements[b.label()] = copy(other._measurements[b.label()])
+            # TODO: deepcopy?
 
         return self
+
 
 class SimpleBleachermark:
     """
@@ -503,7 +509,8 @@ class SimpleBleachermark:
              4: 1.1639999999993878e-05,
              8: 1.8289999999996364e-05}
         """
-        return {size: [t[1] for t in timings] for size,timings in self._bleachermark.timings().iteritems()}
+        return {size: [t[1] for t in timings]
+                for size, timings in self._bleachermark.timings().items()}
 
     def averages(self):
         """
@@ -523,7 +530,8 @@ class SimpleBleachermark:
              4: 1.1639999999993878e-05,
              8: 1.8289999999996364e-05}
         """
-        return {size: average[1] for size,average in self._bleachermark.averages().iteritems()}
+        return {size: average[1]
+                for size, average in self._bleachermark.averages().items()}
 
     def mins(self):
         """
@@ -543,7 +551,8 @@ class SimpleBleachermark:
              4: 1.1639999999993878e-05,
              8: 1.8289999999996364e-05}
         """
-        return {size: min[1] for size,min in self._bleachermark.mins().iteritems()}
+        return {size: min[1]
+                for size, min in self._bleachermark.mins().items()}
 
     def maxes(self):
         """
@@ -563,11 +572,12 @@ class SimpleBleachermark:
              4: 1.1639999999993878e-05,
              8: 1.8289999999996364e-05}
         """
-        return {size: max[1] for size,max in self._bleachermark.maxes().iteritems()}
+        return {size: max[1]
+                for size, max in self._bleachermark.maxes().items()}
 
-#RUNNERS
+# RUNNERS
 # Runners are essentially iterators that produce the data that the bleachermark will store.
-#They should support the following interface:
+# They should support the following interface:
 # They are created by passing the bleachermark that created them, and the specific parameters of the runner
 # They act as iterators that yield the results of the benchmarks.
 # - The format of the return is a tuple (index, results), where
@@ -616,6 +626,7 @@ class SerialRunner:
             return res
     __next__ = next
 
+
 class ListRunner:
     r"""
     Runner based on a list. You just pass a list of the runid's you want to pass
@@ -656,6 +667,7 @@ class ListRunner:
 
     __next__ = next
 
+
 class ParallelRunner:
     r"""
     This runner uses sage parallel utility.
@@ -669,13 +681,15 @@ class ParallelRunner:
         from sage.functions.other import ceil, floor
         self._benchmarks = bleachermark._benchmarks
         # profiling we run each benchmark once
-        self._totaltime = reduce(lambda a,b: a+b, [r[0] for bm in self._benchmarks for r in bm.run(runs[0])[1:]])
-        #divide the runs in chunks
+        self._totaltime = reduce(lambda a, b: a + b, [r[0] for bm in self._benchmarks for r in bm.run(runs[0])[1:]])
+        # divide the runs in chunks
         self._chunksize = ceil(2.0 / self._totaltime)
-        self._nchunks = floor(len(runs)/self._chunksize)
-        self._chunks = [runs[i*self._chunksize:(i+1)*self._chunksize] for i in range(self._nchunks)]
-        if (self._nchunks)*self._chunksize < len(runs):
-            self._chunks.append(runs[(self._nchunks)*self._chunksize:])
+        self._nchunks = floor(len(runs) / self._chunksize)
+        self._chunks = [runs[i * self._chunksize: (i + 1) * self._chunksize]
+                        for i in range(self._nchunks)]
+        if self._nchunks * self._chunksize < len(runs):
+            self._chunks.append(runs[(self._nchunks) * self._chunksize:])
+
         # we define the parallel function
         @parallel
         def f(indices):
@@ -700,6 +714,7 @@ class ParallelRunner:
 
     __next__ = next
 
+
 class AdaptativeRunner:
     r"""
     Runner that decides the runs to make adaptitvely to produce
@@ -713,9 +728,9 @@ class AdaptativeRunner:
     have timings that don't differ by a factor bigger than 1.5
     (unless they are consecutive integers).
     """
-    def __init__(self, bleachermark, totruns = 100):
-        self._benchmarks=bleachermark._benchmarks
-        self._timings = {i:[] for i in range(len(self._benchmarks))}
+    def __init__(self, bleachermark, totruns=100):
+        self._benchmarks = bleachermark._benchmarks
+        self._timings = {i: [] for i in range(len(self._benchmarks))}
         self._curbm = 0
         self._pendingruns = totruns
 
@@ -734,28 +749,27 @@ class AdaptativeRunner:
         if not self._timings[i]:
             j = 1
             ii = 0
-        elif len(self._timings[i]) == 1: # we need at least values for 1 and 2
+        elif len(self._timings[i]) == 1:  # we need at least values for 1 and 2
             j = 2
             ii = 1
-        else: #now we check if two consecutive runids have enough space between
+        else:  # now we check if two consecutive runids have enough space between
             for ii in range(len(self._timings[i])):
-                if ii == len(self._timings[i])-1:
+                if ii == len(self._timings[i]) - 1:
                     j = 2 * self._timings[i][-1][0]
                 else:
                     i0, t0 = self._timings[i][ii]
-                    i1, t1 = self._timings[i][ii+1]
-                    if (i1 > i0+1) and (t1/t0 > 1.5 or t0/t1 > 1.5):
-                        j = int((i0 + i1)/2)
+                    i1, t1 = self._timings[i][ii + 1]
+                    if (i1 > i0 + 1) and (t1 / t0 > 1.5 or t0 / t1 > 1.5):
+                        j = int((i0 + i1) / 2)
                         break
         # now we run, store and return it
         res = self._benchmarks[i].run(j)
         tottime = sum([r[0] for r in res[1:]])
-        self._timings[i].insert(ii+1, (j, tottime))
-        self._curbm = (i+1) % len(self._benchmarks)
+        self._timings[i].insert(ii + 1, (j, tottime))
+        self._curbm = (i + 1) % len(self._benchmarks)
         return (i, res)
 
     __next__ = next
-
 
 
 if __name__ == "__main__":

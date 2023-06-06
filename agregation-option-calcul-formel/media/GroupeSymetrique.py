@@ -7,7 +7,6 @@ TP: formule de Pòlya et systèmes de générateurs forts
 
 """
 
-from sage.misc.misc_c import prod
 
 def p(k, poids):
     r"""
@@ -22,6 +21,7 @@ def p(k, poids):
         sage: p(3, [])
         0
     """
+
 
 def type_cyclique(sigma):
     r"""
@@ -47,8 +47,8 @@ def type_cyclique(sigma):
 
 
 def Polya(G, poids):
-    """
-    Implantation de la formule d'énumération de Pòlya
+    r"""
+    Implémentation de la formule d'énumération de Pòlya
 
     INPUT:
 
@@ -77,6 +77,7 @@ def Polya(G, poids):
 
     """
 
+
 def taille_groupe(sgf):
     r"""
     Renvoie la taille d'un groupe de permutations
@@ -97,6 +98,7 @@ def taille_groupe(sgf):
     .. TODO:: rajouter d'autres exemples
     """
 
+
 def liste_groupe(sgf):
     r"""
     Renvoie la liste des éléments d'un groupe de permutations
@@ -116,6 +118,7 @@ def liste_groupe(sgf):
 
     .. TODO:: rajouter d'autres exemples
     """
+
 
 def est_dans_groupe(sigma, sgf):
     r"""

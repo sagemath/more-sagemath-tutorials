@@ -1,6 +1,8 @@
 """
 Utilities to find interesting examples for the Smith form
 """
+from sage.all import ZZ, matrix, random_matrix
+
 
 def nb_steps(A):
     """
@@ -32,7 +34,8 @@ def nb_steps(A):
             newA = echelon_droite(A)
     return s
 
-def find_matrix_with_large_nb_stepsf(n,m, l, nb_matrices):
+
+def find_matrix_with_large_nb_stepsf(n, m, l, nb_matrices):
     """
     Search for a matrix with large nb_steps by starting from a diagonal
     matrix and multiplying it by two random matrices on the left and on
@@ -51,7 +54,7 @@ def find_matrix_with_large_nb_stepsf(n,m, l, nb_matrices):
     """
     M = matrix(ZZ, n, m)
     for i in range(len(l)):
-        M[i,i]=l[i]
+        M[i, i] = l[i]
     max_s = 0
     max_A = None
     for j in range(nb_matrices):

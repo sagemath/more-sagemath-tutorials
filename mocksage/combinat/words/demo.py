@@ -75,13 +75,13 @@ compute its factor complexity::
     [1, 2, 4, 8, 16, 32, 62, 110, 156, 190, 206, 214, 218, 217, 216, 215, 214, 213, 212, 211]
 
 --------------
-Word Morphisms 
+Word Morphisms
 --------------
 
 Creation
 --------
 
-Creation of a word morphism: 
+Creation of a word morphism:
 
 - from a dictionary::
 
@@ -150,7 +150,7 @@ S-adic sequences
 Definition
 ----------
 
-Let `w` be a infinite word over an alphabet `A=A_0`. 
+Let `w` be a infinite word over an alphabet `A=A_0`.
 
     `w\\in
     A_0^*\\xleftarrow{\\sigma_0}A_1^*\\xleftarrow{\\sigma_1}A_2^*\\xleftarrow{\\sigma_2}
@@ -174,7 +174,7 @@ Let `\\sigma_0 : \\begin{array}{l}e\\mapsto gh\\\\f\\mapsto hg\\end{array}`,
 `\\sigma_2 : \\begin{array}{l}a\\mapsto cd\\\\b\\mapsto dc\\end{array}`.
 
     `\\begin{array}{lclclcl} g \\\\
-    gh \& \\xleftarrow{\\sigma_0} \& 
+    gh \& \\xleftarrow{\\sigma_0} \&
     e \\\\
     ghhg \& \\xleftarrow{\\sigma_0} \&
     ef \& \\xleftarrow{\\sigma_1} \&
@@ -184,7 +184,7 @@ Let `\\sigma_0 : \\begin{array}{l}e\\mapsto gh\\\\f\\mapsto hg\\end{array}`,
     cd \& \\xleftarrow{\\sigma_2} \&
     a\\end{array}`
 
-Let us define three morphisms and compute the first nested succesive 
+Let us define three morphisms and compute the first nested succesive
 prefixes of the s-adic word::
 
     sage: sigma0 = WordMorphism('e->gh,f->hg')
@@ -219,12 +219,12 @@ prefixes), an error is raised::
 Infinite examples
 -----------------
 
-Let `A=A_i=\\{a,b\\}` for all `i` and 
+Let `A=A_i=\\{a,b\\}` for all `i` and
 Let `S = \\left\\{ tm : \\begin{array}{l}a\\mapsto ab\\\\b\\mapsto ba\\end{array},
 fibo : \\begin{array}{l}a\\mapsto ab\\\\b\\mapsto a\\end{array} \\right\\}`.
 
     `\\begin{array}{lclclcl} a \\\\
-    ab \& \\xleftarrow{tm} \& 
+    ab \& \\xleftarrow{tm} \&
     a \\\\
     abba \& \\xleftarrow{tm} \&
     ab \& \\xleftarrow{fibo} \&
@@ -232,7 +232,7 @@ fibo : \\begin{array}{l}a\\mapsto ab\\\\b\\mapsto a\\end{array} \\right\\}`.
     abbaab \& \\xleftarrow{tm} \&
     aba \& \\xleftarrow{fibo} \&
     ab \& \\xleftarrow{tm} \&
-    a 
+    a
     \\end{array}`
 
 Let us define the Thue-Morse and the Fibonacci morphism

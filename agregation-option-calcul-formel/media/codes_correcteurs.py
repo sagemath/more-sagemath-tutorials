@@ -24,33 +24,38 @@ from sage.modules.free_module_element import vector
 from sage.rings.rational_field import QQ
 
 
-def distance_hamming(c1,c2):
+def distance_hamming(c1, c2):
     d = 0
-    for x1,y1 in zip(c1,c2):
+    for x1, y1 in zip(c1, c2):
         if x1 != y1:
-            d = d+1
+            d += 1
     return d
 
+
 def boule(c, k):
-    return [c1 for c1 in c.parent().ambient_module() if distance_hamming(c1,c) <= k]
+    return [c1 for c1 in c.parent().ambient_module()
+            if distance_hamming(c1, c) <= k]
+
 
 def dessin_ensemble(X, color="blue", projection=lambda x: x):
-    return sum(cube(projection(v),.9, color=color) for v in X)
+    return sum(cube(projection(v), .9, color=color) for v in X)
+
 
 def dessin_boules(C, k, projection=lambda x: x):
     """Dessine les boules de rayon k centrées sur les éléments de C"""
     colors = rainbow(len(C))
-    g = sum(dessin_ensemble(boule(c,k), color, projection=projection)
-            for c,color in zip(C, colors))
-    g = g + point([2,2,2], opacity=0)
-    g = g.rotateZ(-pi/6)
+    g = sum(dessin_ensemble(boule(c, k), color, projection=projection)
+            for c, color in zip(C, colors))
+    g = g + point([2, 2, 2], opacity=0)
+    g = g.rotateZ(-pi / 6)
     g.aspect_ratio(1)
     return g
 
-projection_7_3_matrix = \
-matrix([[1,0,0,3,0,0,7],
-        [0,1,0,0,3,0,0],
-        [0,0,1,0,0,3,0]])
+
+projection_7_3_matrix = matrix([[1, 0, 0, 3, 0, 0, 7],
+                                [0, 1, 0, 0, 3, 0, 0],
+                                [0, 0, 1, 0, 0, 3, 0]])
+
 
 def projection_7_3(v):
-    return projection_7_3_matrix*vector(QQ,v)
+    return projection_7_3_matrix * vector(QQ, v)

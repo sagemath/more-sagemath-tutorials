@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+from sage.all import QQ
+
 
 def check_massey(sequence, connection, L=None):
     """
@@ -29,13 +31,13 @@ def check_massey(sequence, connection, L=None):
     """
     if L is None:
         L = connection.degree()
-    for n in range(L+1, len(sequence)):
-        if sum(connection[i] * sequence[n-i]
-               for i in range(connection.degree()+1)):
+    for n in range(L + 1, len(sequence)):
+        if sum(connection[i] * sequence[n - i]
+               for i in range(connection.degree() + 1)):
             return False
     return True
 
-# 
+
 # //  en tant que polynome de P, en
 # // utilisant l'algorithme de Berlekamp-Massey
 # //////////////////////////////////////////////////////////////////////////////
@@ -89,24 +91,24 @@ def massey(sequence, P=QQ['x']):
     for n in range(len(sequence)):
         # We want to update the connectiono for sequence[1..n].
         # How far is connection from a good recurence relation for sequence[n]?
-        defect = sum(connection[i] * sequence[n-i]
-                      for i in range(connection.degree()+1))
+        defect = sum(connection[i] * sequence[n - i]
+                     for i in range(connection.degree() + 1))
         if not defect:
             # no need to change connection
             Xk = Xk * X
             continue
 
         # Update connection appropriately
-        temporary  = connection
+        temporary = connection
         connection = connection - (defect / old_defect) * Xk * old_connection
 
         # We either keep the old connection or choose the new one in
         # order to minimize `L`
-        if 2*L > n:
+        if 2 * L > n:
             Xk = Xk * X
         else:
             Xk = X
-            L = n+1-L
+            L = n + 1 - L
             old_connection = temporary
             old_defect = defect
 
@@ -206,4 +208,3 @@ def massey(sequence, P=QQ['x']):
 
 # wiedemann(matrix2function(M), n)
 # */
-

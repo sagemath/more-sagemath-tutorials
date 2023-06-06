@@ -305,8 +305,8 @@ Interactive plots
     ....:     ft = f.taylor(x,x0,degree)
     ....:     pt = plot(ft, xmin, xmax, color='red', thickness=2, fill=f)
     ....:     show(dot + p + pt, ymin=ymin, ymax=ymax, xmin=xmin, xmax=xmax)
-    ....:     html('$f(x)\;=\;%s$'%latex(f))
-    ....:     html('$P_{%s}(x)\;=\;%s+R_{%s}(x)$'%(degree,latex(ft),degree))
+    ....:     html(r'$f(x)\;=\;%s$' % latex(f))
+    ....:     html(r'$P_{%s}(x)\;=\;%s+R_{%s}(x)$' % (degree,latex(ft),degree))
 
 
 Graph Theory

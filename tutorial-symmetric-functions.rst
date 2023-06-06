@@ -40,7 +40,7 @@ where :math:`z_\mu` is the number of "automorphisms" of a permutation having
 cycle structure :math:`\mu`.
 
 Here is how to obtain both sides of this equality in the ring of symmetric 
-function ":math:`\mathrm{Sym}`" over :math:`\mathbb{Q}`::
+function :math:`\mathrm{Sym}` over :math:`\mathbb{Q}`::
 
     sage: Sym = SymmetricFunctions(QQ)
     sage: Sym.inject_shorthands()
