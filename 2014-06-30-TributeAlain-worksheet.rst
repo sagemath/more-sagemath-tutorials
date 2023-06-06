@@ -1,5 +1,7 @@
 .. -*- coding: utf-8 -*-
 
+.. linkall
+
 .. _lascoux.factorization_gem:
 
 ============================================================================================================
@@ -29,15 +31,13 @@ Let's build one of Young's natural idempotents for the Symmetric group
 It's indexed by a pair of standard tableaux, which we show here, in
 French notation of course::
 
-    sage: Tableaux.global_options(convention="French")
+    sage: Tableaux.options(convention="French")
     sage: tI.pp()
-    sage: print
-    sage: tJ.pp()
       9    
       7  8    
       4  5  6    
       1  2  3    
-    
+    sage: tJ.pp()
       1  2    
       3  4  5    
       6  7  8  9    
@@ -52,7 +52,7 @@ stabilizer, and an alternating sum across a column stabilizer::
     ....:                              for sigma in tJ.row_stabilizer())
     ....:                              
     sage: squareI
-    <html>...</html>
+    () + (7,8) + (5,6) + ...
 
 Both pieces being large, their product is a huge linear combination of
 permutations. One can compute with it, but it's useless to even look
@@ -60,7 +60,7 @@ at it::
 
     sage: idempotent = nablaJ * A.monomial(muI) * squareI
     sage: len(idempotent)
-    <html>...</html>
+    20736
 
 So Alain went onto a quest for a compact representation of this object
 that would be amenable to scrutiny and hand manipulation.
@@ -70,18 +70,18 @@ Lehmer code. The second step, typical of Alain, was to encode each
 such code as an exponent vector. This makes the idempotent into a huge
 multivariate polynomial::
 
-    sage: P = QQ["x1,x1,x2,x3,x4,x5,x6,x7,x8,x9"]
+    sage: P = QQ["x1,x2,x3,x4,x5,x6,x7,x8,x9"]
     sage: x = muI(P.gens())
     sage: def to_monomial(sigma):
     ....:     code = Permutation(sigma).to_lehmer_code()
-    ....:     return prod( xi^ci for xi,ci in zip(x,code) )
+    ....:     return prod(xi^ci for xi,ci in zip(x,code))
     sage: to_polynomial = A.module_morphism(to_monomial, codomain=P)
     sage: p = to_polynomial(idempotent)
 
 Here are its first 20 terms::
 
     sage: sum(p.monomials()[:20])
-    <html>...</html>
+    x1^5*x2^5*x3^3*x4^2*x5^3*x6^2*x7*x8 + ...
 
 So far, so good. But the gain is not that obvious.
 
@@ -95,7 +95,7 @@ Yet, Alain tried to actually factor that polynomial, and here is the
 gem that came out::
 
     sage: factor(p)
-    <html>...</html>
+    (x8 - 1) * (x7 + 1) * (x5 + 1) * (x3 - 1) * (x2 + 1) * (x6^2 - x6 + 1) * (x4^2 + x4 + 1) * (x3^2 + 1) * (x1^2 + x1 + 1) * (-x1^3 + x4^2) * (-x2^4*x5^2 + x2^2*x5^3 + x2^4*x7 - x5^3*x7 - x2^2*x7^2 + x5*x7^2)
 
 Reference
 ---------
