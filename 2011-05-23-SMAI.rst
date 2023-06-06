@@ -39,7 +39,7 @@ petits.
 Une expression::
 
     sage: f = cos(x)^6 + sin(x)^6 + 3 * sin(x)^2 * cos(x)^2; f
-    sin(x)^6 + cos(x)^6 + 3*sin(x)^2*cos(x)^2
+    cos(x)^6 + sin(x)^6 + 3*cos(x)^2*sin(x)^2
 
 Simplifions-la::
 
@@ -55,7 +55,7 @@ Une sommation définie::
     1/2*sqrt(pi)/factorial(n + 1/2)
 
     sage: pretty_print(_)
-    <html><span class="math">\newcommand{\Bold}[1]{\mathbf{#1}}\frac{\sqrt{\pi}}{2 \, \left(n + \frac{1}{2}\right)!}</span></html>
+    1/2*sqrt(pi)/factorial(n + 1/2)
 
 Calcul de `\lim\limits_{x\rightarrow \frac{\pi}{4} }\dfrac{\cos\left(\frac{\pi}{4}-x \right)-\tan x }{1-\sin\left(\frac{\pi}{4}+x \right)}`::
 
@@ -88,9 +88,9 @@ des constructions algébriques plus avancées::
     sage: Z2 = GF(2); Z2
     Finite Field of size 2
     sage: P = Z2['x']; P
-    Univariate Polynomial Ring in x over Finite Field of size 2 (using NTL)
+    Univariate Polynomial Ring in x over Finite Field of size 2 (using GF2X)
     sage: M = MatrixSpace(P, 3); M
-    Full MatrixSpace of 3 by 3 dense matrices over Univariate Polynomial Ring in x over Finite Field of size 2 (using NTL)
+    Full MatrixSpace of 3 by 3 dense matrices over Univariate Polynomial Ring in x over Finite Field of size 2 (using GF2X)
 
     sage: m = M.random_element(); m                       # random
     [      x + 1         x^2         x^2]
@@ -98,7 +98,7 @@ des constructions algébriques plus avancées::
     [    x^2 + 1 x^2 + x + 1         x^2]
 
     sage: m.parent()
-    Full MatrixSpace of 3 by 3 dense matrices over Univariate Polynomial Ring in x over Finite Field of size 2 (using NTL)
+    Full MatrixSpace of 3 by 3 dense matrices over Univariate Polynomial Ring in x over Finite Field of size 2 (using GF2X)
 
     sage: m * (m-1)                                       # random
     [      x^4 + x^3 + x           x^3 + x^2           x^4 + x^2]
@@ -113,7 +113,7 @@ factorisation::
 
     sage: p = 54*x^4+36*x^3-102*x^2-72*x-12
     sage: p.factor()
-    6*(3*x + 1)^2*(x^2 - 2)
+    6*(x^2 - 2)*(3*x + 1)^2
 
     sage: for A in [ZZ, QQ, ComplexField(16), QQ[sqrt(2)], GF(5)]:
     ....:     print(A, ":"); print(A['x'](p).factor())
@@ -123,7 +123,7 @@ factorisation::
     (54) * (x + 1/3)^2 * (x^2 - 2)
     Complex Field with 16 bits of precision :
     (54.00) * (x - 1.414) * (x + 0.3333)^2 * (x + 1.414)
-    Number Field in sqrt2 with defining polynomial x^2 - 2 :
+    Number Field in sqrt2 with defining polynomial x^2 - 2 with sqrt2 = 1.414213562373095? :
     (54) * (x - sqrt2) * (x + sqrt2) * (x + 1/3)^2
     Finite Field of size 5 :
     (4) * (x + 2)^2 * (x^2 + 3)
@@ -265,7 +265,7 @@ Voire faire des calculs avec::
 On veut maintenant manipuler `A` comme un morphisme sur `V`::
 
     sage: phi = End(V)(A); phi
-    Free module morphism defined by the matrix
+    Vector space morphism represented by the matrix:
     [5 5 4 3]
     [0 3 3 4]
     [0 1 5 4]
@@ -288,7 +288,7 @@ On veut maintenant manipuler `A` comme un morphisme sur `V`::
 ::
 
     sage: phi^4 + 5*phi^3 + 6*phi + 2
-    Free module morphism defined by the matrix
+    Vector space morphism represented by the matrix:
     [0 0 0 0]
     [0 0 0 0]
     [0 0 0 0]
@@ -307,7 +307,7 @@ On veut maintenant manipuler `A` comme un morphisme sur `V`::
     True
 
     sage: phi.restrict(E[2])
-    Free module morphism defined by the matrix
+    Vector space morphism represented by the matrix:
     [2 0]
     [0 2]
     Domain: Vector space of degree 4 and dimension 2 over Finite Field of ...
@@ -349,8 +349,8 @@ cinq cartes à jouer::
 
     sage: Symboles = Set(["Coeur", "Carreau", "Pique", "Trefle"])
     sage: Valeurs  = Set([2, 3, 4, 5, 6, 7, 8, 9, 10, "Valet", "Dame", "Roi", "As"])
-    sage: Cartes   = CartesianProduct(Valeurs, Symboles).map(tuple)
-    sage: Mains    = Subsets(Cartes, 5)
+    sage: Cartes = cartesian_product([Valeurs, Symboles])
+    sage: Mains = Subsets(Cartes, 5)
     sage: Mains.cardinality()
     2598960
     sage: Mains.random_element()                           # random
@@ -391,11 +391,11 @@ Combinatoire algébrique
 Et pour faire joli, un système de racine affine et un groupe de Weyl::
 
     sage: L = RootSystem(['A',2,1]).weight_space()
-    sage: L.plot(size=[[-1..1],[-1..1]], alcovewalks=[[0,2,0,1,2,1,2,0,2,1]])
+    sage: L.plot()
 
     sage: W = WeylGroup(["B", 3])
-    sage: W.cayley_graph(side = "left").plot3d(color_by_label = True)
-
+    sage: W.cayley_graph(side = "left").plot3d(color_by_label=True)
+    Graphics3d Object
 
 Graphes
 =======
@@ -407,13 +407,13 @@ graphes::
     sage: g.show()
 
     sage: c = g.hamiltonian_cycle()
-    sage: g.show(edge_colors = {"red": c.edges()} )
+    sage: g.show(edge_colors={"red": c.edges(sort=False)})
 
 Grâce à GAP et à (un port de) Nauty, on peut étudier de près les
 questions de symétries et d'isomorphisme dans les graphes. Voici tous
 les graphes simples sur cinq sommets avec moins de quatre arêtes::
 
-    sage: show(graphs(5, lambda G: G.size() <= 4))
+    sage: show(next(graphs(5, lambda G: G.size() <= 4)))
 
 Le groupe de symétries (automorphismes) du graphe de Petersen::
 
@@ -421,7 +421,7 @@ Le groupe de symétries (automorphismes) du graphe de Petersen::
     sage: petersen.show()
 
     sage: group = petersen.automorphism_group(); group
-    Permutation Group with generators [(3,7)(4,5)(8,9), (2,6)(3,8)(4,5)(7,9), (1,4,5)(2,3,8,6,9,7), (1,10)(2,4,6,5)(3,9,8,7)]
+    Permutation Group with generators [(3,7)(4,5)(8,9), (2,6)(3,8)(4,5)(7,9), ...]
 
 Et quelques-unes de ses propriétés::
 
@@ -513,7 +513,7 @@ Ce qui en Sage donne::
     sage: LP = MixedIntegerLinearProgram(maximization=True)
     sage: b = LP.new_variable()
     sage: LP.set_objective(sum([b[v] for v in petersen]))
-    sage: for (u,v) in petersen.edges(labels=None): # For any edge, we define a constraint
+    sage: for (u,v) in petersen.edges(labels=None, sort=False): # For any edge, we define a constraint
     ....:     LP.add_constraint(b[u]+b[v],max=1)
     sage: LP.set_binary(b)
 
@@ -526,13 +526,13 @@ On trouve alors un indépendant de taille quatre::
     sage: print(b_sol)
     {0: 0.0, 1: 1.0, 2: 0.0, 3: 0.0, 4: 1.0, 5: 0.0, 6: 0.0, 7: 1.0, 8: 1.0, 9: 0.0}
 
-    sage: I = [ v for v in petersen.vertices() if b_sol[v] ]; I
+    sage: I = [v for v in petersen.vertices(sort=False) if b_sol[v]]; I
     [1, 4, 7, 8]
     sage: petersen.show(vertex_colors = {'red' : I})
 
 Pour finir, on manipule l'ensemble de tous les points entiers d'un polytope::
 
-    sage: A = random_matrix(ZZ,3,6,x=7)
+    sage: A = random_matrix(ZZ,6,3,x=7)
     sage: L = LatticePolytope(A)
     sage: L.plot3d()
 
@@ -562,7 +562,7 @@ Toujours dans l'idée de modéliser les mathématiques au plus près, Sage
 a des informations sur la *structure mathématique* de `K`::
 
     sage: K.category()
-    Category of finite fields
+    Join of Category of finite enumerated fields and Category of subquotients of monoids and Category of quotients of semigroups
 
 Voilà ce qu'il peut en déduire:
 
@@ -594,7 +594,7 @@ En quoi est-ce utile?
 
 2. Partage de code générique::
 
-    sage: K.multiplication_table(names = 'elements')
+    sage: K.multiplication_table(names='elements')
     *  0 1 2 3 4 5 6
      +--------------
     0| 0 0 0 0 0 0 0
@@ -615,47 +615,15 @@ En quoi est-ce utile?
     ....:     print(cls)
     <class 'sage.rings.finite_rings.finite_field_prime_modn.FiniteField_prime_modn_with_category'>
     ...
-    <class 'sage.categories.finite_fields.FiniteFields.parent_class'>
-    <class 'sage.categories.fields.Fields.parent_class'>
-    <class 'sage.categories.euclidean_domains.EuclideanDomains.parent_class'>
-    <class 'sage.categories.principal_ideal_domains.PrincipalIdealDomains.parent_class'>
-    <class 'sage.categories.unique_factorization_domains.UniqueFactorizationDomains.parent_class'>
-    <class 'sage.categories.gcd_domains.GcdDomains.parent_class'>
-    ...
-    <class 'sage.categories.magmas.Magmas.parent_class'>
-    ...
-    <class 'sage.categories.finite_sets.FiniteSets.parent_class'>
-    ...
-    <type 'object'>
+    <class 'object'>
 
 
 3. Partage de tests génériques::
 
     sage: TestSuite(K).run(verbose=True)
     running ._test_additive_associativity() . . . pass
-    running ._test_an_element() . . . pass
-    running ._test_associativity() . . . pass
-    running ._test_category() . . . pass
-    running ._test_distributivity() . . . pass
-    running ._test_elements() . . .
-      Running the test suite of self.an_element()
-      running ._test_category() . . . pass
-      running ._test_eq() . . . pass
-      running ._test_not_implemented_methods() . . . pass
-      running ._test_pickling() . . . pass
-      pass
-    running ._test_elements_eq() . . . pass
-    running ._test_enumerated_set_contains() . . . pass
-    running ._test_enumerated_set_iter_cardinality() . . . pass
-    running ._test_enumerated_set_iter_list() . . . pass
-    running ._test_eq() . . . pass
-    running ._test_len() . . . pass
-    running ._test_not_implemented_methods() . . . pass
-    running ._test_one() . . . pass
-    running ._test_pickling() . . . pass
-    running ._test_prod() . . . pass
-    running ._test_some_elements() . . . pass
-    running ._test_zero() . . . pass
+    ...
+    running ._test_zero_divisors() . . . pass
 
 
 A demonstration of Sage + GAP4 + GAP3 + Chevie + Semigroupe

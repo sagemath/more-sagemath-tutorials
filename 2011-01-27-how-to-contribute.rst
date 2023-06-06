@@ -4,9 +4,9 @@
 How to contribute to Sage
 =========================
 
-.. This file can be compiled using the following command ``rst2s5.py``
+.. This file can be compiled using the following command: rst2s5.py
 
-.. We include <s5defs.txt> for colors and other predefined roles like text size
+.. We include s5defs.txt for colors and other predefined roles like text size
    and others
 
 .. include:: <s5defs.txt>
