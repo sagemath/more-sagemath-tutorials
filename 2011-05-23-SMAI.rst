@@ -392,6 +392,7 @@ Et pour faire joli, un système de racine affine et un groupe de Weyl::
 
     sage: L = RootSystem(['A',2,1]).weight_space()
     sage: L.plot()
+    Graphics object consisting of 138 graphics primitives
 
     sage: W = WeylGroup(["B", 3])
     sage: W.cayley_graph(side = "left").plot3d(color_by_label=True)
@@ -535,6 +536,7 @@ Pour finir, on manipule l'ensemble de tous les points entiers d'un polytope::
     sage: A = random_matrix(ZZ,6,3,x=7)
     sage: L = LatticePolytope(A)
     sage: L.plot3d()
+    Graphics3d Object
 
 Un grand merci au passage à Nathann Cohen qui a fourni une bonne part
 des exemples et fonctionnalités ci-dessus.

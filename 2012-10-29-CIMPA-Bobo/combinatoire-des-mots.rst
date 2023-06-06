@@ -1,6 +1,8 @@
 .. -*- coding: utf-8 -*-
 .. _bobo.2012.combinatoire_des_mots:
 
+.. linkall
+
 ========================================
 Travaux Pratiques: Combinatoire des Mots
 ========================================

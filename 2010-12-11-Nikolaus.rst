@@ -46,7 +46,7 @@ Species::
 
     sage: from sage.combinat.species.library import *
     sage: o   = var("o")
-    sage: BT = CombinatorialSpecies()
+    sage: BT = CombinatorialSpecies(min=1)
     sage: Leaf =  SingletonSpecies()
     sage: BT.define(Leaf+(BT*BT))
     sage: BT.isotypes([o]*5).list()
@@ -82,8 +82,7 @@ Graphs up to an isomorphism
 
 ::
 
-    sage: show(graphs(5, lambda G: G.size() <= 4))
-    <html>...
+    sage: show(next(graphs(5, lambda G: G.size() <= 4)))
     
 Symmetric functions
 +++++++++++++++++++
