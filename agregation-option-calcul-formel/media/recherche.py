@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 
-def recherche(liste,val):
+def recherche(liste, val):
     """
     Détermine si ``val`` est présent dans ``liste``.
 

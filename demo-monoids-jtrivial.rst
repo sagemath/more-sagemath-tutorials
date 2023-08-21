@@ -124,7 +124,7 @@ Demonstration: A real life example, parallel testing of a conjecture on J-Trivia
     True
 
     sage: P4 = Posets(4); P4
-    Posets containing 4 vertices
+    Posets containing 4 elements
 
     sage: P4.cardinality()
     16
