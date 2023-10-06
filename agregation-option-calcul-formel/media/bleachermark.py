@@ -426,7 +426,7 @@ class Bleachermark:
         # Now benchmarks can just be concatenated
         self._benchmarks.extend(other._benchmarks)
         for b in other._benchmarks:
-            assert not b.label() in self._measurements
+            assert b.label() not in self._measurements
             self._measurements[b.label()] = copy(other._measurements[b.label()])
             # TODO: deepcopy?
 
