@@ -74,7 +74,7 @@ def signal_ctrl_c(signal, frame):
 signal.signal(signal.SIGINT, signal_ctrl_c)
 
 
-class Benchmark():
+class Benchmark:
     r"""
     A Benchmark is a pipeline of functions.
 
@@ -107,9 +107,9 @@ class Benchmark():
 
     def __repr__(self):
         if self.label():
-            return 'Benchmark {}'.format(self.label())
+            return f'Benchmark {self.label()}'
         else:
-            return 'Benchmark for a pipeline of {} functions'.format(len(self._pipeline))
+            return f'Benchmark for a pipeline of {len(self._pipeline)} functions'
 
     def label(self):
         r"""
@@ -192,7 +192,7 @@ class Bleachermark:
         self._current_runner = None
 
     def __repr__(self):
-        return 'Collection of {} benchmarks'.format(self.size())
+        return f'Collection of {self.size()} benchmarks'
 
     def size(self):
         return len(self._benchmarks)
@@ -312,7 +312,7 @@ class Bleachermark:
                         data.append((label, fun_labels[i], run[0], m[0], m[1]))
             return data
         else:
-            raise ValueError("Invalid argument to format: {}".format(format))
+            raise ValueError(f"Invalid argument to format: {format}")
 
     def timings(self, transposed=False):
         r"""
@@ -609,7 +609,7 @@ class SerialRunner:
         return self
 
     def __repr__(self):
-        return 'Serial Runner of {} instances for {}'.format(self._niter, self._bleachermark)
+        return f'Serial Runner of {self._niter} instances for {self._bleachermark}'
 
     def next(self):
         if self._current_iter >= self._niter:
@@ -655,7 +655,7 @@ class ListRunner:
         return self
 
     def __repr__(self):
-        return 'List Runner for {}'.format(self._bleachermark)
+        return f'List Runner for {self._bleachermark}'
 
     def next(self):
         if self._nbench == len(self._benchmarks) - 1:
@@ -735,7 +735,7 @@ class AdaptativeRunner:
         self._pendingruns = totruns
 
     def repr(self):
-        return "Adaptative Runner for {} benchmarks".format(len(self._benchmarks))
+        return f"Adaptative Runner for {len(self._benchmarks)} benchmarks"
 
     def __iter__(self):
         return self

@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 
 def tri_bulle(liste):
     """

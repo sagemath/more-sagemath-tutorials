@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 """
 Option Algèbre et Calcul Formel de l’Agrégation de Mathématiques:
 Sa Majesté le Groupe Symmétrique; groupes de permutations

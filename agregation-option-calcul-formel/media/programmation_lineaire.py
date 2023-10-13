@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 from copy import copy
 
 from sage.rings.integer_ring import ZZ

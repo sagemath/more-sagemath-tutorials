@@ -1,4 +1,3 @@
-# -*- encoding: utf-8 -*-
 from setuptools import setup, find_packages
 from codecs import open  # To open the README file with proper encoding
 

@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 r"""
 .. _sage.combinat.tutorial_enumerated_sets:
 

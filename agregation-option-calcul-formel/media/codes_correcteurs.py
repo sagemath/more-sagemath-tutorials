@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 r"""
 Some code for drawing binary codes in 3D
 
