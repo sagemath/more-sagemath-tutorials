@@ -51,9 +51,9 @@ def est_langage_préfixe(L):
         sage: est_langage_préfixe(['a', 'ab', 'a'])
         False
     """
-    return not any([u != v and est_préfixe(v, u)
+    return not any(u != v and est_préfixe(v, u)
                     for u in L
-                    for v in L])
+                    for v in L)
 
 
 def factorisations(u: str, L: List[str]) -> List[List[str]]:

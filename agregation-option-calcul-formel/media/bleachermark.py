@@ -55,16 +55,14 @@ EXAMPLE::
     ('stupid benchmark', 'zero', 1, 0.0, 0)]
 """
 
-from time import time as clock
-from copy import copy
-from functools import reduce
-
 # This part handles the ctrl-c interruption.
 # class CTRLC(Exception):
 # def __init__(self):
 # pass
-
 import signal
+from copy import copy
+from functools import reduce
+from time import time as clock
 
 
 def signal_ctrl_c(signal, frame):
@@ -176,9 +174,9 @@ class Bleachermark:
         """
         if isinstance(benchmarks, Benchmark):
             self._benchmarks = (benchmarks, )
-        elif isinstance(benchmarks, (list, tuple)) and all([isinstance(i, Benchmark) for i in benchmarks]):
+        elif isinstance(benchmarks, (list, tuple)) and all(isinstance(i, Benchmark) for i in benchmarks):
             self._benchmarks = tuple(benchmarks)
-        elif isinstance(benchmarks, (list, tuple)) and all([isinstance(i, (list, tuple)) for i in benchmarks]):
+        elif isinstance(benchmarks, (list, tuple)) and all(isinstance(i, (list, tuple)) for i in benchmarks):
             self._benchmarks = tuple(Benchmark(i) for i in benchmarks)
         else:
             self._benchmarks = (Benchmark(benchmarks),)
@@ -350,7 +348,7 @@ class Bleachermark:
         timings = self.timings(transposed=True)
         res = {}
         for bm in timings:
-            totals = map(lambda a: sum(a) / len(a), timings[bm])
+            totals = (sum(a) / len(a) for a in timings[bm])
             res[bm] = totals
         return res
 
@@ -409,8 +407,8 @@ class Bleachermark:
         """
         raise NotImplementedError("Not verified since Runner system")
         import re
-        my_labels = set(b.label() for b in self._benchmarks)
-        ot_labels = set(b.label() for b in other._benchmarks)
+        my_labels = {b.label() for b in self._benchmarks}
+        ot_labels = {b.label() for b in other._benchmarks}
         collisions = my_labels.intersect(ot_labels)
         if collisions:
             autolabel = re.compile(_autolabel_regex)
@@ -677,8 +675,8 @@ class ParallelRunner:
     As input, it takes a list or tuple of the inputs that will be given to the benchmarks.
     """
     def __init__(self, bleachermark, runs):
-        from sage.parallel.decorate import parallel
         from sage.functions.other import ceil, floor
+        from sage.parallel.decorate import parallel
         self._benchmarks = bleachermark._benchmarks
         # profiling we run each benchmark once
         self._totaltime = reduce(lambda a, b: a + b, [r[0] for bm in self._benchmarks for r in bm.run(runs[0])[1:]])

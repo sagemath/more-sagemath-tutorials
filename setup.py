@@ -1,5 +1,6 @@
-from setuptools import setup, find_packages
 from codecs import open  # To open the README file with proper encoding
+
+from setuptools import find_packages, setup
 
 description = 'More SageMath Thematic Tutorials'
 version = "0.0.1"

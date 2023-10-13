@@ -15,12 +15,12 @@ EXAMPLES::
 
 """
 from sage.matrix.constructor import matrix
+from sage.modules.free_module_element import vector
 from sage.plot.colors import rainbow
 from sage.plot.plot3d.platonic import cube
-from sage.symbolic.constants import pi
 from sage.plot.point import point
-from sage.modules.free_module_element import vector
 from sage.rings.rational_field import QQ
+from sage.symbolic.constants import pi
 
 
 def distance_hamming(c1, c2):

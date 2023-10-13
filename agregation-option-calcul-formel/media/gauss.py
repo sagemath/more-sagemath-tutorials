@@ -1,7 +1,8 @@
-import time
 import copy
-from sage.rings.rational_field import QQ
+import time
+
 from sage.matrix.constructor import random_matrix
+from sage.rings.rational_field import QQ
 
 
 def gauss(m, k=None):

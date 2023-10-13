@@ -19,24 +19,26 @@ Symmetric functions, with their multiple realizations
 #
 #                  http://www.gnu.org/licenses/
 # ****************************************************************************
+from sage.categories.fields import Fields
+from sage.categories.graded_hopf_algebras import GradedHopfAlgebras
+from sage.categories.rings import Rings
+from sage.combinat.free_module import CombinatorialFreeModule
+from sage.combinat.partition import Partitions
+from sage.rings.rational_field import QQ
 from sage.structure.parent import Parent
 from sage.structure.unique_representation import UniqueRepresentation
-from sage.categories.graded_hopf_algebras import GradedHopfAlgebras
-from sage.categories.fields import Fields
-from sage.categories.rings import Rings
-from sage.combinat.partition import Partitions
-from sage.combinat.free_module import CombinatorialFreeModule
-from sage.rings.rational_field import QQ
 
-from . import schur
-from . import monomial
-from . import powersum
-from . import elementary
-from . import homogeneous
-from . import hall_littlewood
-from . import jack
-from . import macdonald
-from . import llt
+from . import (
+    elementary,
+    hall_littlewood,
+    homogeneous,
+    jack,
+    llt,
+    macdonald,
+    monomial,
+    powersum,
+    schur,
+)
 
 
 class SymmetricFunctions(UniqueRepresentation, Parent):
@@ -1030,7 +1032,7 @@ class SymmetricFunctions(UniqueRepresentation, Parent):
         else:
             morphism.codomain().register_coercion(morphism)
 
-    _shorthands = set(['e', 'h', 'm', 'p', 's'])
+    _shorthands = {'e', 'h', 'm', 'p', 's'}
 
     def inject_shorthands(self, shorthands=_shorthands):
         """
@@ -1272,6 +1274,8 @@ class SymmetricaConversionOnBasis:
 
     def __call__(self, partition):
         """
+        EXAMPLES::
+
             sage: Sym = SymmetricFunctions(QQ['x'])
             sage: p = Sym.p(); s = Sym.s()
             sage: p[1] + s[1]                           # indirect doctest
